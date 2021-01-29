@@ -2,13 +2,14 @@
 #define EP1M_H
 
 #include    "vehicle-api.h"
+#include    "ep1m-signals.h"
 
 //---------------------------------------------------------------------
 //
 //---------------------------------------------------------------------
 class EP1m : public Vehicle
 {
-  public:
+public:
 
      /// Конструктор класса
      EP1m(QObject *parent = Q_NULLPTR);
@@ -16,7 +17,7 @@ class EP1m : public Vehicle
      /// Деструктор класс
      ~EP1m();
 
-  private:
+private:
 
 };
 
