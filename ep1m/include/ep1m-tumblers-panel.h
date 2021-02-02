@@ -3,11 +3,17 @@
 
 #include    "device.h"
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 enum
 {
     TUMBLERS_NUMBER = 12
 };
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 enum
 {
     TUMBLER_MSUD = 0,
@@ -25,19 +31,30 @@ enum
     TUMBLER_EPT = 11
 };
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 class EP1MTumblersPanel : public Device
 {
 public:
 
     EP1MTumblersPanel(QObject *parent = Q_NULLPTR);
 
-    ~EP1MTumblersPanel();
+    ~EP1MTumblersPanel() override;
+
+    bool getTumblerState(size_t tumbler_index) const;
 
 private:
+
+    Trigger unlock_panel_key;
+
+    std::array<Trigger, TUMBLERS_NUMBER>    tumblers;
 
     void ode_system(const state_vector_t &Y, state_vector_t &dYdt, double t) override;
 
     void stepKeysControl(double t, double dt) override;
+
+    bool isTumblersNotActive() const;
 };
 
 #endif // EP1M_TUMBLERS_PANEL_H
