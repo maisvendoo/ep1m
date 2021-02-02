@@ -5,7 +5,15 @@
 //------------------------------------------------------------------------------
 EP1MTumblersPanel::EP1MTumblersPanel(QObject *parent) : Device(parent)
 {
+    for (size_t i = 0; i < tumblers.size(); ++i)
+    {
+        connect(&tumblers[i], &Trigger::soundPlay, this, &EP1MTumblersPanel::soundPlay);
+        tumblers[i].setOnSoundName("Tumbler_On");
+        tumblers[i].setOffSoundName("Tumbler_Off");
+    }
 
+    unlock_panel_key.setOnSoundName("Key_Unlock");
+    unlock_panel_key.setOffSoundName("Key_Lock");
 }
 
 //------------------------------------------------------------------------------

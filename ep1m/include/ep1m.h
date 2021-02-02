@@ -26,6 +26,8 @@ private:
 
     void initPanel();
 
+    void initSounds();
+
     void stepPanel(double t, double dt);
 
     void step(double t, double dt) override;
