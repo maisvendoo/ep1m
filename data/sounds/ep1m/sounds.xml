@@ -4,7 +4,7 @@
 	<!-- Включение -->
 	<Sound>
 		<Name>Tumbler_On</Name>
-		<Path>tumbler-on.wav</Path>
+		<Path>tumbler.wav</Path>
 		<InitVolume>100</InitVolume>
 		<MaxVolume>100</MaxVolume>
 		<InitPitch>1.0</InitPitch>
@@ -15,7 +15,7 @@
 	<!-- Выключение -->
 	<Sound>
 		<Name>Tumbler_Off</Name>
-		<Path>tumbler-off.wav</Path>
+		<Path>tumbler.wav</Path>
 		<InitVolume>100</InitVolume>
 		<MaxVolume>100</MaxVolume>
 		<InitPitch>1.0</InitPitch>

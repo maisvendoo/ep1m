@@ -4,6 +4,7 @@
 #include    "vehicle-api.h"
 #include    "ep1m-signals.h"
 #include    "ep1m-tumblers-panel.h"
+#include    "ep1m-azv.h"
 #include    "msud.h"
 
 //---------------------------------------------------------------------
@@ -21,11 +22,21 @@ public:
 
 private:
 
+    /// Панель тумблеров
     EP1MTumblersPanel   *tumblers_panel;
 
+    /// МСУД
     MSUD    *msud;
 
+    /// Напряжение питания цепей управления
+    double  Ucc;
+
+    /// Автоматические защитные выключатели
+    std::array<Trigger, AZV_NUMBER> azv;
+
     void initialization() override;
+
+    void initAZV();
 
     void initPanel();
 

@@ -7,6 +7,7 @@
         <WheelDiameter>1.25</WheelDiameter>
         <MainResist>loco-resist</MainResist>
         <NumAxis>6</NumAxis>
+        <SoundDir>ep1m</SoundDir>
         <WheelInertia>2.0</WheelInertia>  
     </Vehicle>
 </Config>

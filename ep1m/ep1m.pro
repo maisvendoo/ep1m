@@ -22,4 +22,5 @@ INCLUDEPATH += $$(RRS_DEV_ROOT)/sdk/include
 
 # Указываем файлы, включаемые в проект
 HEADERS += $$files(./include/*.h)
-SOURCES += $$files(./src/*.cpp)
+SOURCES += $$files(./src/*.cpp) \
+    src/ep1m-init-azv.cpp
