@@ -19,8 +19,10 @@ LIBS += -L$$(RRS_DEV_ROOT)/bin -lfilesystem
 # Путь к необходимым заголовочным файлам
 INCLUDEPATH += ./include
 INCLUDEPATH += $$(RRS_DEV_ROOT)/sdk/include
+INCLUDEPATH += ../ep1m-equipment/include/
 
 # Указываем файлы, включаемые в проект
 HEADERS += $$files(./include/*.h)
-SOURCES += $$files(./src/*.cpp) \
-    src/ep1m-init-azv.cpp
+HEADERS += $$files(../ep1m-equipment/include/*.h)
+SOURCES += $$files(./src/*.cpp)
+SOURCES += $$files(../ep1m-equipment/src/*.cpp)

@@ -1,5 +1,5 @@
-#ifndef     EP1M_AZV_H
-#define     EP1M_AZV_H
+#ifndef     AZV_H
+#define     AZV_H
 
 enum
 {
