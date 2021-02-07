@@ -5,7 +5,17 @@
 //------------------------------------------------------------------------------
 PowerSupply::PowerSupply(QObject *parent) : Device(parent)
   , U_in(0.0)
+  , U_charge(0.0)
   , U_bat(0.0)
+  , Ucc(0.0)
+  , I_charge(0.0)
+  , In(0.0)
+  , K1(50.0 / 380.0)
+  , Ucc_nom(50.0)
+  , I_cy(31.0)
+  , Uc_min(60.0)
+  , Uc_max(80.0)
+  , K2(2.0)
 {
 
 }
@@ -43,4 +53,15 @@ void PowerSupply::stepDiscrete(double t, double dt)
 {
     Q_UNUSED(t)
     Q_UNUSED(dt)
+
+    // Напряжение на выходе выпрямителя, питающего цепи управления
+    double U_rec = K1 * U_in;
+
+    // Автоматическое переключение на питание от АКБ при пропадании
+    // напряжения с выхода выпрямителя
+    Ucc = U_rec + hs_n(U_rec - 0.95 * Ucc_nom) * U_bat;
+
+    // Напряжение заряда АКБ
+    U_charge = K2 * (I_cy - pf(I_charge)) * hs_p(U_in);
+    U_charge = cut(U_charge, Uc_min, Uc_max);
 }
