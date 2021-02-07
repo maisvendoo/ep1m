@@ -14,11 +14,21 @@ public:
 
     ~PowerSupply() override;
 
+    void setInputVoltage(double U_in);
+
 private:
+
+    /// Входное напряжение переменного тока
+    double U_in;
+
+    /// Выходное напряжение подзаряда аккумуляторной батареи
+    double U_bat;
 
     void ode_system(const state_vector_t &Y,
                     state_vector_t &dYdt,
                     double t) override;
+
+    void stepDiscrete(double t, double dt) override;
 };
 
-#endif // POWERSUPPLY_H
+#endif // POWER_SUPPLY_H
