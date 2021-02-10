@@ -9,6 +9,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , Ucc(0.0)
   , battery(Q_NULLPTR)
   , power_supply(Q_NULLPTR)
+  , Icc(0.0)
 {
 
 }

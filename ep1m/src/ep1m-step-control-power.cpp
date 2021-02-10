@@ -6,7 +6,7 @@
 void EP1m::stepControlPower(double t, double dt)
 {
     battery->setChargeVoltage(power_supply->getChargeVoltage());
-    battery->setLoadCurrent(0.0);
+    battery->setLoadCurrent(Icc);
     battery->step(t, dt);
 
     power_supply->setBatVoltage(battery->getVoltage());

@@ -40,6 +40,9 @@ private:
     /// Шкаф питания ШП-21
     PowerSupply *power_supply;
 
+    /// Ток, потребляемый цепями управления
+    double Icc;
+
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;
 
