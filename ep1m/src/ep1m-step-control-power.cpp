@@ -11,7 +11,7 @@ void EP1m::stepControlPower(double t, double dt)
 
     power_supply->setBatVoltage(battery->getVoltage());
     power_supply->setBatChargeCurrent(battery->getCargeCurrent());
-    power_supply->setInputVoltage(0.0);
+    power_supply->setInputVoltage(trac_trans->getControlPowerVoltage());
     power_supply->step(t, dt);
 
     Ucc = power_supply->getPowerControlVoltage();

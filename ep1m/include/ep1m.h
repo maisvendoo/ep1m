@@ -8,6 +8,7 @@
 #include    "msud.h"
 #include    "battery.h"
 #include    "power-supply.h"
+#include    "trac-transformer.h"
 
 //---------------------------------------------------------------------
 //
@@ -43,6 +44,9 @@ private:
     /// Ток, потребляемый цепями управления
     double Icc;
 
+    /// Тяговый трансформатор
+    TractionTransformer *trac_trans;
+
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;
 
@@ -60,6 +64,9 @@ private:
     /// Инициализация МСУД
     void initMSUD();
 
+    /// Инициализация силовой схемы
+    void initPowerCircuit();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -68,6 +75,8 @@ private:
     void stepPanel(double t, double dt);
 
     void stepMSUD(double t, double dt);
+
+    void stepPowerCircuit(double t, double dt);
 
     void step(double t, double dt) override;
 
