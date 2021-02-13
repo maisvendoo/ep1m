@@ -9,6 +9,8 @@
 #include    "battery.h"
 #include    "power-supply.h"
 #include    "trac-transformer.h"
+#include    "pantograph.h"
+#include    "protective-device.h"
 
 //---------------------------------------------------------------------
 //
@@ -46,6 +48,22 @@ private:
 
     /// Тяговый трансформатор
     TractionTransformer *trac_trans;
+
+    /// Главный выключатель
+    ProtectiveDevice *main_switch;
+
+    /// Напряжение на крышевой шине
+    double Ukr;
+
+    enum
+    {
+        PANT_NUMBER = 2,
+        PANT1 = 0,
+        PANT2 = 1
+    };
+
+    /// Токоприемники
+    std::array<Pantograph *, PANT_NUMBER> pant;
 
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;

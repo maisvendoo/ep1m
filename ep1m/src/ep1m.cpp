@@ -10,8 +10,11 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , battery(Q_NULLPTR)
   , power_supply(Q_NULLPTR)
   , Icc(0.0)
+  , trac_trans(Q_NULLPTR)
+  , main_switch(Q_NULLPTR)
+  , Ukr(0.0)
 {
-
+    Uks = 25000.0;
 }
 
 //------------------------------------------------------------------------------
