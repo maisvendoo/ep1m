@@ -13,6 +13,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , trac_trans(Q_NULLPTR)
   , main_switch(Q_NULLPTR)
   , Ukr(0.0)
+  , km5(Q_NULLPTR)
 {
     Uks = 25000.0;
 }

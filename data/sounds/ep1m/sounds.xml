@@ -23,4 +23,15 @@
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
 
+	<!-- Включение КМ5 -->
+	<Sound>
+		<Name>KM5_On</Name>
+		<Path>relay.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
 </Config>

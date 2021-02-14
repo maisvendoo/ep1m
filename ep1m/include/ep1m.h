@@ -11,6 +11,7 @@
 #include    "trac-transformer.h"
 #include    "pantograph.h"
 #include    "protective-device.h"
+#include    "relay.h"
 
 //---------------------------------------------------------------------
 //
@@ -55,6 +56,9 @@ private:
     /// Напряжение на крышевой шине
     double Ukr;
 
+    /// Контактор КМ5 включения ШП-21
+    Relay   *km5;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -67,6 +71,9 @@ private:
 
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;
+
+    /// Тумблер включения ШП-21
+    Trigger     tumbler_power_supply;
 
     void initialization() override;
 

@@ -18,7 +18,7 @@ public:
 
     double getCargeCurrent() const;
 
-    void setLoadCurrent(double In);    
+    void setLoadCurrent(double In) { this->In = In; }
 
     void setChargeVoltage(double U_gen);
 
