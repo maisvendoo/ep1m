@@ -24,5 +24,6 @@ INCLUDEPATH += ../ep1m-equipment/include/
 # Указываем файлы, включаемые в проект
 HEADERS += $$files(./include/*.h)
 HEADERS += $$files(../ep1m-equipment/include/*.h)
-SOURCES += $$files(./src/*.cpp)
+SOURCES += $$files(./src/*.cpp) \
+    src/ep1m-signals-output.cpp
 SOURCES += $$files(../ep1m-equipment/src/*.cpp)
