@@ -35,6 +35,14 @@ bool EP1MTumblersPanel::getTumblerState(size_t tumbler_index) const
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+bool EP1MTumblersPanel::getUnlockKeyState() const
+{
+    return unlock_panel_key.getState();
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void EP1MTumblersPanel::ode_system(const state_vector_t &Y,
                                    state_vector_t &dYdt,
                                    double t)

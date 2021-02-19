@@ -6,20 +6,22 @@
 //------------------------------------------------------------------------------
 enum
 {
-    // Тумблеры блока выключателей
-    SIGNAL_TUMBLER_MSUD = 0, // МСУД
-    SIGNAL_TUMBLER_VVK = 1, // Блокирование ВВК
-    SIGNAL_TUMBLER_PANT1 = 2, // Токоприемник 1
-    SIGNAL_TUMBLER_PANT2 = 3, // Токоприемник 2
-    SIGNAL_TUMBLER_RETURN_PROTECTION = 4, // Возврат защиты ГВ
-    SIGNAL_TUMBLER_MAIN_SWITCH = 5, // Главный выключатель
+    SIGNAL_UNLOCK_KEY = 0, // Ключ блокировки тумблеров
 
-    SIGNAL_TUMBLER_AUX_MACHINES = 6, // Вспомогательные машины
-    SIGNAL_TUMBLER_COMPRESSOR = 7, // Компрессор
-    SIGNAL_TUMBLER_MOTOR_FAN1 = 8, // Вентилятор 1
-    SIGNAL_TUMBLER_MOTOR_FAN2 = 9, // Вентилятор 2
-    SIGNAL_TUMBLER_MOTOR_FAN3 = 10, // Вентилятор 3
-    SIGNAL_TUMBLER_EPT = 11, // ЭПТ
+    // Тумблеры блока выключателей
+    SIGNAL_TUMBLER_MSUD = 1, // МСУД
+    SIGNAL_TUMBLER_LOCK_VVK = 2, // Блокирование ВВК
+    SIGNAL_TUMBLER_PANT1 = 3, // Токоприемник 1
+    SIGNAL_TUMBLER_PANT2 = 4, // Токоприемник 2
+    SIGNAL_TUMBLER_RETURN_PROTECTION = 5, // Возврат защиты ГВ
+    SIGNAL_TUMBLER_MAIN_SWITCH = 6, // Главный выключатель
+
+    SIGNAL_TUMBLER_AUX_MACHINES = 7, // Вспомогательные машины
+    SIGNAL_TUMBLER_COMPRESSOR = 8, // Компрессор
+    SIGNAL_TUMBLER_MOTOR_FAN1 = 9, // Вентилятор 1
+    SIGNAL_TUMBLER_MOTOR_FAN2 = 10, // Вентилятор 2
+    SIGNAL_TUMBLER_MOTOR_FAN3 = 11, // Вентилятор 3
+    SIGNAL_TUMBLER_EPT = 12, // ЭПТ
 
     // Колесные пары
     SIGNAL_WHEEL1 = 194, // Колесная пара 1

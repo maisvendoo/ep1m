@@ -103,6 +103,8 @@ private:
 
     void stepPowerCircuit(double t, double dt);
 
+    void signalsOutput();
+
     void step(double t, double dt) override;
 
     void keyProcess() override;

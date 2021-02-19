@@ -44,6 +44,8 @@ public:
 
     bool getTumblerState(size_t tumbler_index) const;
 
+    bool getUnlockKeyState() const;
+
 private:
 
     Trigger unlock_panel_key;
