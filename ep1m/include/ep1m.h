@@ -12,6 +12,7 @@
 #include    "pantograph.h"
 #include    "protective-device.h"
 #include    "relay.h"
+#include    "electro-valve.h"
 
 //---------------------------------------------------------------------
 //
@@ -58,6 +59,9 @@ private:
 
     /// Контактор КМ5 включения ШП-21
     Relay   *km5;
+
+    /// Вентиль защиты ВЗ-6
+    ElectroValve    *safety_valve;
 
     enum
     {
