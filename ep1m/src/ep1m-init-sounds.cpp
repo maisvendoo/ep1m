@@ -13,4 +13,9 @@ void EP1m::initSounds()
     connect(&tumbler_power_supply, &Trigger::soundPlay, this, &EP1m::soundPlay);
 
     connect(km5, &Relay::soundPlay, this, &EP1m::soundPlay);
+
+    connect(safety_valve, &ElectroValve::soundPlay, this, &EP1m::soundPlay);
+
+    connect(pant[PANT1], &Pantograph::soundPlay, this, &EP1m::soundPlay);
+    connect(pant[PANT2], &Pantograph::soundPlay, this, &EP1m::soundPlay);
 }

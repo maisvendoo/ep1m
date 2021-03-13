@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    <QDir>
+
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -13,4 +15,7 @@ void EP1m::initPowerCircuit()
     main_switch = new ProtectiveDevice();
 
     trac_trans = new TractionTransformer();
+
+    safety_valve = new ElectroValve();
+    safety_valve->read_custom_config(config_dir + QDir::separator() + "vz-6");
 }

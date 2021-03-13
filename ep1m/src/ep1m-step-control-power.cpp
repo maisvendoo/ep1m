@@ -5,7 +5,8 @@
 //------------------------------------------------------------------------------
 void EP1m::stepControlPower(double t, double dt)
 {
-    Icc = km5->getCurrent();
+    Icc = km5->getCurrent() +
+          safety_valve->getCurrent();
 
     battery->setChargeVoltage(power_supply->getChargeVoltage());
     battery->setLoadCurrent(Icc);
