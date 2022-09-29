@@ -8,6 +8,16 @@
         <MainResist>loco-resist</MainResist>
         <NumAxis>6</NumAxis>
         <SoundDir>ep1m</SoundDir>
-        <WheelInertia>2.0</WheelInertia>  
+        <WheelInertia>2.0</WheelInertia>
+
+
+        <ExtModelName>EP1m-384/EP1m.osgt</ExtModelName>
+        <ModelShift>0.0 0.0 0.3</ModelShift>
+
+        <CabineModel>EP1m-384/EP1m-cabview.osgt</CabineModel>
+        <CabineShift>0.0 0.0 0.3</CabineShift>
+
+        <DriverPos>0.635 9.291 3.358</DriverPos> 
+
     </Vehicle>
 </Config>
