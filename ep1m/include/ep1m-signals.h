@@ -16,6 +16,9 @@ enum
     SIGNAL_TUMBLER_RETURN_PROTECTION = 35, // Возврат защиты ГВ
     SIGNAL_TUMBLER_MAIN_SWITCH = 36, // Главный выключатель
 
+    SIGNAL_PANT1 = 40, // Передний токоприемник
+    SIGNAL_PANT2 = 41, // Задний токоприемник
+
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
     SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1

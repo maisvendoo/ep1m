@@ -6,7 +6,7 @@
 void EP1m::keyProcess()
 {
     // Включение/выключение шкафа питания ШП-21
-    if (getKeyState(KEY_Y))
+    if (getKeyState(KEY_H))
     {
         if (isShift())
             tumbler_power_supply.set();
