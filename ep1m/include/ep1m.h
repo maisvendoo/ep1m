@@ -109,6 +109,9 @@ private:
 
     void signalsOutput();
 
+    /// Отладочная печать по F1
+    void stepDebugPrint(double t, double dt);
+
     void step(double t, double dt) override;
 
     void keyProcess() override;
