@@ -10,6 +10,9 @@ void EP1m::initPowerCircuit()
     for (size_t i = 0; i < pant.size(); ++i)
     {
         pant[i] = new Pantograph();
+        pant[i]->read_custom_config(config_dir +
+                                    QDir::separator() +
+                                    "pantograph");
     }
 
     main_switch = new ProtectiveDevice();
