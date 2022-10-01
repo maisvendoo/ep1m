@@ -33,4 +33,7 @@ void EP1m::initSounds()
     connect(kv39, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     connect(km, &TracController::soundPlay, this, &EP1m::soundPlay);
+
+    connect(main_switch, &ProtectiveDevice::soundPlay,
+            this, &EP1m::soundPlay);
 }

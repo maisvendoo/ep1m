@@ -17,6 +17,7 @@ void EP1m::initPowerCircuit()
 
     main_switch = new ProtectiveDevice();
 
+
     trac_trans = new TractionTransformer();
 
     safety_valve = new ElectroValve();

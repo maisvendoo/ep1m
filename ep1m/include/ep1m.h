@@ -71,8 +71,18 @@ private:
     /// Промежуточное реле KV39
     Relay           *kv39;
 
+    Relay           *kv21;
+
+    Relay           *kv22;
+
+    Relay           *kv23;
+
+    Relay           *kv41;
+
     /// Контроллер машиниста
     TracController  *km;
+
+    bool return_GV;
 
     enum
     {
@@ -80,6 +90,9 @@ private:
         PANT1 = 0,
         PANT2 = 1
     };
+
+    /// Данные, передаваемые в МСУД-Н
+    msud_input_t msud_input;
 
     /// Токоприемники
     std::array<Pantograph *, PANT_NUMBER> pant;

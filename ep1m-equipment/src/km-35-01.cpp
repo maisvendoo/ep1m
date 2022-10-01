@@ -5,12 +5,14 @@
 //------------------------------------------------------------------------------
 TracController::TracController(QObject *parent) : Device(parent)
   , mode_pos(0)
+  , mode_pos_old(0)
   , fwd_key_state(false)
   , old_fwd_key_state(false)
   , bwd_key_state(false)
   , old_bwd_key_state(false)
   , revers_pos(0)
   , reversSoundName("Revers")
+  , mainHandleSoundName("KM_main")
   , old_traction_key(false)
   , old_brake_key(false)
   , trac_level(0)
@@ -49,7 +51,14 @@ float TracController::getHandlePosition() const
 //------------------------------------------------------------------------------
 void TracController::preStep(state_vector_t &Y, double t)
 {
+    Q_UNUSED(Y)
+    Q_UNUSED(t)
 
+    if (mode_pos != mode_pos_old)
+    {
+        emit soundPlay(mainHandleSoundName);
+        mode_pos_old = mode_pos;
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -59,7 +68,9 @@ void TracController::ode_system(const state_vector_t &Y,
                                 state_vector_t &dYdt,
                                 double t)
 {
-
+    Q_UNUSED(Y)
+    Q_UNUSED(dYdt)
+    Q_UNUSED(t)
 }
 
 //------------------------------------------------------------------------------

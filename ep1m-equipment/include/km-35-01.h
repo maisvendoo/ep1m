@@ -29,6 +29,11 @@ public:
         return mode_pos == -1;
     }
 
+    bool isContacts15_16 () const
+    {
+        return (trac_level == 0) && (brake_level == 0);
+    }
+
     void setFwdKeyState(bool key_state) { fwd_key_state = key_state; }
 
     void setBwdKeyState(bool key_state) { bwd_key_state = key_state; }
@@ -42,6 +47,7 @@ private:
     /// Позиция, определяющая состояние схемы
     /// (0 - схема разобрана, 1 - подготовка тяги, 2 - подготовка рекуперации)
     int mode_pos;
+    int mode_pos_old;
 
     bool fwd_key_state;
     bool old_fwd_key_state;
@@ -52,6 +58,8 @@ private:
     int revers_pos;
 
     QString reversSoundName;
+
+    QString mainHandleSoundName;
 
     bool old_traction_key;
 
