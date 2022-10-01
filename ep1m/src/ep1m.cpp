@@ -14,6 +14,9 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , main_switch(Q_NULLPTR)
   , Ukr(0.0)
   , km5(Q_NULLPTR)
+  , safety_valve(Q_NULLPTR)
+  , kv44(Q_NULLPTR)
+  , kv39(Q_NULLPTR)
 {
     Uks = 25000.0;
 }
@@ -33,6 +36,9 @@ void EP1m::initialization()
 {
     // Инициализация питания цепей управления
     initControlPower();
+
+    // Инициализация цепей управления
+    initControlCircuit();
 
     // Инициализация АЗВ
     initAZV();
@@ -57,6 +63,9 @@ void EP1m::step(double t, double dt)
 {
     // Работа подсистемы питания цепей управления
     stepControlPower(t, dt);
+
+    // Работа цепей управления
+    stepControlCircuit(t, dt);
 
     // Работа приборов управления в кабине
     stepPanel(t, dt);

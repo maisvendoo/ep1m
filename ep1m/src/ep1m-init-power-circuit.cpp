@@ -21,4 +21,5 @@ void EP1m::initPowerCircuit()
 
     safety_valve = new ElectroValve();
     safety_valve->read_custom_config(config_dir + QDir::separator() + "vz-6");
+    safety_valve->setSoundName("Lock_VVK");
 }

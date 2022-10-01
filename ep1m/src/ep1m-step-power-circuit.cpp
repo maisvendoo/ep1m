@@ -17,6 +17,7 @@ void EP1m::stepPowerCircuit(double t, double dt)
     Ukr = max(pant[PANT1]->getUout(), pant[PANT2]->getUout());
 
     main_switch->setU_in(Ukr);
+    main_switch->setHoldingCoilState(getHoldingCoilState());
     main_switch->step(t, dt);
 
     trac_trans->setInputVoltage(main_switch->getU_out());

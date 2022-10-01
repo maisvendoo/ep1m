@@ -63,6 +63,12 @@ private:
     /// Вентиль защиты ВЗ-6
     ElectroValve    *safety_valve;
 
+    /// Промежуточное реле KV44
+    Relay           *kv44;
+
+    /// Промежуточное реле KV39
+    Relay           *kv39;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -79,10 +85,16 @@ private:
     /// Тумблер включения ШП-21
     Trigger     tumbler_power_supply;
 
+    /// Кнопка аварийного отключения ГВ
+    Trigger     button_main_swith_off;
+
     void initialization() override;
 
     /// Инициализация подсистемы питания цепей управления
     void initControlPower();
+
+    /// Инициализация цепей управления
+    void initControlCircuit();
 
     /// Инициализация АЗВ
     void initAZV();
@@ -100,6 +112,10 @@ private:
     void initSounds();
 
     void stepControlPower(double t, double dt);
+
+    void stepControlCircuit(double t, double dt);
+
+    bool getHoldingCoilState();
 
     void stepPanel(double t, double dt);
 

@@ -34,4 +34,71 @@
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
 
+	<!-- Включение реле -->
+	<Sound>
+		<Name>Relay</Name>
+		<Path>relay.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Блокирование ВВК -->
+	<Sound>
+		<Name>Lock_VVK</Name>
+		<Path>lock_vvk.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Подъем токоприемника -->
+	<Sound>
+		<Name>Pantograph_Up</Name>
+		<Path>TPUp.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+
+	<!-- Опускание токоприемника -->
+	<Sound>
+		<Name>Pantograph_Down</Name>
+		<Path>TPDown.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Включение ГВ -->
+	<Sound>
+		<Name>GV_On</Name>
+		<Path>gv_on.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Отключение ГВ -->
+	<Sound>
+		<Name>GV_Off</Name>
+		<Path>gv_off.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
 </Config>

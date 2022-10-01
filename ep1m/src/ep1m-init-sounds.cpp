@@ -18,4 +18,7 @@ void EP1m::initSounds()
 
     connect(pant[PANT1], &Pantograph::soundPlay, this, &EP1m::soundPlay);
     connect(pant[PANT2], &Pantograph::soundPlay, this, &EP1m::soundPlay);
+
+    connect(kv44, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv39, &Relay::soundPlay, this, &EP1m::soundPlay);
 }
