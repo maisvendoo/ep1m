@@ -123,4 +123,15 @@
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
 
+	<!-- Рукоятка КМ -->
+	<Sound>
+		<Name>Trac_Transformer</Name>
+		<Path>trans.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
 </Config>

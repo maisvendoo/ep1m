@@ -23,6 +23,8 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_REVERS] = km->getReversHandlePos();
     analogSignal[SIGNAL_KONTROLLER] = km->getHandlePosition();
 
+    analogSignal[STRELKA_U_KS] = static_cast<float>(main_switch->getU_out() / 30000.0);
+
     analogSignal[SIGNAL_WHEEL1] = static_cast<float>(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL2] = static_cast<float>(dir * wheel_rotation_angle[1] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL3] = static_cast<float>(dir * wheel_rotation_angle[2] / 2.0 / Physics::PI);

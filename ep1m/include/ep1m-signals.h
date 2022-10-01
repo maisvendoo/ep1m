@@ -24,6 +24,9 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1
     SIGNAL_TUMBLER_MOTOR_FAN2 = 68, // Вентилятор 2
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
+
+    STRELKA_U_KS = 98, // Напряжение КС
+
     SIGNAL_TUMBLER_EPT = 100, // ЭПТ
 
     SIGNAL_REVERS = 101, // Реверсивка
