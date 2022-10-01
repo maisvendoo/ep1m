@@ -17,6 +17,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , safety_valve(Q_NULLPTR)
   , kv44(Q_NULLPTR)
   , kv39(Q_NULLPTR)
+  , km(Q_NULLPTR)
 {
     Uks = 25000.0;
 }

@@ -3,6 +3,7 @@
 
 #include    "vehicle-api.h"
 #include    "ep1m-signals.h"
+#include    "ep1m-tumblers.h"
 #include    "tumblers-panel.h"
 #include    "azv.h"
 #include    "msud.h"
@@ -13,6 +14,7 @@
 #include    "protective-device.h"
 #include    "relay.h"
 #include    "electro-valve.h"
+#include    "km-35-01.h"
 
 //---------------------------------------------------------------------
 //
@@ -69,6 +71,9 @@ private:
     /// Промежуточное реле KV39
     Relay           *kv39;
 
+    /// Контроллер машиниста
+    TracController  *km;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -82,11 +87,14 @@ private:
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;
 
+    /// Тумблеры и кнопки вне блокируемой панели
+    std::array<Trigger, TUMBLERS_COUNT> tumblers;
+
     /// Тумблер включения ШП-21
-    Trigger     tumbler_power_supply;
+    //Trigger     tumbler_power_supply;
 
     /// Кнопка аварийного отключения ГВ
-    Trigger     button_main_swith_off;
+    //Trigger     button_main_swith_off;
 
     void initialization() override;
 

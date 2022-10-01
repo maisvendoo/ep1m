@@ -26,7 +26,7 @@ bool EP1m::getHoldingCoilState()
 {
     bool is_holding_coil_on =
             tumblers_panel->getTumblerState(TUMBLER_MAIN_SWITCH) &&
-            button_main_swith_off.getState() &&
+            tumblers[BUTTON_MAIN_SWITCH_OFF].getState() &&
             kv44->getContactState(0) &&
             kv39->getContactState(0);
 

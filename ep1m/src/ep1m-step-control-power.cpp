@@ -12,7 +12,8 @@ void EP1m::stepControlPower(double t, double dt)
     battery->setLoadCurrent(Icc);
     battery->step(t, dt);
 
-    km5->setVoltage(battery->getVoltage() * static_cast<double>(tumbler_power_supply.getState()));
+    km5->setVoltage(battery->getVoltage() *
+                    static_cast<double>(tumblers[TUMBLER_POWER_SUPPLY_ON].getState()));
     km5->step(t, dt);
 
     power_supply->setBatVoltage(battery->getVoltage());
