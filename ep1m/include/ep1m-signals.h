@@ -27,6 +27,7 @@ enum
     SIGNAL_TUMBLER_EPT = 100, // ЭПТ
 
     SIGNAL_REVERS = 101, // Реверсивка
+    SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
     // Колесные пары
     SIGNAL_WHEEL1 = 194, // Колесная пара 1

@@ -35,6 +35,8 @@ public:
 
     float getReversHandlePos() const { return static_cast<float>(revers_pos); }
 
+    float getHandlePosition() const;
+
 private:
 
     /// Позиция, определяющая состояние схемы
@@ -55,6 +57,20 @@ private:
 
     bool old_brake_key;
 
+    int trac_level;
+
+    int brake_level;
+
+    int dir;
+
+    Timer tracTimer;
+
+    Timer brakeTimer;
+
+    Trigger traction;
+
+    Trigger brake;
+
     void preStep(state_vector_t &Y, double t) override;
 
     void ode_system(const state_vector_t &Y,
@@ -66,6 +82,12 @@ private:
     void stepKeysControl(double t, double dt) override;
 
     void processDiscretePositions(bool key_state, bool old_key_state, int dir);
+
+private slots:
+
+    void slotTracLevelProcess();
+
+    void slotBrakeLevelProcess();
 };
 
 #endif // KM_35_01_H

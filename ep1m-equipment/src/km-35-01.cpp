@@ -13,8 +13,17 @@ TracController::TracController(QObject *parent) : Device(parent)
   , reversSoundName("Revers")
   , old_traction_key(false)
   , old_brake_key(false)
+  , trac_level(0)
+  , brake_level(0)
+  , dir(0)
 {
+    tracTimer.setTimeout(0.02);
+    connect(&tracTimer, &Timer::process,
+            this, &TracController::slotTracLevelProcess);
 
+    brakeTimer.setTimeout(0.02);
+    connect(&brakeTimer, &Timer::process,
+            this, &TracController::slotBrakeLevelProcess);
 }
 
 //------------------------------------------------------------------------------
@@ -23,6 +32,16 @@ TracController::TracController(QObject *parent) : Device(parent)
 TracController::~TracController()
 {
 
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+float TracController::getHandlePosition() const
+{
+    float handle_pos = mode_pos * 0.2f + trac_level / 125.0f - brake_level / 125.f;
+
+    return handle_pos;
 }
 
 //------------------------------------------------------------------------------
@@ -61,6 +80,76 @@ void TracController::stepKeysControl(double t, double dt)
 
     // Тут реализуем процесс перемещения главной рукоятки!!!
 
+    if (mode_pos == -1)
+    {
+        traction.reset();
+        dir = 0;
+
+        if (!brakeTimer.isStarted())
+            brakeTimer.start();
+
+        if (getKeyState(KEY_A))
+        {
+            if (brake_level == 0)
+            {
+                mode_pos = 0;
+                brakeTimer.stop();
+                brake.reset();
+            }
+            else
+            {
+                dir = 1;
+            }
+        }
+
+        if (getKeyState(KEY_D))
+        {
+            if (brake.getState())
+                dir = -1;
+        }
+        else
+        {
+            brake.set();
+        }
+    }
+
+    brakeTimer.step(t, dt);
+
+    if (mode_pos == 1)
+    {
+        brake.reset();
+        dir = 0;
+
+        if (!tracTimer.isStarted())
+            tracTimer.start();
+
+        if (getKeyState(KEY_D))
+        {
+            if (trac_level == 0)
+            {
+                mode_pos = 0;
+                tracTimer.stop();
+                traction.reset();
+            }
+            else
+            {
+                dir = -1;
+            }
+        }
+
+        if (getKeyState(KEY_A))
+        {
+            if (traction.getState())
+                dir = 1;
+        }
+        else
+        {
+            traction.set();
+        }
+    }
+
+    tracTimer.step(t, dt);
+
     old_traction_key = getKeyState(KEY_A);
     old_brake_key = getKeyState(KEY_D);
 
@@ -93,5 +182,39 @@ void TracController::processDiscretePositions(bool key_state,
                                               bool old_key_state,
                                               int dir)
 {
+    if (revers_pos == 0)
+        return;
 
+    if (mode_pos != 0)
+        return;
+
+    trac_level = brake_level = 0;
+    traction.reset();
+    brake.reset();
+
+    if (key_state && !old_key_state)
+    {
+        mode_pos += dir;
+        mode_pos = cut(mode_pos, -1, 1);
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TracController::slotTracLevelProcess()
+{
+    trac_level += dir * mode_pos;
+
+    trac_level = cut(trac_level, 0, 100);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TracController::slotBrakeLevelProcess()
+{
+    brake_level += dir * mode_pos;
+
+    brake_level = cut(brake_level, 0, 100);
 }
