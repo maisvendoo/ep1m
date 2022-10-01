@@ -20,6 +20,8 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_PANT1] = static_cast<float>(pant[PANT1]->getHeight());
     analogSignal[SIGNAL_PANT2] = static_cast<float>(pant[PANT2]->getHeight());
 
+    analogSignal[SIGNAL_REVERS] = km->getReversHandlePos();
+
     analogSignal[SIGNAL_WHEEL1] = static_cast<float>(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL2] = static_cast<float>(dir * wheel_rotation_angle[1] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL3] = static_cast<float>(dir * wheel_rotation_angle[2] / 2.0 / Physics::PI);

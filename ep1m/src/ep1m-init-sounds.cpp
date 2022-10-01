@@ -17,9 +17,9 @@ void EP1m::initSounds()
         connect(&tumblers[i], &Trigger::soundPlay, this, &EP1m::soundPlay);
     }
 
-    tumblers[SWITCH_REVERS_FWD].setOnSoundName("Revers");
+    tumblers[SWITCH_REVERS_FWD].setOnSoundName("");
     tumblers[SWITCH_REVERS_FWD].setOffSoundName("");
-    tumblers[SWITCH_REVERS_BWD].setOnSoundName("Revers");
+    tumblers[SWITCH_REVERS_BWD].setOnSoundName("");
     tumblers[SWITCH_REVERS_BWD].setOffSoundName("");
 
     connect(km5, &Relay::soundPlay, this, &EP1m::soundPlay);
@@ -31,4 +31,6 @@ void EP1m::initSounds()
 
     connect(kv44, &Relay::soundPlay, this, &EP1m::soundPlay);
     connect(kv39, &Relay::soundPlay, this, &EP1m::soundPlay);
+
+    connect(km, &TracController::soundPlay, this, &EP1m::soundPlay);
 }

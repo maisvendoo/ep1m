@@ -26,6 +26,8 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
     SIGNAL_TUMBLER_EPT = 100, // ЭПТ
 
+    SIGNAL_REVERS = 101, // Реверсивка
+
     // Колесные пары
     SIGNAL_WHEEL1 = 194, // Колесная пара 1
     SIGNAL_WHEEL2 = 195, // Колесная пара 2
