@@ -41,8 +41,8 @@ void EP1m::stepControlCircuit(double t, double dt)
             tumblers_panel->getTumblerState(TUMBLER_RETURN_PROTECTION);
 
     bool is_kv41_on =
-            (is_N211_on && !main_switch->getState()) ||
-            (kv21->getContactState(0) && kv41->getContactState(0));
+            is_N211_on && ((!main_switch->getState()) ||
+            (kv21->getContactState(0) && kv41->getContactState(0)));
 
     kv41->setVoltage(Ucc * static_cast<double>(is_kv41_on));
     kv41->step(t, dt);
