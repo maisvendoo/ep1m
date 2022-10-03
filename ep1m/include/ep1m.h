@@ -1,6 +1,7 @@
 #ifndef EP1M_H
 #define EP1M_H
 
+#include    "defines.h"
 #include    "vehicle-api.h"
 #include    "ep1m-signals.h"
 #include    "ep1m-tumblers.h"
