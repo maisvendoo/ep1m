@@ -32,4 +32,13 @@ void EP1m::keyProcess()
     {
         tumblers[SWITCH_REVERS_BWD].reset();
     }
+
+    // Включение блока сигнализации
+    if (getKeyState(KEY_8))
+    {
+        if (isShift())
+            tumblers[TUMBLER_BS_002].set();
+        else
+            tumblers[TUMBLER_BS_002].reset();
+    }
 }

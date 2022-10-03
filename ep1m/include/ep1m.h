@@ -144,6 +144,8 @@ private:
 
     void stepPanel(double t, double dt);
 
+    void setSignalsModuleInputs();
+
     void stepMSUD(double t, double dt);
 
     void stepPowerCircuit(double t, double dt);
