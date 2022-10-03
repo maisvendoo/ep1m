@@ -1,5 +1,8 @@
 #include    "ep1m.h"
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void EP1m::signalsOutput()
 {
     analogSignal[SIGNAL_UNLOCK_KEY] = TO_FLOAT(tumblers_panel->getUnlockKeyState());
