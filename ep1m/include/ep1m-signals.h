@@ -19,6 +19,8 @@ enum
     SIGNAL_PANT1 = 40, // Передний токоприемник
     SIGNAL_PANT2 = 41, // Задний токоприемник
 
+    LAMP_GV = 42,
+
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
     SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1

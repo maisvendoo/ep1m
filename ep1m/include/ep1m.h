@@ -15,6 +15,7 @@
 #include    "relay.h"
 #include    "electro-valve.h"
 #include    "km-35-01.h"
+#include    "bs-002.h"
 
 //---------------------------------------------------------------------
 //
@@ -81,6 +82,9 @@ private:
 
     /// Контроллер машиниста
     TracController  *km;
+
+    /// Блок сигнализации БС-002
+    SignalizationModule *signals_module;
 
     bool return_GV;
 

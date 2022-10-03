@@ -18,6 +18,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , kv44(Q_NULLPTR)
   , kv39(Q_NULLPTR)
   , km(Q_NULLPTR)
+  , signals_module(Q_NULLPTR)
   , return_GV(false)
 {
     Uks = 25000.0;
