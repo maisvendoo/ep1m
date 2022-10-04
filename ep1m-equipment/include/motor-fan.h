@@ -18,7 +18,7 @@ public:
 
     void setFreq(double freq) { f = freq; }
 
-    float isNoReady();
+    bool isNoReady() const;
 
 private:
 

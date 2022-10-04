@@ -32,6 +32,10 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_MK1] = TO_FLOAT(signals_module->getLampState(SM_MK1));
     analogSignal[LAMP_MK2] = TO_FLOAT(signals_module->getLampState(SM_MK2));
 
+    analogSignal[LAMP_MV1] = TO_FLOAT(signals_module->getLampState(SM_V1));
+    analogSignal[LAMP_MV2] = TO_FLOAT(signals_module->getLampState(SM_V2));
+    analogSignal[LAMP_MV3] = TO_FLOAT(signals_module->getLampState(SM_V3));
+
     analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
 
     analogSignal[SIGNAL_WHEEL1] = TO_FLOAT(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);

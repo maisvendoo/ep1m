@@ -16,7 +16,7 @@ public:
 
     double getFrequencyLow() const { return freq_low; }
 
-    double getFrequencityNorm() const { return freq_norm; }
+    double getFrequencyNorm() const { return freq_norm; }
 
     void setInputVoltage(double U_in) { this->U_in = U_in; }
 

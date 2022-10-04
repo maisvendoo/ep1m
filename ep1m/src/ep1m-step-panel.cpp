@@ -28,4 +28,8 @@ void EP1m::setSignalsModuleInputs()
     signals_module->setLampInputSignal(SM_GV, main_switch->getState());
     signals_module->setLampInputSignal(SM_MK1, !main_compressor->isStarted());
     signals_module->setLampInputSignal(SM_MK2, !main_compressor->isStarted());
+
+    signals_module->setLampInputSignal(SM_V1, motor_fan[MV1]->isNoReady());
+    signals_module->setLampInputSignal(SM_V2, motor_fan[MV2]->isNoReady());
+    signals_module->setLampInputSignal(SM_V3, motor_fan[MV3]->isNoReady());
 }

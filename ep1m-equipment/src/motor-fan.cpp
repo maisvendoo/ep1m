@@ -35,10 +35,16 @@ void MotorFan::setU_power(double value)
     QString sndName = QString("Motor_Fan%1").arg(idx);
 
     if (floor(value) > 0 && floor(U_power) == 0)
+    {
         emit soundPlay(sndName);
+        is_no_ready = false;
+    }
 
     if (floor(value) == 0 && floor(U_power) > 0)
+    {
         emit soundStop(sndName);
+        is_no_ready = true;
+    }
 
 
     U_power = value;
@@ -47,9 +53,9 @@ void MotorFan::setU_power(double value)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-float MotorFan::isNoReady()
+bool MotorFan::isNoReady() const
 {
-    return static_cast<float>(is_no_ready);
+    return is_no_ready;
 }
 
 //------------------------------------------------------------------------------
@@ -60,9 +66,6 @@ void MotorFan::preStep(state_vector_t &Y, double t)
     Q_UNUSED(t)
 
     QString sndName = QString("Motor_Fan%1").arg(idx);
-
-    is_no_ready = hs_n(Y[0] - 0.95 * omega_nom);
-    //emit soundSetPitch(sndName, static_cast<float>(Y[0] / omega0));
 }
 
 //------------------------------------------------------------------------------

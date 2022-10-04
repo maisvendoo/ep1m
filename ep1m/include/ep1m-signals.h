@@ -29,6 +29,9 @@ enum
 
     LAMP_MK1 = 50,
     LAMP_MK2 = 51,
+    LAMP_MV1 = 52,
+    LAMP_MV2 = 53,
+    LAMP_MV3 = 54,
 
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
