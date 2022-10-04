@@ -77,6 +77,8 @@ private:
      // Основной цикл работы МСУД
      void main_loop(double t, double dt);
 
+     // Управление частотой вращения мотор-вентиляторов
+     void motor_fans_control(double t, double dt);
 
 private slots:
 
