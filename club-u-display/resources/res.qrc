@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/rcc">
+        <file alias="club-u-fon">img/fon.png</file>
+        <file alias="ind_bdit">img/ind_bdit.png</file>
+
+        <file alias="alsn_green">leds/alsn_green.png</file>
+        <file alias="alsn_yellow">leds/alsn_yellow.png</file>
+        <file alias="alsn_yellow_red">leds/alsn_yellow_red.png</file>
+        <file alias="alsn_red">leds/alsn_red.png</file>
+        <file alias="alsn_white">leds/alsn_white.png</file>
+
+    </qresource>
+</RCC>
