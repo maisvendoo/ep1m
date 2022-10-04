@@ -89,6 +89,9 @@ private:
 
     bool return_GV;
 
+    /// Главный (питательный) резервуар
+    Reservoir   *main_res;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -134,6 +137,9 @@ private:
     /// Инициализация силовой схемы
     void initPowerCircuit();
 
+    /// Инициализация системы подготовки сжатого воздуха
+    void initAirSupplySystem();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -150,6 +156,8 @@ private:
     void stepMSUD(double t, double dt);
 
     void stepPowerCircuit(double t, double dt);
+
+    void stepAirSupplySystem(double t, double dt);
 
     void signalsOutput();
 

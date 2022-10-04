@@ -55,6 +55,9 @@ void EP1m::initialization()
     // Инициализация силовой схемы
     initPowerCircuit();
 
+    // инициализация системы подготовки сжатого воздуха
+    initAirSupplySystem();
+
     // Инициализация озвучки
     initSounds();
 }
@@ -78,6 +81,9 @@ void EP1m::step(double t, double dt)
 
     // Работа силовой схемы
     stepPowerCircuit(t, dt);
+
+    // Работа системы полготовки сжатого воздуха
+    stepAirSupplySystem(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();
