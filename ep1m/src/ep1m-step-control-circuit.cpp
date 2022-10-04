@@ -68,7 +68,8 @@ bool EP1m::getHoldingCoilState()
             tumblers_panel->getTumblerState(TUMBLER_MAIN_SWITCH) &&
             tumblers[BUTTON_MAIN_SWITCH_OFF].getState() &&
             kv44->getContactState(0) &&
-            kv39->getContactState(0);
+            kv39->getContactState(0) &&
+            safety_valve->getState();
 
     return is_holding_coil_on;
 }

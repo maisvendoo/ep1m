@@ -22,6 +22,8 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , return_GV(false)
   , main_res(Q_NULLPTR)
   , main_res_leak(0.0)
+  , main_compressor(Q_NULLPTR)
+  , press_reg(Q_NULLPTR)
 {
     Uks = 25000.0;
 }

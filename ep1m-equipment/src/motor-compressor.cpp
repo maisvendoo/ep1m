@@ -11,10 +11,11 @@ MotorCompressor::MotorCompressor(QString config_path, QObject *parent) : Device(
   , s_kr(0.154)
   , Un(380.0)
   , U_power(0.0)
-  , omega0(157.08)
+  , omega0(78.5)
   , J(0.5)
-  , Mxx(20.0)
+  , Mxx(30.0)
   , Vnk(0.05)
+  , is_started(false)
 
 {
     std::fill(K.begin(), K.end(), 0);
@@ -63,7 +64,24 @@ void MotorCompressor::preStep(state_vector_t &Y, double t)
 
     Q = K[4] * pf(Y[1] - p);
 
-    emit soundSetPitch("Motor_Compressor", static_cast<float>(Y[0] / omega0));
+    if (U_power >= 0.95 * Un)
+    {
+        if (!is_started)
+        {
+            emit soundPlay("Motor_Compressor");
+            is_started = true;
+        }
+    }
+    else
+    {
+        if (is_started)
+        {
+            emit soundStop("Motor_Compressor");
+            is_started = false;
+        }
+    }
+
+   //emit soundSetPitch("Motor_Compressor", static_cast<float>(Y[0] / omega0));
 }
 
 //------------------------------------------------------------------------------

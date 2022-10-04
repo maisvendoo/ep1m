@@ -36,4 +36,13 @@ void EP1m::initSounds()
 
     connect(main_switch, &ProtectiveDevice::soundPlay,
             this, &EP1m::soundPlay);
+
+    connect(main_compressor, &MotorCompressor::soundPlay,
+            this, &EP1m::soundPlay);
+
+    connect(main_compressor, &MotorCompressor::soundStop,
+            this, &EP1m::soundStop);
+
+    connect(main_compressor, &MotorCompressor::soundSetPitch,
+            this, &EP1m::soundSetPitch);
 }

@@ -136,6 +136,15 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
                 tumblers[TUMBLER_AUX_MACHINES].reset();
         }
 
+        // Включение мотор-компрессора
+        if (getKeyState(KEY_4))
+        {
+            if (isShift())
+                tumblers[TUMBLER_COMPRESSOR].set();
+            else
+                tumblers[TUMBLER_COMPRESSOR].reset();
+        }
+
         // Вентилятор 1
         if (getKeyState(KEY_5))
         {

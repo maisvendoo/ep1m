@@ -47,6 +47,8 @@ private:
 
     double  Vnk;
 
+    bool is_started;
+
     enum
     {
         NUM_COEFFS = 6

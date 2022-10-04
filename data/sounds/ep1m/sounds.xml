@@ -83,8 +83,8 @@
 	<Sound>
 		<Name>GV_On</Name>
 		<Path>gv_on.wav</Path>
-		<InitVolume>100</InitVolume>
-		<MaxVolume>100</MaxVolume>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
@@ -94,8 +94,8 @@
 	<Sound>
 		<Name>GV_Off</Name>
 		<Path>gv_off.wav</Path>
-		<InitVolume>100</InitVolume>
-		<MaxVolume>100</MaxVolume>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
@@ -105,8 +105,8 @@
 	<Sound>
 		<Name>Revers</Name>
 		<Path>revers.wav</Path>
-		<InitVolume>100</InitVolume>
-		<MaxVolume>100</MaxVolume>
+		<InitVolume>50</InitVolume>
+		<MaxVolume>50</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
@@ -116,8 +116,8 @@
 	<Sound>
 		<Name>KM_main</Name>
 		<Path>km.wav</Path>
-		<InitVolume>100</InitVolume>
-		<MaxVolume>100</MaxVolume>
+		<InitVolume>50</InitVolume>
+		<MaxVolume>50</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
@@ -127,8 +127,19 @@
 	<Sound>
 		<Name>Trac_Transformer</Name>
 		<Path>trans.wav</Path>
-		<InitVolume>100</InitVolume>
-		<MaxVolume>100</MaxVolume>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<!-- Звуки работы мотор-компрессора -->	
+	<Sound>
+		<Name>Motor_Compressor</Name>
+		<Path>compressor.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>

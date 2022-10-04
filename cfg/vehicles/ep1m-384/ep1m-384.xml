@@ -10,7 +10,8 @@
         <SoundDir>ep1m</SoundDir>
         <WheelInertia>2.0</WheelInertia>
 
-
+		<MainResLeak>4e-5</MainResLeak>
+		
         <ExtModelName>EP1m-384/EP1m.osgt</ExtModelName>
         <ModelShift>0.0 0.0 0.3</ModelShift>
 
@@ -19,7 +20,7 @@
 
         <AnimationsConfigDir>EP1m-384</AnimationsConfigDir>
 
-        <DriverPos>0.635 9.291 3.358</DriverPos> 
+        <DriverPos>0.635 9.291 3.5</DriverPos> 
 
     </Vehicle>
 </Config>

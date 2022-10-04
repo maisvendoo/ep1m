@@ -17,6 +17,8 @@
 #include    "electro-valve.h"
 #include    "km-35-01.h"
 #include    "bs-002.h"
+#include    "motor-compressor.h"
+#include    "pressure-regulator.h"
 
 //---------------------------------------------------------------------
 //
@@ -95,6 +97,12 @@ private:
     /// Темп утечки из главного резервуара
     double main_res_leak;
 
+    /// Мотор-компрессор
+    MotorCompressor *main_compressor;
+
+    /// Реле-регулятор давления
+    PressureRegulator *press_reg;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -170,6 +178,8 @@ private:
     void step(double t, double dt) override;
 
     void keyProcess() override;
+
+    void loadConfig(QString path) override;
 };
 
 #endif // EP1M_H
