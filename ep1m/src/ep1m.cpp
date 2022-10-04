@@ -20,6 +20,8 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , km(Q_NULLPTR)
   , signals_module(Q_NULLPTR)
   , return_GV(false)
+  , main_res(Q_NULLPTR)
+  , main_res_leak(0.0)
 {
     Uks = 25000.0;
 }

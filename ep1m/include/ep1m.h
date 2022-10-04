@@ -92,6 +92,9 @@ private:
     /// Главный (питательный) резервуар
     Reservoir   *main_res;
 
+    /// Темп утечки из главного резервуара
+    double main_res_leak;
+
     enum
     {
         PANT_NUMBER = 2,

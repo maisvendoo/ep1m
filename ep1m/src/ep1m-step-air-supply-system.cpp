@@ -5,5 +5,5 @@
 //------------------------------------------------------------------------------
 void EP1m::stepAirSupplySystem(double t, double dt)
 {
-
+    main_res->step(t, dt);
 }

@@ -7,13 +7,13 @@ MotorCompressor::MotorCompressor(QString config_path, QObject *parent) : Device(
   , p(0.0)
   , Q(0.0)
   , p0(1.5)
-  , Mmax(455.8)
+  , Mmax(280.0)
   , s_kr(0.154)
   , Un(380.0)
   , U_power(0.0)
   , omega0(157.08)
   , J(0.5)
-  , Mxx(50.0)
+  , Mxx(20.0)
   , Vnk(0.05)
 
 {

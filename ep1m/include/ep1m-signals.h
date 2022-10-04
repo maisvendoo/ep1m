@@ -10,6 +10,12 @@ enum
 
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
+
+    STRELKA_TM = 21,
+    STRELKA_UR = 22,
+    STRELKA_GR = 23,
+    STRELKA_TC = 24,
+
     SIGNAL_TUMBLER_LOCK_VVK = 31, // Блокирование ВВК
     SIGNAL_TUMBLER_PANT1 = 32, // Токоприемник 1
     SIGNAL_TUMBLER_PANT2 = 33, // Токоприемник 2
