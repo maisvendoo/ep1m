@@ -14,6 +14,7 @@ MotorFan::MotorFan(size_t idx, QObject *parent) : Device(parent)
   , kr(0.0154)
   , J(0.5)
   , is_no_ready(1.0)
+  , f(50.0)
 {
 
 }
@@ -73,11 +74,14 @@ void MotorFan::ode_system(const state_vector_t &Y,
 {
     Q_UNUSED(t)
 
+    int p = 4; // число пар полюсов
+    omega0 = 2 * Physics::PI * f / p;
+
     // Расчитывает текущее скольжение ротора
     double s = 1 - Y[0] / omega0;
 
     // Рачитываем максимальный момент при данном напряжении питания
-    double M_maximal = Mmax * pow(U_power / Un, 2.0);
+    double M_maximal = Mmax * pow(U_power / Un, 2.0) * fn / f;
 
     // Расчитываем электромагнитный момент (формула Клосса)
     double Ma = 2 * M_maximal / ( s / s_kr + s_kr / s );

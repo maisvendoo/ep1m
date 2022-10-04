@@ -16,6 +16,8 @@ public:
 
     void setU_power(double value);
 
+    void setFreq(double freq) { f = freq; }
+
     float isNoReady();
 
 private:
@@ -40,6 +42,12 @@ private:
     double  J;
 
     double  is_no_ready;
+
+    /// Текущая частота питающего напряжения
+    double f;
+
+    /// Номинальная частота питающего напряжения
+    const double fn = 50.0;
 
     void preStep(state_vector_t &Y, double t);
 

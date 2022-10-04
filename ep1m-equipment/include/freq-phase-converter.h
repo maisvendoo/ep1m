@@ -14,12 +14,27 @@ public:
 
     ~FreqPhaseConverter();
 
-    double getFrequency() const { return freq_cur; }
+    double getFrequencyLow() const { return freq_low; }
+
+    double getFrequencityNorm() const { return freq_norm; }
+
+    void setInputVoltage(double U_in) { this->U_in = U_in; }
+
+    double getOutputVoltage() const { return U_out; }
 
 private:
 
-    /// Текущая частота питания вспомогательных машин
-    double freq_cur;
+    /// Входное напряжение
+    double U_in;
+
+    /// Выходное напряжение
+    double U_out;
+
+    /// Пониженная частота питания вспомогательных машин
+    const double freq_low = 16.67;
+
+    /// Нормальная частота питания вспомогательных машин
+    const double freq_norm = 50.0;
 
     void preStep(state_vector_t &Y, double t);
 

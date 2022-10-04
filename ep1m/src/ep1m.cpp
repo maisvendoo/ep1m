@@ -24,6 +24,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , main_res_leak(0.0)
   , main_compressor(Q_NULLPTR)
   , press_reg(Q_NULLPTR)
+  , freq_phase_conv(Q_NULLPTR)
 {
     Uks = 25000.0;
 }
@@ -59,8 +60,11 @@ void EP1m::initialization()
     // Инициализация силовой схемы
     initPowerCircuit();
 
-    // инициализация системы подготовки сжатого воздуха
+    // Инициализация системы подготовки сжатого воздуха
     initAirSupplySystem();
+
+    // Инициализация вспомогательных машин
+    initAuxMachines();
 
     // Инициализация озвучки
     initSounds();
@@ -88,6 +92,9 @@ void EP1m::step(double t, double dt)
 
     // Работа системы полготовки сжатого воздуха
     stepAirSupplySystem(t, dt);
+
+    // Работа вспомогательных машин
+    stepAuxMachines(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();

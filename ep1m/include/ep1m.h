@@ -17,8 +17,10 @@
 #include    "electro-valve.h"
 #include    "km-35-01.h"
 #include    "bs-002.h"
+#include    "freq-phase-converter.h"
 #include    "motor-compressor.h"
 #include    "pressure-regulator.h"
+#include    "motor-fan.h"
 
 //---------------------------------------------------------------------
 //
@@ -40,7 +42,6 @@ private:
 
     /// МСУД
     MSUD    *msud;
-
 
     /// Напряжение питания цепей управления
     double  Ucc;
@@ -103,6 +104,9 @@ private:
     /// Реле-регулятор давления
     PressureRegulator *press_reg;
 
+    /// Преобразователь частоты и числа фаз (ПЧФ)
+    FreqPhaseConverter *freq_phase_conv;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -151,6 +155,9 @@ private:
     /// Инициализация системы подготовки сжатого воздуха
     void initAirSupplySystem();
 
+    /// Инициализация вспомогательных машин
+    void initAuxMachines();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -169,6 +176,8 @@ private:
     void stepPowerCircuit(double t, double dt);
 
     void stepAirSupplySystem(double t, double dt);
+
+    void stepAuxMachines(double t, double dt);
 
     void signalsOutput();
 
