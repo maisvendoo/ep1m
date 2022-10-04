@@ -107,6 +107,18 @@ private:
     /// Преобразователь частоты и числа фаз (ПЧФ)
     FreqPhaseConverter *freq_phase_conv;
 
+    Relay   *km7;
+
+    Relay   *km8;
+
+    Relay   *km9;
+
+    Relay   *km11;
+
+    Relay   *km12;
+
+    Relay   *km13;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -127,11 +139,6 @@ private:
     std::array<Trigger, TUMBLERS_COUNT> tumblers;
 
     /// Мотор-вентиляторы М11 - М13
-    enum
-    {
-        MOTOR_FANS_NUM = 3
-    };
-
     std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
 
     void initialization() override;
