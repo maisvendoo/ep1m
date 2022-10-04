@@ -6,7 +6,7 @@
 MotorFan::MotorFan(size_t idx, QObject *parent) : Device(parent)
   , idx(idx)
   , Mmax(611.5)
-  , s_kr(0.08)
+  , s_kr_nom(0.08)
   , Un(380.0)
   , U_power(0.0)
   , omega0(157.08)
@@ -82,6 +82,8 @@ void MotorFan::ode_system(const state_vector_t &Y,
 
     // Рачитываем максимальный момент при данном напряжении питания
     double M_maximal = Mmax * pow(U_power / Un, 2.0) * fn / f;
+
+    double s_kr = s_kr_nom * fn / f;
 
     // Расчитываем электромагнитный момент (формула Клосса)
     double Ma = 2 * M_maximal / ( s / s_kr + s_kr / s );

@@ -29,6 +29,8 @@ void EP1m::signalsOutput()
     analogSignal[STRELKA_U_KS] = TO_FLOAT(main_switch->getU_out() / 30000.0);
 
     analogSignal[LAMP_GV] = TO_FLOAT(signals_module->getLampState(SM_GV));
+    analogSignal[LAMP_MK1] = TO_FLOAT(signals_module->getLampState(SM_MK1));
+    analogSignal[LAMP_MK2] = TO_FLOAT(signals_module->getLampState(SM_MK2));
 
     analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
 

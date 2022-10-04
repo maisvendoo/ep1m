@@ -20,6 +20,8 @@ public:
 
     void setU_power(double value);
 
+    bool isStarted() const { return is_started; }
+
 private:
 
     /// Внешнее противодавление

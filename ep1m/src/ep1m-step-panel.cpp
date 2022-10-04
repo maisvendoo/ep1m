@@ -26,4 +26,6 @@ void EP1m::stepPanel(double t, double dt)
 void EP1m::setSignalsModuleInputs()
 {
     signals_module->setLampInputSignal(SM_GV, main_switch->getState());
+    signals_module->setLampInputSignal(SM_MK1, !main_compressor->isStarted());
+    signals_module->setLampInputSignal(SM_MK2, !main_compressor->isStarted());
 }

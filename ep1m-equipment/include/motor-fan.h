@@ -27,7 +27,7 @@ private:
 
     double  Mmax;
 
-    double  s_kr;
+    double  s_kr_nom;
 
     double  Un;
 

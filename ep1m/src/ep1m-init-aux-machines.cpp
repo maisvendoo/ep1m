@@ -7,5 +7,5 @@
 //------------------------------------------------------------------------------
 void EP1m::initAuxMachines()
 {
-
+    freq_phase_conv = new FreqPhaseConverter();
 }

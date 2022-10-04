@@ -126,11 +126,13 @@ private:
     /// Тумблеры и кнопки вне блокируемой панели
     std::array<Trigger, TUMBLERS_COUNT> tumblers;
 
-    /// Тумблер включения ШП-21
-    //Trigger     tumbler_power_supply;
+    /// Мотор-вентиляторы М11 - М13
+    enum
+    {
+        MOTOR_FANS_NUM = 3
+    };
 
-    /// Кнопка аварийного отключения ГВ
-    //Trigger     button_main_swith_off;
+    std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
 
     void initialization() override;
 
