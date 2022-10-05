@@ -14,10 +14,12 @@ void EP1m::stepAuxMachines(double t, double dt)
     freq_phase_conv->step(t, dt);
 
     // Управляем контакторами МВ11
-    km7->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV1]));
+    km7->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV1] &&
+                                              tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN1)));
     km7->step(t, dt);
 
-    km11->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV1]));
+    km11->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV1] &&
+                                               tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN1)));
     km11->step(t, dt);
 
     // Цепь напряжения на МВ11
@@ -35,10 +37,12 @@ void EP1m::stepAuxMachines(double t, double dt)
     motor_fan[MV1]->step(t, dt);
 
     // Управляем контакторами МВ12
-    km8->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV2]));
+    km8->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV2] &&
+                                              tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN2)));
     km8->step(t, dt);
 
-    km12->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV2]));
+    km12->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV2] &&
+                                               tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN2)));
     km12->step(t, dt);
 
     // Цепь напряжения на МВ12
@@ -56,10 +60,12 @@ void EP1m::stepAuxMachines(double t, double dt)
     motor_fan[MV2]->step(t, dt);
 
     // Управляем контакторами МВ13
-    km9->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV3]));
+    km9->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_low[MV3] &&
+                                              tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN3)));
     km9->step(t, dt);
 
-    km13->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV3]));
+    km13->setVoltage(Ucc * static_cast<double>(msud->getOutputData().mv_freq_norm[MV3] &&
+                                               tumblers_panel->getTumblerState(TUMBLER_MOTOR_FAN3)));
     km13->step(t, dt);
 
     // Цепь напряжения на МВ13
