@@ -34,6 +34,11 @@ void MotorFan::setU_power(double value)
 {
     QString sndName = QString("Motor_Fan%1").arg(idx);
 
+    if (f < 17)
+        sndName += "_low";
+    else
+        sndName += "_norm";
+
     if (floor(value) > 0 && floor(U_power) == 0)
     {
         emit soundPlay(sndName);
