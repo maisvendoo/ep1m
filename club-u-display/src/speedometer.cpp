@@ -19,6 +19,7 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     : QLabel(parent)
     , speed_(0)
     , speedLimit_(0)
+    , speedNextLimit_(0)
 {
     this->resize(size);
 
@@ -35,6 +36,7 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
 
     setSpeed(21);
     setSpeedLimit(61);
+    setSpeedNextLimit(40);
 }
 
 
@@ -46,7 +48,7 @@ void Speedometer::setSpeed(int speed)
 {
     speed_ = speed;
 
-    drawArc_(speed, speedLimit_);
+    drawArc_(speed, speedLimit_, speedNextLimit_);
 }
 
 
@@ -58,7 +60,7 @@ void Speedometer::setSpeedLimit(int speedLimit)
 {
     speedLimit_ = speedLimit;
 
-    drawArc_(speed_, speedLimit);
+    drawArc_(speed_, speedLimit, speedNextLimit_);
 }
 
 
@@ -66,7 +68,19 @@ void Speedometer::setSpeedLimit(int speedLimit)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void Speedometer::drawArc_(int speed, int speedLimit)
+void Speedometer::setSpeedNextLimit(int speedNextLimit)
+{
+    speedNextLimit_ = speedNextLimit;
+
+    drawArc_(speed_, speedLimit_, speedNextLimit);
+}
+
+
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void Speedometer::drawArc_(int speed, int speedLimit, int speedNextLimit)
 {
     img_.fill(Qt::transparent);
     QPixmap pix = QPixmap::fromImage(img_);
@@ -82,6 +96,15 @@ void Speedometer::drawArc_(int speed, int speedLimit)
 
     // ограничение скорости
     paint.drawPoint(speed_coords1[speedLimit/5]);
+
+
+    //
+    paint.setPen(QPen( QColor(Qt::yellow),
+                       9,
+                       Qt::SolidLine,
+                       Qt::RoundCap ));
+    // следующее ограничение скорости
+    paint.drawPoint(speed_coords1[speedNextLimit/5]);
 
 
     //

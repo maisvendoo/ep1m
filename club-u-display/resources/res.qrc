@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/rcc">
+        <file alias="club-u-ttf">KLUBU.ttf</file>
+
         <file alias="club-u-fon">img/fon.png</file>
         <file alias="ind_bdit">img/ind_bdit.png</file>
 

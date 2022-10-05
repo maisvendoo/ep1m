@@ -14,6 +14,7 @@ public:
 
     void setSpeed(int speed);
     void setSpeedLimit(int speedLimit);
+    void setSpeedNextLimit(int speedNextLimit);
 
 
 private:
@@ -24,9 +25,10 @@ private:
 
     int speed_;
     int speedLimit_;
+    int speedNextLimit_;
 
 
-    void drawArc_(int speed, int speedLimit);
+    void drawArc_(int speed, int speedLimit, int speedNextLimit);
 
     void loadTxtSpeedCoolrds1_(QString txt_path, QVector<QPoint> &vec);
 
