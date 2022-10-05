@@ -159,16 +159,24 @@ void MSUD::motor_fans_control(double t, double dt)
     Q_UNUSED(t)
     Q_UNUSED(dt)
 
-    if (msud_input.Ia[TRAC_MOTOR1] <= 480)
-    {
-        if (!lowFreqTimer->isStarted())
-            lowFreqTimer->start();
-    }
+    bool fans_run = true;
 
-    if (msud_input.Ia[TRAC_MOTOR1] >= 510)
+    for (size_t i = 0; i < msud_input.mv_state.size(); ++i)
+        fans_run = fans_run && msud_input.mv_state[i];
+
+    if (!fans_run)
     {
-        if (!normalFreqTimer->isStarted())
-            normalFreqTimer->start();
+        if (msud_input.Ia[TRAC_MOTOR1] <= 480)
+        {
+            if (!lowFreqTimer->isStarted())
+                lowFreqTimer->start();
+        }
+
+        if (msud_input.Ia[TRAC_MOTOR1] >= 510)
+        {
+            if (!normalFreqTimer->isStarted())
+                normalFreqTimer->start();
+        }
     }
 
 
