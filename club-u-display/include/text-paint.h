@@ -12,8 +12,10 @@ public:
     TextPaint(QSize _size, QWidget *parent = Q_NULLPTR);
 
     void setFonts(int fontSize, Qt::GlobalColor color);
+    void setParams(int countCell, int deltaX);
 
     void setText(QString txt);
+    void setText2(QString txt);
 
 
 private:
@@ -22,9 +24,12 @@ private:
     int fontSize_;
     Qt::GlobalColor color_;
     QString txt_;
+    int countCell_;
+    int deltaX_;
 
 
     void drawText_(QString txt);
+    void drawText2_(QString txt);
 
 };
 

@@ -22,6 +22,7 @@
 #include <QLabel>
 
 #include "image-widget.h"
+#include    "text-paint.h"
 
 
 
@@ -47,6 +48,8 @@ public:
 
 private:
     ImageWidget* indicationBditelnosti_;
+    TextPaint   *txtPaintCoordinate1_;
+    TextPaint   *txtPaintCoordinate2_;
 
 
 
