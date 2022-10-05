@@ -3,9 +3,10 @@
 
 #include    "display.h"
 
-#include    "top-block.h"
 #include    "structures-CLUB-U.h"
 #include    "ALSN.h"
+#include    "top-block.h"
+#include    "block-middle.h"
 
 #include <QTimer>
 
@@ -26,7 +27,8 @@ private:
     QTimer          *updateTimer;
 
     ALSN            *alsn_;
-    TopBlock        *topBlock;
+    TopBlock        *topBlock_;
+    MiddleBlock     *middleBlock_;
 
     structs_CLUB_U_t structs_CLUB_U;
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<SGlobalParams>
+		
+		<!-- угол центра разрыва дуги  -->
+		<arc_splitPoint>270</arc_splitPoint>
+
+		<!-- длина разрыва дуги -->
+		<arc_splitAngle>90</arc_splitAngle>
+
+		<!-- макс. скорость на шкале -->
+		<maxSpeedScale>300</maxSpeedScale>
+
+		<!-- шаг скорости на шкале -->
+		<stepSpeedScale>20</stepSpeedScale>
+		
+
+	</SGlobalParams>
+
+</Config>

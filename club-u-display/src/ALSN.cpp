@@ -61,7 +61,6 @@ void ALSN::loadLedImages_()
     //ledGreen_->setStyleSheet("background-color: rgba(255, 255, 255, 50);");
 
     ledWidgets_.reserve(8);
-    int numLed = 8;
 
     int ledW = 82;
     int ledH = 35;

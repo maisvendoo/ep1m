@@ -15,13 +15,9 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     : AbstractDisplay(parent, f)
     , updateTimer(Q_NULLPTR)
     , alsn_(Q_NULLPTR)
-    , topBlock(Q_NULLPTR)
+    , topBlock_(Q_NULLPTR)
+    , middleBlock_(Q_NULLPTR)
 {
-    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
-    this->resize(847, 895);
-    this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));
-
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
 }
@@ -133,11 +129,14 @@ void ClubUDisplay::initBlocks_()
     alsn_->move(70, 242);
     alsn_->setSignal(ALSN_COLORS::GREEN);
 
-
     // Верхний блок
-    topBlock = new TopBlock(QSize(670, 135), this);
-    topBlock->move(90, 60);
-    //this->layout()->addWidget(topBlock);
+    topBlock_ = new TopBlock(QSize(670, 135), this);
+    topBlock_->move(90, 60);
+    //this->layout()->addWidget(topBlock_);
+
+    // Центральный блок
+    middleBlock_ = new MiddleBlock(QSize(330, 330), this);
+    middleBlock_->move(225, 240);
 }
 
 
