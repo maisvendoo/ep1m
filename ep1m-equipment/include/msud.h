@@ -56,9 +56,22 @@ private:
     // Таймер загрузки МСУД
     Timer   *load_timer;
 
+    bool is_fans_low_freq;
+
+    Timer *normalFreqTimer;
+
+    Timer *lowFreqTimer;
+
+    Timer *fansBustTimer;
+
+    Timer *runOutTimer;
+
+    size_t fans_count;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
+
 
      void ode_system(const state_vector_t &Y,
                      state_vector_t &dYdt,
@@ -83,6 +96,14 @@ private:
 private slots:
 
      void slotLoadTimer();
+
+     void slotNormalFreqTimer();
+
+     void slotLowFreqTimer();
+
+     void slotFansBustTimer();
+
+     void slotRunOutTimer();
 };
 
 #endif // MSUD_H

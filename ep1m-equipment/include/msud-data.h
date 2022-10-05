@@ -58,7 +58,7 @@ struct msud_output_t
     msud_output_t()
         : kv23_on(false)
     {
-        std::fill(mv_freq_low.begin(), mv_freq_low.end(), false);
+        std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
     }
 };
