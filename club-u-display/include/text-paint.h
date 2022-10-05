@@ -18,14 +18,15 @@ public:
     void setText2(QString txt);
 
 
+
 private:
     QImage img_;
 
     int fontSize_;
     Qt::GlobalColor color_;
     QString txt_;
-    int countCell_;
-    int deltaX_;
+    int countCell_; // количество ячеек под текст
+    int deltaX_;    // дельта X для символов в ячейках
 
 
     void drawText_(QString txt);

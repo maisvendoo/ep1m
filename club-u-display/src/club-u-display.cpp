@@ -122,12 +122,16 @@ void ClubUDisplay::initMainWindow()
     updateTimer->start();
 }
 
+
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void ClubUDisplay::initBlocks_()
 {
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), this);
     alsn_->move(70, 242);
-    alsn_->setSignal(ALSN_COLORS::GREEN);
 
     // Верхний блок
     topBlock_ = new TopBlock(QSize(670, 135), this);
@@ -157,6 +161,18 @@ QString ClubUDisplay::getCfgPath(QString cfgName)
 void ClubUDisplay::slotUpdateTimer()
 {
     //structs_CLUB_U.wasSendData = false;
+
+    alsn_->setSignal(ALSN_COLORS::GREEN);
+
+    topBlock_->setBditelnost(true);
+    topBlock_->setCoordinate(102.03);
+
+    middleBlock_->setCurSpeed(62);
+    middleBlock_->setCurSpeedLimit(81);
+    middleBlock_->setNextSpeedLimit(39);
+    middleBlock_->setReverse(1);
+
+
 }
 
 

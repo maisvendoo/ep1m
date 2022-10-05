@@ -32,11 +32,6 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/CLUB-U/speed-coordinates1.txt", speed_coords1);
     loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/CLUB-U/speed-coordinates2.txt", speed_coords2);
 
-
-
-    setSpeed(21);
-    setSpeedLimit(61);
-    setSpeedNextLimit(40);
 }
 
 

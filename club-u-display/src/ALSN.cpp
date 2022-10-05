@@ -13,6 +13,11 @@ ALSN::ALSN(QSize _size, QWidget *parent)
 
     loadLedImages_();
 
+    for (int i = 0; i < 8; ++i)
+    {
+        ledWidgets_[i]->setVisible(false);
+    }
+
 }
 
 

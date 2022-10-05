@@ -45,6 +45,9 @@ public:
     /// Деструктор
     ~TopBlock();
 
+    void setBditelnost(bool flag);
+    void setCoordinate(double coordinate);
+
 
 private:
     ImageWidget* indicationBditelnosti_;

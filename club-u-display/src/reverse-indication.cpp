@@ -17,7 +17,7 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
-    setRevese(1);
+    //setRevese(1);
 
 }
 

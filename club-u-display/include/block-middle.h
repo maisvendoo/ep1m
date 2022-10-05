@@ -15,6 +15,12 @@ public:
     MiddleBlock(QSize _size, QWidget* parent = Q_NULLPTR);
 
 
+    void setCurSpeed(int curSpeed);
+    void setCurSpeedLimit(int curSpeedLimit);
+    void setNextSpeedLimit(int nextSpeedLimit);
+    void setReverse(int reverse);
+
+
 private:
     Speedometer *speedometer_;
     ReverseInd  *reverseInd_;

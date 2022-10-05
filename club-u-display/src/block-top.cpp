@@ -1,6 +1,7 @@
 #include "block-top.h"
 
 #include "CfgReader.h"
+#include "cmath"
 #include <QTime>
 
 
@@ -20,6 +21,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     // Индикация бдительности (красный треугольник)
     indicationBditelnosti_ = new ImageWidget("rcc", "ind_bdit", QSize(81,82), this);
     indicationBditelnosti_->move(580, 25);
+    indicationBditelnosti_->setVisible(false);
 
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
@@ -31,11 +33,6 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCoordinate2_->setFonts(13, Qt::green);
     txtPaintCoordinate2_->move(173, 100);
     txtPaintCoordinate2_->setParams(3, 19);
-
-
-
-    txtPaintCoordinate1_->setText2("123");
-    txtPaintCoordinate2_->setText2("10");
 }
 
 
@@ -47,5 +44,29 @@ TopBlock::~TopBlock()
 {
 
 }
+
+
+
+void TopBlock::setBditelnost(bool flag)
+{
+    indicationBditelnosti_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setCoordinate(double coordinate)
+{
+    if ((coordinate < 0.0) || (coordinate > 9999.999))
+        return;
+
+    txtPaintCoordinate1_->setText2(QString::number(round(coordinate)));
+    txtPaintCoordinate2_->setText2(QString::number(coordinate, 'f', 3));
+}
+
+
+
 
 

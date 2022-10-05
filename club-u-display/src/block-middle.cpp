@@ -29,6 +29,29 @@ MiddleBlock::MiddleBlock(QSize _size, QWidget *parent)
 
 
 
-    txtPaint1_->setText2("60");
-    txtPaint2_->setText2("50");
+}
+
+
+
+
+void MiddleBlock::setCurSpeed(int curSpeed)
+{
+    speedometer_->setSpeed(curSpeed);
+    txtPaint1_->setText2(QString::number(curSpeed));
+}
+
+void MiddleBlock::setCurSpeedLimit(int curSpeedLimit)
+{
+    speedometer_->setSpeedLimit(curSpeedLimit);
+    txtPaint2_->setText2(QString::number(curSpeedLimit));
+}
+
+void MiddleBlock::setNextSpeedLimit(int nextSpeedLimit)
+{
+    speedometer_->setSpeedNextLimit(nextSpeedLimit);
+}
+
+void MiddleBlock::setReverse(int reverse)
+{
+    reverseInd_->setRevese(reverse);
 }
