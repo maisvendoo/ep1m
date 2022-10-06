@@ -14,10 +14,13 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
     : QLabel(parent)
     , fontSize_(13)
     , color_(Qt::green)
+    , txtWeight_(50)
     , txt_("")
     , countCell_(1)
     , deltaX_(10)
-    , txtWeight_(50)
+    , flagSetPoint_(false)
+    , pointX_(-1)
+    , pointY_(-1)
 {
     this->resize(_size);
 
@@ -29,6 +32,7 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
+
 }
 
 
@@ -36,17 +40,36 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::setFonts(int fontSize, Qt::GlobalColor color)
+void TextPaint::setFonts(int fontSize, Qt::GlobalColor color, int txtWeight)
 {
     fontSize_ = fontSize;
     color_ = color;
+    txtWeight_ = txtWeight;
+
+    font_ = QFont(familyFont_, fontSize_, txtWeight_);
 }
 
-void TextPaint::setParams(int countCell, int deltaX, int txtWeight)
+
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TextPaint::setParams(int countCell, int deltaX)
 {
     countCell_ = countCell;
     deltaX_ = deltaX;
-    txtWeight_ = txtWeight;
+}
+
+
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TextPaint::setPointForDigit(int x, int y)
+{
+    flagSetPoint_ = true;
+    pointX_ = x;
+    pointY_ = y;
 }
 
 
@@ -59,6 +82,11 @@ void TextPaint::setParams(int countCell, int deltaX, int txtWeight)
 //    drawText_(txt);
 //}
 
+
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void TextPaint::setText2(QString txt, bool isNull)
 {
     drawText2_(txt, isNull);
@@ -99,13 +127,9 @@ void TextPaint::drawText2_(QString txt, bool isNull)
     img_.fill(Qt::transparent);
     QPixmap pix = QPixmap::fromImage(img_);
     QPainter paint(&pix);
-    paint.setRenderHint(QPainter::Antialiasing, true);
-
-
-    QFont font(familyFont_, fontSize_, txtWeight_);
-    paint.setFont(font);
-
-    paint.setPen(QPen(QColor(color_)));
+    //paint.setRenderHint(QPainter::Antialiasing, true);
+    paint.setFont(font_);
+    paint.setPen(color_);
 
 
     for (int i = 0; i < countCell_; ++i)
@@ -121,6 +145,12 @@ void TextPaint::drawText2_(QString txt, bool isNull)
                 paint.drawText(posX, this->height(), "0");
         }
 
+    }
+
+    if (flagSetPoint_)
+    {
+        paint.setPen(QPen(QColor(color_), 5));
+        paint.drawPoint(pointX_, pointY_);
     }
 
 

@@ -29,36 +29,39 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
-    txtPaintCoordinate1_->setFonts(13, Qt::green);
     txtPaintCoordinate1_->move(78, 100);
-    txtPaintCoordinate1_->setParams(4, 19, 87);
+    txtPaintCoordinate1_->setFonts(13, Qt::green, 87);
+    txtPaintCoordinate1_->setParams(4, 19);
 
-    txtPaintCoordinate2_ = new TextPaint(QSize(57, 20), this);
-    txtPaintCoordinate2_->setFonts(13, Qt::green);
-    txtPaintCoordinate2_->move(173, 100);
-    txtPaintCoordinate2_->setParams(3, 19, 87);
+    txtPaintCoordinate2_ = new TextPaint(QSize(77, 20), this);
+    txtPaintCoordinate2_->move(153, 100);
+    txtPaintCoordinate2_->setFonts(13, Qt::green, 87);
+    txtPaintCoordinate2_->setParams(3, 19);
+    txtPaintCoordinate2_->setPointForDigit(6, 16);
 
     //
     txtPaintStation_ = new TextPaint(QSize(155, 20), this);
-    txtPaintStation_->setFonts(13, Qt::yellow);
     txtPaintStation_->move(242, 100);
+    txtPaintStation_->setFonts(13, Qt::yellow);
     txtPaintStation_->setParams(8, 19);
 
     //
     txtPaintCurTimeH_ = new TextPaint(QSize(38, 20), this);
-    txtPaintCurTimeH_->setFonts(13, Qt::green);
     txtPaintCurTimeH_->move(411, 100);
-    txtPaintCurTimeH_->setParams(2, 19, 87);
+    txtPaintCurTimeH_->setFonts(13, Qt::green, 87);
+    txtPaintCurTimeH_->setParams(2, 19);
 
-    txtPaintCurTimeM_ = new TextPaint(QSize(38, 20), this);
-    txtPaintCurTimeM_->setFonts(13, Qt::green);
-    txtPaintCurTimeM_->move(467, 100);
-    txtPaintCurTimeM_->setParams(2, 19, 87);
+    txtPaintCurTimeM_ = new TextPaint(QSize(58, 20), this);
+    txtPaintCurTimeM_->move(447, 100);
+    txtPaintCurTimeM_->setFonts(13, Qt::green, 87);
+    txtPaintCurTimeM_->setParams(2, 19);
+    txtPaintCurTimeM_->setPointForDigit(6, 16);
 
-    txtPaintCurTimeS_ = new TextPaint(QSize(38, 20), this);
-    txtPaintCurTimeS_->setFonts(13, Qt::green);
-    txtPaintCurTimeS_->move(524, 100);
-    txtPaintCurTimeS_->setParams(2, 19, 87);
+    txtPaintCurTimeS_ = new TextPaint(QSize(58, 20), this);
+    txtPaintCurTimeS_->move(504, 100);
+    txtPaintCurTimeS_->setFonts(13, Qt::green, 87);
+    txtPaintCurTimeS_->setParams(2, 19);
+    txtPaintCurTimeS_->setPointForDigit(6, 16);
 
 
 
