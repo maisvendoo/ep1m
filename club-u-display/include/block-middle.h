@@ -9,6 +9,7 @@
 #include    "text-paint.h"
 
 
+
 class MiddleBlock : public QLabel
 {
 public:
@@ -24,8 +25,8 @@ public:
 private:
     Speedometer *speedometer_;
     ReverseInd  *reverseInd_;
-    TextPaint   *txtPaint1_;
-    TextPaint   *txtPaint2_;
+    TextPaint   *txtCurSpeed_;
+    TextPaint   *txtCurSpeedLimit_;
 
 
 };

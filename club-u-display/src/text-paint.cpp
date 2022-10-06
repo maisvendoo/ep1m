@@ -17,10 +17,15 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
     , txt_("")
     , countCell_(1)
     , deltaX_(10)
+    , txtWeight_(50)
 {
     this->resize(_size);
 
     //this->setStyleSheet("border: 1px solid red;");
+
+    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
+    familyFont_ = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
+
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
@@ -37,68 +42,68 @@ void TextPaint::setFonts(int fontSize, Qt::GlobalColor color)
     color_ = color;
 }
 
-void TextPaint::setParams(int countCell, int deltaX)
+void TextPaint::setParams(int countCell, int deltaX, int txtWeight)
 {
     countCell_ = countCell;
     deltaX_ = deltaX;
+    txtWeight_ = txtWeight;
 }
+
+
+
+////------------------------------------------------------------------------------
+////
+////------------------------------------------------------------------------------
+//void TextPaint::setText(QString txt)
+//{
+//    drawText_(txt);
+//}
+
+void TextPaint::setText2(QString txt, bool isNull)
+{
+    drawText2_(txt, isNull);
+}
+
+
+
+////------------------------------------------------------------------------------
+////
+////------------------------------------------------------------------------------
+//void TextPaint::drawText_(QString txt)
+//{
+//    img_.fill(Qt::transparent);
+//    QPixmap pix = QPixmap::fromImage(img_);
+//    QPainter paint(&pix);
+//    paint.setRenderHint(QPainter::Antialiasing, true);
+
+//    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
+//    QString family = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
+//    QFont f(family, fontSize_);
+//    paint.setFont(f);
+
+//    paint.setPen(QPen(QColor(color_)));
+
+//    paint.drawText(0,this->height(), txt);
+
+//    paint.end();
+//    this->setPixmap(pix);
+//}
 
 
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::setText(QString txt)
-{
-    drawText_(txt);
-}
-
-void TextPaint::setText2(QString txt)
-{
-    drawText2_(txt);
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void TextPaint::drawText_(QString txt)
+void TextPaint::drawText2_(QString txt, bool isNull)
 {
     img_.fill(Qt::transparent);
     QPixmap pix = QPixmap::fromImage(img_);
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
 
-    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
-    QFont f(family, fontSize_);
-    paint.setFont(f);
 
-    paint.setPen(QPen(QColor(color_)));
-
-    paint.drawText(0,this->height(), txt);
-
-    paint.end();
-    this->setPixmap(pix);
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void TextPaint::drawText2_(QString txt)
-{
-    img_.fill(Qt::transparent);
-    QPixmap pix = QPixmap::fromImage(img_);
-    QPainter paint(&pix);
-    paint.setRenderHint(QPainter::Antialiasing, true);
-
-    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
-    QFont f(family, fontSize_);
-    paint.setFont(f);
+    QFont font(familyFont_, fontSize_, txtWeight_);
+    paint.setFont(font);
 
     paint.setPen(QPen(QColor(color_)));
 
@@ -111,7 +116,10 @@ void TextPaint::drawText2_(QString txt)
         if (i < txt.length())
             paint.drawText(posX, this->height(), QString(txt[k]));
         else
-            paint.drawText(posX, this->height(), "0");
+        {
+            if (!isNull)
+                paint.drawText(posX, this->height(), "0");
+        }
 
     }
 

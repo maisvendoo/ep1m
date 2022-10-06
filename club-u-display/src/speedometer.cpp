@@ -29,8 +29,8 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
 
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/CLUB-U/speed-coordinates1.txt", speed_coords1);
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/CLUB-U/speed-coordinates2.txt", speed_coords2);
+    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinates1.txt", speed_coords1);
+    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinates2.txt", speed_coords2);
 
 }
 

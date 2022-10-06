@@ -166,6 +166,7 @@ void ClubUDisplay::slotUpdateTimer()
 
     topBlock_->setBditelnost(true);
     topBlock_->setCoordinate(102.03);
+    topBlock_->setStationName("Станция");
 
     middleBlock_->setCurSpeed(62);
     middleBlock_->setCurSpeedLimit(81);

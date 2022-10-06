@@ -20,6 +20,7 @@
 //#include <QTimer>
 #include <QWidget>
 #include <QLabel>
+#include <QTime>
 
 #include "image-widget.h"
 #include    "text-paint.h"
@@ -47,12 +48,20 @@ public:
 
     void setBditelnost(bool flag);
     void setCoordinate(double coordinate);
+    void setStationName(QString stationName);
 
 
 private:
     ImageWidget* indicationBditelnosti_;
     TextPaint   *txtPaintCoordinate1_;
     TextPaint   *txtPaintCoordinate2_;
+    TextPaint   *txtPaintStation_;
+    TextPaint   *txtPaintCurTimeH_;
+    TextPaint   *txtPaintCurTimeM_;
+    TextPaint   *txtPaintCurTimeS_;
+
+    QTimer* timeTimer_;
+    QTime curTime_;
 
 
 
