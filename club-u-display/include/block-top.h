@@ -46,18 +46,26 @@ public:
     ~TopBlock();
 
     void setBditelnost(bool flag);
+    void setIndM(bool flag);
+    void setIndP(bool flag);
+    void setCassete(bool flag);
     void setCoordinate(double coordinate);
     void setStationName(QString stationName);
 
 
 private:
-    ImageWidget* indicationBditelnosti_;
+    ImageWidget *indicationBditelnosti_;
+    ImageWidget *indicationCassette_;
+    ImageWidget *indicationM_;
+    ImageWidget *indicationP_;
+
     TextPaint   *txtPaintCoordinate1_;
     TextPaint   *txtPaintCoordinate2_;
     TextPaint   *txtPaintStation_;
     TextPaint   *txtPaintCurTimeH_;
     TextPaint   *txtPaintCurTimeM_;
     TextPaint   *txtPaintCurTimeS_;
+
 
     QTimer* timeTimer_;
     QTime curTime_;

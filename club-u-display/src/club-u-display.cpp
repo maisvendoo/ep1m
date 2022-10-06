@@ -175,6 +175,9 @@ void ClubUDisplay::slotUpdateTimer()
     alsn_->setSignal(ALSN_COLORS::GREEN);
 
     topBlock_->setBditelnost(true);
+    topBlock_->setCassete(true);
+    topBlock_->setIndM(true);
+    topBlock_->setIndP(true);
     topBlock_->setCoordinate(102.9);
     topBlock_->setStationName("Станция");
 

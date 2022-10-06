@@ -67,7 +67,7 @@ void ALSN::loadLedImages_()
 
     ledWidgets_.reserve(8);
 
-    int ledW = 82;
+    int ledW = 81;
     int ledH = 35;
     int ledX = 3;
     int ledY = 3;
@@ -89,19 +89,19 @@ void ALSN::loadLedImages_()
     ledWidgets_.append(imgWidget);
     ledY += dY;
 
-    imgWidget = new ImageWidget("rcc", "alsn_yellow_red", QSize(ledW, ledH + 9), this);
+    imgWidget = new ImageWidget("rcc", "alsn_yellow_red", QSize(ledW, ledH + 10), this);
     imgWidget->move(ledX, ledY);
     ledWidgets_.append(imgWidget);
 
-    ledY += dY + 8;
+    ledY += dY + 9;
 
     imgWidget = new ImageWidget("rcc", "alsn_red", QSize(ledW, ledH), this);
     imgWidget->move(ledX, ledY);
     ledWidgets_.append(imgWidget);
 
-    ledY += dY;
+    ledY += dY - 1;
 
-    imgWidget = new ImageWidget("rcc", "alsn_white", QSize(ledW, ledH), this);
+    imgWidget = new ImageWidget("rcc", "alsn_white", QSize(ledW, ledH + 1), this);
     imgWidget->move(ledX, ledY);
     ledWidgets_.append(imgWidget);
 

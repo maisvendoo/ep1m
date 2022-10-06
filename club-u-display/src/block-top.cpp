@@ -12,6 +12,9 @@
 TopBlock::TopBlock(QSize size, QWidget *parent)
     : QLabel(parent)
     , indicationBditelnosti_(Q_NULLPTR)
+    , indicationCassette_(Q_NULLPTR)
+    , indicationM_(Q_NULLPTR)
+    , indicationP_(Q_NULLPTR)
     , txtPaintCoordinate1_(Q_NULLPTR)
     , txtPaintCoordinate2_(Q_NULLPTR)
     , txtPaintStation_(Q_NULLPTR)
@@ -27,6 +30,21 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     indicationBditelnosti_ = new ImageWidget("rcc", "ind_bdit", QSize(81,82), this);
     indicationBditelnosti_->move(580, 25);
     indicationBditelnosti_->setVisible(false);
+
+    // Индикация кассеты
+    indicationCassette_ = new ImageWidget("rcc", "ind_cassette", QSize(26,23), this);
+    indicationCassette_->move(353, 29);
+    indicationCassette_->setVisible(false);
+
+    // Индикация М
+    indicationM_ = new ImageWidget("rcc", "ind_M", QSize(16,18), this);
+    indicationM_->move(270, 31);
+    indicationM_->setVisible(false);
+
+    // Индикация П
+    indicationP_ = new ImageWidget("rcc", "ind_P", QSize(12,18), this);
+    indicationP_->move(316, 31);
+    indicationP_->setVisible(false);
 
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
@@ -66,6 +84,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 
 
 
+
     txtPaintCurTimeH_->setText("");
     txtPaintCurTimeM_->setText("");
     txtPaintCurTimeS_->setText("");
@@ -99,9 +118,42 @@ TopBlock::~TopBlock()
 
 
 
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 void TopBlock::setBditelnost(bool flag)
 {
     indicationBditelnosti_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setIndM(bool flag)
+{
+    indicationM_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setIndP(bool flag)
+{
+    indicationP_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setCassete(bool flag)
+{
+    indicationCassette_->setVisible(flag);
 }
 
 
