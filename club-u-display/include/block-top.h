@@ -34,7 +34,6 @@
  */
 class TopBlock : public QLabel
 {
-    Q_OBJECT
 
 public:
 

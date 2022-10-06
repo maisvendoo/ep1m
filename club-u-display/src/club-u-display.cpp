@@ -17,6 +17,8 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     , alsn_(Q_NULLPTR)
     , topBlock_(Q_NULLPTR)
     , middleBlock_(Q_NULLPTR)
+    , rightBlock_(Q_NULLPTR)
+    , bottomBlock_(Q_NULLPTR)
 {
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
@@ -141,6 +143,14 @@ void ClubUDisplay::initBlocks_()
     // Центральный блок
     middleBlock_ = new MiddleBlock(QSize(330, 330), this);
     middleBlock_->move(225, 240);
+
+    // Правый блок
+    rightBlock_ = new RightBlock(QSize(155, 372), this);
+    rightBlock_->move(622, 215);
+
+    // Нижний блок
+    bottomBlock_ = new BottomBlock(QSize(585, 30), this);
+    bottomBlock_->move(133, 622);
 }
 
 
@@ -165,7 +175,7 @@ void ClubUDisplay::slotUpdateTimer()
     alsn_->setSignal(ALSN_COLORS::GREEN);
 
     topBlock_->setBditelnost(true);
-    topBlock_->setCoordinate(102.3);
+    topBlock_->setCoordinate(102.9);
     topBlock_->setStationName("Станция");
 
     middleBlock_->setCurSpeed(62);
@@ -173,6 +183,13 @@ void ClubUDisplay::slotUpdateTimer()
     middleBlock_->setNextSpeedLimit(39);
     middleBlock_->setReverse(1);
 
+    rightBlock_->setPressureTM(0.56);
+    rightBlock_->setPressureUR(0.58);
+    rightBlock_->setNumTrack("1нп");
+    rightBlock_->setAcceleration(0.7);
+
+    bottomBlock_->setDistToTarget(78);
+    bottomBlock_->setTargetName("чм2а");
 
 }
 

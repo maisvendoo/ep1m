@@ -11,6 +11,7 @@
 //-----------------------------------------------------------------------------
 TopBlock::TopBlock(QSize size, QWidget *parent)
     : QLabel(parent)
+    , indicationBditelnosti_(Q_NULLPTR)
     , txtPaintCoordinate1_(Q_NULLPTR)
     , txtPaintCoordinate2_(Q_NULLPTR)
     , txtPaintStation_(Q_NULLPTR)
@@ -43,7 +44,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintStation_ = new TextPaint(QSize(155, 20), this);
     txtPaintStation_->move(242, 100);
     txtPaintStation_->setFonts(13, Qt::yellow);
-    txtPaintStation_->setParams(8, 19);
+    txtPaintStation_->setParams(8, 19, true);
 
     //
     txtPaintCurTimeH_ = new TextPaint(QSize(38, 20), this);
@@ -65,9 +66,9 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 
 
 
-    txtPaintCurTimeH_->setText2("");
-    txtPaintCurTimeM_->setText2("");
-    txtPaintCurTimeS_->setText2("");
+    txtPaintCurTimeH_->setText("");
+    txtPaintCurTimeM_->setText("");
+    txtPaintCurTimeS_->setText("");
 
 
 //    timeTimer_ = new QTimer();
@@ -78,9 +79,9 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 
 //    connect(timeTimer_, &QTimer::timeout, this, [this]()
 //    {
-//        txtPaintCurTimeH_->setText2(QString::number(curTime_.currentTime().hour()));
-//        txtPaintCurTimeM_->setText2(QString::number(curTime_.currentTime().minute()));
-//        txtPaintCurTimeS_->setText2(QString::number(curTime_.currentTime().second()));
+//        txtPaintCurTimeH_->setText(QString::number(curTime_.currentTime().hour()));
+//        txtPaintCurTimeM_->setText(QString::number(curTime_.currentTime().minute()));
+//        txtPaintCurTimeS_->setText(QString::number(curTime_.currentTime().second()));
 //    });
 
 
@@ -113,8 +114,8 @@ void TopBlock::setCoordinate(double coordinate)
     if ((coordinate < 0.0) || (coordinate > 9999.999))
         return;
 
-    txtPaintCoordinate1_->setText2(QString::number(round(coordinate)));
-    txtPaintCoordinate2_->setText2(QString::number(coordinate, 'f', 3));
+    txtPaintCoordinate1_->setText(QString::number(floor(coordinate)));
+    txtPaintCoordinate2_->setText(QString::number(coordinate, 'f', 3));
 }
 
 
@@ -124,7 +125,7 @@ void TopBlock::setCoordinate(double coordinate)
 //-----------------------------------------------------------------------------
 void TopBlock::setStationName(QString stationName)
 {
-    txtPaintStation_->setText2(stationName.toUpper(), true);
+    txtPaintStation_->setText(stationName.toUpper());
 }
 
 

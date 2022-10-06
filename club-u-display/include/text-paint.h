@@ -13,12 +13,11 @@ public:
     TextPaint(QSize _size, QWidget *parent = Q_NULLPTR);
 
     void setFonts(int fontSize, Qt::GlobalColor color, int txtWeight = 50);
-    void setParams(int countCell, int deltaX);
+    void setParams(int countCell, int deltaX, bool symbolIsNull = false, bool rightleftText = true);
     // Установить точку-разделитель числа
     void setPointForDigit(int x, int y);
 
-    //void setText(QString txt);
-    void setText2(QString txt, bool isNull = false);
+    void setText(QString txt);
 
 
 
@@ -31,8 +30,10 @@ private:
     Qt::GlobalColor color_;
     int txtWeight_; // жирность текста
     QString txt_;
-    int countCell_; // количество ячеек под текст
-    int deltaX_;    // дельта X для символов в ячейках
+    int countCell_;     // количество ячеек под текст
+    int deltaX_;        // дельта X для символов в ячейках
+    bool symbolIsNull_; // null или 0 на дисплее
+    bool rightleftText_; // текст справа налево (по умолчанию)
 
     QFont font_;
 
@@ -42,8 +43,7 @@ private:
     int pointY_;
 
 
-    //void drawText_(QString txt);
-    void drawText2_(QString txt, bool isNull = false);
+    void drawText_(QString txt);
 
 
 };

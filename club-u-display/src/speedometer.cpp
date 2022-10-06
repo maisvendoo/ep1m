@@ -22,7 +22,6 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     , speedNextLimit_(0)
 {
     this->resize(size);
-
    // this->setStyleSheet("border: 1px solid red;");
 
 

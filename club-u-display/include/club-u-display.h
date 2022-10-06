@@ -7,6 +7,8 @@
 #include    "ALSN.h"
 #include    "block-top.h"
 #include    "block-middle.h"
+#include    "block-right.h"
+#include    "block-bottom.h"
 
 #include <QTimer>
 
@@ -29,6 +31,8 @@ private:
     ALSN            *alsn_;
     TopBlock        *topBlock_;
     MiddleBlock     *middleBlock_;
+    RightBlock      *rightBlock_;
+    BottomBlock     *bottomBlock_;
 
     structs_CLUB_U_t structs_CLUB_U;
 

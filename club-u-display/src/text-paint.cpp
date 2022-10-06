@@ -18,12 +18,13 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
     , txt_("")
     , countCell_(1)
     , deltaX_(10)
+    , symbolIsNull_(false)
+    , rightleftText_(true)
     , flagSetPoint_(false)
     , pointX_(-1)
     , pointY_(-1)
 {
     this->resize(_size);
-
     //this->setStyleSheet("border: 1px solid red;");
 
     int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
@@ -31,7 +32,6 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
 
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
-
 
 }
 
@@ -54,10 +54,12 @@ void TextPaint::setFonts(int fontSize, Qt::GlobalColor color, int txtWeight)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::setParams(int countCell, int deltaX)
+void TextPaint::setParams(int countCell, int deltaX, bool symbolIsNull, bool rightleftText)
 {
     countCell_ = countCell;
     deltaX_ = deltaX;
+    symbolIsNull_ = symbolIsNull;
+    rightleftText_ = rightleftText;
 }
 
 
@@ -74,55 +76,20 @@ void TextPaint::setPointForDigit(int x, int y)
 
 
 
-////------------------------------------------------------------------------------
-////
-////------------------------------------------------------------------------------
-//void TextPaint::setText(QString txt)
-//{
-//    drawText_(txt);
-//}
-
-
-
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::setText2(QString txt, bool isNull)
+void TextPaint::setText(QString txt)
 {
-    drawText2_(txt, isNull);
+    drawText_(txt);
 }
 
 
 
-////------------------------------------------------------------------------------
-////
-////------------------------------------------------------------------------------
-//void TextPaint::drawText_(QString txt)
-//{
-//    img_.fill(Qt::transparent);
-//    QPixmap pix = QPixmap::fromImage(img_);
-//    QPainter paint(&pix);
-//    paint.setRenderHint(QPainter::Antialiasing, true);
-
-//    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
-//    QString family = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
-//    QFont f(family, fontSize_);
-//    paint.setFont(f);
-
-//    paint.setPen(QPen(QColor(color_)));
-
-//    paint.drawText(0,this->height(), txt);
-
-//    paint.end();
-//    this->setPixmap(pix);
-//}
-
-
-
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::drawText2_(QString txt, bool isNull)
+void TextPaint::drawText_(QString txt)
 {
     img_.fill(Qt::transparent);
     QPixmap pix = QPixmap::fromImage(img_);
@@ -131,33 +98,38 @@ void TextPaint::drawText2_(QString txt, bool isNull)
     paint.setFont(font_);
     paint.setPen(color_);
 
-
-    for (int i = 0; i < countCell_; ++i)
+    //
+    if (rightleftText_)
     {
-        int posX = this->width() - (i + 1)*deltaX_;
-        int k = txt.length() - 1 - i;
-
-        if (i < txt.length())
-            paint.drawText(posX, this->height(), QString(txt[k]));
-        else
+        for (int i = 0; i < countCell_; ++i)
         {
-            if (!isNull)
-                paint.drawText(posX, this->height(), "0");
-        }
+            int posX = this->width() - (i + 1)*deltaX_;
+            int k = txt.length() - 1 - i;
 
+            if (i < txt.length())
+                paint.drawText(posX, this->height(), QString(txt[k]));
+            else
+            {
+                if (!symbolIsNull_)
+                    paint.drawText(posX, this->height(), "0");
+            }
+
+        }
+    }
+    else
+    {
+        for (int i = 0; i < txt.length(); ++i)
+        {
+            paint.drawText(i*deltaX_,this->height(), QString(txt[i]));
+        }
     }
 
+    //
     if (flagSetPoint_)
     {
         paint.setPen(QPen(QColor(color_), 5));
         paint.drawPoint(pointX_, pointY_);
     }
-
-
-//    for (int i = txt.size(); i > 0; --i)
-//    {
-//        paint.drawText(i*20,this->height(), QString(txt[i]));
-//    }
 
 
     paint.end();

@@ -36,7 +36,7 @@ MiddleBlock::MiddleBlock(QSize _size, QWidget *parent)
 void MiddleBlock::setCurSpeed(int curSpeed)
 {
     speedometer_->setSpeed(curSpeed);
-    txtCurSpeed_->setText2(QString::number(curSpeed));
+    txtCurSpeed_->setText(QString::number(curSpeed));
 }
 
 
@@ -47,7 +47,7 @@ void MiddleBlock::setCurSpeed(int curSpeed)
 void MiddleBlock::setCurSpeedLimit(int curSpeedLimit)
 {
     speedometer_->setSpeedLimit(curSpeedLimit);
-    txtCurSpeedLimit_->setText2(QString::number(curSpeedLimit));
+    txtCurSpeedLimit_->setText(QString::number(curSpeedLimit));
 }
 
 

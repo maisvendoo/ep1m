@@ -12,13 +12,9 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     : QLabel(parent)
 {
     this->resize(_size);
-
     //this->setStyleSheet("border: 1px solid red;");
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
-
-    //setRevese(1);
-
 }
 
 
