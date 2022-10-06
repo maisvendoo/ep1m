@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/rcc">
+        <file alias="club-u-ttf">KLUBU.ttf</file>
+
+        <file alias="club-u-fon">img/fon.png</file>
+        <file alias="ind_bdit">img/ind_bdit.png</file>
+        <file alias="ind_cassette">img/cassette.png</file>
+        <file alias="ind_M">img/ind_M.png</file>
+        <file alias="ind_P">img/ind_P.png</file>
+
+        <file alias="alsn_green">leds/alsn_green.png</file>
+        <file alias="alsn_yellow">leds/alsn_yellow.png</file>
+        <file alias="alsn_yellow_red">leds/alsn_yellow_red.png</file>
+        <file alias="alsn_red">leds/alsn_red.png</file>
+        <file alias="alsn_white">leds/alsn_white.png</file>
+
+    </qresource>
+</RCC>
