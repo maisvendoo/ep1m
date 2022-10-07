@@ -2,6 +2,8 @@
 
 #include "cmath"
 
+#include <QTime>
+
 
 
 //-----------------------------------------------------------------------------
@@ -82,27 +84,13 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCurTimeS_->setParams(2, 19);
     txtPaintCurTimeS_->setPointForDigit(6, 16);
 
-
-
-
-    txtPaintCurTimeH_->setText("");
-    txtPaintCurTimeM_->setText("");
-    txtPaintCurTimeS_->setText("");
-
-
-//    timeTimer_ = new QTimer();
-//    timeTimer_->setInterval(1000);
-//    timeTimer_->start(0);
-
-//    //curTime_ = new QTime();
-
-//    connect(timeTimer_, &QTimer::timeout, this, [this]()
-//    {
-//        txtPaintCurTimeH_->setText(QString::number(curTime_.currentTime().hour()));
-//        txtPaintCurTimeM_->setText(QString::number(curTime_.currentTime().minute()));
-//        txtPaintCurTimeS_->setText(QString::number(curTime_.currentTime().second()));
-//    });
-
+    connect(&timeTimer_, &QTimer::timeout, [&]()
+    {
+        txtPaintCurTimeH_->setText(QString::number(QTime::currentTime().hour()));
+        txtPaintCurTimeM_->setText(QString::number(QTime::currentTime().minute()));
+        txtPaintCurTimeS_->setText(QString::number(QTime::currentTime().second()));
+    });
+    timeTimer_.start(1000);
 
 }
 

@@ -18,7 +18,7 @@
 
 
 #include <QLabel>
-#include <QTime>
+#include <QTimer>
 
 #include    "image-widget.h"
 #include    "text-paint.h"
@@ -66,11 +66,7 @@ private:
     double oldCoordinate_;
     QString oldStation_;
 
-
-
-    QTimer* timeTimer_;
-    QTime curTime_;
-
+    QTimer timeTimer_;
 
 
 };
