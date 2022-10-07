@@ -5,6 +5,13 @@
 #include    <QLabel>
 
 #include    "CfgReader.h"
+#include    "club-u-funcs.h"
+
+#include    "ALSN.h"
+#include    "block-top.h"
+#include    "block-middle.h"
+#include    "block-right.h"
+#include    "block-bottom.h"
 
 
 
@@ -90,7 +97,7 @@ void ClubUDisplay::initMainWindow()
     bool    hideCursor = false;
     int     timeInterval = 100;
 
-    if (cfg.load(config_dir + getCfgPath("main.xml")))
+    if (cfg.load(config_dir + getConfigPath("main.xml")))
     {
         QString sectionName = "Main";
         cfg.getInt(sectionName, "sizeWindow_X", sizeWindow_X);
@@ -131,6 +138,9 @@ void ClubUDisplay::initMainWindow()
 //------------------------------------------------------------------------------
 void ClubUDisplay::initBlocks_()
 {
+    // пусть к конфигам
+    QString cfg_path = config_dir + getConfigPath("");
+
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), this);
     alsn_->move(70, 242);
@@ -141,7 +151,7 @@ void ClubUDisplay::initBlocks_()
     //this->layout()->addWidget(topBlock_);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(330, 330), this);
+    middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, this);
     middleBlock_->move(225, 240);
 
     // Правый блок
@@ -152,16 +162,6 @@ void ClubUDisplay::initBlocks_()
     bottomBlock_ = new BottomBlock(QSize(585, 30), this);
     bottomBlock_->move(133, 622);
 
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-QString ClubUDisplay::getCfgPath(QString cfgName)
-{
-    return QDir::separator() + QString("CLUB-U") + QDir::separator() + cfgName;
 }
 
 

@@ -12,7 +12,7 @@
 class MiddleBlock : public QLabel
 {
 public:
-    MiddleBlock(QSize _size, QWidget* parent = Q_NULLPTR);
+    MiddleBlock(QSize _size, QString cfg_path, QWidget* parent = Q_NULLPTR);
 
     void setCurSpeed(int curSpeed);
     void setCurSpeedLimit(int curSpeedLimit);

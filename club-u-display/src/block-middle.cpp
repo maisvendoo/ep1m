@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-MiddleBlock::MiddleBlock(QSize _size, QWidget *parent)
+MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     : QLabel(parent)
     , speedometer_(Q_NULLPTR)
     , reverseInd_(Q_NULLPTR)
@@ -18,7 +18,7 @@ MiddleBlock::MiddleBlock(QSize _size, QWidget *parent)
     this->resize(_size);
 
     // Спидометр
-    speedometer_ = new Speedometer(_size, this);
+    speedometer_ = new Speedometer(_size, cfg_path, this);
 
     // Индикация реверсора
     reverseInd_ = new ReverseInd(QSize(30,50), this);

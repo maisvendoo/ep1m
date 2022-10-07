@@ -1,16 +1,17 @@
 #ifndef CLUB_U_DISPLAY_H
 #define CLUB_U_DISPLAY_H
 
+#include    <QTimer>
+
 #include    "display.h"
-
 #include    "structures-CLUB-U.h"
-#include    "ALSN.h"
-#include    "block-top.h"
-#include    "block-middle.h"
-#include    "block-right.h"
-#include    "block-bottom.h"
 
-#include <QTimer>
+class ALSN;
+class TopBlock;
+class MiddleBlock;
+class RightBlock;
+class BottomBlock;
+
 
 
 class ClubUDisplay : public AbstractDisplay
@@ -43,8 +44,6 @@ private:
     void initMainWindow();
     void initBlocks_();
 
-    //
-    QString getCfgPath(QString cfgName);
 
 
 private slots:

@@ -4,12 +4,14 @@
 #include <QVector>
 #include <QFile>
 
+//#include "club-u-funcs.h"
+
 
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-Speedometer::Speedometer(QSize size, QWidget *parent)
+Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
     : QLabel(parent)
     , num_speed_(0)
     , num_speedLimit_(0)
@@ -25,8 +27,10 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
 
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesOutScale.txt", speed_coordsOutScale);
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
+    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesOutScale.txt", speed_coordsOutScale);
+    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
+//    loadScalePontsCoolrds_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesOutScale.txt", speed_coordsOutScale);
+//    loadScalePontsCoolrds_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
 
 }
 
@@ -119,7 +123,7 @@ void Speedometer::drawArc_(int num_speed, int num_speedLimit, int num_speedNextL
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void Speedometer::loadTxtSpeedCoolrds1_(QString txt_path, QVector<QPoint> &vec)
+void Speedometer::loadScalePontsCoolrds_(QString txt_path, QVector<QPoint> &vec)
 {
     QFile fileTxt(txt_path);
 
