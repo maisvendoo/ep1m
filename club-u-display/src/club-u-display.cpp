@@ -151,6 +151,7 @@ void ClubUDisplay::initBlocks_()
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(585, 30), this);
     bottomBlock_->move(133, 622);
+
 }
 
 

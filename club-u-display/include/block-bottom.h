@@ -1,10 +1,10 @@
 #ifndef BOTTOMBLOCK_H
 #define BOTTOMBLOCK_H
 
-
 #include <QLabel>
 
 #include    "text-paint.h"
+
 
 
 class BottomBlock : public QLabel
@@ -22,6 +22,8 @@ private:
     TextPaint   *txtPaintTargetType_;
     TextPaint   *txtPaintTargetName_;
 
+    int oldDistToTarget_;
+    QString oldTargetName_;
 
 };
 

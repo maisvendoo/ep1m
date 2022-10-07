@@ -1,6 +1,5 @@
 #include "block-right.h"
 
-
 #include "cmath"
 
 
@@ -17,6 +16,10 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     , txtPaintNumTrack_(Q_NULLPTR)
     , txtPaintAcceleration1_(Q_NULLPTR)
     , txtPaintAcceleration2_(Q_NULLPTR)
+    , oldPressureTM_(0.0)
+    , oldPressureUR_(0.0)
+    , oldTrackNum_("")
+    , oldAcceleration_(0.0)
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
@@ -59,7 +62,7 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     txtPaintNumTrack_->setFonts(13, Qt::green, 87);
     txtPaintNumTrack_->setParams(4, 18, true);
 
-    //--------------
+    //
     txtPaintAcceleration1_ = new TextPaint(QSize(15, 20), this);
     txtPaintAcceleration1_->move(95, 198);
     txtPaintAcceleration1_->setFonts(13, Qt::green, 87);
@@ -83,8 +86,13 @@ void RightBlock::setPressureTM(double pressure)
     if ((pressure < 0.0) || (pressure > 9.99))
         return;
 
+    if (std::abs(pressure - oldPressureTM_) < 0.01)
+        return;
+
     txtPaintPressureTM1_->setText(QString::number(floor(pressure)));
     txtPaintPressureTM2_->setText(QString::number(pressure, 'f', 2));
+
+    oldPressureTM_ = pressure;
 }
 
 
@@ -97,8 +105,13 @@ void RightBlock::setPressureUR(double pressure)
     if ((pressure < 0.0) || (pressure > 9.99))
         return;
 
+    if (std::abs(pressure - oldPressureUR_) < 0.01)
+        return;
+
     txtPaintPressureUR1_->setText(QString::number(floor(pressure)));
     txtPaintPressureUR2_->setText(QString::number(pressure, 'f', 2));
+
+    oldPressureUR_ = pressure;
 }
 
 
@@ -108,7 +121,12 @@ void RightBlock::setPressureUR(double pressure)
 //-----------------------------------------------------------------------------
 void RightBlock::setNumTrack(QString trackNum)
 {
+    if (trackNum.compare(oldTrackNum_, Qt::CaseSensitivity::CaseInsensitive) == 0)
+        return;
+
     txtPaintNumTrack_->setText(trackNum.toUpper());
+
+    oldTrackNum_ = trackNum;
 }
 
 
@@ -121,6 +139,11 @@ void RightBlock::setAcceleration(double a)
     if ((a < 0.0) || (a > 9.9))
         return;
 
+    if (std::abs(a - oldAcceleration_) < 0.1)
+        return;
+
     txtPaintAcceleration1_->setText(QString::number(floor(a)));
     txtPaintAcceleration2_->setText(QString::number(a, 'f', 1));
+
+    oldAcceleration_ = a;
 }

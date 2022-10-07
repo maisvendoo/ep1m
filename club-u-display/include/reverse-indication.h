@@ -17,6 +17,8 @@ public:
 private:
     QImage img_;
 
+    int oldVal_;
+
     void drawReverse_(int val);
 
 };

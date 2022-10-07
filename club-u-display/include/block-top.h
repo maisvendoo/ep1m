@@ -16,15 +16,12 @@
 #ifndef TOPBLOCK_H
 #define TOPBLOCK_H
 
-//#include <QMap>
-//#include <QTimer>
-#include <QWidget>
+
 #include <QLabel>
 #include <QTime>
 
-#include "image-widget.h"
+#include    "image-widget.h"
 #include    "text-paint.h"
-
 
 
 
@@ -65,6 +62,10 @@ private:
     TextPaint   *txtPaintCurTimeH_;
     TextPaint   *txtPaintCurTimeM_;
     TextPaint   *txtPaintCurTimeS_;
+
+    double oldCoordinate_;
+    QString oldStation_;
+
 
 
     QTimer* timeTimer_;

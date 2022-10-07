@@ -1,8 +1,6 @@
 #include "block-top.h"
 
-#include "CfgReader.h"
 #include "cmath"
-#include <QTimer>
 
 
 
@@ -21,6 +19,8 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     , txtPaintCurTimeH_(Q_NULLPTR)
     , txtPaintCurTimeM_(Q_NULLPTR)
     , txtPaintCurTimeS_(Q_NULLPTR)
+    , oldCoordinate_(0.0)
+    , oldStation_("")
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
@@ -123,6 +123,9 @@ TopBlock::~TopBlock()
 //-----------------------------------------------------------------------------
 void TopBlock::setBditelnost(bool flag)
 {
+    if (indicationBditelnosti_->isVisible() == flag)
+        return;
+
     indicationBditelnosti_->setVisible(flag);
 }
 
@@ -133,6 +136,9 @@ void TopBlock::setBditelnost(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setIndM(bool flag)
 {
+    if (indicationM_->isVisible() == flag)
+        return;
+
     indicationM_->setVisible(flag);
 }
 
@@ -143,6 +149,9 @@ void TopBlock::setIndM(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setIndP(bool flag)
 {
+    if (indicationP_->isVisible() == flag)
+        return;
+
     indicationP_->setVisible(flag);
 }
 
@@ -153,6 +162,9 @@ void TopBlock::setIndP(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setCassete(bool flag)
 {
+    if (indicationCassette_->isVisible() == flag)
+        return;
+
     indicationCassette_->setVisible(flag);
 }
 
@@ -166,8 +178,13 @@ void TopBlock::setCoordinate(double coordinate)
     if ((coordinate < 0.0) || (coordinate > 9999.999))
         return;
 
+    if (std::abs(coordinate - oldCoordinate_) < 0.001)
+        return;
+
     txtPaintCoordinate1_->setText(QString::number(floor(coordinate)));
     txtPaintCoordinate2_->setText(QString::number(coordinate, 'f', 3));
+
+    oldCoordinate_ = coordinate;
 }
 
 
@@ -177,7 +194,12 @@ void TopBlock::setCoordinate(double coordinate)
 //-----------------------------------------------------------------------------
 void TopBlock::setStationName(QString stationName)
 {
+    if (stationName.compare(oldStation_, Qt::CaseSensitivity::CaseInsensitive) == 0)
+        return;
+
     txtPaintStation_->setText(stationName.toUpper());
+
+    oldStation_ = stationName;
 }
 
 

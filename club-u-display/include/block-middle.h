@@ -3,7 +3,6 @@
 
 #include <QLabel>
 
-
 #include    "speedometer.h"
 #include    "reverse-indication.h"
 #include    "text-paint.h"
@@ -14,7 +13,6 @@ class MiddleBlock : public QLabel
 {
 public:
     MiddleBlock(QSize _size, QWidget* parent = Q_NULLPTR);
-
 
     void setCurSpeed(int curSpeed);
     void setCurSpeedLimit(int curSpeedLimit);
@@ -27,6 +25,10 @@ private:
     ReverseInd  *reverseInd_;
     TextPaint   *txtCurSpeed_;
     TextPaint   *txtCurSpeedLimit_;
+
+    int oldSpeed_;
+    int oldSpeedLimit_;
+    int oldNextSpeedLimit_;
 
 
 };

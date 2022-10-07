@@ -10,6 +10,8 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     , txtPaintDistToTarget_(Q_NULLPTR)
     , txtPaintTargetType_(Q_NULLPTR)
     , txtPaintTargetName_(Q_NULLPTR)
+    , oldDistToTarget_(0)
+    , oldTargetName_("")
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
@@ -43,7 +45,12 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
 //------------------------------------------------------------------------------
 void BottomBlock::setDistToTarget(int dist)
 {
+    if (dist == oldDistToTarget_)
+        return;
+
     txtPaintDistToTarget_->setText(QString::number(dist));
+
+    oldDistToTarget_ = dist;
 }
 
 
@@ -53,5 +60,10 @@ void BottomBlock::setDistToTarget(int dist)
 //------------------------------------------------------------------------------
 void BottomBlock::setTargetName(QString txt)
 {
+    if (txt.compare(oldTargetName_, Qt::CaseSensitivity::CaseInsensitive) == 0)
+        return;
+
     txtPaintTargetName_->setText(txt.toUpper());
+
+    oldTargetName_ = txt;
 }
