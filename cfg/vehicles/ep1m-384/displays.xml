@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+
+	<!-- БИЛ-УТ -->
+	<Display>
+		<Module>club-u-display</Module>
+		<SurfaceName>Plane001</SurfaceName>
+		
+		<Corner1>1.0 0.0</Corner1>
+		<Corner2>0.0 0.0</Corner2>
+		<Corner3>0.0 1.0</Corner3>
+		<Corner4>0.0 1.0</Corner4>
+		<Corner5>1.0 1.0</Corner5>
+		<Corner6>1.0 0.0</Corner6>
+	</Display> 
+
+</Config>

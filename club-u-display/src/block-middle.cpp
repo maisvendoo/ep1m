@@ -1,16 +1,17 @@
 #include "block-middle.h"
 
-MiddleBlock::MiddleBlock(QSize _size, QWidget *parent)
+MiddleBlock::MiddleBlock(QString config_dir, QSize _size, QWidget *parent)
     : QLabel(parent)
     , speedometer_(Q_NULLPTR)
     , reverseInd_(Q_NULLPTR)
     , txtCurSpeed_(Q_NULLPTR)
     , txtCurSpeedLimit_(Q_NULLPTR)
+    , config_dir(config_dir)
 {
     this->resize(_size);
 
     // Спидометр
-    speedometer_ = new Speedometer(_size, this);
+    speedometer_ = new Speedometer(config_dir, _size, this);
 
     // Индикация реверсора
     reverseInd_ = new ReverseInd(QSize(30,50), this);

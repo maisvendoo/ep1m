@@ -10,16 +10,17 @@
 
 #include "CfgReader.h"
 
-
+#include    <QDir>
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-Speedometer::Speedometer(QSize size, QWidget *parent)
+Speedometer::Speedometer(QString config_dir, QSize size, QWidget *parent)
     : QLabel(parent)
     , speed_(0)
     , speedLimit_(0)
     , speedNextLimit_(0)
+    , config_dir(config_dir)
 {
     this->resize(size);
    // this->setStyleSheet("border: 1px solid red;");
@@ -28,9 +29,17 @@ Speedometer::Speedometer(QSize size, QWidget *parent)
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
 
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinates1.txt", speed_coords1);
-    loadTxtSpeedCoolrds1_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinates2.txt", speed_coords2);
+    loadTxtSpeedCoolrds1_(config_dir +
+                          QDir::separator() +
+                          "CLUB-U" +
+                          QDir::separator() +
+                          "speed-coordinates1.txt", speed_coords1);
 
+    loadTxtSpeedCoolrds1_(config_dir +
+                          QDir::separator() +
+                          "CLUB-U" +
+                          QDir::separator() +
+                          "speed-coordinates2.txt", speed_coords2);
 }
 
 
