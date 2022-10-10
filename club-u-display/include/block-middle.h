@@ -12,6 +12,7 @@
 class MiddleBlock : public QLabel
 {
 public:
+
     MiddleBlock(QSize _size, QString cfg_path, QWidget* parent = Q_NULLPTR);
 
     void setCurSpeed(int curSpeed);
@@ -19,6 +20,7 @@ public:
     void setNextSpeedLimit(int nextSpeedLimit);
     void setReverse(int reverse);
 
+    void setConfigDir(QString config_dir) { this->config_dir = config_dir; }
 
 private:
     Speedometer *speedometer_;
@@ -29,8 +31,6 @@ private:
     int oldSpeed_;
     int oldSpeedLimit_;
     int oldNextSpeedLimit_;
-
-
 };
 
 #endif // MIDDLEBLOCK_H

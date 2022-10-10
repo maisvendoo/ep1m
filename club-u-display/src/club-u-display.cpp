@@ -35,6 +35,11 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
+    updateTimer = new QTimer();
+    connect(updateTimer, &QTimer::timeout,
+            this, &ClubUDisplay::slotUpdateTimer);
+    updateTimer->setInterval(1000);
+    updateTimer->start();
 }
 
 
@@ -54,9 +59,11 @@ ClubUDisplay::~ClubUDisplay()
 //------------------------------------------------------------------------------
 void ClubUDisplay::init()
 {
-    loadStations();
+    //loadStations();
     initMainWindow();
     initBlocks_();
+
+    this->resize(847, 895);
 
     AbstractDisplay::init();
 }
@@ -109,23 +116,26 @@ void ClubUDisplay::initMainWindow()
         cfg.getInt(sectionName, "sizeWindow_X", sizeWindow_X);
         cfg.getInt(sectionName, "sizeWindow_Y", sizeWindow_Y);
         cfg.getBool(sectionName, "hideCursor", hideCursor);
-        cfg.getInt(sectionName, "timeInterval", timeInterval);
+        cfg.getInt(sectionName, "timeInterval", timeInterval);        
     }
 
     this->setCursor( hideCursor ? Qt::BlankCursor : Qt::ArrowCursor);
 
-    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
+    /*this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));
+    this->setPalette(QPalette(QColor(0, 0, 0)));*/
 
 
-    //
-    updateTimer = new QTimer;
-    connect(updateTimer, &QTimer::timeout,
-            this, &ClubUDisplay::slotUpdateTimer, Qt::QueuedConnection);
-    updateTimer->setInterval(timeInterval);
-    updateTimer->start();
+    QLabel* fon = new QLabel(this);
+    fon->setFrameShape(QLabel::NoFrame);
+    QPixmap pic;
+    if (!pic.load(":/rcc/club-u-fon")) { return; }
+    fon->setFixedSize(pic.size());
+    fon->setPixmap(pic);
+    fon->move(0, 0);
+
+    this->layout()->addWidget(fon);
 }
 
 
@@ -155,6 +165,7 @@ void ClubUDisplay::initBlocks_()
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), fon);
     alsn_->move(70, 242);
+    this->layout()->addWidget(alsn_);
 
     // Верхний блок
     topBlock_ = new TopBlock(QSize(670, 135), fon);
@@ -163,15 +174,17 @@ void ClubUDisplay::initBlocks_()
     // Центральный блок
     middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, fon);
     middleBlock_->move(225, 240);
+    this->layout()->addWidget(topBlock_);
 
     // Правый блок
     rightBlock_ = new RightBlock(QSize(155, 372), fon);
     rightBlock_->move(622, 215);
+    this->layout()->addWidget(rightBlock_);
 
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
-
+    this->layout()->addWidget(bottomBlock_);
 }
 
 
@@ -203,8 +216,7 @@ void ClubUDisplay::slotUpdateTimer()
     rightBlock_->setAcceleration(0.7);
 
     bottomBlock_->setDistToTarget(78);
-    bottomBlock_->setTargetName("чм2а");
-
+    bottomBlock_->setTargetName("чм2а");    
 }
 
 

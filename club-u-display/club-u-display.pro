@@ -14,7 +14,6 @@ LIBS += -L$$(RRS_DEV_ROOT)/bin -ldisplay
 LIBS += -L$$(RRS_DEV_ROOT)/bin -lCfgReader
 
 LIBS += -lgcov
-
 CONFIG += force_debug_info
 
 INCLUDEPATH += ./include

@@ -6,11 +6,39 @@
 void EP1m::keyProcess()
 {
     // Включение/выключение шкафа питания ШП-21
-    if (getKeyState(KEY_Y))
+    if (getKeyState(KEY_H))
     {
         if (isShift())
-            tumbler_power_supply.set();
+            tumblers[TUMBLER_POWER_SUPPLY_ON].set();
         else
-            tumbler_power_supply.reset();
+            tumblers[TUMBLER_POWER_SUPPLY_ON].reset();
+    }
+
+    // Перевод реверсивной рукоятки
+    if (getKeyState(KEY_W))
+    {
+        tumblers[SWITCH_REVERS_FWD].set();
+    }
+    else
+    {
+        tumblers[SWITCH_REVERS_FWD].reset();
+    }
+
+    if (getKeyState(KEY_S))
+    {
+        tumblers[SWITCH_REVERS_BWD].set();
+    }
+    else
+    {
+        tumblers[SWITCH_REVERS_BWD].reset();
+    }
+
+    // Включение блока сигнализации
+    if (getKeyState(KEY_8))
+    {
+        if (isShift())
+            tumblers[TUMBLER_BS_002].set();
+        else
+            tumblers[TUMBLER_BS_002].reset();
     }
 }

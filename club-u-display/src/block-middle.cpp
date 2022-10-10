@@ -1,7 +1,5 @@
 #include "block-middle.h"
 
-
-
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
@@ -11,6 +9,7 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     , reverseInd_(Q_NULLPTR)
     , txtCurSpeed_(Q_NULLPTR)
     , txtCurSpeedLimit_(Q_NULLPTR)
+
     , oldSpeed_(0)
     , oldSpeedLimit_(0)
     , oldNextSpeedLimit_(0)

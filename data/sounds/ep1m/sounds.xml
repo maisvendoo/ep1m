@@ -34,4 +34,175 @@
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
 
+	<!-- Включение реле -->
+	<Sound>
+		<Name>Relay</Name>
+		<Path>relay.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Блокирование ВВК -->
+	<Sound>
+		<Name>Lock_VVK</Name>
+		<Path>lock_vvk.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Подъем токоприемника -->
+	<Sound>
+		<Name>Pantograph_Up</Name>
+		<Path>TPUp.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+
+	<!-- Опускание токоприемника -->
+	<Sound>
+		<Name>Pantograph_Down</Name>
+		<Path>TPDown.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Включение ГВ -->
+	<Sound>
+		<Name>GV_On</Name>
+		<Path>gv_on.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Отключение ГВ -->
+	<Sound>
+		<Name>GV_Off</Name>
+		<Path>gv_off.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Реверсивка -->
+	<Sound>
+		<Name>Revers</Name>
+		<Path>revers.wav</Path>
+		<InitVolume>50</InitVolume>
+		<MaxVolume>50</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Рукоятка КМ -->
+	<Sound>
+		<Name>KM_main</Name>
+		<Path>km.wav</Path>
+		<InitVolume>50</InitVolume>
+		<MaxVolume>50</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Рукоятка КМ -->
+	<Sound>
+		<Name>Trac_Transformer</Name>
+		<Path>trans.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<!-- Звуки работы мотор-компрессора -->	
+	<Sound>
+		<Name>Motor_Compressor</Name>
+		<Path>compressor.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan1_low</Name>
+		<Path>mv1_low.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan2_low</Name>
+		<Path>mv2_low.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan3_low</Name>
+		<Path>mv3_low.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan1_norm</Name>
+		<Path>mv1_norm.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan2_norm</Name>
+		<Path>mv2_norm.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>Motor_Fan3_norm</Name>
+		<Path>mv3_norm.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
 </Config>

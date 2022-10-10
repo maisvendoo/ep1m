@@ -6,11 +6,12 @@
 
 //#include "club-u-funcs.h"
 
-
+#include    <QDir>
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+
 Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
     : QLabel(parent)
     , num_speed_(0)
@@ -19,19 +20,15 @@ Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
     , old_num_speed_(0)
     , old_num_speedLimit_(0)
     , old_num_speedNextLimit_(0)
+
 {
     this->resize(size);
    // this->setStyleSheet("border: 1px solid red;");
 
-
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
-
     loadScalePontsCoolrds_(cfg_path + "speed-coordinatesOutScale.txt", speed_coordsOutScale);
-    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
-//    loadScalePontsCoolrds_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesOutScale.txt", speed_coordsOutScale);
-//    loadScalePontsCoolrds_("G:/WORK/Projects/ep1m/soft/ep1m/cfg/vehicles/ep1m-384/CLUB-U/speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
-
+    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);    
 }
 
 

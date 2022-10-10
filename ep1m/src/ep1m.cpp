@@ -14,6 +14,17 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , main_switch(Q_NULLPTR)
   , Ukr(0.0)
   , km5(Q_NULLPTR)
+  , safety_valve(Q_NULLPTR)
+  , kv44(Q_NULLPTR)
+  , kv39(Q_NULLPTR)
+  , km(Q_NULLPTR)
+  , signals_module(Q_NULLPTR)
+  , return_GV(false)
+  , main_res(Q_NULLPTR)
+  , main_res_leak(0.0)
+  , main_compressor(Q_NULLPTR)
+  , press_reg(Q_NULLPTR)
+  , freq_phase_conv(Q_NULLPTR)
 {
     Uks = 25000.0;
 }
@@ -34,6 +45,9 @@ void EP1m::initialization()
     // Инициализация питания цепей управления
     initControlPower();
 
+    // Инициализация цепей управления
+    initControlCircuit();
+
     // Инициализация АЗВ
     initAZV();
 
@@ -45,6 +59,12 @@ void EP1m::initialization()
 
     // Инициализация силовой схемы
     initPowerCircuit();
+
+    // Инициализация системы подготовки сжатого воздуха
+    initAirSupplySystem();
+
+    // Инициализация вспомогательных машин
+    initAuxMachines();
 
     // Инициализация озвучки
     initSounds();
@@ -58,6 +78,9 @@ void EP1m::step(double t, double dt)
     // Работа подсистемы питания цепей управления
     stepControlPower(t, dt);
 
+    // Работа цепей управления
+    stepControlCircuit(t, dt);
+
     // Работа приборов управления в кабине
     stepPanel(t, dt);
 
@@ -67,8 +90,17 @@ void EP1m::step(double t, double dt)
     // Работа силовой схемы
     stepPowerCircuit(t, dt);
 
+    // Работа системы полготовки сжатого воздуха
+    stepAirSupplySystem(t, dt);
+
+    // Работа вспомогательных машин
+    stepAuxMachines(t, dt);
+
     // Вывод сигналов к внешней модели
     signalsOutput();
+
+    // Отладочный вывод
+    stepDebugPrint(t, dt);
 }
 
 //------------------------------------------------------------------------------
