@@ -12,22 +12,18 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , load_time(2.0)
   , load_timer(Q_NULLPTR)
   , is_fans_low_freq(true)
-  , normalFreqTimer(new Timer(80.0, false))
-  , lowFreqTimer(new Timer(80.0, false))
+  , normalFreqTimer(new Timer(1.0, false))
+  , lowFreqTimer(new Timer(1.0, false))
   , fansBustTimer(new Timer(2.5, true))
   , runOutTimer(new Timer(10.0, false))
   , fans_count(0)
 {
-    normalFreqTimer->setTimeout(80.0);
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
-    lowFreqTimer->setTimeout(80.0);
     connect(lowFreqTimer, &Timer::process, this, &MSUD::slotLowFreqTimer);
 
-    fansBustTimer->setTimeout(2.5);
     connect(fansBustTimer, &Timer::process, this, &MSUD::slotFansBustTimer);
 
-    runOutTimer->setTimeout(10.0);
     connect(runOutTimer, &Timer::process, this, &MSUD::slotRunOutTimer);
 }
 
@@ -164,17 +160,25 @@ void MSUD::motor_fans_control(double t, double dt)
     for (size_t i = 0; i < msud_input.mv_state.size(); ++i)
         fans_run = fans_run && msud_input.mv_state[i];
 
-    if (!fans_run)
+    bool is_low_freq = msud_output.mv_freq_low[MV1] ||
+            msud_output.mv_freq_low[MV2] ||
+            msud_output.mv_freq_low[MV3];
+
+    bool is_norm_freq = msud_output.mv_freq_norm[MV1] ||
+            msud_output.mv_freq_norm[MV2] ||
+            msud_output.mv_freq_norm[MV3];
+
+    if (fans_run)
     {
         if (msud_input.Ia[TRAC_MOTOR1] <= 480)
         {
-            if (!lowFreqTimer->isStarted())
+            if (!lowFreqTimer->isStarted() && !is_low_freq)
                 lowFreqTimer->start();
         }
 
         if (msud_input.Ia[TRAC_MOTOR1] >= 510)
         {
-            if (!normalFreqTimer->isStarted())
+            if (!normalFreqTimer->isStarted() && !is_norm_freq)
                 normalFreqTimer->start();
         }
     }
@@ -201,9 +205,11 @@ void MSUD::slotLoadTimer()
 void MSUD::slotNormalFreqTimer()
 {
     if (!fansBustTimer->isStarted())
+    {
         fansBustTimer->start();
-
-    fans_count = MV1;
+        fans_count = MV1;
+        normalFreqTimer->stop();
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -213,7 +219,7 @@ void MSUD::slotLowFreqTimer()
 {
     for (size_t i = 0; i < msud_output.mv_freq_norm.size(); ++i)
     {
-        msud_output.mv_freq_norm[i] = false;
+        msud_output.mv_freq_norm[i] = false;        
     }
 
     if (!runOutTimer->isStarted())
@@ -227,6 +233,7 @@ void MSUD::slotLowFreqTimer()
 //------------------------------------------------------------------------------
 void MSUD::slotFansBustTimer()
 {
+    msud_output.mv_freq_low[fans_count] = false;
     msud_output.mv_freq_norm[fans_count] = true;
     fans_count++;
 

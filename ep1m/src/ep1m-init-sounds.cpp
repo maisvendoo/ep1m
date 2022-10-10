@@ -45,4 +45,13 @@ void EP1m::initSounds()
 
     connect(main_compressor, &MotorCompressor::soundSetPitch,
             this, &EP1m::soundSetPitch);
+
+    for (size_t i = 0; i < motor_fan.size(); ++i)
+    {
+        connect(motor_fan[i], &MotorFan::soundPlay,
+                this, &EP1m::soundPlay);
+
+        connect(motor_fan[i], &MotorFan::soundStop,
+                this, &EP1m::soundStop);
+    }
 }

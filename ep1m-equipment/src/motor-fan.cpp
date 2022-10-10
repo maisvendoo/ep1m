@@ -15,6 +15,8 @@ MotorFan::MotorFan(size_t idx, QObject *parent) : Device(parent)
   , J(0.5)
   , is_no_ready(1.0)
   , f(50.0)
+  , is_low_freq(true)
+  , sndName("")
 {
 
 }
@@ -32,12 +34,36 @@ MotorFan::~MotorFan()
 //------------------------------------------------------------------------------
 void MotorFan::setU_power(double value)
 {
-    QString sndName = QString("Motor_Fan%1").arg(idx);
+    QString lowSndName = QString("Motor_Fan%1_low").arg(idx);
+    QString normSndName = QString("Motor_Fan%1_norm").arg(idx);
 
     if (f < 17)
-        sndName += "_low";
+    {
+        if (!is_low_freq)
+        {
+            emit soundStop(normSndName);
+            sndName = lowSndName;
+
+            if (!is_no_ready)
+                emit soundPlay(sndName);
+
+            is_low_freq = true;
+        }
+    }
     else
-        sndName += "_norm";
+    {
+        if (is_low_freq)
+        {
+            emit soundStop(lowSndName);
+            sndName = normSndName;
+
+            if (!is_no_ready)
+                emit soundPlay(sndName);
+
+            is_low_freq = false;
+        }
+    }
+
 
     if (floor(value) > 0 && floor(U_power) == 0)
     {
@@ -70,7 +96,7 @@ void MotorFan::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(t)
 
-    QString sndName = QString("Motor_Fan%1").arg(idx);
+    //QString sndName = QString("Motor_Fan%1").arg(idx);
 }
 
 //------------------------------------------------------------------------------
