@@ -1,8 +1,8 @@
 #include "club-u-display.h"
 
 #include    <QVBoxLayout>
-#include    <QDir>
 #include    <QLabel>
+#include    <QDir>
 
 #include    "CfgReader.h"
 #include    "club-u-funcs.h"
@@ -27,8 +27,14 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     , rightBlock_(Q_NULLPTR)
     , bottomBlock_(Q_NULLPTR)
 {
+    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
+    this->resize(847, 895);
+    this->setAutoFillBackground(true);
+    this->setPalette(QPalette(QColor(0, 0, 0)));
+
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
+
 }
 
 
@@ -113,15 +119,6 @@ void ClubUDisplay::initMainWindow()
     this->setAutoFillBackground(true);
     this->setPalette(QPalette(QColor(0, 0, 0)));
 
-    //
-    QLabel* fon = new QLabel(this);
-    fon->setFrameShape(QLabel::NoFrame);
-    QPixmap pic;
-    if (!pic.load(":/rcc/club-u-fon")) { return; }
-    fon->setFixedSize(pic.size());
-    fon->setPixmap(pic);
-    fon->move(0, 0);
-
 
     //
     updateTimer = new QTimer;
@@ -141,25 +138,38 @@ void ClubUDisplay::initBlocks_()
     // пусть к конфигам
     QString cfg_path = config_dir + getConfigPath("");
 
+
+    // Фоновый виджет
+    QLabel* fon = new QLabel(this);
+    fon->setFrameShape(QLabel::NoFrame);
+    QPixmap pic;
+    if (!pic.load(":/rcc/club-u-fon")) { return; }
+    fon->setFixedSize(pic.size());
+    //fon->setGeometry(0,0, pic.size().width(), pic.size().height());
+    fon->setPixmap(pic);
+    fon->move(0, 0);
+    //fon->setStyleSheet("border: 2px solid red");
+    this->layout()->addWidget(fon);
+
+
     // Локомотивный светофор
-    alsn_ = new ALSN(QSize(98,350), this);
+    alsn_ = new ALSN(QSize(98,350), fon);
     alsn_->move(70, 242);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(670, 135), this);
+    topBlock_ = new TopBlock(QSize(670, 135), fon);
     topBlock_->move(90, 60);
-    //this->layout()->addWidget(topBlock_);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, this);
+    middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, fon);
     middleBlock_->move(225, 240);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(155, 372), this);
+    rightBlock_ = new RightBlock(QSize(155, 372), fon);
     rightBlock_->move(622, 215);
 
     // Нижний блок
-    bottomBlock_ = new BottomBlock(QSize(585, 30), this);
+    bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
 
 }
@@ -171,7 +181,7 @@ void ClubUDisplay::initBlocks_()
 //------------------------------------------------------------------------------
 void ClubUDisplay::slotUpdateTimer()
 {
-    //structs_CLUB_U.wasSendData = false;
+//    structs_CLUB_U.wasSendData = false;
 
     alsn_->setSignal(ALSN_COLORS::GREEN);
 
