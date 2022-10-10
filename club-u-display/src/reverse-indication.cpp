@@ -1,6 +1,5 @@
 #include "reverse-indication.h"
 
-
 #include <QPainter>
 
 
@@ -10,6 +9,7 @@
 //------------------------------------------------------------------------------
 ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     : QLabel(parent)
+    , oldVal_(0)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red;");
@@ -24,6 +24,9 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
 //------------------------------------------------------------------------------
 void ReverseInd::setRevese(int val)
 {
+    if (val == oldVal_)
+        return;
+
     if (val == 0)
     {
         this->setPixmap(QPixmap());
@@ -31,6 +34,8 @@ void ReverseInd::setRevese(int val)
     }
 
     drawReverse_(val);
+
+    oldVal_ = val;
 }
 
 

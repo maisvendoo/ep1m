@@ -1,16 +1,17 @@
 #ifndef SPEEDOMETER_H
 #define SPEEDOMETER_H
 
-
 #include <QLabel>
-#include "SGlobalParams.h"
 
 
-class Speedometer : public QLabel, SGlobalParams
+
+class Speedometer : public QLabel
 {
 
 public:
-    Speedometer(QString config_dir, QSize size, QWidget *parent = Q_NULLPTR);
+
+    Speedometer(QSize size, QString cfg_path, QWidget *parent = Q_NULLPTR);
+
 
     void setSpeed(int speed);
     void setSpeedLimit(int speedLimit);
@@ -21,19 +22,23 @@ public:
 private:
     QImage img_;
 
-    QVector<QPoint> speed_coords1;
-    QVector<QPoint> speed_coords2;
+    QVector<QPoint> speed_coordsOutScale;
+    QVector<QPoint> speed_coordsInsideScale;
 
-    int speed_;
-    int speedLimit_;
-    int speedNextLimit_;
+    int num_speed_;
+    int num_speedLimit_;
+    int num_speedNextLimit_;
+
+    int old_num_speed_;
+    int old_num_speedLimit_;
+    int old_num_speedNextLimit_;
 
     QString config_dir;
 
 
-    void drawArc_(int speed, int speedLimit, int speedNextLimit);
+    void drawArc_(int num_speed, int num_speedLimit, int num_speedNextLimit);
 
-    void loadTxtSpeedCoolrds1_(QString txt_path, QVector<QPoint> &vec);
+    void loadScalePontsCoolrds_(QString txt_path, QVector<QPoint> &vec);
 
 
 };

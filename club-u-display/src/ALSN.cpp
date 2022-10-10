@@ -7,6 +7,8 @@
 //-----------------------------------------------------------------------------
 ALSN::ALSN(QSize _size, QWidget *parent)
     : QLabel(parent)
+    , oldColor_(ALSN_COLORS::RED_YELLOW)
+    , oldFreeBlocks_(0)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red;");
@@ -27,6 +29,13 @@ ALSN::ALSN(QSize _size, QWidget *parent)
 //-----------------------------------------------------------------------------
 void ALSN::setSignal(int color, int freeBlocs)
 {
+    if ((color == oldColor_) && (freeBlocs == oldFreeBlocks_))
+        return;
+
+    oldColor_ = color;
+    oldFreeBlocks_ = freeBlocs;
+
+    //
     for (int i = 0; i < 8; ++i)
     {
         ledWidgets_[i]->setVisible(false);

@@ -1,8 +1,8 @@
 #include "block-top.h"
 
-#include "CfgReader.h"
 #include "cmath"
-#include <QTimer>
+
+#include <QTime>
 
 
 
@@ -21,6 +21,8 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     , txtPaintCurTimeH_(Q_NULLPTR)
     , txtPaintCurTimeM_(Q_NULLPTR)
     , txtPaintCurTimeS_(Q_NULLPTR)
+    , oldCoordinate_(0.0)
+    , oldStation_("")
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
@@ -82,27 +84,13 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCurTimeS_->setParams(2, 19);
     txtPaintCurTimeS_->setPointForDigit(6, 16);
 
-
-
-
-    txtPaintCurTimeH_->setText("");
-    txtPaintCurTimeM_->setText("");
-    txtPaintCurTimeS_->setText("");
-
-
-//    timeTimer_ = new QTimer();
-//    timeTimer_->setInterval(1000);
-//    timeTimer_->start(0);
-
-//    //curTime_ = new QTime();
-
-//    connect(timeTimer_, &QTimer::timeout, this, [this]()
-//    {
-//        txtPaintCurTimeH_->setText(QString::number(curTime_.currentTime().hour()));
-//        txtPaintCurTimeM_->setText(QString::number(curTime_.currentTime().minute()));
-//        txtPaintCurTimeS_->setText(QString::number(curTime_.currentTime().second()));
-//    });
-
+    connect(&timeTimer_, &QTimer::timeout, [&]()
+    {
+        txtPaintCurTimeH_->setText(QString::number(QTime::currentTime().hour()));
+        txtPaintCurTimeM_->setText(QString::number(QTime::currentTime().minute()));
+        txtPaintCurTimeS_->setText(QString::number(QTime::currentTime().second()));
+    });
+    timeTimer_.start(1000);
 
 }
 
@@ -123,6 +111,9 @@ TopBlock::~TopBlock()
 //-----------------------------------------------------------------------------
 void TopBlock::setBditelnost(bool flag)
 {
+    if (indicationBditelnosti_->isVisible() == flag)
+        return;
+
     indicationBditelnosti_->setVisible(flag);
 }
 
@@ -133,6 +124,9 @@ void TopBlock::setBditelnost(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setIndM(bool flag)
 {
+    if (indicationM_->isVisible() == flag)
+        return;
+
     indicationM_->setVisible(flag);
 }
 
@@ -143,6 +137,9 @@ void TopBlock::setIndM(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setIndP(bool flag)
 {
+    if (indicationP_->isVisible() == flag)
+        return;
+
     indicationP_->setVisible(flag);
 }
 
@@ -153,6 +150,9 @@ void TopBlock::setIndP(bool flag)
 //-----------------------------------------------------------------------------
 void TopBlock::setCassete(bool flag)
 {
+    if (indicationCassette_->isVisible() == flag)
+        return;
+
     indicationCassette_->setVisible(flag);
 }
 
@@ -166,8 +166,13 @@ void TopBlock::setCoordinate(double coordinate)
     if ((coordinate < 0.0) || (coordinate > 9999.999))
         return;
 
+    if (std::abs(coordinate - oldCoordinate_) < 0.001)
+        return;
+
     txtPaintCoordinate1_->setText(QString::number(floor(coordinate)));
     txtPaintCoordinate2_->setText(QString::number(coordinate, 'f', 3));
+
+    oldCoordinate_ = coordinate;
 }
 
 
@@ -177,7 +182,12 @@ void TopBlock::setCoordinate(double coordinate)
 //-----------------------------------------------------------------------------
 void TopBlock::setStationName(QString stationName)
 {
+    if (stationName.compare(oldStation_, Qt::CaseSensitivity::CaseInsensitive) == 0)
+        return;
+
     txtPaintStation_->setText(stationName.toUpper());
+
+    oldStation_ = stationName;
 }
 
 

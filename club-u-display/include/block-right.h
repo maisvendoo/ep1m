@@ -1,10 +1,7 @@
 #ifndef RIGHTBLOCK_H
 #define RIGHTBLOCK_H
 
-
-
 #include <QLabel>
-
 
 #include    "text-paint.h"
 
@@ -30,6 +27,11 @@ private:
     TextPaint   *txtPaintNumTrack_;
     TextPaint   *txtPaintAcceleration1_;
     TextPaint   *txtPaintAcceleration2_;
+
+    double oldPressureTM_;
+    double oldPressureUR_;
+    QString oldTrackNum_;
+    double oldAcceleration_;
 
 
 };

@@ -37,6 +37,9 @@ private:
 
     QVector<ImageWidget*> ledWidgets_;
 
+    int oldColor_;
+    int oldFreeBlocks_;
+
     void loadLedImages_();
 
 };
