@@ -28,9 +28,9 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    updateTimer = new QTimer(this);
+    updateTimer = new QTimer();
     connect(updateTimer, &QTimer::timeout,
-            this, &ClubUDisplay::slotUpdateTimer, Qt::QueuedConnection);
+            this, &ClubUDisplay::slotUpdateTimer);
     updateTimer->setInterval(1000);
     updateTimer->start();
 }
@@ -102,7 +102,6 @@ void ClubUDisplay::initMainWindow()
     int     sizeWindow_Y = 895;
     bool    hideCursor = false;
     int     timeInterval = 100;
-    bool    transparent = false;
 
     if (cfg.load(config_dir + getCfgPath("main.xml")))
     {
@@ -110,33 +109,26 @@ void ClubUDisplay::initMainWindow()
         cfg.getInt(sectionName, "sizeWindow_X", sizeWindow_X);
         cfg.getInt(sectionName, "sizeWindow_Y", sizeWindow_Y);
         cfg.getBool(sectionName, "hideCursor", hideCursor);
-        cfg.getInt(sectionName, "timeInterval", timeInterval);
-        cfg.getBool(sectionName, "transparent", transparent);
+        cfg.getInt(sectionName, "timeInterval", timeInterval);        
     }
 
     this->setCursor( hideCursor ? Qt::BlankCursor : Qt::ArrowCursor);
 
-    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
+    /*this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));
+    this->setPalette(QPalette(QColor(0, 0, 0)));*/
 
-    if (transparent)
-    {
-        this->setAttribute(Qt::WA_TranslucentBackground);
-    }
-    else
-    {
-        QLabel* fon = new QLabel(this);
-        fon->setFrameShape(QLabel::NoFrame);
-        QPixmap pic;
-        if (!pic.load(":/rcc/club-u-fon")) { return; }
-        fon->setFixedSize(pic.size());
-        fon->setPixmap(pic);
-        fon->move(0, 0);
+    QLabel* fon = new QLabel(this);
+    fon->setFrameShape(QLabel::NoFrame);
+    QPixmap pic;
+    if (!pic.load(":/rcc/club-u-fon")) { return; }
+    fon->setFixedSize(pic.size());
+    fon->setPixmap(pic);
+    fon->move(0, 0);
 
-        this->layout()->addWidget(fon);
-    }   
+    this->layout()->addWidget(fon);
+
 }
 
 
@@ -212,9 +204,7 @@ void ClubUDisplay::slotUpdateTimer()
     rightBlock_->setAcceleration(0.7);
 
     bottomBlock_->setDistToTarget(78);
-    bottomBlock_->setTargetName("чм2а");
-
-    this->update();
+    bottomBlock_->setTargetName("чм2а");    
 }
 
 
