@@ -20,7 +20,7 @@ public:
     void setNextSpeedLimit(int nextSpeedLimit);
     void setReverse(int reverse);
 
-    void setConfigDir(QString config_dir) { this->config_dir = config_dir; }
+    //void setConfigDir(QString config_dir) { this->config_dir = config_dir; }
 
 private:
     Speedometer *speedometer_;

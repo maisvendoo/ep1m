@@ -127,7 +127,7 @@ void ClubUDisplay::initMainWindow()
     this->setPalette(QPalette(QColor(0, 0, 0)));*/
 
 
-    QLabel* fon = new QLabel(this);
+    /*QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
     QPixmap pic;
     if (!pic.load(":/rcc/club-u-fon")) { return; }
@@ -135,7 +135,7 @@ void ClubUDisplay::initMainWindow()
     fon->setPixmap(pic);
     fon->move(0, 0);
 
-    this->layout()->addWidget(fon);
+    this->layout()->addWidget(fon);*/
 }
 
 
@@ -147,7 +147,6 @@ void ClubUDisplay::initBlocks_()
 {
     // пусть к конфигам
     QString cfg_path = config_dir + getConfigPath("");
-
 
     // Фоновый виджет
     QLabel* fon = new QLabel(this);
@@ -161,11 +160,10 @@ void ClubUDisplay::initBlocks_()
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
 
-
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), fon);
     alsn_->move(70, 242);
-    this->layout()->addWidget(alsn_);
+    //this->layout()->addWidget(alsn_);
 
     // Верхний блок
     topBlock_ = new TopBlock(QSize(670, 135), fon);
@@ -174,17 +172,17 @@ void ClubUDisplay::initBlocks_()
     // Центральный блок
     middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, fon);
     middleBlock_->move(225, 240);
-    this->layout()->addWidget(topBlock_);
+    //this->layout()->addWidget(topBlock_);
 
     // Правый блок
     rightBlock_ = new RightBlock(QSize(155, 372), fon);
     rightBlock_->move(622, 215);
-    this->layout()->addWidget(rightBlock_);
+    //this->layout()->addWidget(rightBlock_);
 
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
-    this->layout()->addWidget(bottomBlock_);
+    //this->layout()->addWidget(bottomBlock_);
 }
 
 
