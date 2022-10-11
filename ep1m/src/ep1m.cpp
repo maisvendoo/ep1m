@@ -25,6 +25,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , main_compressor(Q_NULLPTR)
   , press_reg(Q_NULLPTR)
   , freq_phase_conv(Q_NULLPTR)
+  , charge_press(0.5)
 {
     Uks = 25000.0;
 }

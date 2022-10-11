@@ -108,6 +108,8 @@ private:
     /// Преобразователь частоты и числа фаз (ПЧФ)
     FreqPhaseConverter *freq_phase_conv;
 
+    double  charge_press;
+
     Relay   *km7;
 
     Relay   *km8;
@@ -119,6 +121,7 @@ private:
     Relay   *km12;
 
     Relay   *km13;
+
 
     BrakeLock *ubt;
 
@@ -210,6 +213,10 @@ private:
     void keyProcess() override;
 
     void loadConfig(QString path) override;
+
+    void initBrakeDevices(double p0, double pTM, double PFL) override;
+
+    void load_brakes_config(QString path);
 };
 
 #endif // EP1M_H

@@ -2,6 +2,20 @@
 
 #include    "filesystem.h"
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::initBrakeDevices(double p0, double pTM, double pFL)
+{
+    main_res->setY(0, pFL);
+    charge_press = p0;
+
+    brake_crane->setChargePressure(charge_press);
+    brake_crane->init(pTM, pFL);
+    loco_crane->init(pTM, pFL);
+
+    load_brakes_config(config_dir + QDir::separator() + "brakes-init.xml");
+}
 
 //------------------------------------------------------------------------------
 //
