@@ -198,6 +198,36 @@ void ClubUDisplay::slotUpdateTimer()
         return;
     }
 
+
+
+
+    alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
+                     static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
+
+    topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
+    topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
+    topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
+    topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
+    topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
+    int stationNum = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_NUM]);
+    if ((stationsCount_ > 0) && (stationNum < stationsCount_))
+        topBlock_->setStationName(stations[stationNum]);
+
+    middleBlock_->setSpeedLimitVisible(true);
+    middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
+    middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
+    middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
+    middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
+    middleBlock_->blinkingSpeed(false);
+
+    rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
+    rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
+    rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
+    rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
+
+    bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
+
+
     if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_EPK]))
     {
         alsn_->setVisible(true);
@@ -220,33 +250,6 @@ void ClubUDisplay::slotUpdateTimer()
 
         return;
     }
-
-
-    alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
-                     static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
-
-    topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
-    topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
-    topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
-    topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
-    topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
-    int stationNum = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_NUM]);
-    if ((stationsCount_ > 0) && (stationNum < stationsCount_))
-        topBlock_->setStationName(stations[stationNum]);
-
-    middleBlock_->setSpeedLimitVisible(true);
-    middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
-    middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
-    middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
-    middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
-
-    rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
-    rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
-    rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
-    rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
-
-    bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
-
 }
 
 

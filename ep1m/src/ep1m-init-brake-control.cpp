@@ -14,6 +14,8 @@ void EP1m::initBrakeDevices(double p0, double pTM, double pFL)
     brake_crane->init(pTM, pFL);
     loco_crane->init(pTM, pFL);
 
+    epk->init(pTM, pFL);
+
     load_brakes_config(config_dir + QDir::separator() + "brakes-init.xml");
 }
 

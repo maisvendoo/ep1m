@@ -48,4 +48,18 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_WHEEL4] = TO_FLOAT(dir * wheel_rotation_angle[3] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL5] = TO_FLOAT(dir * wheel_rotation_angle[4] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(dir * wheel_rotation_angle[5] / 2.0 / Physics::PI);
+
+    analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
+    analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->getStateKey());
+
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = pTM;
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = brake_crane->getEqReservoirPressure();
+    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(velocity * 3.6);
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = 140.0f;
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = 100.0f;
+    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(getRailwayCoord() / 1000.0);
+    analogSignal[SIGNAL_KLUB_U_ALSN] = 4;
+    analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
+    analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
+    analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
 }

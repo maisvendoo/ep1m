@@ -128,7 +128,9 @@ private:
 
     LocoCrane *loco_crane;
 
-    BrakeCrane *brake_crane;    
+    BrakeCrane *brake_crane;
+
+    AutoTrainStop *epk;
 
     enum
     {

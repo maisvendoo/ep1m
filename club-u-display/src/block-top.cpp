@@ -21,7 +21,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     , txtPaintCurTimeH_(Q_NULLPTR)
     , txtPaintCurTimeM_(Q_NULLPTR)
     , txtPaintCurTimeS_(Q_NULLPTR)
-    , oldCoordinate_(0.0)
+    , oldCoordinate_(-1.0)
     , oldStation_("")
 {
     this->resize(size);

@@ -10,7 +10,7 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     , txtPaintDistToTarget_(Q_NULLPTR)
     , txtPaintTargetType_(Q_NULLPTR)
     , txtPaintTargetName_(Q_NULLPTR)
-    , oldDistToTarget_(0)
+    , oldDistToTarget_(-1)
     , oldTargetName_("")
 {
     this->resize(size);
