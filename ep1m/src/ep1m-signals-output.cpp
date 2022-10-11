@@ -37,6 +37,10 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_MV3] = TO_FLOAT(signals_module->getLampState(SM_V3));
 
     analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
+    analogSignal[STRELKA_TM] = TO_FLOAT(pTM / 1.0);
+    analogSignal[STRELKA_UR] = TO_FLOAT(brake_crane->getEqReservoirPressure() / 1.0);
+
+    analogSignal[RUK_395] = TO_FLOAT(brake_crane->getHandlePosition());
 
     analogSignal[SIGNAL_WHEEL1] = TO_FLOAT(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL2] = TO_FLOAT(dir * wheel_rotation_angle[1] / 2.0 / Physics::PI);

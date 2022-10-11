@@ -21,6 +21,7 @@
 #include    "motor-compressor.h"
 #include    "pressure-regulator.h"
 #include    "motor-fan.h"
+#include    "ubt367m.h"
 
 //---------------------------------------------------------------------
 //
@@ -119,6 +120,12 @@ private:
 
     Relay   *km13;
 
+    BrakeLock *ubt;
+
+    LocoCrane *loco_crane;
+
+    BrakeCrane *brake_crane;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -167,6 +174,9 @@ private:
     /// Инициализация вспомогательных машин
     void initAuxMachines();
 
+    /// Инициализация приборов управления тормозами
+    void initBrakeControl();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -187,6 +197,8 @@ private:
     void stepAirSupplySystem(double t, double dt);
 
     void stepAuxMachines(double t, double dt);
+
+    void stepBrakeControl(double t, double dt);
 
     void signalsOutput();
 

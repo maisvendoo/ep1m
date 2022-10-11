@@ -66,6 +66,9 @@ void EP1m::initialization()
     // Инициализация вспомогательных машин
     initAuxMachines();
 
+    // Инициализация приборов управления тормозами
+    initBrakeControl();
+
     // Инициализация озвучки
     initSounds();
 }
@@ -95,6 +98,9 @@ void EP1m::step(double t, double dt)
 
     // Работа вспомогательных машин
     stepAuxMachines(t, dt);
+
+    // Работа приборов управления тормозами
+    stepBrakeControl(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();
