@@ -57,6 +57,9 @@ void EP1MTumblersPanel::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void EP1MTumblersPanel::stepKeysControl(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     // Поворот ключа блокировки, при условии нахождения всех тумблеров
     // в положении "выключено"
     if (getKeyState(KEY_U))
@@ -131,6 +134,15 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
                 tumblers[TUMBLER_AUX_MACHINES].set();
             else
                 tumblers[TUMBLER_AUX_MACHINES].reset();
+        }
+
+        // Включение мотор-компрессора
+        if (getKeyState(KEY_4))
+        {
+            if (isShift())
+                tumblers[TUMBLER_COMPRESSOR].set();
+            else
+                tumblers[TUMBLER_COMPRESSOR].reset();
         }
 
         // Вентилятор 1

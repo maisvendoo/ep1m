@@ -3,6 +3,8 @@
 
 #include    "device.h"
 
+#include    "msud-data.h"
+
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -18,6 +20,16 @@ public:
     void init();
 
     void setPowerVoltage(double Uc);
+
+    void setInputData(const msud_input_t &msud_input)
+    {
+        this->msud_input = msud_input;
+    }
+
+    msud_output_t getOutputData() const
+    {
+        return this->msud_output;
+    }
 
 private:
 
@@ -44,6 +56,23 @@ private:
     // Таймер загрузки МСУД
     Timer   *load_timer;
 
+    bool is_fans_low_freq;
+
+    Timer *normalFreqTimer;
+
+    Timer *lowFreqTimer;
+
+    Timer *fansBustTimer;
+
+    Timer *runOutTimer;
+
+    size_t fans_count;
+
+    msud_input_t msud_input;
+
+    msud_output_t msud_output;
+
+
      void ode_system(const state_vector_t &Y,
                      state_vector_t &dYdt,
                      double t) override;
@@ -61,10 +90,20 @@ private:
      // Основной цикл работы МСУД
      void main_loop(double t, double dt);
 
+     // Управление частотой вращения мотор-вентиляторов
+     void motor_fans_control(double t, double dt);
 
 private slots:
 
      void slotLoadTimer();
+
+     void slotNormalFreqTimer();
+
+     void slotLowFreqTimer();
+
+     void slotFansBustTimer();
+
+     void slotRunOutTimer();
 };
 
 #endif // MSUD_H

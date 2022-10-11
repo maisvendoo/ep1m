@@ -10,10 +10,9 @@ void EP1m::initControlPower()
     battery = new Battery();
     battery->read_custom_config(config_dir + QDir::separator() + "battery");
 
-    power_supply = new PowerSupply();
+    power_supply = new PowerSupply();    
 
-    tumbler_power_supply.setOnSoundName("Tumbler_On");
-    tumbler_power_supply.setOffSoundName("Tumbler_Off");
+    tumblers[BUTTON_MAIN_SWITCH_OFF].set();
 
     km5 = new Relay(1);
     km5->read_custom_config(config_dir + QDir::separator() + "mk-69");

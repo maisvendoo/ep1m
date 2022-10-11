@@ -114,7 +114,7 @@ void ClubUDisplay::initMainWindow()
         cfg.getInt(sectionName, "sizeWindow_X", sizeWindow_X);
         cfg.getInt(sectionName, "sizeWindow_Y", sizeWindow_Y);
         cfg.getBool(sectionName, "hideCursor", hideCursor);
-        cfg.getInt(sectionName, "timeInterval", timeInterval);
+        cfg.getInt(sectionName, "timeInterval", timeInterval);        
     }
 
     this->setCursor( hideCursor ? Qt::BlankCursor : Qt::ArrowCursor);

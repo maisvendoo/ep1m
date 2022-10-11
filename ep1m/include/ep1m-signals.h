@@ -10,18 +10,41 @@ enum
 
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
-    SIGNAL_TUMBLER_LOCK_VVK = 2, // Блокирование ВВК
-    SIGNAL_TUMBLER_PANT1 = 3, // Токоприемник 1
-    SIGNAL_TUMBLER_PANT2 = 4, // Токоприемник 2
-    SIGNAL_TUMBLER_RETURN_PROTECTION = 5, // Возврат защиты ГВ
-    SIGNAL_TUMBLER_MAIN_SWITCH = 6, // Главный выключатель
 
-    SIGNAL_TUMBLER_AUX_MACHINES = 7, // Вспомогательные машины
-    SIGNAL_TUMBLER_COMPRESSOR = 8, // Компрессор
-    SIGNAL_TUMBLER_MOTOR_FAN1 = 9, // Вентилятор 1
-    SIGNAL_TUMBLER_MOTOR_FAN2 = 10, // Вентилятор 2
-    SIGNAL_TUMBLER_MOTOR_FAN3 = 11, // Вентилятор 3
-    SIGNAL_TUMBLER_EPT = 12, // ЭПТ
+    STRELKA_TM = 21,
+    STRELKA_UR = 22,
+    STRELKA_GR = 23,
+    STRELKA_TC = 24,
+
+    SIGNAL_TUMBLER_LOCK_VVK = 31, // Блокирование ВВК
+    SIGNAL_TUMBLER_PANT1 = 32, // Токоприемник 1
+    SIGNAL_TUMBLER_PANT2 = 33, // Токоприемник 2
+    SIGNAL_TUMBLER_RETURN_PROTECTION = 35, // Возврат защиты ГВ
+    SIGNAL_TUMBLER_MAIN_SWITCH = 36, // Главный выключатель
+
+    SIGNAL_PANT1 = 40, // Передний токоприемник
+    SIGNAL_PANT2 = 41, // Задний токоприемник
+
+    LAMP_GV = 42,
+
+    LAMP_MK1 = 50,
+    LAMP_MK2 = 51,
+    LAMP_MV1 = 52,
+    LAMP_MV2 = 53,
+    LAMP_MV3 = 54,
+
+    SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
+    SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
+    SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1
+    SIGNAL_TUMBLER_MOTOR_FAN2 = 68, // Вентилятор 2
+    SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
+
+    STRELKA_U_KS = 98, // Напряжение КС
+
+    SIGNAL_TUMBLER_EPT = 100, // ЭПТ
+
+    SIGNAL_REVERS = 101, // Реверсивка
+    SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
     // КЛУБ-У
     SIGNAL_KLUB_U_POWER_SUPPLAY = 50,   // питание
