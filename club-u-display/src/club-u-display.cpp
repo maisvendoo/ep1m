@@ -6,6 +6,7 @@
 
 #include    "CfgReader.h"
 #include    "club-u-funcs.h"
+#include    "ep1m-signals.h"
 
 #include    "ALSN.h"
 #include    "block-top.h"
@@ -26,6 +27,8 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     , middleBlock_(Q_NULLPTR)
     , rightBlock_(Q_NULLPTR)
     , bottomBlock_(Q_NULLPTR)
+    , stations()
+    , stationsCount_(0)
 {
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(847, 895);
@@ -35,11 +38,6 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setLayout(new QVBoxLayout);
     this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    updateTimer = new QTimer();
-    connect(updateTimer, &QTimer::timeout,
-            this, &ClubUDisplay::slotUpdateTimer);
-    updateTimer->setInterval(1000);
-    updateTimer->start();
 }
 
 
@@ -59,11 +57,9 @@ ClubUDisplay::~ClubUDisplay()
 //------------------------------------------------------------------------------
 void ClubUDisplay::init()
 {
-    //loadStations();
+    loadStations();
     initMainWindow();
     initBlocks_();
-
-    this->resize(847, 895);
 
     AbstractDisplay::init();
 }
@@ -94,6 +90,8 @@ void ClubUDisplay::loadStations()
             stations.push_back(tokens[2]);
         }
     }
+
+    stationsCount_ = stations.size();
 }
 
 
@@ -121,21 +119,19 @@ void ClubUDisplay::initMainWindow()
 
     this->setCursor( hideCursor ? Qt::BlankCursor : Qt::ArrowCursor);
 
-    /*this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
+    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));*/
+    this->setPalette(QPalette(QColor(0, 0, 0)));
 
 
-    /*QLabel* fon = new QLabel(this);
-    fon->setFrameShape(QLabel::NoFrame);
-    QPixmap pic;
-    if (!pic.load(":/rcc/club-u-fon")) { return; }
-    fon->setFixedSize(pic.size());
-    fon->setPixmap(pic);
-    fon->move(0, 0);
 
-    this->layout()->addWidget(fon);*/
+    //
+    updateTimer = new QTimer;
+    connect(updateTimer, &QTimer::timeout,
+            this, &ClubUDisplay::slotUpdateTimer, Qt::QueuedConnection);
+    updateTimer->setInterval(timeInterval);
+    updateTimer->start();
 }
 
 
@@ -163,7 +159,6 @@ void ClubUDisplay::initBlocks_()
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), fon);
     alsn_->move(70, 242);
-    //this->layout()->addWidget(alsn_);
 
     // Верхний блок
     topBlock_ = new TopBlock(QSize(670, 135), fon);
@@ -172,17 +167,16 @@ void ClubUDisplay::initBlocks_()
     // Центральный блок
     middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, fon);
     middleBlock_->move(225, 240);
-    //this->layout()->addWidget(topBlock_);
 
     // Правый блок
     rightBlock_ = new RightBlock(QSize(155, 372), fon);
     rightBlock_->move(622, 215);
-    //this->layout()->addWidget(rightBlock_);
+    rightBlock_->setNumTrack("1пр");
 
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
-    //this->layout()->addWidget(bottomBlock_);
+    bottomBlock_->setTargetName("н1а");
 }
 
 
@@ -192,31 +186,71 @@ void ClubUDisplay::initBlocks_()
 //------------------------------------------------------------------------------
 void ClubUDisplay::slotUpdateTimer()
 {
-//    structs_CLUB_U.wasSendData = false;
 
-    alsn_->setSignal(ALSN_COLORS::GREEN);
+    if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_POWER_SUPPLAY]))
+    {
+        alsn_->setVisible(false);
+        topBlock_->setVisible(false);
+        middleBlock_->setVisible(false);
+        rightBlock_->setVisible(false);
+        bottomBlock_->setVisible(false);
 
-    topBlock_->setBditelnost(true);
-    topBlock_->setCassete(true);
-    topBlock_->setIndM(true);
-    topBlock_->setIndP(true);
-    topBlock_->setCoordinate(102.9);
-    topBlock_->setStationName("Станция");
+        return;
+    }
 
-    middleBlock_->setCurSpeed(62);
-    middleBlock_->setCurSpeedLimit(81);
-    middleBlock_->setNextSpeedLimit(39);
-    middleBlock_->setReverse(1);
+    if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_EPK]))
+    {
+        alsn_->setVisible(true);
+        alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
-    rightBlock_->setPressureTM(0.56);
-    rightBlock_->setPressureUR(0.58);
-    rightBlock_->setNumTrack("1нп");
-    rightBlock_->setAcceleration(0.7);
+        topBlock_->setVisible(true);
+        topBlock_->setIndM(false);
+        topBlock_->setCassete(false);
+        topBlock_->setBditelnost(false);
 
-    bottomBlock_->setDistToTarget(78);
-    bottomBlock_->setTargetName("чм2а");    
+        middleBlock_->setVisible(true);
+        middleBlock_->setSpeedLimitVisible(false);
+        middleBlock_->setCurSpeedLimit(-5);
+        middleBlock_->setNextSpeedLimit(-5);
+        middleBlock_->blinkingSpeed(true);
+
+        rightBlock_->setVisible(true);
+
+        bottomBlock_->setVisible(true);
+
+        return;
+    }
+
+
+    alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
+                     static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
+
+    topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
+    topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
+    topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
+    topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
+    topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
+    int stationNum = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_NUM]);
+    if ((stationsCount_ > 0) && (stationNum < stationsCount_))
+        topBlock_->setStationName(stations[stationNum]);
+
+    middleBlock_->setSpeedLimitVisible(true);
+    middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
+    middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
+    middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
+    middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
+
+    rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
+    rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
+    rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
+    rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
+
+    bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
+
 }
 
 
 
+
+// Важная штука, чтобы в RRS работало.
 GET_DISPLAY(ClubUDisplay)

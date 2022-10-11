@@ -16,6 +16,7 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     , txtPaintNumTrack_(Q_NULLPTR)
     , txtPaintAcceleration1_(Q_NULLPTR)
     , txtPaintAcceleration2_(Q_NULLPTR)
+    , indicationZapretOtpuska_(Q_NULLPTR)
     , oldPressureTM_(0.0)
     , oldPressureUR_(0.0)
     , oldTrackNum_("")
@@ -73,6 +74,12 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     txtPaintAcceleration2_->setFonts(13, Qt::green, 87);
     txtPaintAcceleration2_->setParams(1, 15);
     txtPaintAcceleration2_->setPointForDigit(5, 15);
+
+
+    // Индикация "Запрет отпуска"
+    indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(71,36), this);
+    indicationZapretOtpuska_->move(41, 325);
+    indicationZapretOtpuska_->setVisible(false);
 
 }
 
@@ -146,4 +153,17 @@ void RightBlock::setAcceleration(double a)
     txtPaintAcceleration2_->setText(QString::number(a, 'f', 1));
 
     oldAcceleration_ = a;
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void RightBlock::setIndZapretOtpuska(bool flag)
+{
+    if (indicationZapretOtpuska_->isVisible() == flag)
+        return;
+
+    indicationZapretOtpuska_->setVisible(true);
 }

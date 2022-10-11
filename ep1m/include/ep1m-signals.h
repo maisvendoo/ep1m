@@ -48,6 +48,29 @@ enum
     SIGNAL_REVERS = 101, // Реверсивка
     SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
+    // КЛУБ-У
+    SIGNAL_KLUB_U_POWER_SUPPLAY = 50,   // питание
+    SIGNAL_KLUB_U_EPK           = 51,   // ЭПК
+    SIGNAL_KLUB_U_ALSN          = 52,   // код АЛСН
+    SIGNAL_KLUB_U_ALSN_FB       = 53,   // кол-во свободных БУ
+    SIGNAL_KLUB_U_COORDINATE    = 54,
+    SIGNAL_KLUB_U_STATION_NUM   = 55,
+    SIGNAL_KLUB_U_BDITELNOST    = 56,
+    SIGNAL_KLUB_U_M             = 57,
+    SIGNAL_KLUB_U_P             = 58,
+    SIGNAL_KLUB_U_CASSETE       = 59,
+    SIGNAL_KLUB_U_SPEED         = 60,
+    SIGNAL_KLUB_U_SPEED_LIMIT   = 61,
+    SIGNAL_KLUB_U_SPEED_LIMIT_2 = 62,
+    SIGNAL_KLUB_U_REVERSOR      = 63,
+    SIGNAL_KLUB_U_TARGET_DIST   = 64,
+    SIGNAL_KLUB_U_TARGET_NAME   = 65,
+    SIGNAL_KLUB_U_PRESSURE_TM   = 66,
+    SIGNAL_KLUB_U_PRESSURE_UR   = 67,
+    SIGNAL_KLUB_U_ACCELERATION  = 68,
+    SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 69,
+
+
     // Колесные пары
     SIGNAL_WHEEL1 = 194, // Колесная пара 1
     SIGNAL_WHEEL2 = 195, // Колесная пара 2

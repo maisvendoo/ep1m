@@ -2,6 +2,8 @@
 #define MIDDLEBLOCK_H
 
 #include <QLabel>
+#include <QTimer>
+
 
 #include    "speedometer.h"
 #include    "reverse-indication.h"
@@ -12,7 +14,6 @@
 class MiddleBlock : public QLabel
 {
 public:
-
     MiddleBlock(QSize _size, QString cfg_path, QWidget* parent = Q_NULLPTR);
 
     void setCurSpeed(int curSpeed);
@@ -20,7 +21,10 @@ public:
     void setNextSpeedLimit(int nextSpeedLimit);
     void setReverse(int reverse);
 
-    //void setConfigDir(QString config_dir) { this->config_dir = config_dir; }
+    void setSpeedLimitVisible(bool flag);
+
+    void blinkingSpeed(bool flag);
+
 
 private:
     Speedometer *speedometer_;
@@ -31,6 +35,11 @@ private:
     int oldSpeed_;
     int oldSpeedLimit_;
     int oldNextSpeedLimit_;
+
+    QTimer timerForBlink;
+    bool forceBlinking_;
+
+
 };
 
 #endif // MIDDLEBLOCK_H

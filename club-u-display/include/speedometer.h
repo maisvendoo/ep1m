@@ -9,15 +9,12 @@ class Speedometer : public QLabel
 {
 
 public:
-
     Speedometer(QSize size, QString cfg_path, QWidget *parent = Q_NULLPTR);
-
 
     void setSpeed(int speed);
     void setSpeedLimit(int speedLimit);
     void setSpeedNextLimit(int speedNextLimit);
 
-    void setConfigDir(QString config_dir) { this->config_dir = config_dir; }
 
 private:
     QImage img_;
@@ -32,8 +29,6 @@ private:
     int old_num_speed_;
     int old_num_speedLimit_;
     int old_num_speedNextLimit_;
-
-    QString config_dir;
 
 
     void drawArc_(int num_speed, int num_speedLimit, int num_speedNextLimit);

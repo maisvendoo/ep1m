@@ -1,5 +1,7 @@
 #include "block-middle.h"
 
+
+
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
@@ -9,10 +11,10 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     , reverseInd_(Q_NULLPTR)
     , txtCurSpeed_(Q_NULLPTR)
     , txtCurSpeedLimit_(Q_NULLPTR)
-
     , oldSpeed_(0)
     , oldSpeedLimit_(0)
     , oldNextSpeedLimit_(0)
+    , forceBlinking_(false)
 {
     this->resize(_size);
 
@@ -34,6 +36,17 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     txtCurSpeedLimit_->setFonts(33, Qt::red);
     txtCurSpeedLimit_->move(135, 159);
     txtCurSpeedLimit_->setParams(3, 33);
+
+
+    // Моргание скорости, если подходим к ограничению скорости
+    connect(&timerForBlink, &QTimer::timeout, [&]()
+    {
+        if ((oldSpeedLimit_ - oldSpeed_ <= 3) || forceBlinking_)
+            txtCurSpeed_->setVisible(!txtCurSpeed_->isVisible());
+        else
+            txtCurSpeed_->setVisible(true);
+    });
+    timerForBlink.start(500);
 }
 
 
@@ -63,6 +76,7 @@ void MiddleBlock::setCurSpeedLimit(int curSpeedLimit)
         return;
 
     speedometer_->setSpeedLimit(curSpeedLimit);
+
     txtCurSpeedLimit_->setText(QString::number(curSpeedLimit));
 
     oldSpeedLimit_ = curSpeedLimit;
@@ -92,3 +106,23 @@ void MiddleBlock::setReverse(int reverse)
 {
     reverseInd_->setRevese(reverse);
 }
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void MiddleBlock::setSpeedLimitVisible(bool flag)
+{
+    txtCurSpeedLimit_->setVisible(flag);
+}
+
+
+
+void MiddleBlock::blinkingSpeed(bool flag)
+{
+    //txtCurSpeed_->setVisible(!txtCurSpeed_->isVisible());
+    forceBlinking_ = flag;
+}
+
+

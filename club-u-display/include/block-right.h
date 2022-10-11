@@ -4,6 +4,7 @@
 #include <QLabel>
 
 #include    "text-paint.h"
+#include    "image-widget.h"
 
 
 
@@ -17,6 +18,7 @@ public:
     void setPressureUR(double pressure);
     void setNumTrack(QString trackNum);
     void setAcceleration(double a);
+    void setIndZapretOtpuska(bool flag);
 
 
 private:
@@ -27,6 +29,8 @@ private:
     TextPaint   *txtPaintNumTrack_;
     TextPaint   *txtPaintAcceleration1_;
     TextPaint   *txtPaintAcceleration2_;
+
+    ImageWidget *indicationZapretOtpuska_;
 
     double oldPressureTM_;
     double oldPressureUR_;

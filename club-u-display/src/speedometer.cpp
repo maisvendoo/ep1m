@@ -4,9 +4,7 @@
 #include <QVector>
 #include <QFile>
 
-//#include "club-u-funcs.h"
 
-#include    <QDir>
 
 //------------------------------------------------------------------------------
 //
@@ -28,7 +26,8 @@ Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
     loadScalePontsCoolrds_(cfg_path + "speed-coordinatesOutScale.txt", speed_coordsOutScale);
-    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);    
+    loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
+
 }
 
 
@@ -95,13 +94,16 @@ void Speedometer::drawArc_(int num_speed, int num_speedLimit, int num_speedNextL
     paint.setRenderHint(QPainter::Antialiasing, true);
 
 
-    // ограничение скорости
-    paint.setPen(QPen( QColor(Qt::red), 9, Qt::SolidLine, Qt::RoundCap ));
-    paint.drawPoint(speed_coordsOutScale[num_speedLimit]);
+    if ((num_speedLimit_ >= 0) && (num_speedNextLimit >= 0))
+    {
+        // ограничение скорости
+        paint.setPen(QPen( QColor(Qt::red), 9, Qt::SolidLine, Qt::RoundCap ));
+        paint.drawPoint(speed_coordsOutScale[num_speedLimit]);
 
-    // следующее ограничение скорости
-    paint.setPen(QPen( QColor(Qt::yellow), 9, Qt::SolidLine, Qt::RoundCap ));
-    paint.drawPoint(speed_coordsOutScale[num_speedNextLimit]);
+        // следующее ограничение скорости
+        paint.setPen(QPen( QColor(Qt::yellow), 9, Qt::SolidLine, Qt::RoundCap ));
+        paint.drawPoint(speed_coordsOutScale[num_speedNextLimit]);
+    }
 
     // скорость
     paint.setPen(QPen( QColor(Qt::green), 9, Qt::SolidLine, Qt::RoundCap ));

@@ -4,7 +4,6 @@
 #include    <QTimer>
 
 #include    "display.h"
-#include    "structures-CLUB-U.h"
 
 class ALSN;
 class TopBlock;
@@ -35,9 +34,8 @@ private:
     RightBlock      *rightBlock_;
     BottomBlock     *bottomBlock_;
 
-    structs_CLUB_U_t structs_CLUB_U;
-
     std::vector<QString>    stations;
+    int stationsCount_;
 
 
     void loadStations();
