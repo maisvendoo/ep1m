@@ -17,6 +17,11 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , fansBustTimer(new Timer(2.5, true))
   , runOutTimer(new Timer(10.0, false))
   , fans_count(0)
+  , fan_switch_timeout(80.0)
+  , fan_bust_interval(2.5)
+  , fan_runout_time(10.0)
+  , I_fan_sw_min(480)
+  , I_fan_sw_max(510)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -79,7 +84,22 @@ void MSUD::stepDiscrete(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::load_config(CfgReader &cfg)
 {
+    QString secName = "Device";
 
+    cfg.getDouble(secName, "FanSwitchTimeout", fan_switch_timeout);
+
+    lowFreqTimer->setTimeout(fan_switch_timeout);
+    normalFreqTimer->setTimeout(fan_switch_timeout);
+
+    cfg.getDouble(secName, "FanBustInterval", fan_bust_interval);
+    fansBustTimer->setTimeout(fan_bust_interval);
+
+    cfg.getDouble(secName, "FanRunoutTime", fan_runout_time);
+    runOutTimer->setTimeout(fan_runout_time);
+
+    cfg.getDouble(secName, "FanSwitchCurrentMin", I_fan_sw_min);
+
+    cfg.getDouble(secName, "FanSwitchCurrentMax", I_fan_sw_max);
 }
 
 //------------------------------------------------------------------------------
@@ -170,13 +190,13 @@ void MSUD::motor_fans_control(double t, double dt)
 
     if (fans_run)
     {
-        if (msud_input.Ia[TRAC_MOTOR1] <= 480)
+        if (msud_input.Ia[TRAC_MOTOR1] <= I_fan_sw_min)
         {
             if (!lowFreqTimer->isStarted() && !is_low_freq)
                 lowFreqTimer->start();
         }
 
-        if (msud_input.Ia[TRAC_MOTOR1] >= 510)
+        if (msud_input.Ia[TRAC_MOTOR1] >= I_fan_sw_max)
         {
             if (!normalFreqTimer->isStarted() && !is_norm_freq)
                 normalFreqTimer->start();
