@@ -70,6 +70,9 @@ void EP1m::initialization()
     // Инициализация приборов управления тормозами
     initBrakeControl();
 
+    // Инициализация приборов торможения
+    initBrakeEquipment();
+
     // Инициализация озвучки
     initSounds();
 }
@@ -102,6 +105,9 @@ void EP1m::step(double t, double dt)
 
     // Работа приборов управления тормозами
     stepBrakeControl(t, dt);
+
+    // Работа приборов торможения
+    stepBrakeEquipment(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();

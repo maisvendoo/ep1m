@@ -22,6 +22,7 @@
 #include    "pressure-regulator.h"
 #include    "motor-fan.h"
 #include    "ubt367m.h"
+#include    "trolley-brake-mech.h"
 
 //---------------------------------------------------------------------
 //
@@ -127,7 +128,7 @@ private:
 
     LocoCrane *loco_crane;
 
-    BrakeCrane *brake_crane;
+    BrakeCrane *brake_crane;    
 
     enum
     {
@@ -150,6 +151,17 @@ private:
 
     /// Мотор-вентиляторы М11 - М13
     std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
+
+    /// Тормозные механизмы тележек
+    enum
+    {
+        TROLLEYS_NUM = 3,
+        FWD_TROLLEY = 0,
+        MID_TROLLEY = 1,
+        BWD_TROLLEY = 2
+    };
+
+    std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
 
     void initialization() override;
 
@@ -180,6 +192,9 @@ private:
     /// Инициализация приборов управления тормозами
     void initBrakeControl();
 
+    /// Инициализация приборов торможения
+    void initBrakeEquipment();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -202,6 +217,8 @@ private:
     void stepAuxMachines(double t, double dt);
 
     void stepBrakeControl(double t, double dt);
+
+    void stepBrakeEquipment(double t, double dt);
 
     void signalsOutput();
 
