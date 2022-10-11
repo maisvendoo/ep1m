@@ -34,7 +34,7 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     txtPaintTargetName_ = new TextPaint(QSize(77, 20), this);
     txtPaintTargetName_->move(this->width()-90, 2);
     txtPaintTargetName_->setFonts(13, Qt::green, 87);
-    txtPaintTargetName_->setParams(4, 18);
+    txtPaintTargetName_->setParams(4, 18, true);
 
 }
 

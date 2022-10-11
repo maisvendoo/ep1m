@@ -2,6 +2,8 @@
 #define MIDDLEBLOCK_H
 
 #include <QLabel>
+#include <QTimer>
+
 
 #include    "speedometer.h"
 #include    "reverse-indication.h"
@@ -19,6 +21,9 @@ public:
     void setNextSpeedLimit(int nextSpeedLimit);
     void setReverse(int reverse);
 
+    void setSpeedLimitVisible(bool flag);
+
+    void blinkingSpeed(bool flag);
 
 private:
     Speedometer *speedometer_;
@@ -29,6 +34,9 @@ private:
     int oldSpeed_;
     int oldSpeedLimit_;
     int oldNextSpeedLimit_;
+
+    QTimer timerForBlink;
+    bool forceBlinking_;
 
 
 };
