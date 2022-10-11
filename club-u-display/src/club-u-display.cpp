@@ -245,14 +245,14 @@ void ClubUDisplay::slotUpdateTimer()
     rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
     rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
     rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
+    rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
 
     bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
-
 
 }
 
 
 
 
-
+// Важная штука, чтобы в RRS работало.
 GET_DISPLAY(ClubUDisplay)
