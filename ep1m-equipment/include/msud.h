@@ -68,9 +68,21 @@ private:
 
     size_t fans_count;
 
+    double fan_switch_timeout;
+
+    double fan_bust_interval;
+
+    double fan_runout_time;
+
+    double I_fan_sw_min;
+
+    double I_fan_sw_max;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
+
+
 
 
      void ode_system(const state_vector_t &Y,

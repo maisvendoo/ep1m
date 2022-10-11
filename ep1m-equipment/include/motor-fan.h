@@ -46,6 +46,10 @@ private:
     /// Текущая частота питающего напряжения
     double f;
 
+    bool is_low_freq;
+
+    QString sndName;
+
     /// Номинальная частота питающего напряжения
     const double fn = 50.0;
 

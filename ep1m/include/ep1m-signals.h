@@ -11,6 +11,8 @@ enum
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
 
+    RUK_395 = 20,
+
     STRELKA_TM = 21,
     STRELKA_UR = 22,
     STRELKA_GR = 23,

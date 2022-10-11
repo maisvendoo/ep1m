@@ -21,6 +21,8 @@
 #include    "motor-compressor.h"
 #include    "pressure-regulator.h"
 #include    "motor-fan.h"
+#include    "ubt367m.h"
+#include    "trolley-brake-mech.h"
 
 //---------------------------------------------------------------------
 //
@@ -107,6 +109,8 @@ private:
     /// Преобразователь частоты и числа фаз (ПЧФ)
     FreqPhaseConverter *freq_phase_conv;
 
+    double  charge_press;
+
     Relay   *km7;
 
     Relay   *km8;
@@ -118,6 +122,13 @@ private:
     Relay   *km12;
 
     Relay   *km13;
+
+
+    BrakeLock *ubt;
+
+    LocoCrane *loco_crane;
+
+    BrakeCrane *brake_crane;    
 
     enum
     {
@@ -140,6 +151,17 @@ private:
 
     /// Мотор-вентиляторы М11 - М13
     std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
+
+    /// Тормозные механизмы тележек
+    enum
+    {
+        TROLLEYS_NUM = 3,
+        FWD_TROLLEY = 0,
+        MID_TROLLEY = 1,
+        BWD_TROLLEY = 2
+    };
+
+    std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
 
     void initialization() override;
 
@@ -167,6 +189,12 @@ private:
     /// Инициализация вспомогательных машин
     void initAuxMachines();
 
+    /// Инициализация приборов управления тормозами
+    void initBrakeControl();
+
+    /// Инициализация приборов торможения
+    void initBrakeEquipment();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -188,6 +216,10 @@ private:
 
     void stepAuxMachines(double t, double dt);
 
+    void stepBrakeControl(double t, double dt);
+
+    void stepBrakeEquipment(double t, double dt);
+
     void signalsOutput();
 
     /// Отладочная печать по F1
@@ -198,6 +230,10 @@ private:
     void keyProcess() override;
 
     void loadConfig(QString path) override;
+
+    void initBrakeDevices(double p0, double pTM, double PFL) override;
+
+    void load_brakes_config(QString path);
 };
 
 #endif // EP1M_H

@@ -25,6 +25,7 @@ public:
 
     void blinkingSpeed(bool flag);
 
+
 private:
     Speedometer *speedometer_;
     ReverseInd  *reverseInd_;

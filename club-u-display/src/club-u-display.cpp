@@ -125,6 +125,7 @@ void ClubUDisplay::initMainWindow()
     this->setPalette(QPalette(QColor(0, 0, 0)));
 
 
+
     //
     updateTimer = new QTimer;
     connect(updateTimer, &QTimer::timeout,
@@ -143,7 +144,6 @@ void ClubUDisplay::initBlocks_()
     // пусть к конфигам
     QString cfg_path = config_dir + getConfigPath("");
 
-
     // Фоновый виджет
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
@@ -155,7 +155,6 @@ void ClubUDisplay::initBlocks_()
     fon->move(0, 0);
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
-
 
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(98,350), fon);
@@ -178,7 +177,6 @@ void ClubUDisplay::initBlocks_()
     bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
     bottomBlock_->setTargetName("н1а");
-
 }
 
 

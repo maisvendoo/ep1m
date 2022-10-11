@@ -42,6 +42,10 @@ public:
 
     float getHandlePosition() const;
 
+    double getTracLevel() const { return static_cast<double>(trac_level) / 100.0; }
+
+    double getBrakeLevel() const { return static_cast<double>(brake_level) / 100.0; }
+
 private:
 
     /// Позиция, определяющая состояние схемы
