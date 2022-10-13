@@ -61,16 +61,16 @@ void MsudDisplay::init()
 void MsudDisplay::initDisplay_()
 {
     // Фоновый виджет
-    /*QLabel* */fon = new QLabel(this);
-    fon->setFrameShape(QLabel::NoFrame);
+    fon_ = new QLabel(this);
+    fon_->setFrameShape(QLabel::NoFrame);
     QPixmap pic;
     if (!pic.load(":/rcc/msud-fon")) { return; }
-    fon->setFixedSize(pic.size());
+    fon_->setFixedSize(pic.size());
     //fon->setGeometry(0,0, pic.size().width(), pic.size().height());
-    fon->setPixmap(pic);
-    fon->move(0, 0);
-    //fon->setStyleSheet("border: 1px solid red");
-    this->layout()->addWidget(fon);
+    fon_->setPixmap(pic);
+    fon_->move(0, 0);
+    //fon_->setStyleSheet("border: 1px solid red");
+    this->layout()->addWidget(fon_);
 
 
     int fooX = 34;
@@ -79,60 +79,59 @@ void MsudDisplay::initDisplay_()
     int fooH = 28;
     int fooDeltaX = 252;
 
-    createLab_(labMode_, QSize(fooW, fooH));
+    createLab_(labMode_, QSize(fooW, fooH), "yellow");
     labMode_->move(fooX, fooY);
 
 
-
-    createLab_(labControl_, QSize(fooW*2 + 20, fooH));
+    createLab_(labControl_, QSize(fooW*2 + 20, fooH), "red");
     labControl_->move(fooX + fooDeltaX, fooY);
 
     fooY  = 124;
 
-    createLab_(labPC1_, QSize(fooW, fooH));
+    createLab_(labPC1_, QSize(fooW, fooH), "yellow");
     labPC1_->move(fooX, fooY);
 
     fooX += fooDeltaX;
 
-    createLab_(labPC2_, QSize(fooW, fooH));
+    createLab_(labPC2_, QSize(fooW, fooH), "yellow");
     labPC2_->move(fooX, fooY);
 
     fooX += fooDeltaX;
 
-    createLab_(labPC3_, QSize(fooW, fooH));
+    createLab_(labPC3_, QSize(fooW, fooH), "red");
     labPC3_->move(fooX, fooY);
 
 
     fooY = 188;
 
     // Тяга
-    sbTyaga_ = new StatusBar(QSize(252, 28), fon);
+    sbTyaga_ = new StatusBar(QSize(252, 37), fon_);
     sbTyaga_->move(38, fooY);
 
     // Ток возбуждения
-    sbCurrent_ = new StatusBar(QSize(252, 28), fon);
+    sbCurrent_ = new StatusBar(QSize(252, 37), fon_);
     sbCurrent_->move(417, fooY);
 
-    createLab_(labTyaga_, QSize(64, fooH), Qt::AlignRight);
+    createLab_(labTyaga_, QSize(64, fooH), "black", Qt::AlignRight);
     labTyaga_->move(303, fooY);
 
-    createLab_(labCurrent_, QSize(80, fooH), Qt::AlignRight);
+    createLab_(labCurrent_, QSize(80, fooH), "black", Qt::AlignRight);
     labCurrent_->move(683, fooY);
 
 
 
     fooY = 394;
 
-    createLab_(labV1_, QSize(67, fooH), Qt::AlignRight);
+    createLab_(labV1_, QSize(67, fooH), "yellow", Qt::AlignRight);
     labV1_->move(110, fooY);
 
-    createLab_(labV2_, QSize(66, fooH), Qt::AlignRight);
+    createLab_(labV2_, QSize(66, fooH), "yellow", Qt::AlignRight);
     labV2_->move(255, fooY);
 
-    createLab_(labI1_, QSize(85, fooH), Qt::AlignRight);
+    createLab_(labI1_, QSize(85, fooH), "yellow", Qt::AlignRight);
     labI1_->move(475, fooY);
 
-    createLab_(labI2_, QSize(85, fooH), Qt::AlignRight);
+    createLab_(labI2_, QSize(85, fooH), "yellow", Qt::AlignRight);
     labI2_->move(625, fooY);
 
 
@@ -141,38 +140,42 @@ void MsudDisplay::initDisplay_()
     fooY = 449;
 
     // Ток ЭПТ
-    sbTyaga_ = new StatusBar(QSize(253, 28), fon);
-    sbTyaga_->move(432, fooY);
+    sbCurrentEPT_ = new StatusBar(QSize(253, 37), fon_);
+    sbCurrentEPT_->move(432, fooY);
 
-    createLab_(labCurrentEPT_, QSize(45, fooH), Qt::AlignRight);
+    createLab_(labCurrentEPT_, QSize(45, fooH), "yellow", Qt::AlignRight);
     labCurrentEPT_->move(698, fooY);
 
     fooY = 513;
 
     // Напряжение ЭПТ
-    sbCurrent_ = new StatusBar(QSize(253, 28), fon);
-    sbCurrent_->move(432, fooY);
+    sbVoltageEPT_ = new StatusBar(QSize(253, 37), fon_);
+    sbVoltageEPT_->move(432, fooY);
 
-    createLab_(labVoltageEPT_, QSize(62, fooH), Qt::AlignRight);
+    createLab_(labVoltageEPT_, QSize(62, fooH), "yellow", Qt::AlignRight);
     labVoltageEPT_->move(698, fooY);
 }
 
 
 
-void MsudDisplay::createLab_(QLabel* &lab, QSize size, Qt::Alignment align)
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void MsudDisplay::createLab_(QLabel* &lab, QSize size, QString color, Qt::Alignment align)
 {
-    lab = new QLabel("0", fon);
+    lab = new QLabel("0", fon_);
     lab->resize(size);
-
     lab->setFont(QFont("Arial", 18, 87));
     lab->setStyleSheet("border: 1px solid red;"
-                        "color: white;");
-
+                        "color: " + color + ";");
     lab->setAlignment(align);
 }
 
 
 
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 void MsudDisplay::slotUpdateTimer()
 {
 
@@ -189,6 +192,12 @@ void MsudDisplay::slotUpdateTimer()
     labI2_->setText("410");
     labCurrentEPT_->setText("0");
     labVoltageEPT_->setText("3");
+
+
+    sbTyaga_->setVal(50);
+    sbCurrent_->setVal(40);
+    sbCurrentEPT_->setVal(20);
+    sbVoltageEPT_->setVal(10);
 
 
 }

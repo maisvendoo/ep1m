@@ -20,7 +20,7 @@ public:
 
 
 private:
-    QLabel* fon;
+    QLabel* fon_;
 
     QLabel* labMode_;
     QLabel* labControl_;
@@ -51,6 +51,7 @@ private:
     void initDisplay_();
 
     void createLab_(QLabel* &lab, QSize size,
+                    QString color,
                     Qt::Alignment align = Qt::AlignCenter);
 
 

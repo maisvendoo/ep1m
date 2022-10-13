@@ -10,13 +10,13 @@ class StatusBar : public QLabel
 public:
     StatusBar(QSize _size, QWidget *parent = Q_NULLPTR);
 
+    void setVal(double val);
 
 private:
     QImage img_;
 
-    QFont font_;
 
-    void drawBar_();
+    void drawBar_(double val);
 
 };
 
