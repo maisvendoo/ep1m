@@ -132,6 +132,28 @@ private:
 
     AutoTrainStop *epk;
 
+    /// Запасный резервуар
+    Reservoir *aux_res;
+
+    /// Воздухораспределитель
+    AirDistributor *air_dist;
+
+    /// Электровоздухораспределитель
+    ElectroAirDistributor *electro_air_dist;
+
+    PneumoReley *rd4;
+
+    PneumoReley *rd1;
+    PneumoReley *rd2;
+    PneumoReley *rd3;
+
+    SwitchingValve *kp1;
+    SwitchingValve *kp2;
+    SwitchingValve *kp5;
+
+    PneumoSplitter *ps1;
+    PneumoSplitter *ps2;
+
     enum
     {
         PANT_NUMBER = 2,
