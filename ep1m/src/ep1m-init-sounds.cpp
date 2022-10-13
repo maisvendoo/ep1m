@@ -22,6 +22,14 @@ void EP1m::initSounds()
     tumblers[SWITCH_REVERS_BWD].setOnSoundName("");
     tumblers[SWITCH_REVERS_BWD].setOffSoundName("");
 
+    tumblers[BUTTON_RB].setOnSoundName("");
+    tumblers[BUTTON_RB].setOffSoundName("");
+    tumblers[BUTTON_RBS].setOnSoundName("");
+    tumblers[BUTTON_RBS].setOffSoundName("");
+
+    tumblers[EPK_KEY].setOnSoundName("EPK_Key");
+    tumblers[EPK_KEY].setOffSoundName("EPK_Key");
+
     connect(km5, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     connect(safety_valve, &ElectroValve::soundPlay, this, &EP1m::soundPlay);
@@ -63,4 +71,9 @@ void EP1m::initSounds()
     connect(loco_crane, &LocoCrane::soundPlay, this, &EP1m::soundPlay);
     connect(loco_crane, &LocoCrane::soundStop, this, &EP1m::soundStop);
     connect(loco_crane, &LocoCrane::soundSetVolume, this, &EP1m::soundSetVolume);
+
+    connect(epk, &AutoTrainStop::soundPlay, this, &EP1m::soundPlay);
+    connect(epk, &AutoTrainStop::soundStop, this, &EP1m::soundStop);
+
+    connect(klub_BEL, &KLUB::soundPlay, this, &EP1m::soundPlay);
 }

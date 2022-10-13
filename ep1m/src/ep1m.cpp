@@ -28,6 +28,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , charge_press(0.5)
 {
     Uks = 25000.0;
+    alsn_info.code_alsn = KLUB_ALSN_GREEN;
 }
 
 //------------------------------------------------------------------------------
@@ -73,6 +74,9 @@ void EP1m::initialization()
     // Инициализация приборов торможения
     initBrakeEquipment();
 
+    // Инициализация приборов безопасности
+    initSafetyDevices();
+
     // Инициализация озвучки
     initSounds();
 }
@@ -108,6 +112,9 @@ void EP1m::step(double t, double dt)
 
     // Работа приборов торможения
     stepBrakeEquipment(t, dt);
+
+    // Работа приборов безопасности
+    stepSafetyDevices(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();

@@ -25,6 +25,7 @@
 #include    "trolley-brake-mech.h"
 #include    "ept-converter.h"
 #include    "ept-pass-control.h"
+#include    "klub.h"
 
 //---------------------------------------------------------------------
 //
@@ -159,6 +160,9 @@ private:
     EPTConverter *ept_converter;
     EPTPassControl *ept_pass_control;
 
+    /// Блок электронный локомотивный (БЭЛ)
+    KLUB    *klub_BEL;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -227,6 +231,9 @@ private:
     /// Инициализация ЭПТ
     void initEPT();
 
+    /// Инициализация устройств безопасности
+    void initSafetyDevices();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -253,6 +260,8 @@ private:
     void stepBrakeEquipment(double t, double dt);
 
     void stepEPT(double t, double dt);
+
+    void stepSafetyDevices(double t, double dt);
 
     void signalsOutput();
 

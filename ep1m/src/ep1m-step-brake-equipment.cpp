@@ -8,6 +8,7 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     epk->setBrakepipePressure(pTM);
     epk->setFeedlinePressure(main_res->getPressure());
     epk->setControl(keys);
+    epk->powerOn(klub_BEL->getEPKstate());
     epk->step(t, dt);
 
     Q_r[1] = brake_mech[FWD_TROLLEY]->getBrakeTorque();
@@ -35,7 +36,7 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     air_dist->setBrakeCylinderPressure(electro_air_dist->getPbc_out());
     air_dist->setAirSupplyPressure(electro_air_dist->getSupplyReservoirPressure());
     air_dist->setBrakepipePressure(pTM);
-    auxRate = air_dist->getAuxRate();
+    auxRate = air_dist->getAuxRate() + epk->getEmergencyBrakeRate();
     air_dist->step(t, dt);
 
     electro_air_dist->setControlLine(ept_control[0]);

@@ -49,7 +49,7 @@ void EP1m::initBrakeEquipment()
     rd3->read_config("rd304");
 
     rd4 = new PneumoReley();
-    rd4->read_config("rd304");
+    rd4->read_custom_config(config_dir + QDir::separator() + "rd4");
 
     kp1 = new SwitchingValve();
     kp1->read_config("zpk");

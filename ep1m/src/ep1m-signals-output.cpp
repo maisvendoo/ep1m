@@ -57,14 +57,15 @@ void EP1m::signalsOutput()
 
     analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = pTM;
     analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = brake_crane->getEqReservoirPressure();
-    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(velocity * 3.6);
-    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = 140.0f;
-    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = 100.0f;
-    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(getRailwayCoord() / 1000.0);
-    analogSignal[SIGNAL_KLUB_U_ALSN] = 4;
+    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
+    analogSignal[SIGNAL_KLUB_U_ALSN] = alsn_info.code_alsn;
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
+    analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
 
     analogSignal[LAMP_EPT_O] = ept_pass_control->stateReleaseLamp();
     analogSignal[LAMP_EPT_P] = ept_pass_control->stateHoldLamp();
@@ -72,4 +73,7 @@ void EP1m::signalsOutput()
 
     analogSignal[STRELKA_EPT_AMP] = ept_current[0] / 10.0;
     analogSignal[STRELKA_EPT_VOLT] = ept_converter->getU_out() / 150.0;
+
+    analogSignal[RB1] = TO_FLOAT(tumblers[BUTTON_RB].getState());
+    analogSignal[RBS] = TO_FLOAT(tumblers[BUTTON_RBS].getState());
 }

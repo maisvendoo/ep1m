@@ -41,4 +41,25 @@ void EP1m::keyProcess()
         else
             tumblers[TUMBLER_BS_002].reset();
     }
+
+    // РБ
+    if (getKeyState(KEY_M))
+        tumblers[BUTTON_RB].set();
+    else
+        tumblers[BUTTON_RB].reset();
+
+    // РБС
+    if (getKeyState(KEY_Z))
+        tumblers[BUTTON_RBS].set();
+    else
+        tumblers[BUTTON_RBS].reset();
+
+    // ЭПК
+    if (getKeyState(KEY_N))
+    {
+        if (isShift())
+            tumblers[EPK_KEY].set();
+        else
+            tumblers[EPK_KEY].reset();
+    }
 }

@@ -20,7 +20,7 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     , oldPressureTM_(0.0)
     , oldPressureUR_(0.0)
     , oldTrackNum_("")
-    , oldAcceleration_(0.0)
+    , oldAcceleration_(-1.0)
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
