@@ -8,7 +8,7 @@ void EP1m::stepDebugPrint(double t, double dt)
     Q_UNUSED(t)
     Q_UNUSED(dt)
 
-    DebugMsg = QString("Пульт: %1 Ucc: %2 ВВК: %3 Uсн: %4 Реверс: %5 ГВ: %6 УК: %7 Возвр.: %8 Ток: %9 ТЦ: %10")
+    DebugMsg = QString("Пульт: %1 Ucc: %2 ВВК: %3 Uсн: %4 Реверс: %5 ГВ: %6 УК: %7 Возвр.: %8 Ток: %9 ТЦ1: %10 ТЦ2: %11 ТЦ3: %12")
             .arg(static_cast<int>(tumblers_panel->getUnlockKeyState()), 1)
             .arg(static_cast<float>(Ucc), 5, 'f', 2)
             .arg(static_cast<int>(safety_valve->getState()), 1)
@@ -18,5 +18,7 @@ void EP1m::stepDebugPrint(double t, double dt)
             .arg(static_cast<int>(getHoldingCoilState()), 1)
             .arg(static_cast<int>(return_GV), 1)
             .arg(static_cast<double>(msud_input.Ia[TRAC_MOTOR1]), 6, 'f', 1)
-            .arg(brake_mech[FWD_TROLLEY]->getBrakeCylinderPressure(), 4, 'f', 2);
+            .arg(brake_mech[FWD_TROLLEY]->getBrakeCylinderPressure(), 4, 'f', 2)
+            .arg(brake_mech[MID_TROLLEY]->getBrakeCylinderPressure(), 4, 'f', 2)
+            .arg(brake_mech[BWD_TROLLEY]->getBrakeCylinderPressure(), 4, 'f', 2);
 }

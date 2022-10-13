@@ -29,7 +29,38 @@ void EP1m::stepBrakeEquipment(double t, double dt)
         brake_mech[i]->step(t, dt);
     }
 
-    kp5->setInputFlow1(0.0);
+    aux_res->setAirFlow(electro_air_dist->getOutputSupplyReservoirFlow());
+    aux_res->step(t, dt);
+
+    air_dist->setBrakeCylinderPressure(electro_air_dist->getPbc_out());
+    air_dist->setAirSupplyPressure(electro_air_dist->getSupplyReservoirPressure());
+    air_dist->setBrakepipePressure(pTM);
+    auxRate = air_dist->getAuxRate();
+    air_dist->step(t, dt);
+
+    electro_air_dist->setControlLine(0.0);//ept_control[0]);
+    electro_air_dist->setQbc_in(air_dist->getBrakeCylinderAirFlow());
+    electro_air_dist->setPbc_in(rd4->getWorkPressure());
+    electro_air_dist->setInputSupplyReservoirFlow(air_dist->getAirSupplyFlow());
+    electro_air_dist->setSupplyReservoirPressure(aux_res->getPressure());
+    electro_air_dist->step(t, dt);
+
+    rd4->setPipelinePressure(main_res->getPressure());
+    rd4->setWorkAirFlow(electro_air_dist->getQbc_out());
+    rd4->setBrakeCylPressure(kp1->getPressure2());
+    rd4->step(t, dt);
+
+    kp1->setInputFlow1(0.0);
+    kp1->setInputFlow2(rd4->getBrakeCylAirFlow());
+    kp1->setOutputPressure(kp2->getPressure2());
+    kp1->step(t, dt);
+
+    kp2->setInputFlow1(0.0);
+    kp2->setInputFlow2(kp1->getOutputFlow());
+    kp2->setOutputPressure(kp5->getPressure1());
+    kp2->step(t, dt);
+
+    kp5->setInputFlow1(kp2->getOutputFlow());
     kp5->setInputFlow2(loco_crane->getBrakeCylinderFlow());
     kp5->setOutputPressure(ps1->getP_in());
     kp5->step(t, dt);

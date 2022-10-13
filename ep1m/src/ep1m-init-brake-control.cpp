@@ -17,6 +17,9 @@ void EP1m::initBrakeDevices(double p0, double pTM, double pFL)
 
     epk->init(pTM, pFL);
 
+    aux_res->init(pTM, pFL);
+    aux_res->setY(0, charge_press);
+
     load_brakes_config(config_dir + QDir::separator() + "brakes-init.xml");
 }
 

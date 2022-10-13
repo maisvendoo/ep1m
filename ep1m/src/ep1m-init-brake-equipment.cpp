@@ -59,4 +59,14 @@ void EP1m::initBrakeEquipment()
 
     kp5 = new SwitchingValve();
     kp5->read_config("zpk");
+
+    aux_res = new Reservoir(0.055);
+
+    QString air_dist_path = QString(fs.combinePath(fs.getModulesDir(), "vr242").c_str());
+    air_dist = loadAirDistributor(air_dist_path);
+    air_dist->read_config("vr242");
+
+    QString electro_air_dist_path = QString(fs.combinePath(fs.getModulesDir(), "evr305").c_str());
+    electro_air_dist = loadElectroAirDistributor(electro_air_dist_path);
+    electro_air_dist->read_config("evr305");
 }
