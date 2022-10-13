@@ -38,7 +38,7 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     auxRate = air_dist->getAuxRate();
     air_dist->step(t, dt);
 
-    electro_air_dist->setControlLine(0.0);//ept_control[0]);
+    electro_air_dist->setControlLine(ept_control[0]);
     electro_air_dist->setQbc_in(air_dist->getBrakeCylinderAirFlow());
     electro_air_dist->setPbc_in(rd4->getWorkPressure());
     electro_air_dist->setInputSupplyReservoirFlow(air_dist->getAirSupplyFlow());
@@ -89,4 +89,6 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     rd3->setWorkAirFlow(ps2->getQ_out2());
     rd3->setBrakeCylPressure(brake_mech[BWD_TROLLEY]->getBrakeCylinderPressure());
     rd3->step(t, dt);
+
+    stepEPT(t, dt);
 }

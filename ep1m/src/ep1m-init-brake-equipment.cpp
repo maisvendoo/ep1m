@@ -69,4 +69,6 @@ void EP1m::initBrakeEquipment()
     QString electro_air_dist_path = QString(fs.combinePath(fs.getModulesDir(), "evr305").c_str());
     electro_air_dist = loadElectroAirDistributor(electro_air_dist_path);
     electro_air_dist->read_config("evr305");
+
+    initEPT();
 }

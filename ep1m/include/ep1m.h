@@ -23,6 +23,8 @@
 #include    "motor-fan.h"
 #include    "ubt367m.h"
 #include    "trolley-brake-mech.h"
+#include    "ept-converter.h"
+#include    "ept-pass-control.h"
 
 //---------------------------------------------------------------------
 //
@@ -154,6 +156,9 @@ private:
     PneumoSplitter *ps1;
     PneumoSplitter *ps2;
 
+    EPTConverter *ept_converter;
+    EPTPassControl *ept_pass_control;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -219,6 +224,9 @@ private:
     /// Инициализация приборов торможения
     void initBrakeEquipment();
 
+    /// Инициализация ЭПТ
+    void initEPT();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -243,6 +251,8 @@ private:
     void stepBrakeControl(double t, double dt);
 
     void stepBrakeEquipment(double t, double dt);
+
+    void stepEPT(double t, double dt);
 
     void signalsOutput();
 

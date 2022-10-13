@@ -11,6 +11,8 @@ enum
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
 
+    STRELKA_EPT_AMP = 10,
+
     RUK_395 = 20,
 
     STRELKA_TM = 21,
@@ -32,6 +34,10 @@ enum
 
     LAMP_GV = 42,
 
+    LAMP_EPT_O = 44,
+    LAMP_EPT_P = 45,
+    LAMP_EPT_T = 46,
+
     LAMP_MK1 = 50,
     LAMP_MK2 = 51,
     LAMP_MV1 = 52,
@@ -45,6 +51,8 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
 
     STRELKA_U_KS = 98, // Напряжение КС
+
+    STRELKA_EPT_VOLT = 99,
 
     SIGNAL_TUMBLER_EPT = 100, // ЭПТ
 

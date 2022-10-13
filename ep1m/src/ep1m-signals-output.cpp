@@ -65,4 +65,11 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
+
+    analogSignal[LAMP_EPT_O] = ept_pass_control->stateReleaseLamp();
+    analogSignal[LAMP_EPT_P] = ept_pass_control->stateHoldLamp();
+    analogSignal[LAMP_EPT_T] = ept_pass_control->stateBrakeLamp();
+
+    analogSignal[STRELKA_EPT_AMP] = ept_current[0] / 10.0;
+    analogSignal[STRELKA_EPT_VOLT] = ept_converter->getU_out() / 150.0;
 }
