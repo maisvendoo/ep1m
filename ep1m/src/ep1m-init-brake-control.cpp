@@ -1,6 +1,7 @@
 #include    "ep1m.h"
 
 #include    "filesystem.h"
+#include    <QDir>
 
 //------------------------------------------------------------------------------
 //
@@ -35,5 +36,5 @@ void EP1m::initBrakeControl()
 
     QString loco_crane_cfg = QString(fs.combinePath(fs.getModulesDir(), "kvt254").c_str());
     loco_crane = loadLocoCrane(loco_crane_cfg);
-    loco_crane->read_config("kvt254");
+    loco_crane->read_custom_config(config_dir + QDir::separator() + "kvt215");
 }

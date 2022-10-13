@@ -18,7 +18,7 @@ void EP1m::stepBrakeControl(double t, double dt)
     brake_crane->step(t, dt);
 
     loco_crane->setFeedlinePressure(ubt->getCraneFLpressure());
-    loco_crane->setBrakeCylinderPressure(0.0);
+    loco_crane->setBrakeCylinderPressure(kp5->getPressure2());
     loco_crane->setAirDistributorFlow(0.0);
     loco_crane->setControl(keys);
     loco_crane->step(t, dt);
