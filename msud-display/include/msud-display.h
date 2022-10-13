@@ -5,7 +5,6 @@
 
 #include    "display.h"
 
-#include    "text-paint.h"
 #include    "status-bar.h"
 
 
@@ -51,8 +50,8 @@ private:
 
     void initDisplay_();
 
-    void createLab(QLabel* &lab, QSize size,
-                   Qt::Alignment align = Qt::AlignCenter);
+    void createLab_(QLabel* &lab, QSize size,
+                    Qt::Alignment align = Qt::AlignCenter);
 
 
 private slots:
