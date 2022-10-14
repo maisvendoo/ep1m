@@ -40,6 +40,10 @@ private:
     QLabel* labI2_;
 
 
+    QLabel* labFieldWeak1_;
+    QLabel* labFieldWeak2_;
+    QLabel* labFieldWeak3_;
+
     StatusBar* sbCurrentEPT_;
     StatusBar* sbVoltageEPT_;
     QLabel* labCurrentEPT_;

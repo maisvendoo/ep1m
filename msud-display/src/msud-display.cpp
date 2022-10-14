@@ -138,6 +138,20 @@ void MsudDisplay::initDisplay_()
     labI2_->move(625, fooY);
 
 
+    // Ослабление поля
+    fooY = 492;
+    createLab_(labFieldWeak1_, QSize(44, fooH + 4), "white");
+    labFieldWeak1_->move(124, fooY);
+    labFieldWeak1_->setText("1");
+    createLab_(labFieldWeak2_, QSize(44, fooH + 4), "white");
+    labFieldWeak2_->move(176, fooY);
+    labFieldWeak2_->setText("2");
+    createLab_(labFieldWeak3_, QSize(44, fooH + 4), "white");
+    labFieldWeak3_->move(227, fooY);
+    labFieldWeak3_->setText("3");
+
+
+
 
 
     fooY = 449;
@@ -205,6 +219,14 @@ void MsudDisplay::slotUpdateTimer()
     sbCurrent_->setVal(40);
     sbCurrentEPT_->setVal(20);
     sbVoltageEPT_->setVal(10);
+
+
+
+    labFieldWeak2_->setStyleSheet("color: white;"
+                                  "background: none;");
+    labFieldWeak3_->setStyleSheet("color: white;"
+                                  "background: red;");
+
 
 
 
