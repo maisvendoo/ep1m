@@ -26,7 +26,10 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
 
     connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer, Qt::QueuedConnection);
     updateTimer_.setInterval(1000);
-    updateTimer_.start(0);
+    updateTimer_.start();
+
+
+    updateTimer_.start(100);
 
 }
 
@@ -154,6 +157,14 @@ void MsudDisplay::initDisplay_()
 
     createLab_(labVoltageEPT_, QSize(62, fooH), "yellow", Qt::AlignRight);
     labVoltageEPT_->move(698, fooY);
+
+
+    //
+    manArrV_ = new ManometerArrow(QSize(310, 113), fon_);
+    manArrV_->move(55, 280);
+
+    manArrI_ = new ManometerArrow(QSize(310, 113), fon_);
+    manArrI_->move(434, 280);
 }
 
 
@@ -199,6 +210,11 @@ void MsudDisplay::slotUpdateTimer()
     sbCurrentEPT_->setVal(20);
     sbVoltageEPT_->setVal(10);
 
+
+    if (val1_ > 160)
+        val1_ = 0;
+    manArrV_->setVal(++val1_);
+    manArrI_->setVal(++val1_);
 
 }
 
