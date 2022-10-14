@@ -15,7 +15,7 @@ public:
     MsudDisplay(QWidget *parent = Q_NULLPTR,
                 Qt::WindowFlags f = Qt::WindowFlags());
 
-    ~MsudDisplay();
+    ~MsudDisplay() override;
 
     void init() override;
 
@@ -50,6 +50,7 @@ private:
     ManometerArrow* manArrI_;
 
     int val1_ = 0;
+    int val2_ = 0;
 
 
     QTimer updateTimer_;

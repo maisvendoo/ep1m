@@ -8,20 +8,25 @@
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-ManometerArrow::ManometerArrow(QSize _size, QWidget *parent)
+ManometerArrow::ManometerArrow(QSize _size, int maxValScale, QWidget *parent)
     : QLabel(parent)
+    , maxValScale_(maxValScale)
+    , oldVal1_line_(-1)
+    , oldVal2_arrow_(-1)
 {
     this->resize(_size);
     this->setStyleSheet("border: 1px solid red");
 
-    w_2_ = this->width()/2;
-    h_2_ = this->height()/2;
+
+    // 416 - диаметр круга
+    QRect rect(-53, 10,
+               416, 416 + 10);
+
+    w_2_ = rect.x() + rect.width()/2.0;
+    h_2_ = rect.y() + rect.height()/2.0;
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
-
-    drawArrow_(0);
-
 }
 
 
@@ -29,9 +34,23 @@ ManometerArrow::ManometerArrow(QSize _size, QWidget *parent)
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void ManometerArrow::setVal(double val)
+void ManometerArrow::setVals(int val1_line, int val2_arrow)
 {
-    drawArrow_(val);
+    if (val1_line < 0) val1_line = 0;
+    if (val2_arrow < 0) val2_arrow = 0;
+    if (val1_line > maxValScale_) val1_line = maxValScale_;
+    if (val2_arrow > maxValScale_) val2_arrow = maxValScale_;
+
+
+    if ((oldVal1_line_ == val1_line) && (oldVal2_arrow_ == val2_arrow))
+        return;
+
+
+
+    drawArrow_(val1_line, val2_arrow);
+
+    oldVal1_line_ = val1_line;
+    oldVal2_arrow_ = val2_arrow;
 }
 
 
@@ -39,7 +58,7 @@ void ManometerArrow::setVal(double val)
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void ManometerArrow::drawArrow_(double manometerVal)
+void ManometerArrow::drawArrow_(int val1_line, int val2_arrow)
 {
     img_.fill(Qt::transparent);
     QPixmap pix = QPixmap::fromImage(img_);
@@ -47,66 +66,47 @@ void ManometerArrow::drawArrow_(double manometerVal)
     paint.setRenderHint(QPainter::Antialiasing, true);
 
 
-
-    int maxValScale = 160;
-    int angleArcEnd = 46;
-    int arcSplitLength = 272;
+    double angleArcEnd = 46.7;
+    double arcSplitLength = 273.3;
 
 
-
-    double fooAngle2 = (360.0 - angleArcEnd) - (maxValScale - manometerVal)*(360.0-arcSplitLength)/maxValScale;
-    double angle = qDegreesToRadians(fooAngle2);
+    double fooAngleDegrees1 = (360.0 - angleArcEnd) - (maxValScale_ - val1_line)*(360.0-arcSplitLength)/maxValScale_;
+    double angle1 = qDegreesToRadians(fooAngleDegrees1);
+    double fooAngleDegrees2 = (360.0 - angleArcEnd) - (maxValScale_ - val2_arrow)*(360.0-arcSplitLength)/maxValScale_;
+    double angle2 = qDegreesToRadians(fooAngleDegrees2);
     double fooAngle = qDegreesToRadians(90.0);
 
 
-
-    paint.setPen(QPen(Qt::green, 1, Qt::SolidLine));
-    paint.setBrush(Qt::black);
-
-
-
-    // 416 - диаметр круга
-    QRectF rect(-53, 10,
-                416, 416 + 10);
+    double r = 205.0;   // радиус (длина) стрелки
+    double ht = 15.0;   // высота треугольника стрелки
+    double bt = 5.0;    // длина основания треугольника
 
 
-    paint.drawArc(rect,
-                  angleArcEnd*16,
-                  (360.0 - arcSplitLength)*16);
-
-
-    w_2_ = rect.x() + rect.width()/2.0;
-    h_2_ = rect.y() + rect.height()/2.0;
-    double r_ = 205.0;
-
-
-
-
-
-    // линия стрелки
-    paint.drawLine(w_2_ + (r_ - 10)*cos(angle),
-                   h_2_ + (r_ - 10)*sin(angle),
+    //
+    paint.setPen(QPen(Qt::red, 3, Qt::SolidLine));
+    paint.drawLine(w_2_ + (r)*cos(angle1),
+                   h_2_ + (r)*sin(angle1),
                    w_2_,
                    h_2_);
 
 
 
-    double ht = 15.0; // высота треугольника стрелки
-    double bt = 5.0; // длина основания треугольника
+    //
+    paint.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+    paint.setBrush(Qt::black);
+    paint.drawLine(w_2_ + (r - 10)*cos(angle2),
+                   h_2_ + (r - 10)*sin(angle2),
+                   w_2_,
+                   h_2_);
+
     QPolygonF triangle;
-    triangle << QPointF( w_2_ + (r_)*cos(angle),
-                         h_2_ + (r_)*sin(angle) )
-             << QPointF( w_2_ + (r_ - ht)*cos(angle) + (bt)*cos(angle+fooAngle),
-                         h_2_ + (r_ - ht)*sin(angle) + (bt)*sin(angle+fooAngle) )
-             << QPointF( w_2_ + (r_ - ht)*cos(angle) + (bt)*cos(angle-fooAngle),
-                         h_2_ + (r_ - ht)*sin(angle) + (bt)*sin(angle-fooAngle) );
-
-    // треугольник стрелки
+    triangle << QPointF( w_2_ + (r)*cos(angle2),
+                         h_2_ + (r)*sin(angle2) )
+             << QPointF( w_2_ + (r - ht)*cos(angle2) + bt*cos(angle2+fooAngle),
+                         h_2_ + (r - ht)*sin(angle2) + bt*sin(angle2+fooAngle) )
+             << QPointF( w_2_ + (r - ht)*cos(angle2) + bt*cos(angle2-fooAngle),
+                         h_2_ + (r - ht)*sin(angle2) + bt*sin(angle2-fooAngle) );
     paint.drawPolygon(triangle);
-
-
-
-
 
 
 

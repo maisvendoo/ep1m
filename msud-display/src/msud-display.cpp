@@ -160,10 +160,10 @@ void MsudDisplay::initDisplay_()
 
 
     //
-    manArrV_ = new ManometerArrow(QSize(310, 113), fon_);
+    manArrV_ = new ManometerArrow(QSize(310, 113), 160, fon_);
     manArrV_->move(55, 280);
 
-    manArrI_ = new ManometerArrow(QSize(310, 113), fon_);
+    manArrI_ = new ManometerArrow(QSize(310, 113), 1600, fon_);
     manArrI_->move(434, 280);
 }
 
@@ -197,10 +197,6 @@ void MsudDisplay::slotUpdateTimer()
     labPC3_->setText("собрана");
     labTyaga_->setText("5");
     labCurrent_->setText("0");
-    labV1_->setText("0");
-    labV2_->setText("140");
-    labI1_->setText("0");
-    labI2_->setText("410");
     labCurrentEPT_->setText("0");
     labVoltageEPT_->setText("3");
 
@@ -211,10 +207,19 @@ void MsudDisplay::slotUpdateTimer()
     sbVoltageEPT_->setVal(10);
 
 
-    if (val1_ > 160)
+    if (val1_ > 1600)
         val1_ = 0;
-    manArrV_->setVal(++val1_);
-    manArrI_->setVal(++val1_);
+    if (val2_ > 1600)
+        val2_ = 0;
+    val2_ += 10;
+
+    manArrV_->setVals(++val1_, val2_);
+    labV1_->setText(QString::number(val1_));
+    labV2_->setText(QString::number(val2_));
+    manArrI_->setVals(++val1_, val2_);
+    labI1_->setText(QString::number(val1_));
+    labI2_->setText(QString::number(val2_));
+
 
 }
 

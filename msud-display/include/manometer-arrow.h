@@ -5,12 +5,13 @@
 #include <QLabel>
 
 
+
 class ManometerArrow : public QLabel
 {
 public:
-    ManometerArrow(QSize _size, QWidget* parent = Q_NULLPTR);
+    ManometerArrow(QSize _size, int maxValScale, QWidget* parent = Q_NULLPTR);
 
-    void setVal(double val);
+    void setVals(int val1_line, int val2_arrow);
 
 
 private:
@@ -19,7 +20,13 @@ private:
 
     QImage img_;
 
-    void drawArrow_(double manometerVal);
+    int maxValScale_;
+
+    int oldVal1_line_;
+    int oldVal2_arrow_;
+
+
+    void drawArrow_(int val1_line, int val2_arrow);
 
 
 };
