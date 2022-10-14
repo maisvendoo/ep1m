@@ -204,5 +204,88 @@
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
+	
+	<!-- Щелчек рукоятки крана 395 -->
+	<Sound>
+		<Name>Kran_395_ruk</Name>
+		<Path>395-chelk.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Щелчек комбинированного крана -->
+	<Sound>
+		<Name>Komb_kran</Name>
+		<Path>komb-kran.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Щелчек комбинированного крана -->
+	<Sound>
+		<Name>UBT_367_ruk</Name>
+		<Path>ubt-367-ruk.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<Sound>
+		<Name>KRM395_vpusk</Name>
+		<Path>395_vpusk.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
+
+	<Sound>
+		<Name>KRM395_vipusk</Name>
+		<Path>395_vypusk.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
+
+	<Sound>
+		<Name>KRM395_1</Name>
+		<Path>395_1.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
+
+	<Sound>
+		<Name>KRM395_2</Name>
+		<Path>395_2.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
+
+	<Sound>
+		<Name>KRM395_5</Name>
+		<Path>395_5.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
 
 </Config>

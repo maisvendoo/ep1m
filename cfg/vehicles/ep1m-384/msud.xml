@@ -2,5 +2,10 @@
 <Config>
 	<Device>
 		<Order>1</Order>
+		<FanSwitchTimeout>80.0</FanSwitchTimeout>
+		<FanBustInterval>2.5</FanBustInterval>
+		<FanRunoutTime>10.0</FanRunoutTime>
+		<FanSwitchCurrentMin>480.0</FanSwitchCurrentMin>
+		<FanSwitchCurrentMax>480.0</FanSwitchCurrentMax>
 	</Device>
 </Config>

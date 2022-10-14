@@ -45,4 +45,22 @@ void EP1m::initSounds()
 
     connect(main_compressor, &MotorCompressor::soundSetPitch,
             this, &EP1m::soundSetPitch);
+
+    for (size_t i = 0; i < motor_fan.size(); ++i)
+    {
+        connect(motor_fan[i], &MotorFan::soundPlay,
+                this, &EP1m::soundPlay);
+
+        connect(motor_fan[i], &MotorFan::soundStop,
+                this, &EP1m::soundStop);
+    }
+
+    connect(ubt, &BrakeLock::soundPlay, this, &EP1m::soundPlay);
+
+    connect(brake_crane, &BrakeCrane::soundPlay, this, &EP1m::soundPlay);
+    connect(brake_crane, &BrakeCrane::soundSetVolume, this, &EP1m::soundSetVolume);
+
+    connect(loco_crane, &LocoCrane::soundPlay, this, &EP1m::soundPlay);
+    connect(loco_crane, &LocoCrane::soundStop, this, &EP1m::soundStop);
+    connect(loco_crane, &LocoCrane::soundSetVolume, this, &EP1m::soundSetVolume);
 }
