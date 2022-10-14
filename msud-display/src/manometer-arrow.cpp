@@ -34,7 +34,7 @@ ManometerArrow::ManometerArrow(QSize _size, int maxValScale, QWidget *parent)
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-void ManometerArrow::setVals(int val1_line, int val2_arrow)
+QPair<int, int> ManometerArrow::setVals(int val1_line, int val2_arrow)
 {
     if (val1_line < 0) val1_line = 0;
     if (val2_arrow < 0) val2_arrow = 0;
@@ -43,14 +43,14 @@ void ManometerArrow::setVals(int val1_line, int val2_arrow)
 
 
     if ((oldVal1_line_ == val1_line) && (oldVal2_arrow_ == val2_arrow))
-        return;
-
-
+        return {-1, -1};
 
     drawArrow_(val1_line, val2_arrow);
 
     oldVal1_line_ = val1_line;
     oldVal2_arrow_ = val2_arrow;
+
+    return {val1_line, val2_arrow};
 }
 
 

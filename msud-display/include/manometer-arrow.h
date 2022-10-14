@@ -11,7 +11,7 @@ class ManometerArrow : public QLabel
 public:
     ManometerArrow(QSize _size, int maxValScale, QWidget* parent = Q_NULLPTR);
 
-    void setVals(int val1_line, int val2_arrow);
+    QPair<int , int> setVals(int val1_line, int val2_arrow);
 
 
 private:

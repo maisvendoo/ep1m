@@ -207,18 +207,26 @@ void MsudDisplay::slotUpdateTimer()
     sbVoltageEPT_->setVal(10);
 
 
+
     if (val1_ > 1600)
         val1_ = 0;
     if (val2_ > 1600)
         val2_ = 0;
     val2_ += 10;
 
-    manArrV_->setVals(++val1_, val2_);
-    labV1_->setText(QString::number(val1_));
-    labV2_->setText(QString::number(val2_));
-    manArrI_->setVals(++val1_, val2_);
-    labI1_->setText(QString::number(val1_));
-    labI2_->setText(QString::number(val2_));
+    QPair<int, int> pair1 = manArrV_->setVals(++val1_, val2_);
+    if (pair1.first != -1)
+    {
+        labV1_->setText(QString::number(pair1.first));
+        labV2_->setText(QString::number(pair1.second));
+    }
+
+    QPair<int, int> pair2 = manArrI_->setVals(++val1_, val2_);
+    if (pair2.first != -1)
+    {
+        labI1_->setText(QString::number(pair2.first));
+        labI2_->setText(QString::number(pair2.first));
+    }
 
 
 }
