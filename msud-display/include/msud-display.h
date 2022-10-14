@@ -53,6 +53,7 @@ private:
     ManometerArrow* manArrV_;
     ManometerArrow* manArrI_;
 
+
     int val1_ = 0;
     int val2_ = 0;
 

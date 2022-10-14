@@ -108,11 +108,11 @@ void MsudDisplay::initDisplay_()
     fooY = 188;
 
     // Тяга
-    sbTyaga_ = new StatusBar(QSize(252, 37), fon_);
+    sbTyaga_ = new StatusBar(QSize(252, 37), 100, 1.0, fon_);
     sbTyaga_->move(38, fooY);
 
     // Ток возбуждения
-    sbCurrent_ = new StatusBar(QSize(252, 37), fon_);
+    sbCurrent_ = new StatusBar(QSize(252, 37), 1000, 1.0, fon_);
     sbCurrent_->move(417, fooY);
 
     createLab_(labTyaga_, QSize(64, fooH), "black", Qt::AlignRight);
@@ -157,7 +157,7 @@ void MsudDisplay::initDisplay_()
     fooY = 449;
 
     // Ток ЭПТ
-    sbCurrentEPT_ = new StatusBar(QSize(253, 37), fon_);
+    sbCurrentEPT_ = new StatusBar(QSize(253, 37), 10, 0.1, fon_);
     sbCurrentEPT_->move(432, fooY);
 
     createLab_(labCurrentEPT_, QSize(45, fooH), "yellow", Qt::AlignRight);
@@ -166,7 +166,7 @@ void MsudDisplay::initDisplay_()
     fooY = 513;
 
     // Напряжение ЭПТ
-    sbVoltageEPT_ = new StatusBar(QSize(253, 37), fon_);
+    sbVoltageEPT_ = new StatusBar(QSize(253, 37), 100, 1.0, fon_);
     sbVoltageEPT_->move(432, fooY);
 
     createLab_(labVoltageEPT_, QSize(62, fooH), "yellow", Qt::AlignRight);
@@ -209,16 +209,31 @@ void MsudDisplay::slotUpdateTimer()
     labPC1_->setText("вперед");
     labPC2_->setText("тяга");
     labPC3_->setText("собрана");
-    labTyaga_->setText("5");
-    labCurrent_->setText("0");
-    labCurrentEPT_->setText("0");
-    labVoltageEPT_->setText("3");
 
 
-    sbTyaga_->setVal(50);
-    sbCurrent_->setVal(40);
-    sbCurrentEPT_->setVal(20);
-    sbVoltageEPT_->setVal(10);
+    double zzzz1 = 50.5;
+    double zzzz2 = 200.5;
+    double zzzz3 = 6.4;
+    double zzzz4 = 12.4;
+
+
+
+    int tyagaVal = sbTyaga_->setVal(zzzz1);
+    if (tyagaVal != -1)
+        labTyaga_->setText(QString::number(tyagaVal));
+
+    int currentVal = sbCurrent_->setVal(zzzz2);
+    if (currentVal != -1)
+        labCurrent_->setText(QString::number(currentVal));
+
+    double currentEptVal = sbCurrentEPT_->setVal(zzzz3);
+    if (currentEptVal != -1)
+        labCurrentEPT_->setText(QString::number(currentEptVal, 'f', 1));
+
+    double voltageEptVal = sbVoltageEPT_->setVal(zzzz4);
+    if (voltageEptVal != -1)
+        labVoltageEPT_->setText(QString::number(voltageEptVal));
+
 
 
 

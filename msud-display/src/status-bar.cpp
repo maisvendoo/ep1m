@@ -6,8 +6,11 @@
 
 
 
-StatusBar::StatusBar(QSize _size, QWidget *parent)
+StatusBar::StatusBar(QSize _size, int maxVal, double EPS, QWidget *parent)
     : QLabel(parent)
+    , maxVal_(maxVal)
+    , oldVal_(-1)
+    , EPS_(EPS)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid green;");
@@ -18,10 +21,19 @@ StatusBar::StatusBar(QSize _size, QWidget *parent)
 
 
 
-void StatusBar::setVal(double val)
+double StatusBar::setVal(double val)
 {
+    if (val < 0) val = 0;
+    if (val > maxVal_) val = maxVal_;
+
+    if (std::abs(val - oldVal_) < EPS_)
+        return -1.0;
 
     drawBar_(val);
+
+    oldVal_ = val;
+
+    return  val;
 }
 
 
@@ -38,12 +50,12 @@ void StatusBar::drawBar_(double val)
     paint.setBrush(QColor("yellow"));
 
 
-    int w = this->width() * val/100.0;
+    int valX = this->width() * val / maxVal_;
 
     QPolygon p;
     p << QPoint(0,0)
-      << QPoint(w, 0)
-      << QPoint(w, this->height()-10)
+      << QPoint(valX, 0)
+      << QPoint(valX, this->height()-10)
       << QPoint(0, this->height()-10);
 
     paint.drawPolygon(p);
@@ -57,7 +69,7 @@ void StatusBar::drawBar_(double val)
 
         int fooX = i*linesDeltaX;
         paint.drawLine(fooX, 0,
-                       fooX, this->height()-12);
+                       fooX, this->height()-11);
 
     }
 
