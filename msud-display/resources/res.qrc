@@ -1,6 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource prefix="/rcc">
+        <file alias="msud-ttf">smwtexttwonc.ttf</file>
 
         <file alias="msud-fon">fon.png</file>
 

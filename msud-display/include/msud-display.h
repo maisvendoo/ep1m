@@ -21,6 +21,8 @@ public:
 
 
 private:
+    QString familyFont_;
+
     QLabel* fon_;
 
     QLabel* labMode_;
@@ -65,7 +67,7 @@ private:
 
     void createLab_(QLabel* &lab, QSize size,
                     QString color,
-                    Qt::Alignment align = Qt::AlignCenter);
+                    Qt::Alignment align = Qt::AlignHCenter);
 
 
 private slots:

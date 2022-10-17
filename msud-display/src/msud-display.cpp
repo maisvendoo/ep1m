@@ -2,6 +2,7 @@
 
 #include    <QVBoxLayout>
 #include    <QLabel>
+#include    <QFontDatabase>
 
 
 
@@ -22,6 +23,10 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
 
 
    // this->setStyleSheet("border: 4px solid green");
+
+
+    int id = QFontDatabase::addApplicationFont(":/rcc/msud-ttf"); //путь к шрифту
+    familyFont_ = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
 
 
     connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer, Qt::QueuedConnection);
@@ -77,7 +82,7 @@ void MsudDisplay::initDisplay_()
 
 
     int fooX = 34;
-    int fooY = 51;
+    int fooY = 53;
     int fooW = 233;
     int fooH = 28;
     int fooDeltaX = 252;
@@ -89,7 +94,7 @@ void MsudDisplay::initDisplay_()
     createLab_(labControl_, QSize(fooW*2 + 20, fooH), "red");
     labControl_->move(fooX + fooDeltaX, fooY);
 
-    fooY  = 124;
+    fooY  = 125;
 
     createLab_(labPC1_, QSize(fooW, fooH), "yellow");
     labPC1_->move(fooX, fooY);
@@ -115,26 +120,26 @@ void MsudDisplay::initDisplay_()
     sbCurrent_ = new StatusBar(QSize(252, 37), 1000, 1.0, fon_);
     sbCurrent_->move(417, fooY);
 
-    createLab_(labTyaga_, QSize(64, fooH), "black", Qt::AlignRight);
+    createLab_(labTyaga_, QSize(62, fooH), "black", Qt::AlignRight);
     labTyaga_->move(303, fooY);
 
-    createLab_(labCurrent_, QSize(80, fooH), "black", Qt::AlignRight);
+    createLab_(labCurrent_, QSize(78, fooH), "black", Qt::AlignRight);
     labCurrent_->move(683, fooY);
 
 
 
     fooY = 394;
 
-    createLab_(labV1_, QSize(67, fooH), "yellow", Qt::AlignRight);
+    createLab_(labV1_, QSize(65, fooH), "yellow", Qt::AlignRight);
     labV1_->move(110, fooY);
 
-    createLab_(labV2_, QSize(66, fooH), "yellow", Qt::AlignRight);
+    createLab_(labV2_, QSize(64, fooH), "yellow", Qt::AlignRight);
     labV2_->move(255, fooY);
 
-    createLab_(labI1_, QSize(85, fooH), "yellow", Qt::AlignRight);
+    createLab_(labI1_, QSize(83, fooH), "yellow", Qt::AlignRight);
     labI1_->move(475, fooY);
 
-    createLab_(labI2_, QSize(85, fooH), "yellow", Qt::AlignRight);
+    createLab_(labI2_, QSize(82, fooH), "yellow", Qt::AlignRight);
     labI2_->move(625, fooY);
 
 
@@ -143,12 +148,15 @@ void MsudDisplay::initDisplay_()
     createLab_(labFieldWeak1_, QSize(44, fooH + 4), "white");
     labFieldWeak1_->move(124, fooY);
     labFieldWeak1_->setText("1");
+    labFieldWeak1_->setMargin(-1);
     createLab_(labFieldWeak2_, QSize(44, fooH + 4), "white");
     labFieldWeak2_->move(176, fooY);
     labFieldWeak2_->setText("2");
+    labFieldWeak2_->setMargin(-1);
     createLab_(labFieldWeak3_, QSize(44, fooH + 4), "white");
     labFieldWeak3_->move(227, fooY);
     labFieldWeak3_->setText("3");
+    labFieldWeak3_->setMargin(-1);
 
 
 
@@ -160,7 +168,7 @@ void MsudDisplay::initDisplay_()
     sbCurrentEPT_ = new StatusBar(QSize(253, 37), 10, 0.1, fon_);
     sbCurrentEPT_->move(432, fooY);
 
-    createLab_(labCurrentEPT_, QSize(45, fooH), "yellow", Qt::AlignRight);
+    createLab_(labCurrentEPT_, QSize(47, fooH), "yellow", Qt::AlignRight);
     labCurrentEPT_->move(698, fooY);
 
     fooY = 513;
@@ -190,9 +198,11 @@ void MsudDisplay::createLab_(QLabel* &lab, QSize size, QString color, Qt::Alignm
 {
     lab = new QLabel("0", fon_);
     lab->resize(size);
-    lab->setFont(QFont("Arial", 18, 87));
-    lab->setStyleSheet("border: 1px solid red;"
+    lab->setFont(QFont(familyFont_, 20, 0));
+    lab->setStyleSheet(//"border: 1px solid red;"
                         "color: " + color + ";");
+    lab->setMargin(-4);
+    lab->setIndent(6);
     lab->setAlignment(align);
 }
 
@@ -206,7 +216,7 @@ void MsudDisplay::slotUpdateTimer()
 
     labMode_->setText("АВТОРЕГ");
     labControl_->setText("zzzzz");
-    labPC1_->setText("вперед");
+    labPC1_->setText("ВПЕРЕД");
     labPC2_->setText("тяга");
     labPC3_->setText("собрана");
 
@@ -232,11 +242,13 @@ void MsudDisplay::slotUpdateTimer()
 
     double voltageEptVal = sbVoltageEPT_->setVal(zzzz4);
     if (voltageEptVal != -1)
-        labVoltageEPT_->setText(QString::number(voltageEptVal));
+        labVoltageEPT_->setText(QString::number(voltageEptVal, 'f', 1));
 
 
 
 
+    labFieldWeak1_->setStyleSheet("color: white;"
+                                  "background: none;");
     labFieldWeak2_->setStyleSheet("color: white;"
                                   "background: none;");
     labFieldWeak3_->setStyleSheet("color: white;"
