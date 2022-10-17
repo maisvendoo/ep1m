@@ -49,6 +49,7 @@ enum
     SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
     // КЛУБ-У
+    SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 149,
     SIGNAL_KLUB_U_POWER_SUPPLAY = 150,   // питание
     SIGNAL_KLUB_U_EPK           = 151,   // ЭПК
     SIGNAL_KLUB_U_ALSN          = 152,   // код АЛСН
@@ -68,9 +69,9 @@ enum
     SIGNAL_KLUB_U_PRESSURE_TM   = 166,
     SIGNAL_KLUB_U_PRESSURE_UR   = 167,
     SIGNAL_KLUB_U_ACCELERATION  = 168,
-    SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 169,
 
     // МСУД
+    SIGNAL_MSUD_POWER_SUPPLAY   = 169,
     SIGNAL_MSUD_MODE            = 170, // авторег/ручное
     SIGNAL_MSUD_TC              = 171,
     SIGNAL_MSUD_DB              = 172,

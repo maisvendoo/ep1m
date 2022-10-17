@@ -285,7 +285,7 @@ void MsudDisplay::createLab_(QLabel* &lab, QSize size, QString color, Qt::Alignm
 //-----------------------------------------------------------------------------
 void MsudDisplay::slotUpdateTimer()
 {
-
+    input_signals[SIGNAL_MSUD_POWER_SUPPLAY] = 1;
     input_signals[SIGNAL_MSUD_MODE] = 1;
     input_signals[SIGNAL_MSUD_TC] = 1;
     input_signals[SIGNAL_MSUD_DB] = 1;
@@ -314,6 +314,8 @@ void MsudDisplay::slotUpdateTimer()
 
 
 
+
+    fon_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_POWER_SUPPLAY]));
 
 
 
