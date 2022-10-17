@@ -76,4 +76,11 @@ void EP1m::signalsOutput()
 
     analogSignal[RB1] = TO_FLOAT(tumblers[BUTTON_RB].getState());
     analogSignal[RBS] = TO_FLOAT(tumblers[BUTTON_RBS].getState());
+
+    analogSignal[SIGNAL_MSUD_POWER_SUPPLAY] = TO_FLOAT(msud->getOutputData().state == MSUD_READY);
+    analogSignal[SIGNAL_MSUD_SPEED1] = 0.0f;
+    analogSignal[SIGNAL_MSUD_SPEED2] = TO_FLOAT(velocity * Physics::kmh);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT( (km->getTracLevel() +
+                                                           qAbs(km->getBrakeLevel())) * 16);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = msud_input.Ia[TRAC_MOTOR1];
 }
