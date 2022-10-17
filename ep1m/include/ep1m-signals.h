@@ -66,6 +66,7 @@ enum
     SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
     // КЛУБ-У
+    SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 149,
     SIGNAL_KLUB_U_POWER_SUPPLAY = 150,   // питание
     SIGNAL_KLUB_U_EPK           = 151,   // ЭПК
     SIGNAL_KLUB_U_ALSN          = 152,   // код АЛСН
@@ -85,7 +86,34 @@ enum
     SIGNAL_KLUB_U_PRESSURE_TM   = 166,
     SIGNAL_KLUB_U_PRESSURE_UR   = 167,
     SIGNAL_KLUB_U_ACCELERATION  = 168,
-    SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 169,
+
+    // МСУД
+    SIGNAL_MSUD_POWER_SUPPLAY   = 169,
+    SIGNAL_MSUD_MODE            = 170, // авторег/ручное
+    SIGNAL_MSUD_TC              = 171,
+    SIGNAL_MSUD_DB              = 172,
+    SIGNAL_MSUD_MK              = 173,
+    SIGNAL_MSUD_DM              = 174,
+    SIGNAL_MSUD_NC              = 175,
+    SIGNAL_MSUD_OB              = 176,
+    SIGNAL_MSUD_KZ              = 177,
+    SIGNAL_MSUD_OV              = 178,
+    SIGNAL_MSUD_MPK             = 179,
+    SIGNAL_MSUD_REVERSOR        = 180, // вперед/назад
+    SIGNAL_MSUD_TRACTION_TYPE   = 181, // тяга/рекуперация
+    SIGNAL_MSUD_TRACTION_STATE  = 182, // собрана/разобрана
+    SIGNAL_MSUD_TRACTION        = 183, // Тяга
+    SIGNAL_MSUD_CURCUIT_VOZB    = 184, // Ток возбуждения
+    SIGNAL_MSUD_SPEED1          = 185, // Скорость
+    SIGNAL_MSUD_SPEED2          = 186, //
+    SIGNAL_MSUD_CURRENT_ANHCOR1 = 187, // Ток якоря
+    SIGNAL_MSUD_CURRENT_ANHCOR2 = 188, //
+    SIGNAL_MSUD_CURRENT_EPT     = 189, // ТОК ЭПТ
+    SIGNAL_MSUD_VOLTAGE_EPT     = 190, // НАПРЯЖЕНИЕ ЭПТ
+    SIGNAL_MSUD_OSLAB_POLE1     = 191, // Ослбаление поля 1
+    SIGNAL_MSUD_OSLAB_POLE2     = 192, // Ослбаление поля 2
+    SIGNAL_MSUD_OSLAB_POLE3     = 193, // Ослбаление поля 3
+
 
 
     // Колесные пары

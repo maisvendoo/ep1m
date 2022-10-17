@@ -47,7 +47,7 @@ void StatusBar::drawBar_(double val)
 
     //paint.setPen(QColor("yellow"));
     paint.setPen(Qt::transparent);
-    paint.setBrush(QColor("yellow"));
+    paint.setBrush(QColor("red"));
 
 
     int valX = this->width() * val / maxVal_;

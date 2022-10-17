@@ -21,10 +21,20 @@ public:
 
 
 private:
+    QString familyFont_;
+
     QLabel* fon_;
 
     QLabel* labMode_;
-    QLabel* labControl_;
+    QLabel* labKO_TC_;
+    QLabel* labKO_DB_;
+    QLabel* labKO_MK_;
+    QLabel* labKO_DM_;
+    QLabel* labKO_NC_;
+    QLabel* labKO_OB_;
+    QLabel* labKO_KZ_;
+    QLabel* labKO_OV_;
+    QLabel* labKO_MPK_;
     QLabel* labPC1_;
     QLabel* labPC2_;
     QLabel* labPC3_;
@@ -54,8 +64,8 @@ private:
     ManometerArrow* manArrI_;
 
 
-    int val1_ = 0;
-    int val2_ = 0;
+//    int val1_ = 0;
+//    int val2_ = 0;
 
 
     QTimer updateTimer_;
@@ -65,7 +75,7 @@ private:
 
     void createLab_(QLabel* &lab, QSize size,
                     QString color,
-                    Qt::Alignment align = Qt::AlignCenter);
+                    Qt::Alignment align = Qt::AlignHCenter);
 
 
 private slots:

@@ -15,7 +15,7 @@ ManometerArrow::ManometerArrow(QSize _size, int maxValScale, QWidget *parent)
     , oldVal2_arrow_(-1)
 {
     this->resize(_size);
-    this->setStyleSheet("border: 1px solid red");
+    //this->setStyleSheet("border: 1px solid red");
 
 
     // 416 - диаметр круга
