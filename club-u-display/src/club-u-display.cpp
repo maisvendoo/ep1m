@@ -153,7 +153,7 @@ void ClubUDisplay::initBlocks_()
     //fon->setGeometry(0,0, pic.size().width(), pic.size().height());
     fon->setPixmap(pic);
     fon->move(0, 0);
-    fon->setStyleSheet("border: 2px solid red");
+    //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
 
     // Локомотивный светофор
@@ -186,7 +186,6 @@ void ClubUDisplay::initBlocks_()
 //------------------------------------------------------------------------------
 void ClubUDisplay::slotUpdateTimer()
 {
-    return;
     if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_POWER_SUPPLAY]))
     {
         alsn_->setVisible(false);

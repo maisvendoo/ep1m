@@ -24,12 +24,10 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
    // this->setStyleSheet("border: 4px solid green");
 
 
-    connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer, Qt::QueuedConnection);
-    updateTimer_.setInterval(1000);
-    updateTimer_.start();
 
 
-    updateTimer_.start(100);
+
+    //updateTimer_.start(100);
 
 }
 
@@ -74,6 +72,17 @@ void MsudDisplay::initDisplay_()
     fon_->move(0, 0);
     //fon_->setStyleSheet("border: 1px solid red");
     this->layout()->addWidget(fon_);
+
+
+    this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
+    this->resize(800, 408);
+    this->setAutoFillBackground(true);
+    this->setPalette(QPalette(QColor(0, 0, 0)));
+
+    connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer, Qt::QueuedConnection);
+    updateTimer_.setInterval(1000);
+    updateTimer_.start();
+
 
 
     int fooX = 34;
