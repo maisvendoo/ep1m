@@ -34,10 +34,7 @@ public:
 private:
 
     // Напряжение питания
-    double  Uc;
-
-    // Текущее состояние МСУД
-    msud_state_t     state;
+    double  Uc;    
 
     // Минимально допустимое напряжение питания МСУД
     double  Uc_min;

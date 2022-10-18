@@ -71,7 +71,8 @@ struct msud_output_t
     std::array<bool, MOTOR_FANS_NUM> mv_freq_norm;
 
     msud_output_t()
-        : kv23_on(false)
+        : state(MSUD_OFF)
+        , kv23_on(false)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);

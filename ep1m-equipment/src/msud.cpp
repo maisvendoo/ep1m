@@ -7,7 +7,6 @@
 //------------------------------------------------------------------------------
 MSUD::MSUD(QObject *parent) : Device(parent)
   , Uc(0.0)
-  , state(MSUD_OFF)
   , Uc_min(40.0)
   , load_time(2.0)
   , load_timer(Q_NULLPTR)
@@ -107,14 +106,14 @@ void MSUD::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void MSUD::stateProcess(double t, double dt)
 {
-    switch (state)
+    switch (msud_output.state)
     {
     case MSUD_OFF:
         {
             // Переход в режим общего сброса при включении питания
             if ( Uc >= Uc_min )
             {
-                state = MSUD_RESET;
+                msud_output.state = MSUD_RESET;
             }
 
             break;
@@ -141,7 +140,7 @@ void MSUD::stateProcess(double t, double dt)
     // Если напряжение питания упало ниже минимально допустимого
     // МСУД переходит в выключенное состояние
     if (Uc < Uc_min)
-        state = MSUD_OFF;
+        msud_output.state = MSUD_OFF;
 }
 
 //------------------------------------------------------------------------------
@@ -216,7 +215,7 @@ void MSUD::motor_fans_control(double t, double dt)
 void MSUD::slotLoadTimer()
 {
     load_timer->stop();
-    state = MSUD_READY;
+    msud_output.state = MSUD_READY;
 }
 
 //------------------------------------------------------------------------------
