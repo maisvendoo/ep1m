@@ -285,11 +285,11 @@ void MsudDisplay::slotUpdateTimer()
     //input_signals[SIGNAL_MSUD_POWER_SUPPLAY] = 1;
     //input_signals[SIGNAL_MSUD_MODE] = 0;
     input_signals[SIGNAL_MSUD_TC] = 1;
-    input_signals[SIGNAL_MSUD_DB] = 1;
+    input_signals[SIGNAL_MSUD_DB] = 0;
     //input_signals[SIGNAL_MSUD_MK] = 1;
     input_signals[SIGNAL_MSUD_DM] = 1;
     //input_signals[SIGNAL_MSUD_NC] = 1;
-    input_signals[SIGNAL_MSUD_OB] = 1;
+    //input_signals[SIGNAL_MSUD_OB] = 1;
     input_signals[SIGNAL_MSUD_KZ] = 0;
     input_signals[SIGNAL_MSUD_OV] = 0;
     //input_signals[SIGNAL_MSUD_MPK] = 1;

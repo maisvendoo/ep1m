@@ -15,7 +15,7 @@ PowerSupply::PowerSupply(QObject *parent) : Device(parent)
   , I_cy(31.0)
   , Uc_min(60.0)
   , Uc_max(80.0)
-  , K2(2.0)
+  , K2(20.0)
 {
 
 }
@@ -62,6 +62,6 @@ void PowerSupply::stepDiscrete(double t, double dt)
     Ucc = U_rec + hs_n(U_rec - 0.95 * Ucc_nom) * U_bat;
 
     // Напряжение заряда АКБ
-    U_charge = K2 * (I_cy - pf(I_charge)) * hs_p(U_in);
-    U_charge = cut(U_charge, Uc_min, Uc_max);
+    U_charge = K2 * pf(I_cy - I_charge) * hs_p(U_in);
+    U_charge = cut(U_charge, 0.0, Uc_max);
 }

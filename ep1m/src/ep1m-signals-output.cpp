@@ -86,7 +86,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT( (km->getTracLevel() +
                                                            qAbs(km->getBrakeLevel())) * 16);
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = msud_input.Ia[TRAC_MOTOR1];
-    analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!main_compressor->isStarted());
+    analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!main_compressor->isStarted() && press_reg->getState());
     analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!main_compressor->isStarted());
 
     analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = 0.0f;
@@ -101,4 +101,7 @@ void EP1m::signalsOutput()
 
     analogSignal[SIGNAL_TUMBLER_MPK] = TO_FLOAT(tumblers[TUMBLER_MPK].getState());
     analogSignal[SIGNAL_TUMBLER_AUTO_MODE] = TO_FLOAT(tumblers[TUMBLER_AUTO_MODE].getState());
+
+    bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getCargeCurrent() <= 0.0;
+    analogSignal[SIGNAL_MSUD_OB] = TO_FLOAT(is_MSUD_OB);
 }
