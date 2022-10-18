@@ -3,6 +3,7 @@
 #include    <QVBoxLayout>
 #include    <QLabel>
 #include    <QFontDatabase>
+#include    <QTime>
 
 #include    "ep1m-signals.h"
 
@@ -78,7 +79,6 @@ MsudDisplay::~MsudDisplay()
 //-----------------------------------------------------------------------------
 void MsudDisplay::init()
 {
-
     initDisplay_();
 
     AbstractDisplay::init();
@@ -229,8 +229,6 @@ void MsudDisplay::initDisplay_()
 
 
 
-
-
     fooY = 449;
 
     // Ток ЭПТ
@@ -256,6 +254,27 @@ void MsudDisplay::initDisplay_()
 
     manArrI_ = new ManometerArrow(QSize(310, 111), 1600, fon_);
     manArrI_->move(434, 280);
+
+
+    createLab_(labCurTime_, QSize(135, fooH), "yellow", Qt::AlignLeft);
+    labCurTime_->move(640, 560);
+
+    connect(&timeTimer_, &QTimer::timeout, [&]()
+    {
+        labCurTime_->setText(QTime::currentTime().toString("hh.mm.ss"));
+    });
+    timeTimer_.start(1000);
+
+
+
+    createConnectionTimer_(timerTC_, labKO_TC_);
+    createConnectionTimer_(timerDB_, labKO_DB_);
+    createConnectionTimer_(timerMK_, labKO_MK_);
+    createConnectionTimer_(timerDM_, labKO_DM_);
+    createConnectionTimer_(timerNC_, labKO_NC_);
+    createConnectionTimer_(timerOB_, labKO_OB_);
+    createConnectionTimer_(timerKZ_, labKO_KZ_);
+    createConnectionTimer_(timerOV_, labKO_OV_);
 }
 
 
@@ -280,16 +299,54 @@ void MsudDisplay::createLab_(QLabel* &lab, QSize size, QString color, Qt::Alignm
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
+void MsudDisplay::createConnectionTimer_(QTimer &timer, QLabel *&lab)
+{
+    connect(&timer, &QTimer::timeout, [&]()
+    {
+        lab->setVisible(!lab->isVisible());
+    });
+    timer.setInterval(500);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void MsudDisplay::setStateLabKO_(QLabel *&lab, int signalEnum, QTimer &timer)
+{
+    int sigVal = static_cast<int>(input_signals[signalEnum]);
+
+    if (sigVal == 2)
+    {
+        if (!timer.isActive())
+            timer.start();
+    }
+    else
+    {
+        if (timer.isActive())
+            timer.stop();
+
+        lab->setVisible(sigVal);
+    }
+
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 void MsudDisplay::slotUpdateTimer()
 {
     input_signals[SIGNAL_MSUD_POWER_SUPPLAY] = 1;
     input_signals[SIGNAL_MSUD_MODE] = 1;
-    input_signals[SIGNAL_MSUD_TC] = 1;
+    input_signals[SIGNAL_MSUD_TC] = 2;
     input_signals[SIGNAL_MSUD_DB] = 1;
-    input_signals[SIGNAL_MSUD_MK] = 1;
+    input_signals[SIGNAL_MSUD_MK] = 2;
     input_signals[SIGNAL_MSUD_DM] = 1;
     input_signals[SIGNAL_MSUD_NC] = 1;
-    input_signals[SIGNAL_MSUD_OB] = 1;
+    input_signals[SIGNAL_MSUD_OB] = 2;
     input_signals[SIGNAL_MSUD_KZ] = 1;
     input_signals[SIGNAL_MSUD_OV] = 1;
     input_signals[SIGNAL_MSUD_MPK] = 2;
@@ -313,7 +370,6 @@ void MsudDisplay::slotUpdateTimer()
 
 
     fon_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_POWER_SUPPLAY]));
-    fon_->raise();
 
 
     if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 1)
@@ -324,14 +380,15 @@ void MsudDisplay::slotUpdateTimer()
         labMode_->setText("");
 
 
-    labKO_TC_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_TC]));
-    labKO_DB_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_DB]));
-    labKO_MK_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_MK]));
-    labKO_DM_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_DM]));
-    labKO_NC_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_NC]));
-    labKO_OB_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_OB]));
-    labKO_KZ_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_KZ]));
-    labKO_OV_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_OV]));
+    setStateLabKO_(labKO_TC_, SIGNAL_MSUD_TC, timerTC_);
+    setStateLabKO_(labKO_DB_, SIGNAL_MSUD_DB, timerDB_);
+    setStateLabKO_(labKO_MK_, SIGNAL_MSUD_MK, timerMK_);
+    setStateLabKO_(labKO_DM_, SIGNAL_MSUD_DM, timerDM_);
+    setStateLabKO_(labKO_NC_, SIGNAL_MSUD_NC, timerNC_);
+    setStateLabKO_(labKO_OB_, SIGNAL_MSUD_OB, timerOB_);
+    setStateLabKO_(labKO_KZ_, SIGNAL_MSUD_KZ, timerKZ_);
+    setStateLabKO_(labKO_OV_, SIGNAL_MSUD_OV, timerOV_);
+
 
     if (static_cast<int>(input_signals[SIGNAL_MSUD_MPK]) == 1)
         labKO_MPK_->setText(KO_MPK1);
