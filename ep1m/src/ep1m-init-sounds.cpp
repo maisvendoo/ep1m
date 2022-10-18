@@ -30,6 +30,12 @@ void EP1m::initSounds()
     tumblers[EPK_KEY].setOnSoundName("EPK_Key");
     tumblers[EPK_KEY].setOffSoundName("EPK_Key");
 
+    tumblers[TUMBLER_MPK].setOnSoundName("Small_Tumbler_On");
+    tumblers[TUMBLER_MPK].setOffSoundName("Small_Tumbler_Off");
+
+    tumblers[TUMBLER_AUTO_MODE].setOnSoundName("Small_Tumbler_On");
+    tumblers[TUMBLER_AUTO_MODE].setOffSoundName("Small_Tumbler_Off");
+
     connect(km5, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     connect(safety_valve, &ElectroValve::soundPlay, this, &EP1m::soundPlay);

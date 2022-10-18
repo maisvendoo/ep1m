@@ -96,4 +96,9 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_VOLTAGE_EPT] = ept_converter->getU_out();
 
     analogSignal[SIGNAL_MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
+    analogSignal[SIGNAL_MSUD_MPK] = TO_FLOAT(static_cast<int>(msud_input.tumbler_MPK) + 1);
+    analogSignal[SIGNAL_MSUD_MODE] = TO_FLOAT(static_cast<int>(msud_input.is_automatic_mode) + 1);
+
+    analogSignal[SIGNAL_TUMBLER_MPK] = TO_FLOAT(tumblers[TUMBLER_MPK].getState());
+    analogSignal[SIGNAL_TUMBLER_AUTO_MODE] = TO_FLOAT(tumblers[TUMBLER_AUTO_MODE].getState());
 }

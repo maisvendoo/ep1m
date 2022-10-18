@@ -19,6 +19,9 @@ enum
 
     STRELKA_EPT_AMP = 10,
 
+    SIGNAL_TUMBLER_AUTO_MODE = 17,
+    SIGNAL_TUMBLER_MPK = 18,
+
     LAMP_NCH = 19,
 
     RUK_395 = 20,

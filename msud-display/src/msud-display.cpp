@@ -283,7 +283,7 @@ void MsudDisplay::createLab_(QLabel* &lab, QSize size, QString color, Qt::Alignm
 void MsudDisplay::slotUpdateTimer()
 {
     //input_signals[SIGNAL_MSUD_POWER_SUPPLAY] = 1;
-    input_signals[SIGNAL_MSUD_MODE] = 1;
+    //input_signals[SIGNAL_MSUD_MODE] = 0;
     input_signals[SIGNAL_MSUD_TC] = 1;
     input_signals[SIGNAL_MSUD_DB] = 1;
     //input_signals[SIGNAL_MSUD_MK] = 1;
@@ -292,7 +292,7 @@ void MsudDisplay::slotUpdateTimer()
     input_signals[SIGNAL_MSUD_OB] = 1;
     input_signals[SIGNAL_MSUD_KZ] = 0;
     input_signals[SIGNAL_MSUD_OV] = 0;
-    input_signals[SIGNAL_MSUD_MPK] = 1;
+    //input_signals[SIGNAL_MSUD_MPK] = 1;
     input_signals[SIGNAL_MSUD_REVERSOR] = 2;
     input_signals[SIGNAL_MSUD_TRACTION_TYPE] = 1;
     input_signals[SIGNAL_MSUD_TRACTION_STATE] = 2;

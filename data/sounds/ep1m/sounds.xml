@@ -327,5 +327,26 @@
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
+	
+	<Sound>
+		<Name>Small_Tumbler_On</Name>
+		<Path>small_tumbler_on.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<!-- Выключение -->
+	<Sound>
+		<Name>Small_Tumbler_Off</Name>
+		<Path>small_tumbler_off.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
 
 </Config>

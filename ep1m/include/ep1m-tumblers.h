@@ -23,7 +23,10 @@ enum
     BUTTON_RB = 5,
     BUTTON_RBS = 6,
 
-    EPK_KEY = 7
+    EPK_KEY = 7,
+
+    TUMBLER_MPK = 8,
+    TUMBLER_AUTO_MODE = 9
 };
 
 #endif // EP1M_TUMBLERS_H

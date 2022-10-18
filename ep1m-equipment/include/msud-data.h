@@ -41,6 +41,12 @@ enum
 //------------------------------------------------------------------------------
 struct msud_input_t
 {
+    /// Положение тумблера (МПК1/МПК2)
+    bool tumbler_MPK;
+
+    /// Признак включения режима "АВТОРЕГУЛИРОВАНИЕ"
+    bool is_automatic_mode;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -48,6 +54,8 @@ struct msud_input_t
     std::array<bool, MOTOR_FANS_NUM> mv_state;
 
     msud_input_t()
+        : tumbler_MPK(false)
+        , is_automatic_mode(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(mv_state.begin(), mv_state.end(), false);

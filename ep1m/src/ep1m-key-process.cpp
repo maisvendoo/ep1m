@@ -62,4 +62,22 @@ void EP1m::keyProcess()
         else
             tumblers[EPK_KEY].reset();
     }
+
+    // Выбор МПК
+    if (getKeyState(KEY_1))
+    {
+        if (isShift())
+            tumblers[TUMBLER_MPK].set();
+        else
+            tumblers[TUMBLER_MPK].reset();
+    }
+
+    // Вкл/Выкл "АВТОРЕГУЛИРОВАНИЕ"
+    if (getKeyState(KEY_F))
+    {
+        if (isShift())
+            tumblers[TUMBLER_AUTO_MODE].set();
+        else
+            tumblers[TUMBLER_AUTO_MODE].reset();
+    }
 }
