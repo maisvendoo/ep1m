@@ -26,7 +26,8 @@ enum
     EPK_KEY = 7,
 
     TUMBLER_MPK = 8,
-    TUMBLER_AUTO_MODE = 9
+    TUMBLER_AUTO_MODE = 9,
+    TUMBLER_PCHF = 10,
 };
 
 #endif // EP1M_TUMBLERS_H

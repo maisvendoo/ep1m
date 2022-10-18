@@ -21,6 +21,8 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , fan_runout_time(10.0)
   , I_fan_sw_min(480)
   , I_fan_sw_max(510)
+  , is_pchf_ignored(false)
+  , old_is_norm_freq(false)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -99,6 +101,8 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "FanSwitchCurrentMin", I_fan_sw_min);
 
     cfg.getDouble(secName, "FanSwitchCurrentMax", I_fan_sw_max);
+
+    cfg.getBool(secName, "Ignore_Off_PCHF", is_pchf_ignored);
 }
 
 //------------------------------------------------------------------------------
@@ -174,41 +178,68 @@ void MSUD::motor_fans_control(double t, double dt)
     Q_UNUSED(t)
     Q_UNUSED(dt)
 
+    // Тики таймеров
+    normalFreqTimer->step(t, dt);
+    lowFreqTimer->step(t, dt);
+    fansBustTimer->step(t, dt);
+    runOutTimer->step(t, dt);
+
+    // Признак работы без ПЧФ, только на нормальной частоте
+    bool is_Norm_Freq_Only = (!msud_input.is_PCHF_On) || (is_pchf_ignored);
+
+    // Проверяем, запущены ли венты
     bool fans_run = true;
 
     for (size_t i = 0; i < msud_input.mv_state.size(); ++i)
         fans_run = fans_run && msud_input.mv_state[i];
 
-    bool is_low_freq = msud_output.mv_freq_low[MV1] ||
-            msud_output.mv_freq_low[MV2] ||
-            msud_output.mv_freq_low[MV3];
 
-    bool is_norm_freq = msud_output.mv_freq_norm[MV1] ||
-            msud_output.mv_freq_norm[MV2] ||
-            msud_output.mv_freq_norm[MV3];
-
-    msud_output.is_MV_low_freq = fans_run && is_low_freq;
-
-    if (fans_run)
+    if (!is_Norm_Freq_Only)
     {
-        if (msud_input.Ia[TRAC_MOTOR1] <= I_fan_sw_min)
-        {
-            if (!lowFreqTimer->isStarted() && !is_low_freq)
-                lowFreqTimer->start();
-        }
+        // Работаем при включенном ПЧФ
+        bool is_low_freq = msud_output.mv_freq_low[MV1] ||
+                msud_output.mv_freq_low[MV2] ||
+                msud_output.mv_freq_low[MV3];
 
-        if (msud_input.Ia[TRAC_MOTOR1] >= I_fan_sw_max)
+        bool is_norm_freq = msud_output.mv_freq_norm[MV1] ||
+                msud_output.mv_freq_norm[MV2] ||
+                msud_output.mv_freq_norm[MV3];
+
+        msud_output.is_MV_low_freq = fans_run && is_low_freq;
+
+        if (fans_run)
         {
-            if (!normalFreqTimer->isStarted() && !is_norm_freq)
-                normalFreqTimer->start();
+            if (msud_input.Ia[TRAC_MOTOR1] <= I_fan_sw_min)
+            {
+                if (!lowFreqTimer->isStarted() && !is_low_freq)
+                    lowFreqTimer->start();
+            }
+
+            if (msud_input.Ia[TRAC_MOTOR1] >= I_fan_sw_max)
+            {
+                if (!normalFreqTimer->isStarted() && !is_norm_freq)
+                    normalFreqTimer->start();
+            }
+        }
+        else
+        {
+            for (size_t i = 0; i < msud_output.mv_freq_low.size(); ++i)
+            {
+                msud_output.mv_freq_low[i] = true;
+                msud_output.mv_freq_norm[i] = false;
+            }
         }
     }
+    else
+    {
+        msud_output.is_MV_low_freq = false;
+        lowFreqTimer->stop();
+        normalFreqTimer->stop();
+        runOutTimer->stop();
 
-
-    normalFreqTimer->step(t, dt);
-    lowFreqTimer->step(t, dt);
-    fansBustTimer->step(t, dt);
-    runOutTimer->step(t, dt);
+        if (!fansBustTimer->isStarted())
+            fansBustTimer->start();
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -273,6 +304,7 @@ void MSUD::slotRunOutTimer()
     for (size_t i = 0; i < msud_output.mv_freq_low.size(); ++i)
     {
         msud_output.mv_freq_low[i] = true;
+        msud_output.mv_freq_norm[i] = false;
     }
 
     runOutTimer->stop();

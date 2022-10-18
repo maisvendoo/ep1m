@@ -12,6 +12,7 @@ void EP1m::stepMSUD(double t, double dt)
 
     msud_input.tumbler_MPK = tumblers[TUMBLER_MPK].getState();
     msud_input.is_automatic_mode = tumblers[TUMBLER_AUTO_MODE].getState();
+    msud_input.is_PCHF_On = tumblers[TUMBLER_PCHF].getState();
 
     msud->setPowerVoltage(Ucc * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_MSUD)));
     msud->setInputData(msud_input);

@@ -67,12 +67,13 @@ private:
 
     double I_fan_sw_max;
 
+    bool is_pchf_ignored;
+
+    bool old_is_norm_freq;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
-
-
-
 
      void ode_system(const state_vector_t &Y,
                      state_vector_t &dYdt,

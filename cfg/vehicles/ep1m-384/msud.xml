@@ -7,5 +7,6 @@
 		<FanRunoutTime>10.0</FanRunoutTime>
 		<FanSwitchCurrentMin>480.0</FanSwitchCurrentMin>
 		<FanSwitchCurrentMax>480.0</FanSwitchCurrentMax>
+		<Ignore_Off_PCHF>false</Ignore_Off_PCHF>
 	</Device>
 </Config>

@@ -47,6 +47,9 @@ struct msud_input_t
     /// Признак включения режима "АВТОРЕГУЛИРОВАНИЕ"
     bool is_automatic_mode;
 
+    /// Признак включения ПЧФ
+    bool is_PCHF_On;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -56,6 +59,7 @@ struct msud_input_t
     msud_input_t()
         : tumbler_MPK(false)
         , is_automatic_mode(false)
+        , is_PCHF_On(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(mv_state.begin(), mv_state.end(), false);
