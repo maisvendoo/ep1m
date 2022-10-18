@@ -56,6 +56,9 @@ struct msud_input_t
     /// Состояние мотор-вентиляторов
     std::array<bool, MOTOR_FANS_NUM> mv_state;
 
+    /// Давление в ТЦ тележек
+    std::array<double, TRAC_MOTORS_NUM / 2> TC_press;
+
     msud_input_t()
         : tumbler_MPK(false)
         , is_automatic_mode(false)
@@ -63,7 +66,7 @@ struct msud_input_t
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(mv_state.begin(), mv_state.end(), false);
-
+        std::fill(TC_press.begin(), TC_press.end(), 0.0);
     }
 };
 
@@ -75,21 +78,25 @@ struct msud_output_t
 {
     msud_state_t state;
 
-    // Подача питания на реле КМ23
+    /// Подача питания на реле КМ23
     bool kv23_on;
 
     /// Работа МВ на низкой частоте
     bool is_MV_low_freq;
 
-    // Включение МВ на низкой частоте
+    /// Признак наполнения тормозных цилиндров
+    int TC_full;
+
+    /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
-    // Включение МВ на нормальной частоте
+    /// Включение МВ на нормальной частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_norm;
 
     msud_output_t()
         : state(MSUD_OFF)
         , kv23_on(false)
         , is_MV_low_freq(false)
+        , TC_full(0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);

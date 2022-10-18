@@ -63,19 +63,37 @@ private:
     ManometerArrow* manArrV_;
     ManometerArrow* manArrI_;
 
+    QLabel* labCurTime_;
 
 //    int val1_ = 0;
 //    int val2_ = 0;
 
 
     QTimer updateTimer_;
+    QTimer timeTimer_;
+
+    QTimer timerTC_;
+    QTimer timerDB_;
+    QTimer timerMK_;
+    QTimer timerDM_;
+    QTimer timerNC_;
+    QTimer timerOB_;
+    QTimer timerKZ_;
+    QTimer timerOV_;
 
 
     void initDisplay_();
 
+    // Создание и расположение лейбла
     void createLab_(QLabel* &lab, QSize size,
                     QString color,
                     Qt::Alignment align = Qt::AlignHCenter);
+
+    // Создается соединение таймера и лейбла для "моргания"
+    void createConnectionTimer_(QTimer &timer, QLabel* &lab);
+
+    // Отображение лейбла/скрытие/стар "моргания"
+    void setStateLabKO_(QLabel* &lab, int signalEnum, QTimer &timer);
 
 
 private slots:

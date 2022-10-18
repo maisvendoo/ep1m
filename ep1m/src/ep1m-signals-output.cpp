@@ -106,4 +106,6 @@ void EP1m::signalsOutput()
 
     bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getCargeCurrent() <= 0.0;
     analogSignal[SIGNAL_MSUD_OB] = TO_FLOAT(is_MSUD_OB);
+
+    analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_full);
 }

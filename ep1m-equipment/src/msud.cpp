@@ -168,6 +168,14 @@ void MSUD::main_loop(double t, double dt)
     msud_output.kv23_on = true;
 
     motor_fans_control(t, dt);
+
+    double TC_max_press = max(msud_input.TC_press[1],
+            max(msud_input.TC_press[2], msud_input.TC_press[3]));
+
+    if (TC_max_press > 0.11)
+        msud_output.TC_full = 2;
+    else
+        msud_output.TC_full = 0;
 }
 
 //------------------------------------------------------------------------------
