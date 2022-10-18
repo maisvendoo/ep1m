@@ -36,6 +36,8 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_MV2] = TO_FLOAT(signals_module->getLampState(SM_V2));
     analogSignal[LAMP_MV3] = TO_FLOAT(signals_module->getLampState(SM_V3));
 
+    analogSignal[LAMP_NCH] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
+
     analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
     analogSignal[STRELKA_TM] = TO_FLOAT(pTM / 1.0);
     analogSignal[STRELKA_UR] = TO_FLOAT(brake_crane->getEqReservoirPressure() / 1.0);
@@ -84,4 +86,14 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT( (km->getTracLevel() +
                                                            qAbs(km->getBrakeLevel())) * 16);
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = msud_input.Ia[TRAC_MOTOR1];
+    analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!main_compressor->isStarted());
+    analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!main_compressor->isStarted());
+
+    analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = 0.0f;
+    analogSignal[SIGNAL_MSUD_TRACTION] = TO_FLOAT(msud_input.Ia[TRAC_MOTOR1] / 1300.0);
+
+    analogSignal[SIGNAL_MSUD_CURRENT_EPT] = ept_current[0];
+    analogSignal[SIGNAL_MSUD_VOLTAGE_EPT] = ept_converter->getU_out();
+
+    analogSignal[SIGNAL_MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
 }

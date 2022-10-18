@@ -187,6 +187,8 @@ void MSUD::motor_fans_control(double t, double dt)
             msud_output.mv_freq_norm[MV2] ||
             msud_output.mv_freq_norm[MV3];
 
+    msud_output.is_MV_low_freq = fans_run && is_low_freq;
+
     if (fans_run)
     {
         if (msud_input.Ia[TRAC_MOTOR1] <= I_fan_sw_min)

@@ -19,6 +19,8 @@ enum
 
     STRELKA_EPT_AMP = 10,
 
+    LAMP_NCH = 19,
+
     RUK_395 = 20,
 
     STRELKA_TM = 21,

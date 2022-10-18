@@ -32,4 +32,6 @@ void EP1m::setSignalsModuleInputs()
     signals_module->setLampInputSignal(SM_V1, motor_fan[MV1]->isNoReady());
     signals_module->setLampInputSignal(SM_V2, motor_fan[MV2]->isNoReady());
     signals_module->setLampInputSignal(SM_V3, motor_fan[MV3]->isNoReady());
+
+    signals_module->setLampInputSignal(SM_LOW_FREQ, msud->getOutputData().is_MV_low_freq);
 }

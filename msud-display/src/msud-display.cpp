@@ -286,27 +286,27 @@ void MsudDisplay::slotUpdateTimer()
     input_signals[SIGNAL_MSUD_MODE] = 1;
     input_signals[SIGNAL_MSUD_TC] = 1;
     input_signals[SIGNAL_MSUD_DB] = 1;
-    input_signals[SIGNAL_MSUD_MK] = 1;
+    //input_signals[SIGNAL_MSUD_MK] = 1;
     input_signals[SIGNAL_MSUD_DM] = 1;
-    input_signals[SIGNAL_MSUD_NC] = 1;
+    //input_signals[SIGNAL_MSUD_NC] = 1;
     input_signals[SIGNAL_MSUD_OB] = 1;
-    input_signals[SIGNAL_MSUD_KZ] = 1;
-    input_signals[SIGNAL_MSUD_OV] = 1;
-    input_signals[SIGNAL_MSUD_MPK] = 2;
+    input_signals[SIGNAL_MSUD_KZ] = 0;
+    input_signals[SIGNAL_MSUD_OV] = 0;
+    input_signals[SIGNAL_MSUD_MPK] = 1;
     input_signals[SIGNAL_MSUD_REVERSOR] = 2;
     input_signals[SIGNAL_MSUD_TRACTION_TYPE] = 1;
     input_signals[SIGNAL_MSUD_TRACTION_STATE] = 2;
-    input_signals[SIGNAL_MSUD_TRACTION] = 78;
-    input_signals[SIGNAL_MSUD_CURCUIT_VOZB] = 240;
+    //input_signals[SIGNAL_MSUD_TRACTION] = 78;
+    //input_signals[SIGNAL_MSUD_CURCUIT_VOZB] = 240;
     //input_signals[SIGNAL_MSUD_SPEED1] = 30.5;
     //input_signals[SIGNAL_MSUD_SPEED2] = 80.5;
     //input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1] = 850;
     //input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2] = 1100;
-    input_signals[SIGNAL_MSUD_CURRENT_EPT] = 4.6;
-    input_signals[SIGNAL_MSUD_VOLTAGE_EPT] = 22;
+    //input_signals[SIGNAL_MSUD_CURRENT_EPT] = 4.6;
+    //input_signals[SIGNAL_MSUD_VOLTAGE_EPT] = 22;
     input_signals[SIGNAL_MSUD_OSLAB_POLE1] = 1;
     input_signals[SIGNAL_MSUD_OSLAB_POLE2] = 1;
-    input_signals[SIGNAL_MSUD_OSLAB_POLE3] = 0;
+    input_signals[SIGNAL_MSUD_OSLAB_POLE3] = 1;
 
 
 

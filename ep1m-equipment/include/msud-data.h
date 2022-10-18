@@ -51,6 +51,7 @@ struct msud_input_t
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(mv_state.begin(), mv_state.end(), false);
+
     }
 };
 
@@ -65,6 +66,9 @@ struct msud_output_t
     // Подача питания на реле КМ23
     bool kv23_on;
 
+    /// Работа МВ на низкой частоте
+    bool is_MV_low_freq;
+
     // Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     // Включение МВ на нормальной частоте
@@ -73,6 +77,7 @@ struct msud_output_t
     msud_output_t()
         : state(MSUD_OFF)
         , kv23_on(false)
+        , is_MV_low_freq(false)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
