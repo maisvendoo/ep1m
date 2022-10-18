@@ -36,14 +36,6 @@ private:
     // Напряжение питания
     double  Uc;
 
-    // Доступные состояния МСУД
-    enum msud_state_t
-    {
-        MSUD_OFF = 0,
-        MSUD_RESET = 1,
-        MSUD_READY = 2
-    };
-
     // Текущее состояние МСУД
     msud_state_t     state;
 

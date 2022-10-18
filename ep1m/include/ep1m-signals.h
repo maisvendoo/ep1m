@@ -11,12 +11,23 @@ enum
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
 
+    // РБ
+    RB1 = 4,
+
+    // РБС
+    RBS = 5,
+
+    STRELKA_EPT_AMP = 10,
+
     RUK_395 = 20,
 
     STRELKA_TM = 21,
     STRELKA_UR = 22,
     STRELKA_GR = 23,
     STRELKA_TC = 24,
+
+    KVT215_AXIS = 29,
+    KVT215_RUK = 30,
 
     SIGNAL_TUMBLER_LOCK_VVK = 31, // Блокирование ВВК
     SIGNAL_TUMBLER_PANT1 = 32, // Токоприемник 1
@@ -28,6 +39,10 @@ enum
     SIGNAL_PANT2 = 41, // Задний токоприемник
 
     LAMP_GV = 42,
+
+    LAMP_EPT_O = 44,
+    LAMP_EPT_P = 45,
+    LAMP_EPT_T = 46,
 
     LAMP_MK1 = 50,
     LAMP_MK2 = 51,
@@ -42,6 +57,8 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
 
     STRELKA_U_KS = 98, // Напряжение КС
+
+    STRELKA_EPT_VOLT = 99,
 
     SIGNAL_TUMBLER_EPT = 100, // ЭПТ
 

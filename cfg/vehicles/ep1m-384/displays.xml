@@ -13,5 +13,18 @@
 		<Corner5>1.0 1.0</Corner5>
 		<Corner6>0.0 0.0</Corner6>
 	</Display> 
+	
+	
+	<Display>
+		<Module>msud-display</Module>
+		<SurfaceName>Display_MSUD</SurfaceName>
+		
+		<Corner1>0.0 0.0</Corner1>
+		<Corner2>1.0 0.0</Corner2>
+		<Corner3>1.0 1.0</Corner3>
+		<Corner4>1.0 1.0</Corner4>
+		<Corner5>0.0 1.0</Corner5>
+		<Corner6>0.0 0.0</Corner6>
+	</Display>
 
 </Config>

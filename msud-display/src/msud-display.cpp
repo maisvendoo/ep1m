@@ -39,7 +39,7 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
     : AbstractDisplay(parent, f)
 {
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
-    this->resize(800, 408);
+    this->resize(800, 608);
     this->setAutoFillBackground(true);
     this->setPalette(QPalette(QColor(0, 0, 0)));
 
@@ -55,13 +55,10 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
     familyFont_ = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
 
 
-    connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer, Qt::QueuedConnection);
-    updateTimer_.setInterval(1000);
+    connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer,
+            Qt::QueuedConnection);
+    updateTimer_.setInterval(100);
     updateTimer_.start();
-
-
-    updateTimer_.start(100);
-
 }
 
 
@@ -301,10 +298,10 @@ void MsudDisplay::slotUpdateTimer()
     input_signals[SIGNAL_MSUD_TRACTION_STATE] = 2;
     input_signals[SIGNAL_MSUD_TRACTION] = 78;
     input_signals[SIGNAL_MSUD_CURCUIT_VOZB] = 240;
-    input_signals[SIGNAL_MSUD_SPEED1] = 30.5;
-    input_signals[SIGNAL_MSUD_SPEED2] = 80.5;
-    input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1] = 850;
-    input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2] = 1100;
+    //input_signals[SIGNAL_MSUD_SPEED1] = 30.5;
+    //input_signals[SIGNAL_MSUD_SPEED2] = 80.5;
+    //input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1] = 850;
+    //input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2] = 1100;
     input_signals[SIGNAL_MSUD_CURRENT_EPT] = 4.6;
     input_signals[SIGNAL_MSUD_VOLTAGE_EPT] = 22;
     input_signals[SIGNAL_MSUD_OSLAB_POLE1] = 1;
@@ -316,8 +313,7 @@ void MsudDisplay::slotUpdateTimer()
 
 
     fon_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_POWER_SUPPLAY]));
-
-
+    fon_->raise();
 
 
     if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 1)

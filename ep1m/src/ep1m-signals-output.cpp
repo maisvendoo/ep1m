@@ -39,8 +39,11 @@ void EP1m::signalsOutput()
     analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
     analogSignal[STRELKA_TM] = TO_FLOAT(pTM / 1.0);
     analogSignal[STRELKA_UR] = TO_FLOAT(brake_crane->getEqReservoirPressure() / 1.0);
+    analogSignal[STRELKA_TC] = TO_FLOAT(brake_mech[FWD_TROLLEY]->getBrakeCylinderPressure() / 1.6);
 
     analogSignal[RUK_395] = TO_FLOAT(brake_crane->getHandlePosition());
+    analogSignal[KVT215_AXIS] = TO_FLOAT(loco_crane->getHandlePosition());
+    analogSignal[KVT215_RUK] = TO_FLOAT(loco_crane->getHandleShift());
 
     analogSignal[SIGNAL_WHEEL1] = TO_FLOAT(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL2] = TO_FLOAT(dir * wheel_rotation_angle[1] / 2.0 / Physics::PI);
@@ -48,4 +51,36 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_WHEEL4] = TO_FLOAT(dir * wheel_rotation_angle[3] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL5] = TO_FLOAT(dir * wheel_rotation_angle[4] / 2.0 / Physics::PI);
     analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(dir * wheel_rotation_angle[5] / 2.0 / Physics::PI);
+
+    analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
+    analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->getStateKey());
+
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = pTM;
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = brake_crane->getEqReservoirPressure();
+    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
+    analogSignal[SIGNAL_KLUB_U_ALSN] = alsn_info.code_alsn;
+    analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
+    analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
+    analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
+    analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
+
+    analogSignal[LAMP_EPT_O] = ept_pass_control->stateReleaseLamp();
+    analogSignal[LAMP_EPT_P] = ept_pass_control->stateHoldLamp();
+    analogSignal[LAMP_EPT_T] = ept_pass_control->stateBrakeLamp();
+
+    analogSignal[STRELKA_EPT_AMP] = ept_current[0] / 10.0;
+    analogSignal[STRELKA_EPT_VOLT] = ept_converter->getU_out() / 150.0;
+
+    analogSignal[RB1] = TO_FLOAT(tumblers[BUTTON_RB].getState());
+    analogSignal[RBS] = TO_FLOAT(tumblers[BUTTON_RBS].getState());
+
+    analogSignal[SIGNAL_MSUD_POWER_SUPPLAY] = TO_FLOAT(msud->getOutputData().state == MSUD_READY);
+    analogSignal[SIGNAL_MSUD_SPEED1] = 0.0f;
+    analogSignal[SIGNAL_MSUD_SPEED2] = TO_FLOAT(velocity * Physics::kmh);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT( (km->getTracLevel() +
+                                                           qAbs(km->getBrakeLevel())) * 16);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = msud_input.Ia[TRAC_MOTOR1];
 }

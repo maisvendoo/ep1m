@@ -23,6 +23,9 @@
 #include    "motor-fan.h"
 #include    "ubt367m.h"
 #include    "trolley-brake-mech.h"
+#include    "ept-converter.h"
+#include    "ept-pass-control.h"
+#include    "klub.h"
 
 //---------------------------------------------------------------------
 //
@@ -128,7 +131,37 @@ private:
 
     LocoCrane *loco_crane;
 
-    BrakeCrane *brake_crane;    
+    BrakeCrane *brake_crane;
+
+    AutoTrainStop *epk;
+
+    /// Запасный резервуар
+    Reservoir *aux_res;
+
+    /// Воздухораспределитель
+    AirDistributor *air_dist;
+
+    /// Электровоздухораспределитель
+    ElectroAirDistributor *electro_air_dist;
+
+    PneumoReley *rd4;
+
+    PneumoReley *rd1;
+    PneumoReley *rd2;
+    PneumoReley *rd3;
+
+    SwitchingValve *kp1;
+    SwitchingValve *kp2;
+    SwitchingValve *kp5;
+
+    PneumoSplitter *ps1;
+    PneumoSplitter *ps2;
+
+    EPTConverter *ept_converter;
+    EPTPassControl *ept_pass_control;
+
+    /// Блок электронный локомотивный (БЭЛ)
+    KLUB    *klub_BEL;
 
     enum
     {
@@ -195,6 +228,12 @@ private:
     /// Инициализация приборов торможения
     void initBrakeEquipment();
 
+    /// Инициализация ЭПТ
+    void initEPT();
+
+    /// Инициализация устройств безопасности
+    void initSafetyDevices();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -219,6 +258,10 @@ private:
     void stepBrakeControl(double t, double dt);
 
     void stepBrakeEquipment(double t, double dt);
+
+    void stepEPT(double t, double dt);
+
+    void stepSafetyDevices(double t, double dt);
 
     void signalsOutput();
 

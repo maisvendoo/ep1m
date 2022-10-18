@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Device>
+		<Order>1</Order>
+
+		<WorkVolume>4e-3</WorkVolume>
+		
+		<K1>1e-2</K1>
+		<K2>2e-2</K2>		
+
+		<k1>1.0</k1>		
+
+	</Device>
+</Config>

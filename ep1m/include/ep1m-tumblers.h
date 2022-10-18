@@ -18,7 +18,12 @@ enum
     BUTTON_MAIN_SWITCH_OFF = 1,
     SWITCH_REVERS_FWD = 2,
     SWITCH_REVERS_BWD = 3,
-    TUMBLER_BS_002 = 4
+    TUMBLER_BS_002 = 4,
+
+    BUTTON_RB = 5,
+    BUTTON_RBS = 6,
+
+    EPK_KEY = 7
 };
 
 #endif // EP1M_TUMBLERS_H
