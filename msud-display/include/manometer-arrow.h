@@ -11,7 +11,14 @@ class ManometerArrow : public QLabel
 public:
     ManometerArrow(QSize _size, int maxValScale, QWidget* parent = Q_NULLPTR);
 
-    QPair<int , int> setVals(int val1_line, int val2_arrow);
+//    QPair<int , int> setVals(int val1_line, int val2_arrow);
+
+
+    int setVal_Line(int val);
+    int setVal_Arrow(int val);
+
+    double setVal_LineD(double val);
+
 
 
 private:
@@ -24,9 +31,10 @@ private:
 
     int oldVal1_line_;
     int oldVal2_arrow_;
+    double oldVal1_lineD_;
 
 
-    void drawArrow_(int val1_line, int val2_arrow);
+    void drawArrow_(double val1_line, int val2_arrow = -1);
 
 
 };

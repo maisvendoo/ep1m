@@ -6,7 +6,8 @@
 #include    "display.h"
 
 #include    "status-bar.h"
-#include    "manometer-arrow.h"
+//#include    "manometer-arrow.h"
+#include    "manometer.h"
 
 
 class MsudDisplay : public AbstractDisplay
@@ -60,8 +61,14 @@ private:
     QLabel* labVoltageEPT_;
 
 
-    ManometerArrow* manArrV_;
-    ManometerArrow* manArrI_;
+//    ManometerArrow* manArrV_;
+//    ManometerArrow* manArrI_;
+
+    Manometer* man11_;
+    Manometer* man12_;
+    Manometer* man21_;
+    Manometer* man22_;
+
 
     QLabel* labCurTime_;
 
