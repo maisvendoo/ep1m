@@ -19,11 +19,11 @@ TracController::TracController(QObject *parent) : Device(parent)
   , brake_level(0)
   , dir(0)
 {
-    tracTimer.setTimeout(0.02);
+    tracTimer.setTimeout(0.06);
     connect(&tracTimer, &Timer::process,
             this, &TracController::slotTracLevelProcess);
 
-    brakeTimer.setTimeout(0.02);
+    brakeTimer.setTimeout(0.06);
     connect(&brakeTimer, &Timer::process,
             this, &TracController::slotBrakeLevelProcess);
 }

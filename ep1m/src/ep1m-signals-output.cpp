@@ -81,11 +81,11 @@ void EP1m::signalsOutput()
 
     bool is_visible = msud->getOutputData().state == MSUD_READY;
     analogSignal[SIGNAL_MSUD_POWER_SUPPLAY] = TO_FLOAT(is_visible);
-    analogSignal[SIGNAL_MSUD_SPEED1] = 0.0f;
-    analogSignal[SIGNAL_MSUD_SPEED2] = TO_FLOAT(velocity * Physics::kmh);
-    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT( (km->getTracLevel() +
-                                                           qAbs(km->getBrakeLevel())) * 16);
-    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = msud_input.Ia[TRAC_MOTOR1];
+    analogSignal[SIGNAL_MSUD_SPEED2] = 0.0f;
+    analogSignal[SIGNAL_MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km->getTracLevel() +
+                                                           qAbs(km->getBrakeLevel())) * 1600.0);
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = msud_input.Ia[TRAC_MOTOR1];
     analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!main_compressor->isStarted() && press_reg->getState());
     analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!main_compressor->isStarted());
 
@@ -107,7 +107,7 @@ void EP1m::signalsOutput()
     bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getCargeCurrent() <= 0.0;
     analogSignal[SIGNAL_MSUD_OB] = TO_FLOAT(is_MSUD_OB);
 
-    //analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_full);
+    analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_status);
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {
         analogSignal[LAMP_TC3 + i] = signals_module->getLampState(SM_LAMP_TC3 + i);

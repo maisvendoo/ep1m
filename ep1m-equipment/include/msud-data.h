@@ -3,7 +3,21 @@
 
 #include    <array>
 
+// Режимы работы статуса оборудования
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+enum
+{
+    MSUD_STATUS_OFF = 0,
+    MSUD_STATUS_ON = 1,
+    MSUD_STATUS_BLINK = 2
+};
+
 // Доступные состояния МСУД
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 enum msud_state_t
 {
     MSUD_OFF = 0,
@@ -86,6 +100,8 @@ struct msud_output_t
 
     double TC_min_press;
 
+    int TC_status;
+
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
@@ -98,6 +114,7 @@ struct msud_output_t
         , kv23_on(false)
         , is_MV_low_freq(false)
         , TC_min_press(0.11)
+        , TC_status(0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);

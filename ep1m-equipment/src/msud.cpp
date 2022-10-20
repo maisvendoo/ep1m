@@ -253,9 +253,21 @@ void MSUD::brake_cylinders_pressure_control(double t, double dt)
     Q_UNUSED(t)
     Q_UNUSED(dt)
 
+    bool is_TC_full = false;
+
     for (size_t i = 0; i < msud_output.TC_full.size(); ++i)
     {
         msud_output.TC_full[i] = msud_input.TC_press[i] > msud_output.TC_min_press;
+        is_TC_full |= msud_output.TC_full[i];
+    }
+
+    if (is_TC_full)
+    {
+        msud_output.TC_status = MSUD_STATUS_BLINK;
+    }
+    else
+    {
+        msud_output.TC_status = MSUD_STATUS_OFF;
     }
 }
 
