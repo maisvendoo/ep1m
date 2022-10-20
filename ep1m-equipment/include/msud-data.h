@@ -84,22 +84,24 @@ struct msud_output_t
     /// Работа МВ на низкой частоте
     bool is_MV_low_freq;
 
-    /// Признак наполнения тормозных цилиндров
-    int TC_full;
+    double TC_min_press;
 
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_norm;
+    /// Наполнение ТЦ тележек
+    std::array<bool, TRAC_MOTORS_NUM / 2> TC_full;
 
     msud_output_t()
         : state(MSUD_OFF)
         , kv23_on(false)
         , is_MV_low_freq(false)
-        , TC_full(0)
+        , TC_min_press(0.11)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
+        std::fill(TC_full.begin(), TC_full.end(), false);
     }
 };
 

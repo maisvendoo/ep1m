@@ -8,5 +8,6 @@
 		<FanSwitchCurrentMin>480.0</FanSwitchCurrentMin>
 		<FanSwitchCurrentMax>480.0</FanSwitchCurrentMax>
 		<Ignore_Off_PCHF>false</Ignore_Off_PCHF>
+		<TC_min_press>0.11</TC_min_press>
 	</Device>
 </Config>

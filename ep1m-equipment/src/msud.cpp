@@ -21,8 +21,7 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , fan_runout_time(10.0)
   , I_fan_sw_min(480)
   , I_fan_sw_max(510)
-  , is_pchf_ignored(false)
-  , old_is_norm_freq(false)
+  , is_pchf_ignored(false)  
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -103,6 +102,8 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "FanSwitchCurrentMax", I_fan_sw_max);
 
     cfg.getBool(secName, "Ignore_Off_PCHF", is_pchf_ignored);
+
+    cfg.getDouble(secName, "TC_min_press", msud_output.TC_min_press);
 }
 
 //------------------------------------------------------------------------------
@@ -169,13 +170,7 @@ void MSUD::main_loop(double t, double dt)
 
     motor_fans_control(t, dt);
 
-    double TC_max_press = max(msud_input.TC_press[1],
-            max(msud_input.TC_press[2], msud_input.TC_press[3]));
-
-    if (TC_max_press > 0.11)
-        msud_output.TC_full = 2;
-    else
-        msud_output.TC_full = 0;
+    brake_cylinders_pressure_control(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -247,6 +242,20 @@ void MSUD::motor_fans_control(double t, double dt)
 
         if (!fansBustTimer->isStarted())
             fansBustTimer->start();
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::brake_cylinders_pressure_control(double t, double dt)
+{
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
+    for (size_t i = 0; i < msud_output.TC_full.size(); ++i)
+    {
+        msud_output.TC_full[i] = msud_input.TC_press[i] > msud_output.TC_min_press;
     }
 }
 

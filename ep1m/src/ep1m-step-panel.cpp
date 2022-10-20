@@ -34,4 +34,11 @@ void EP1m::setSignalsModuleInputs()
     signals_module->setLampInputSignal(SM_V3, motor_fan[MV3]->isNoReady());
 
     signals_module->setLampInputSignal(SM_LOW_FREQ, msud->getOutputData().is_MV_low_freq);
+
+    for (size_t i = 0; i < brake_mech.size(); ++i)
+    {
+        signals_module->setLampInputSignal(SM_LAMP_TC3 + i,
+                                           brake_mech[i]->getBrakeCylinderPressure() >
+                                           msud->getOutputData().TC_min_press);
+    }
 }

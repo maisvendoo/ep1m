@@ -107,5 +107,9 @@ void EP1m::signalsOutput()
     bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getCargeCurrent() <= 0.0;
     analogSignal[SIGNAL_MSUD_OB] = TO_FLOAT(is_MSUD_OB);
 
-    analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_full);
+    //analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_full);
+    for (size_t i = 0; i < brake_mech.size(); ++i)
+    {
+        analogSignal[LAMP_TC3 + i] = signals_module->getLampState(SM_LAMP_TC3 + i);
+    }
 }

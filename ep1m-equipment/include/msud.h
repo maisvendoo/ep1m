@@ -67,9 +67,7 @@ private:
 
     double I_fan_sw_max;
 
-    bool is_pchf_ignored;
-
-    bool old_is_norm_freq;
+    bool is_pchf_ignored;    
 
     msud_input_t msud_input;
 
@@ -94,6 +92,9 @@ private:
 
      // Управление частотой вращения мотор-вентиляторов
      void motor_fans_control(double t, double dt);
+
+     // Контроль давления в ТЦ
+     void brake_cylinders_pressure_control(double t, double dt);
 
 private slots:
 
