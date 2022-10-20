@@ -248,12 +248,51 @@ void MsudDisplay::initDisplay_()
     labVoltageEPT_->move(698, fooY);
 
 
-    //
-    manArrV_ = new ManometerArrow(QSize(310, 111), 160, fon_);
-    manArrV_->move(55, 280);
 
-    manArrI_ = new ManometerArrow(QSize(310, 111), 1600, fon_);
-    manArrI_->move(434, 280);
+
+    //
+//    manArrV_ = new ManometerArrow(QSize(310, 111), 160, fon_);
+//    manArrV_->move(55, 280);
+
+//    manArrI_ = new ManometerArrow(QSize(310, 111), 1600, fon_);
+//    manArrI_->move(434, 280);
+
+
+
+    QSize manSize(330, 196);
+
+    man11_ = new Manometer(manSize, "man11", 160, fon_);
+    man11_->move(45, 232);
+    man11_->addTxtLab1(QRect(65,162, 65,28));
+    man11_->addTxtLab2(QRect(209,162, 65,28));
+    //man11_->setVal_Line(10);
+    //man11_->setVal_Arrow(20);
+    man11_->setVisible(true);
+
+    man12_ = new Manometer(manSize, "man12", 1600, fon_);
+    man12_->move(423, 232);
+    man12_->addTxtLab1(QRect(50,162, 85,28));
+    man12_->addTxtLab2(QRect(200,162, 85,28));
+    //man12_->setVal_Line(500);
+    //man12_->setVal_Arrow(600);
+    man12_->setVisible(true);
+
+    man21_ = new Manometer(manSize, "man21", 4, fon_, false, "green");
+    man21_->move(45, 232);
+    man21_->addTxtLab1(QRect(135,162, 55,28));
+    //man21_->setVal_zonaVIP(1.2);
+    man21_->setVisible(true);
+
+    man22_ = new Manometer(manSize, "man22", 1600, fon_, false, "green");
+    man22_->move(423, 232);
+    man22_->addTxtLab1(QRect(120,162, 85,28));
+    //man22_->setVal_Line(1600);
+    man22_->setVisible(true);
+
+
+
+
+
 
 
     createLab_(labCurTime_, QSize(135, fooH), "yellow", Qt::AlignLeft);
@@ -340,6 +379,7 @@ void MsudDisplay::setStateLabKO_(QLabel *&lab, int signalEnum, QTimer &timer)
 void MsudDisplay::slotUpdateTimer()
 {
 
+
     //input_signals[SIGNAL_MSUD_POWER_SUPPLAY] = 1;
     //input_signals[SIGNAL_MSUD_MODE] = 0;
     //input_signals[SIGNAL_MSUD_TC] = 1;
@@ -382,11 +422,51 @@ void MsudDisplay::slotUpdateTimer()
     fon_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_POWER_SUPPLAY]));
 
     if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 1)
-        labMode_->setText(MODE_AUTO_REG);
+    {
+        if (man21_->isVisible())
+        {
+            labMode_->setText(MODE_AUTO_REG);
+
+            man21_->setVisible(false);
+            man22_->setVisible(false);
+
+            man11_->setVisible(true);
+            man12_->setVisible(true);
+        }
+
+        //
+        man11_->setVal_Line(input_signals[SIGNAL_MSUD_SPEED2]);
+        man11_->setVal_Arrow(input_signals[SIGNAL_MSUD_SPEED1]);
+
+        //
+        man12_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2]);
+        man12_->setVal_Arrow(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]);
+
+    }
     else if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 2)
-        labMode_->setText(MODE_HAND_REG);
+    {
+
+        if (man11_->isVisible())
+        {
+            labMode_->setText(MODE_HAND_REG);
+
+            man11_->setVisible(false);
+            man12_->setVisible(false);
+
+            man21_->setVisible(true);
+            man22_->setVisible(true);
+        }
+
+        //
+        man21_->setVal_zonaVIP(0);
+
+        //
+        man22_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]);
+    }
     else
+    {
         labMode_->setText("");
+    }
 
 
     setStateLabKO_(labKO_TC_, SIGNAL_MSUD_TC, timerTC_);
@@ -489,21 +569,21 @@ void MsudDisplay::slotUpdateTimer()
 //        val2_ = 0;
 //    val2_ += 10;
 
-    QPair<int, int> pair1 = manArrV_->setVals(static_cast<double>(input_signals[SIGNAL_MSUD_SPEED1]),
-                                              static_cast<double>(input_signals[SIGNAL_MSUD_SPEED2]));
-    if (pair1.first != -1)
-    {
-        labV1_->setText(QString::number(pair1.first));
-        labV2_->setText(QString::number(pair1.second));
-    }
+//    QPair<int, int> pair1 = manArrV_->setVals(static_cast<double>(input_signals[SIGNAL_MSUD_SPEED1]),
+//                                              static_cast<double>(input_signals[SIGNAL_MSUD_SPEED2]));
+//    if (pair1.first != -1)
+//    {
+//        labV1_->setText(QString::number(pair1.first));
+//        labV2_->setText(QString::number(pair1.second));
+//    }
 
-    QPair<int, int> pair2 = manArrI_->setVals(static_cast<double>(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]),
-                                              static_cast<double>(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2]));
-    if (pair2.first != -1)
-    {
-        labI1_->setText(QString::number(pair2.first));
-        labI2_->setText(QString::number(pair2.second));
-    }
+//    QPair<int, int> pair2 = manArrI_->setVals(static_cast<double>(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]),
+//                                              static_cast<double>(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2]));
+//    if (pair2.first != -1)
+//    {
+//        labI1_->setText(QString::number(pair2.first));
+//        labI2_->setText(QString::number(pair2.second));
+//    }
 
 
 }
