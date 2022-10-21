@@ -112,4 +112,6 @@ void EP1m::signalsOutput()
     {
         analogSignal[LAMP_TC3 + i] = signals_module->getLampState(SM_LAMP_TC3 + i);
     }
+
+    analogSignal[REF_SPEED] = TO_FLOAT(km->getRefSpeedLevel());
 }

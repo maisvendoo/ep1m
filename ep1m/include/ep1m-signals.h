@@ -11,6 +11,8 @@ enum
     // Тумблеры блока выключателей
     SIGNAL_TUMBLER_MSUD = 1, // МСУД
 
+    REF_SPEED = 3,
+
     // РБ
     RB1 = 4,
 
