@@ -77,7 +77,9 @@ private:
 
     int dir;
 
-    int ref_speed_level;
+    double ref_speed_level;
+
+    double ref_speed_step;
 
     int ref_speed_dir;
 

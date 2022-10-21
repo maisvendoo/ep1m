@@ -58,7 +58,7 @@ MsudDisplay::MsudDisplay(QWidget *parent, Qt::WindowFlags f)
 
     connect(&updateTimer_, &QTimer::timeout, this, &MsudDisplay::slotUpdateTimer,
             Qt::QueuedConnection);
-    updateTimer_.setInterval(100);
+    updateTimer_.setInterval(1000);
     updateTimer_.start();
 }
 

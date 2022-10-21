@@ -19,6 +19,7 @@ TracController::TracController(QObject *parent) : Device(parent)
   , brake_level(0)
   , dir(0)
   , ref_speed_level(0)
+  , ref_speed_step(0.5)
   , ref_speed_dir(0)
 {
     tracTimer.setTimeout(0.1);
@@ -268,7 +269,7 @@ void TracController::slotBrakeLevelProcess()
 //------------------------------------------------------------------------------
 void TracController::slotSpeedLevelProcess()
 {
-    ref_speed_level += ref_speed_dir;
+    ref_speed_level += ref_speed_dir * ref_speed_step;
 
-    ref_speed_level = cut(ref_speed_level, 0, 100);
+    ref_speed_level = cut(ref_speed_level, 0.0, 100.0);
 }
