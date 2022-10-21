@@ -46,6 +46,8 @@ public:
 
     double getBrakeLevel() const { return static_cast<double>(brake_level) / 100.0; }
 
+    double getRefSpeedLevel() const { return static_cast<double>(ref_speed_level) / 100.0; }
+
 private:
 
     /// Позиция, определяющая состояние схемы
@@ -75,9 +77,15 @@ private:
 
     int dir;
 
+    int ref_speed_level;
+
+    int ref_speed_dir;
+
     Timer tracTimer;
 
     Timer brakeTimer;
+
+    Timer speedTimer;
 
     Trigger traction;
 
@@ -100,6 +108,8 @@ private slots:
     void slotTracLevelProcess();
 
     void slotBrakeLevelProcess();
+
+    void slotSpeedLevelProcess();
 };
 
 #endif // KM_35_01_H

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Device>
+		<Order>1</Order>
+		<KM_main_Timeout>0.1</KM_main_Timeout>
+		<Ref_Speed_Timeout>0.2</Ref_Speed_Timeout>
+	</Device>
+</Config>

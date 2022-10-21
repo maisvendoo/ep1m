@@ -18,14 +18,21 @@ TracController::TracController(QObject *parent) : Device(parent)
   , trac_level(0)
   , brake_level(0)
   , dir(0)
+  , ref_speed_level(0)
+  , ref_speed_dir(0)
 {
-    tracTimer.setTimeout(0.06);
+    tracTimer.setTimeout(0.1);
     connect(&tracTimer, &Timer::process,
             this, &TracController::slotTracLevelProcess);
 
-    brakeTimer.setTimeout(0.06);
+    brakeTimer.setTimeout(0.1);
     connect(&brakeTimer, &Timer::process,
             this, &TracController::slotBrakeLevelProcess);
+
+    speedTimer.setTimeout(0.1);
+    //connect(&speedTimer, &Timer::process,
+      //      this, &TracController::slotSpeedLevelProcess);
+    //speedTimer.start();
 }
 
 //------------------------------------------------------------------------------
@@ -78,7 +85,19 @@ void TracController::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void TracController::load_config(CfgReader &cfg)
 {
+    QString secName = "Device";
 
+    double timeout = 0.0;
+    cfg.getDouble(secName, "KM_main_Timeout", timeout);
+
+    tracTimer.setTimeout(timeout);
+    brakeTimer.setTimeout(timeout);
+
+    cfg.getDouble(secName, "Ref_Speed_Timeout", timeout);
+    speedTimer.setTimeout(timeout);
+    connect(&speedTimer, &Timer::process,
+            this, &TracController::slotSpeedLevelProcess);
+    speedTimer.start();
 }
 
 //------------------------------------------------------------------------------
@@ -184,6 +203,20 @@ void TracController::stepKeysControl(double t, double dt)
 
     old_fwd_key_state = fwd_key_state;
     old_bwd_key_state = bwd_key_state;
+
+    ref_speed_dir = 0;
+
+    if (getKeyState(KEY_Q))
+    {
+        ref_speed_dir = 1;
+    }
+
+    if (getKeyState(KEY_E))
+    {
+        ref_speed_dir = -1;
+    }
+
+    speedTimer.step(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -228,4 +261,14 @@ void TracController::slotBrakeLevelProcess()
     brake_level += dir * mode_pos;
 
     brake_level = cut(brake_level, 0, 100);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TracController::slotSpeedLevelProcess()
+{
+    ref_speed_level += ref_speed_dir;
+
+    ref_speed_level = cut(ref_speed_level, 0, 100);
 }
