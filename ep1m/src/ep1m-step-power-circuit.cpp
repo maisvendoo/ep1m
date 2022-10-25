@@ -31,4 +31,5 @@ void EP1m::stepPowerCircuit(double t, double dt)
 
     safety_valve->setVoltage(Ucc * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_LOCK_VVK)));
     safety_valve->step(t, dt);
+
 }

@@ -26,6 +26,7 @@
 #include    "ept-converter.h"
 #include    "ept-pass-control.h"
 #include    "klub.h"
+#include    "trac-motor.h"
 
 //---------------------------------------------------------------------
 //
@@ -195,6 +196,8 @@ private:
     };
 
     std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
+
+    std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
 
     void initialization() override;
 

@@ -43,4 +43,7 @@ void EP1m::initAuxMachines()
     {
         motor_fan[i] = new MotorFan(i + 1);
     }
+
+    // Тумблер "ПЧФ" включен по-умолчанию
+    tumblers[TUMBLER_PCHF].set();
 }
