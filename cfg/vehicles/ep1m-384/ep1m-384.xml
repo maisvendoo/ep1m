@@ -9,6 +9,7 @@
         <NumAxis>6</NumAxis>
         <SoundDir>ep1m</SoundDir>
         <WheelInertia>2.0</WheelInertia>
+		<ReguctorCoeff>3.38</ReguctorCoeff>
 
 		<MainResLeak>4e-5</MainResLeak>
 		

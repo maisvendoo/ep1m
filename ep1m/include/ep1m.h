@@ -115,6 +115,9 @@ private:
 
     double  charge_press;
 
+    /// Передаточное число тягового редуктора
+    double ip;
+
     Relay   *km7;
 
     Relay   *km8;
@@ -163,6 +166,7 @@ private:
 
     /// Блок электронный локомотивный (БЭЛ)
     KLUB    *klub_BEL;
+
 
     enum
     {

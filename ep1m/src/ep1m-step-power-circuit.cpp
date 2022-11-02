@@ -32,4 +32,15 @@ void EP1m::stepPowerCircuit(double t, double dt)
     safety_valve->setVoltage(Ucc * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_LOCK_VVK)));
     safety_valve->step(t, dt);
 
+    for (size_t i = 0; i < trac_motor.size(); ++i)
+    {
+        // Передаем модели двигателя данные об угловой скорости его вала
+        trac_motor[i]->setOmega(wheel_omega[i] * ip);
+
+        // ВЫдаем момент на тяговые оси
+        Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
+
+        trac_motor[i]->step(t, dt);
+
+    }
 }
