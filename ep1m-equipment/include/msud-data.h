@@ -67,6 +67,9 @@ struct msud_input_t
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
+    /// Токи возбуждения тяговых двигателей
+    std::array<double, TRAC_MOTORS_NUM> If;
+
     /// Состояние мотор-вентиляторов
     std::array<bool, MOTOR_FANS_NUM> mv_state;
 
@@ -79,6 +82,7 @@ struct msud_input_t
         , is_PCHF_On(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
+        std::fill(If.begin(), If.end(), 0.0);
         std::fill(mv_state.begin(), mv_state.end(), false);
         std::fill(TC_press.begin(), TC_press.end(), 0.0);
     }

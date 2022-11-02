@@ -27,6 +27,7 @@
 #include    "ept-pass-control.h"
 #include    "klub.h"
 #include    "trac-motor.h"
+#include    "vip-5600.h"
 
 //---------------------------------------------------------------------
 //
@@ -202,6 +203,14 @@ private:
     std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
 
     std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
+
+    /// Выпрямительно инверторные преобразователи
+    enum
+    {
+        RECT_INV_CONV_NUM = 2
+    };
+
+    std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
 
     void initialization() override;
 

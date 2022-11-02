@@ -37,10 +37,10 @@ void EP1m::stepPowerCircuit(double t, double dt)
         // Передаем модели двигателя данные об угловой скорости его вала
         trac_motor[i]->setOmega(wheel_omega[i] * ip);
 
-        // ВЫдаем момент на тяговые оси
+        // Выдаем момент на тяговые оси
         Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
 
+        // Моделируем работу ТЭД
         trac_motor[i]->step(t, dt);
-
     }
 }
