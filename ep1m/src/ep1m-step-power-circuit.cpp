@@ -32,6 +32,15 @@ void EP1m::stepPowerCircuit(double t, double dt)
     safety_valve->setVoltage(Ucc * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_LOCK_VVK)));
     safety_valve->step(t, dt);
 
+    // Задаем напряжения на якорях ТЭД
+    trac_motor[TRAC_MOTOR1]->setAncorVoltage(vip[VIP1]->getU_out());
+    trac_motor[TRAC_MOTOR2]->setAncorVoltage(vip[VIP1]->getU_out());
+    trac_motor[TRAC_MOTOR3]->setAncorVoltage(vip[VIP1]->getU_out());
+
+    trac_motor[TRAC_MOTOR4]->setAncorVoltage(vip[VIP2]->getU_out());
+    trac_motor[TRAC_MOTOR5]->setAncorVoltage(vip[VIP2]->getU_out());
+    trac_motor[TRAC_MOTOR6]->setAncorVoltage(vip[VIP2]->getU_out());
+
     for (size_t i = 0; i < trac_motor.size(); ++i)
     {
         // Передаем модели двигателя данные об угловой скорости его вала
@@ -47,10 +56,24 @@ void EP1m::stepPowerCircuit(double t, double dt)
     vip[VIP1]->setU1(trac_trans->getUt1());
     vip[VIP1]->setU2(trac_trans->getUt2());
     vip[VIP1]->setU3(trac_trans->getUt3());
+
+    // Полный ток, потребляемый от ВИП1
+    double I_vip1 = trac_motor[TRAC_MOTOR1]->getAncorCurrent() +
+            trac_motor[TRAC_MOTOR2]->getAncorCurrent() +
+            trac_motor[TRAC_MOTOR3]->getAncorCurrent();
+
+    vip[VIP1]->setI_out(I_vip1);
     vip[VIP1]->step(t, dt);
 
     vip[VIP2]->setU1(trac_trans->getUt1());
     vip[VIP2]->setU2(trac_trans->getUt2());
     vip[VIP2]->setU3(trac_trans->getUt3());
+
+    // Полный ток, потребляемый от ВИП2
+    double I_vip2 = trac_motor[TRAC_MOTOR4]->getAncorCurrent() +
+            trac_motor[TRAC_MOTOR5]->getAncorCurrent() +
+            trac_motor[TRAC_MOTOR6]->getAncorCurrent();
+
+    vip[VIP2]->setI_out(I_vip2);
     vip[VIP2]->step(t, dt);
 }
