@@ -31,4 +31,10 @@ void EP1m::initPowerCircuit()
         trac_motor[i]->load_magnetic_char(config_dir + QDir::separator() + "nb-520v.txt");
         trac_motor[i]->load_eff_coeff(config_dir + QDir::separator() + "nb-520v-eff-coeff.txt");
     }
+
+    vip[VIP1] = new RectInvertConverter();
+    vip[VIP1]->read_custom_config(config_dir + QDir::separator() + "vip-5600");
+
+    vip[VIP2] = new RectInvertConverter();
+    vip[VIP2]->read_custom_config(config_dir + QDir::separator() + "vip-5600");
 }

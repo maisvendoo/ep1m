@@ -3,7 +3,10 @@
 	<Device>
 		<Order>1</Order>
 
-		<InternalRes>0.03</InternalRes>		
+		<InternalRes>0.03</InternalRes>	
+		<AlphaMin>9.0</AlphaMin>
+		<AlphaMax>90.0</AlphaMax>
+		<K_rect>0.9</K_rect>
 
 	</Device>
 </Config>

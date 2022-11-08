@@ -43,4 +43,14 @@ void EP1m::stepPowerCircuit(double t, double dt)
         // Моделируем работу ТЭД
         trac_motor[i]->step(t, dt);
     }
+
+    vip[VIP1]->setU1(trac_trans->getUt1());
+    vip[VIP1]->setU2(trac_trans->getUt2());
+    vip[VIP1]->setU3(trac_trans->getUt3());
+    vip[VIP1]->step(t, dt);
+
+    vip[VIP2]->setU1(trac_trans->getUt1());
+    vip[VIP2]->setU2(trac_trans->getUt2());
+    vip[VIP2]->setU3(trac_trans->getUt3());
+    vip[VIP2]->step(t, dt);
 }

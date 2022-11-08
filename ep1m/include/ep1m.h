@@ -207,7 +207,9 @@ private:
     /// Выпрямительно инверторные преобразователи
     enum
     {
-        RECT_INV_CONV_NUM = 2
+        RECT_INV_CONV_NUM = 2,
+        VIP1 = 0,
+        VIP2 = 1
     };
 
     std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
