@@ -18,6 +18,12 @@ public:
 
     double getControlPowerVoltage() const { return U2cc; }
 
+    double getUt1() const { return Ut1; }
+
+    double getUt2() const { return Ut2; }
+
+    double getUt3() const { return Ut3; }
+
 private:
 
     /// Напряжение на первичной обмотке
@@ -28,6 +34,21 @@ private:
 
     /// Напряжение обмотки питания собственных нужд
     double U2cc;
+
+    /// Коэффициент передачи на четверть тяговой полуобмотки
+    double K1_4;
+
+    /// Коэфициент передачи на половину тяговой полуобмотки
+    double K2_4;
+
+    /// Напряжение первой секции тяговогой обмотки (четверть)
+    double Ut1;
+
+    /// Напряжение второй секции тяговой обмотки (втрорая четверть)
+    double Ut2;
+
+    /// Напряжение третьей секции тяговой обмотки (последняя половина)
+    double Ut3;
 
     void ode_system(const state_vector_t &Y,
                     state_vector_t &dYdt,

@@ -4,6 +4,10 @@
 //
 //------------------------------------------------------------------------------
 RectInvertConverter::RectInvertConverter(QObject *parent) : Device(parent)
+  , r(0.03)
+  , U1(0.0)
+  , U2(0.0)
+  , U3(0.0)
 {
 
 }
@@ -16,17 +20,33 @@ RectInvertConverter::~RectInvertConverter()
 
 }
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void RectInvertConverter::preStep(state_vector_t &Y, double t)
 {
-
+    Q_UNUSED(Y)
+    Q_UNUSED(t)
 }
 
-void RectInvertConverter::ode_system(const state_vector_t &Y, state_vector_t &dYdt, double t)
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void RectInvertConverter::ode_system(const state_vector_t &Y,
+                                     state_vector_t &dYdt,
+                                     double t)
 {
-
+    Q_UNUSED(Y)
+    Q_UNUSED(dYdt)
+    Q_UNUSED(t)
 }
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void RectInvertConverter::load_config(CfgReader &cfg)
 {
+    QString secName = "Device";
 
+    cfg.getDouble(secName, "InternalRes", r);
 }
