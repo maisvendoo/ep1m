@@ -12,6 +12,7 @@ void EP1m::loadConfig(QString path)
         QString secName = "Vehicle";
 
         cfg.getDouble(secName, "MainResLeak", main_res_leak);
+        cfg.getDouble(secName, "ReductorCoeff", ip);
     }
 }
 

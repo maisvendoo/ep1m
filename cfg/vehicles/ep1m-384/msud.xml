@@ -9,5 +9,7 @@
 		<FanSwitchCurrentMax>480.0</FanSwitchCurrentMax>
 		<Ignore_Off_PCHF>false</Ignore_Off_PCHF>
 		<TC_min_press>0.11</TC_min_press>
+		<AlphaMin>9.0</AlphaMin>
+		<AlphaMax>90.0</AlphaMax>
 	</Device>
 </Config>

@@ -27,6 +27,7 @@
 #include    "ept-pass-control.h"
 #include    "klub.h"
 #include    "trac-motor.h"
+#include    "vip-5600.h"
 
 //---------------------------------------------------------------------
 //
@@ -115,6 +116,9 @@ private:
 
     double  charge_press;
 
+    /// Передаточное число тягового редуктора
+    double ip;
+
     Relay   *km7;
 
     Relay   *km8;
@@ -164,6 +168,7 @@ private:
     /// Блок электронный локомотивный (БЭЛ)
     KLUB    *klub_BEL;
 
+
     enum
     {
         PANT_NUMBER = 2,
@@ -198,6 +203,16 @@ private:
     std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
 
     std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
+
+    /// Выпрямительно инверторные преобразователи
+    enum
+    {
+        RECT_INV_CONV_NUM = 2,
+        VIP1 = 0,
+        VIP2 = 1
+    };
+
+    std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
 
     void initialization() override;
 

@@ -8,7 +8,12 @@ void EP1m::stepMSUD(double t, double dt)
     for (size_t i = 0; i < motor_fan.size(); ++i)
         msud_input.mv_state[i] = !motor_fan[i]->isNoReady();
 
-    //msud_input.Ia[TRAC_MOTOR1] = 1300.0 * km->getTracLevel();
+    // Мерям токи тяговых двигателей
+    for (size_t i = 0; i < msud_input.Ia.size(); ++i)
+    {
+        msud_input.Ia[i] = trac_motor[i]->getAncorCurrent();
+        msud_input.If[i] = trac_motor[i]->getFieldCurrent();
+    }
 
     msud_input.tumbler_MPK = tumblers[TUMBLER_MPK].getState();
     msud_input.is_automatic_mode = tumblers[TUMBLER_AUTO_MODE].getState();

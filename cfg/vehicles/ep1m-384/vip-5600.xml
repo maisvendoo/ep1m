@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Device>
+		<Order>1</Order>
+
+		<InternalRes>0.03</InternalRes>	
+		<K_rect>0.9</K_rect>
+
+	</Device>
+</Config>
