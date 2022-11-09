@@ -104,6 +104,15 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getBool(secName, "Ignore_Off_PCHF", is_pchf_ignored);
 
     cfg.getDouble(secName, "TC_min_press", msud_output.TC_min_press);
+
+    QDomNode secNode = cfg.getFirstSection("Zone");
+
+    while (!secNode.isNull())
+    {
+
+
+        secNode = cfg.getNextSection();
+    }
 }
 
 //------------------------------------------------------------------------------

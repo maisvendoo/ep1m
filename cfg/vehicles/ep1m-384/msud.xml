@@ -12,4 +12,26 @@
 		<AlphaMin>9.0</AlphaMin>
 		<AlphaMax>90.0</AlphaMax>
 	</Device>
+	
+	<!-- Диапазон напряжений зон ВИП -->
+	<Zone>
+		<Umin>0.0</Umin>
+		<Umax>350.0</Umax>
+	</Zone>
+	
+	<Zone>
+		<Umin>350.0</Umin>
+		<Umax>700.0</Umax>
+	</Zone>
+	
+	<Zone>
+		<Umin>700.0</Umin>
+		<Umax>1050.0</Umax>
+	</Zone>
+	
+	<Zone>
+		<Umin>1050.0</Umin>
+		<Umax>1400.0</Umax>
+	</Zone>
+	
 </Config>
