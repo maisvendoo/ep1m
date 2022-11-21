@@ -28,6 +28,7 @@
 #include    "klub.h"
 #include    "trac-motor.h"
 #include    "vip-5600.h"
+#include    "reversor.h"
 
 //---------------------------------------------------------------------
 //
@@ -118,6 +119,9 @@ private:
 
     /// Передаточное число тягового редуктора
     double ip;
+
+    /// Реверсор
+    Reversor *reversor;
 
     Relay   *km7;
 

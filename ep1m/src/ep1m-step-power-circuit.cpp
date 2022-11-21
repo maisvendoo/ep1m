@@ -43,6 +43,9 @@ void EP1m::stepPowerCircuit(double t, double dt)
 
     for (size_t i = 0; i < trac_motor.size(); ++i)
     {
+        // Передаем состояние реверсивного переключателя
+        trac_motor[i]->setReversSate(reversor->getState());
+
         // Передаем модели двигателя данные об угловой скорости его вала
         trac_motor[i]->setOmega(wheel_omega[i] * ip);
 
@@ -76,4 +79,9 @@ void EP1m::stepPowerCircuit(double t, double dt)
 
     vip[VIP2]->setI_out(I_vip2);
     vip[VIP2]->step(t, dt);
+
+    // Работа реверсивного переключателя
+    reversor->setForwardValveState(km->getReversHandlePos() == 1);
+    reversor->setBackwardValveState(km->getReversHandlePos() == -1);
+    reversor->step(t, dt);
 }

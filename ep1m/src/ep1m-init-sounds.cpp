@@ -82,4 +82,6 @@ void EP1m::initSounds()
     connect(epk, &AutoTrainStop::soundStop, this, &EP1m::soundStop);
 
     connect(klub_BEL, &KLUB::soundPlay, this, &EP1m::soundPlay);
+
+    connect(reversor, &Reversor::soundPlay, this, &EP1m::soundPlay);
 }

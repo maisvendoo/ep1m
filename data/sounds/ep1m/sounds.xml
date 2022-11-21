@@ -111,6 +111,17 @@
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
+	
+	<!-- Реверсор -->
+	<Sound>
+		<Name>Reversor</Name>
+		<Path>reversor.wav</Path>
+		<InitVolume>50</InitVolume>
+		<MaxVolume>50</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
 
 	<!-- Рукоятка КМ -->
 	<Sound>

@@ -37,4 +37,7 @@ void EP1m::initPowerCircuit()
 
     vip[VIP2] = new RectInvertConverter();
     vip[VIP2]->read_custom_config(config_dir + QDir::separator() + "vip-5600");
+
+    reversor = new Reversor();
+    reversor->read_custom_config(config_dir + QDir::separator() + "reversor");
 }
