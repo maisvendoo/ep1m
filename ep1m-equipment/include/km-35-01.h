@@ -34,6 +34,11 @@ public:
         return (trac_level == 0) && (brake_level == 0);
     }
 
+    bool isContacts5_6() const
+    {
+        return (revers_pos == 1) || (revers_pos == -1);
+    }
+
     void setFwdKeyState(bool key_state) { fwd_key_state = key_state; }
 
     void setBwdKeyState(bool key_state) { bwd_key_state = key_state; }

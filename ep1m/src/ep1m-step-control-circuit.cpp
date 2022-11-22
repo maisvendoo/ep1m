@@ -26,6 +26,13 @@ void EP1m::stepControlCircuit(double t, double dt)
     kv21->setVoltage(Ucc * static_cast<double>(is_kv21_on));
     kv21->step(t, dt);
 
+    // Цепь питания контактора КМ43
+    bool is_km43_on = tumblers_panel->getTumblerState(TUMBLER_MSUD) &&
+            (kv21->getContactState(1) || km43->getContactState(0));
+
+    km43->setVoltage(Ucc * static_cast<double>(is_km43_on));
+    km43->step(t, dt);
+
     kv22->setVoltage(Ucc * static_cast<double>(is_kv22_on));
     kv22->step(t, dt);
 
@@ -55,11 +62,9 @@ void EP1m::stepControlCircuit(double t, double dt)
             kv44->getContactState(2) &&
             kv23->getContactState(0);
 
-    main_switch->setReturn(return_GV);
+    main_switch->setReturn(return_GV);        
 
-    // Контроль давления в тормозной магистрали
-    sp4->setInput(pTM);
-    sp4->step(t, dt);
+    stepTractionControl(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -75,4 +80,23 @@ bool EP1m::getHoldingCoilState()
             safety_valve->getState();
 
     return is_holding_coil_on;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::stepTractionControl(double t, double dt)
+{
+    bool is_KV11_KV12_on = km->isContacts5_6() &&
+            epk->getEmeggencyBrakeContact();
+
+    kv11->setVoltage(Ucc * static_cast<double>(is_KV11_KV12_on));
+    kv11->step(t, dt);
+
+    kv12->setVoltage(Ucc * static_cast<double>(is_KV11_KV12_on));
+    kv12->step(t, dt);
+
+    // Контроль давления в тормозной магистрали
+    sp4->setInput(pTM);
+    sp4->step(t, dt);
 }

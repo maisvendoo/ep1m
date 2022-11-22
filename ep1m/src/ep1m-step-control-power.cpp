@@ -21,5 +21,5 @@ void EP1m::stepControlPower(double t, double dt)
     power_supply->setInputVoltage(trac_trans->getControlPowerVoltage() * static_cast<double>(km5->getContactState(0)));
     power_supply->step(t, dt);
 
-    Ucc = power_supply->getPowerControlVoltage();
+    Ucc = max(power_supply->getPowerControlVoltage(), battery->getVoltage());
 }

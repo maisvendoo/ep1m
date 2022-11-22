@@ -13,4 +13,6 @@ void EP1m::initPanel()
     km->read_custom_config(config_dir + QDir::separator() + "km-35-01");
 
     signals_module = new SignalizationModule();
+
+    tumblers[BUTTON_EMERGENCY_BRAKE].set();
 }
