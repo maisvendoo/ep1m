@@ -61,7 +61,7 @@ void EP1m::initControlCircuit()
 
     kv12 = new Relay(4);
     kv12->read_custom_config(config_dir + QDir::separator() + "mk-69");
-    kv12->setInitContactState(0, false);
+    kv12->setInitContactState(0, true);
     kv12->setInitContactState(1, false);
     kv12->setInitContactState(2, false);
     kv12->setInitContactState(3, false);
