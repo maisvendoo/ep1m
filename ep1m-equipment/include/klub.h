@@ -107,6 +107,8 @@ public:
 
    int getStationIndex() const { return station_idx; }
 
+   bool isTractionAllowed() const { return is_trac_allowed; }
+
 private:
 
    double U_pow;
@@ -182,6 +184,9 @@ private:
 
    /// Флаг окончания поиска начальной станции
    bool begin_station_finded;
+
+   /// Признак разрешения тяги
+   bool is_trac_allowed;
 
    /// База ограничений скорости
    std::vector<speed_limit_t> limits;

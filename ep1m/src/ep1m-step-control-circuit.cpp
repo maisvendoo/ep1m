@@ -109,4 +109,11 @@ void EP1m::stepTractionControl(double t, double dt)
 
     kv13->setVoltage(Ucc * static_cast<double>(is_KV13_on));
     kv13->step(t, dt);
+
+    // Разрешение тяги от КЛУБ
+    kv84->setVoltage(Ucc * static_cast<double>(klub_BEL->isTractionAllowed()));
+    kv84->step(t, dt);
+
+    // Включение реле времени KT10
+    kt10->setControlVoltage(Ucc * static_cast<double>(reversor->isNoZero()));
 }

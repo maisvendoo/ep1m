@@ -31,6 +31,7 @@
 #include    "vip-5600.h"
 #include    "reversor.h"
 #include    "hysteresis-relay.h"
+#include    "time-relay.h"
 
 //---------------------------------------------------------------------
 //
@@ -194,6 +195,15 @@ private:
 
     /// Промежуточное реле KV15
     Relay   *kv15;
+
+    /// Реле КЛУБ
+    Relay   *kv84;
+
+    /// Реле выдержки времени КТ10
+    TimeRelay   *kt10;
+
+    /// Реле выдержки времени КТ1
+    TimeRelay   *kt1;
 
     enum
     {

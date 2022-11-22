@@ -37,6 +37,7 @@ KLUB::KLUB(QObject *parent) : Device(parent)
   , limit_dist(0)
   , station_idx(-1)
   , begin_station_finded(false)
+  , is_trac_allowed(false)
 {
     epk_state.set();
 
@@ -153,10 +154,12 @@ void KLUB::preStep(state_vector_t &Y, double t)
     if (hs_n(U_pow - 0.95 * U_nom))
     {
         is_dislplay_ON = false;
+        is_trac_allowed = false;
         return;
     }
 
     is_dislplay_ON = true;
+    is_trac_allowed = true;
 
     speed_control();
 

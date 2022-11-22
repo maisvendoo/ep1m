@@ -81,4 +81,27 @@ void EP1m::initControlCircuit()
     kv14->setInitContactState(3, false);
 
     sp4 = new HysteresisRelay(0.27, 0.45);
+
+    kv84 = new Relay(4);
+    kv84->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    kv84->setInitContactState(0, false);
+    kv84->setInitContactState(1, false);
+    kv84->setInitContactState(2, false);
+    kv84->setInitContactState(3, false);
+
+    kt10 = new TimeRelay(4);
+    kt10->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    kt10->setInitContactState(0, false);
+    kt10->setInitContactState(1, false);
+    kt10->setInitContactState(2, false);
+    kt10->setInitContactState(3, false);
+    kt10->setTimeout(1.5);
+
+    kt1 = new TimeRelay(4);
+    kt1->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    kt1->setInitContactState(0, false);
+    kt1->setInitContactState(1, false);
+    kt1->setInitContactState(2, false);
+    kt1->setInitContactState(3, false);
+    kt1->setTimeout(1.5);
 }

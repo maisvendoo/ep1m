@@ -23,6 +23,8 @@ public:
 
     void setBackwardValveState(bool backward_valve) { this->backward_valve = backward_valve; }
 
+    bool isNoZero() { return (state == 1) || (state == -1); }
+
 private:
 
     /// Состояние реверсора (для модели ТЭД)
