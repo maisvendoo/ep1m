@@ -55,11 +55,11 @@ void PowerSupply::stepDiscrete(double t, double dt)
     Q_UNUSED(dt)
 
     // Напряжение на выходе выпрямителя, питающего цепи управления
-    double U_rec = K1 * U_in;
+    Ucc = K1 * U_in;
 
     // Автоматическое переключение на питание от АКБ при пропадании
     // напряжения с выхода выпрямителя
-    Ucc = U_rec + hs_n(U_rec - 0.95 * Ucc_nom) * U_bat;
+    //Ucc = U_rec + hs_n(U_rec - 0.95 * Ucc_nom) * U_bat;
 
     // Напряжение заряда АКБ
     U_charge = K2 * pf(I_cy - I_charge) * hs_p(U_in);

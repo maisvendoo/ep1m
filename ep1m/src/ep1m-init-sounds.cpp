@@ -84,4 +84,6 @@ void EP1m::initSounds()
     connect(klub_BEL, &KLUB::soundPlay, this, &EP1m::soundPlay);
 
     connect(reversor, &Reversor::soundPlay, this, &EP1m::soundPlay);
+
+    connect(km43, &Relay::soundPlay, this, &EP1m::soundPlay);
 }

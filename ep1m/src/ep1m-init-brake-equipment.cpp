@@ -11,9 +11,8 @@ void EP1m::initBrakeEquipment()
 {
     FileSystem &fs = FileSystem::getInstance();
 
-    QString epk_path = QString(fs.combinePath(fs.getModulesDir(), "epk150").c_str());
-    epk = loadAutoTrainStop(epk_path);
-    epk->read_config("epk150");
+    epk = new AutoTrainStopEPK150();
+    epk->read_custom_config(config_dir + QDir::separator() + "epk150");
 
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {

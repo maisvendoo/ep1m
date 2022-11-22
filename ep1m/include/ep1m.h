@@ -22,6 +22,7 @@
 #include    "pressure-regulator.h"
 #include    "motor-fan.h"
 #include    "ubt367m.h"
+#include    "epk150.h"
 #include    "trolley-brake-mech.h"
 #include    "ept-converter.h"
 #include    "ept-pass-control.h"
@@ -142,7 +143,7 @@ private:
 
     BrakeCrane *brake_crane;
 
-    AutoTrainStop *epk;
+    AutoTrainStopEPK150 *epk;
 
     /// Запасный резервуар
     Reservoir *aux_res;
@@ -172,6 +173,23 @@ private:
     /// Блок электронный локомотивный (БЭЛ)
     KLUB    *klub_BEL;
 
+    /// Реле подачи питания на МСУД
+    Relay   *km43;
+
+    /// Промежуточное реле KV11
+    Relay   *kv11;
+
+    /// Промежуточное реле KV12
+    Relay   *kv12;
+
+    /// Промежуточное реле KV13
+    Relay   *kv13;
+
+    /// Промежуточное реле KV14
+    Relay   *kv14;
+
+    /// Промежуточное реле KV15
+    Relay   *kv15;
 
     enum
     {
