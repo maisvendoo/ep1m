@@ -44,4 +44,6 @@ void EP1m::initControlCircuit()
     kv41->setInitContactState(1, true);
     kv41->setInitContactState(2, false);
     kv41->setInitContactState(3, false);
+
+    sp4 = new HysteresisRelay(0.27, 0.45);
 }

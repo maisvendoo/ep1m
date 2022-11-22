@@ -29,6 +29,7 @@
 #include    "trac-motor.h"
 #include    "vip-5600.h"
 #include    "reversor.h"
+#include    "hysteresis-relay.h"
 
 //---------------------------------------------------------------------
 //
@@ -122,6 +123,9 @@ private:
 
     /// Реверсор
     Reversor *reversor;
+
+    /// Сигнализатор давления в ТМ
+    HysteresisRelay *sp4;
 
     Relay   *km7;
 

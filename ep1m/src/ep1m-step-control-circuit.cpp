@@ -57,6 +57,9 @@ void EP1m::stepControlCircuit(double t, double dt)
 
     main_switch->setReturn(return_GV);
 
+    // Контроль давления в тормозной магистрали
+    sp4->setInput(pTM);
+    sp4->step(t, dt);
 }
 
 //------------------------------------------------------------------------------
