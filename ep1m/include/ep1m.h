@@ -283,6 +283,9 @@ private:
 
     bool getHoldingCoilState();
 
+    /// Управление схемой тяги
+    void stepTractionControl(double t, double dt);
+
     void stepPanel(double t, double dt);
 
     void setSignalsModuleInputs();

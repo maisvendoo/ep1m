@@ -64,6 +64,7 @@ void EP1m::stepControlCircuit(double t, double dt)
 
     main_switch->setReturn(return_GV);    
 
+    stepTractionControl(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -79,4 +80,19 @@ bool EP1m::getHoldingCoilState()
             safety_valve->getState();
 
     return is_holding_coil_on;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::stepTractionControl(double t, double dt)
+{
+    bool is_KV11_KV12_on = km->isContacts5_6() &&
+            epk->getEmeggencyBrakeContact();
+
+    kv11->setVoltage(Ucc * static_cast<double>(is_KV11_KV12_on));
+    kv11->step(t, dt);
+
+    kv12->setVoltage(Ucc * static_cast<double>(is_KV11_KV12_on));
+    kv12->step(t, dt);
 }

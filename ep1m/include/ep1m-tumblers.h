@@ -28,6 +28,8 @@ enum
     TUMBLER_MPK = 8,
     TUMBLER_AUTO_MODE = 9,
     TUMBLER_PCHF = 10,
+
+    BUTTON_EMERGENCY_BRAKE = 11
 };
 
 #endif // EP1M_TUMBLERS_H

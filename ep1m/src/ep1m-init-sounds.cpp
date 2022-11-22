@@ -36,6 +36,9 @@ void EP1m::initSounds()
     tumblers[TUMBLER_AUTO_MODE].setOnSoundName("Small_Tumbler_On");
     tumblers[TUMBLER_AUTO_MODE].setOffSoundName("Small_Tumbler_Off");
 
+    tumblers[BUTTON_EMERGENCY_BRAKE].setOnSoundName("");
+    tumblers[BUTTON_EMERGENCY_BRAKE].setOffSoundName("");
+
     connect(km5, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     connect(safety_valve, &ElectroValve::soundPlay, this, &EP1m::soundPlay);
