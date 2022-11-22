@@ -99,4 +99,14 @@ void EP1m::stepTractionControl(double t, double dt)
     // Контроль давления в тормозной магистрали
     sp4->setInput(pTM);
     sp4->step(t, dt);
+
+    // Контакт экстренного торможения на кране машиниста
+    bool is_SQ3 =  brake_crane->getPositionName() == "VI";
+
+    bool is_KV13_on = km->isContacts5_6() &&
+            (!is_SQ3) &&
+            (!tumblers[BUTTON_EMERGENCY_BRAKE].getState());
+
+    kv13->setVoltage(Ucc * static_cast<double>(is_KV13_on));
+    kv13->step(t, dt);
 }
