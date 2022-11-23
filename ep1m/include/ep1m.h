@@ -175,6 +175,9 @@ private:
     /// Реле выдержки времени КТ1
     TimeRelay   *kt1;
 
+    /// Тормозной переключатель
+    BrakeSwitcher *qt1;
+
     enum
     {
         PANT_NUMBER = 2,

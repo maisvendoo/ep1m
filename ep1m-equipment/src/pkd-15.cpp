@@ -39,5 +39,7 @@ void BrakeSwitcher::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void BrakeSwitcher::load_config(CfgReader &cfg)
 {
+    QString secName = "Device";
 
+    cfg.getDouble(secName, "tau", tau);
 }
