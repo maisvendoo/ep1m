@@ -46,6 +46,9 @@ void EP1m::stepPowerCircuit(double t, double dt)
         // Передаем состояние реверсивного переключателя
         trac_motor[i]->setReversSate(reversor->getState());
 
+        // Режим работы ТЭД от QT1
+        trac_motor[i]->setMode(qt1->getContactState(0));
+
         // Передаем модели двигателя данные об угловой скорости его вала
         trac_motor[i]->setOmega(wheel_omega[i] * ip);
 
@@ -84,4 +87,22 @@ void EP1m::stepPowerCircuit(double t, double dt)
     reversor->setForwardValveState(km->getReversHandlePos() == 1);
     reversor->setBackwardValveState(km->getReversHandlePos() == -1);
     reversor->step(t, dt);
+
+    // Работа тормозного переключателя
+    qt1->setPressure(0.55 * main_res->getPressure());
+
+    // Сигнал на проводе Н36
+    is_H36 = epk->getStateKey() &&
+            sp4->getOutput() &&
+            kv84->getContactState(0) &&
+            kv12->getContactState(0) &&
+            kv13->getContactState(0) &&
+            kv14->getContactState(0);
+
+    bool is_QT1_trac = is_H36 &&
+            ( kt1->getContactState(0) || qt1->getContactState(1) );
+
+    qt1->setTracValveState(is_QT1_trac);
+
+    qt1->step(t, dt);
 }

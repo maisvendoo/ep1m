@@ -27,6 +27,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , freq_phase_conv(Q_NULLPTR)
   , charge_press(0.5)
   , ip(1.0)
+  , is_H36(false)
 {
     Uks = 25000.0;
     alsn_info.code_alsn = KLUB_ALSN_GREEN;

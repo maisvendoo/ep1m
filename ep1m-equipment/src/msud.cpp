@@ -175,7 +175,10 @@ void MSUD::main_loop(double t, double dt)
     Q_UNUSED(dt)
 
     // Подаем питание на реле KV23 (временно, потом будем считать отключения ГВ)
-    msud_output.kv23_on = true;
+    msud_output.kv23_On = true;
+
+    // Подаем питание на реле KV14
+    msud_output.kv14_On = true;
 
     motor_fans_control(t, dt);
 

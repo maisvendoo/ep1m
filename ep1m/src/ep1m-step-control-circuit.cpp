@@ -37,7 +37,7 @@ void EP1m::stepControlCircuit(double t, double dt)
     kv22->step(t, dt);
 
     // Цепь питания реле KV23
-    bool is_kv23_on = static_cast<double>(msud->getOutputData().kv23_on);
+    bool is_kv23_on = static_cast<double>(msud->getOutputData().kv23_On);
     kv23->setVoltage(Ucc * is_kv23_on);
     kv23->step(t, dt);
 
@@ -105,7 +105,7 @@ void EP1m::stepTractionControl(double t, double dt)
 
     bool is_KV13_on = km->isContacts5_6() &&
             (!is_SQ3) &&
-            (!tumblers[BUTTON_EMERGENCY_BRAKE].getState());
+            (tumblers[BUTTON_EMERGENCY_BRAKE].getState());
 
     kv13->setVoltage(Ucc * static_cast<double>(is_KV13_on));
     kv13->step(t, dt);
@@ -116,4 +116,40 @@ void EP1m::stepTractionControl(double t, double dt)
 
     // Включение реле времени KT10
     kt10->setControlVoltage(Ucc * static_cast<double>(reversor->isNoZero()));
+    kt10->step(t, dt);
+
+    // Включение реле KV14
+    kv14->setVoltage(Ucc * static_cast<double>(msud->getOutputData().kv14_On));
+    kv14->step(t, dt);
+
+    // Включение реле KV15
+    bool is_KV15_on = is_H36 &&
+            qt1->getContactState(2) &&
+            qt1->getContactState(3) &&
+            kt10->getContactState(0) &&
+            ( (kt1->getContactState(1) && kv15->getContactState(0)) || kv22->getContactState(1) );
+
+    if (!is_KV15_on)
+    {
+        int a = 0;
+    }
+
+    kv15->setVoltage(Ucc * static_cast<double>(is_KV15_on));
+    kv15->step(t, dt);
+
+    // Включение контактора KM41
+    bool is_KM41_on = kv23->getContactState(0) &&
+            kv15->getContactState(1) &&
+            qt1->getContactState(7);
+
+    km41->setVoltage(Ucc * static_cast<double>(is_KM41_on));
+    km41->step(t, dt);
+
+    // Включение контактора KM42
+    bool is_KM42_on = kv23->getContactState(1) &&
+            kv15->getContactState(2) &&
+            qt1->getContactState(8);
+
+    km42->setVoltage(Ucc * static_cast<double>(is_KM42_on));
+    km42->step(t, dt);
 }

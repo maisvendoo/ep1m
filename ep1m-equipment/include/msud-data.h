@@ -79,7 +79,7 @@ struct msud_input_t
     msud_input_t()
         : tumbler_MPK(false)
         , is_automatic_mode(false)
-        , is_PCHF_On(false)
+        , is_PCHF_On(false)        
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);
@@ -97,7 +97,10 @@ struct msud_output_t
     msud_state_t state;
 
     /// Подача питания на реле КМ23
-    bool kv23_on;
+    bool kv23_On;
+
+    /// Сигнал включения реле KV14
+    bool kv14_On;
 
     /// Работа МВ на низкой частоте
     bool is_MV_low_freq;
@@ -115,7 +118,8 @@ struct msud_output_t
 
     msud_output_t()
         : state(MSUD_OFF)
-        , kv23_on(false)
+        , kv23_On(false)
+        , kv14_On(false)
         , is_MV_low_freq(false)
         , TC_min_press(0.11)
         , TC_status(0)

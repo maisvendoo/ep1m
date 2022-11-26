@@ -35,7 +35,7 @@ public:
     void init(double pTM, double pFL);
 
     // ПЕРЕНЕСТИ ЭТОТ МЕТОД В СЛЕДУЮЩИЙ ВЫПУСК RRS
-    bool getEmeggencyBrakeContact() const { return !is_whistle; }
+    bool getEmeggencyBrakeContact() const { return is_whistle; }
 
 private:
 

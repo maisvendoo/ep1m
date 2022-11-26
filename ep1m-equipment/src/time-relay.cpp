@@ -99,6 +99,9 @@ void TimeRelay::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void TimeRelay::load_config(CfgReader &cfg)
 {
+    QString secName = "Device";
+    cfg.getDouble(secName, "U_nom", U_nom);
+
     Relay::load_config(cfg);
 }
 

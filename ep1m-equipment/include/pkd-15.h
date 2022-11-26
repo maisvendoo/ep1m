@@ -6,11 +6,11 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-class BrakeSwitcher : Device
+class BrakeSwitcher : public Device
 {
 public:
 
-    BrakeSwitcher(QObject *parent = Q_NULLPTR);
+    BrakeSwitcher(size_t num_contacts = 1, QObject *parent = Q_NULLPTR);
 
     ~BrakeSwitcher();
 
@@ -26,6 +26,20 @@ public:
         this->brake_valve_state = brake_valve_state;
     }
 
+    void setInitContactState(size_t number, bool state)
+    {
+        if (number < contact.size())
+            contact[number] = state;
+    }
+
+    bool getContactState(size_t number) const
+    {
+        if (number < contact.size())
+            return contact[number];
+
+        return false;
+    }
+
 private:
 
     /// Время переключения с одного положения на другое
@@ -37,14 +51,27 @@ private:
     /// Состояние вентиля "торможение"
     bool brake_valve_state;
 
-    /// Рабочее давление
+    /// Текущее давление в пневматической магистрали управления
     double p;
+
+    /// Номинальное рабочее давление
+    double p_nom;
+
+    /// Условная скорость переключения номинальна
+    double omega_nom;
+
+    /// Условная скорость переключения фактическая
+    double omega;
+
+    std::vector<bool>    contact;
 
     void preStep(state_vector_t &Y, double t);
 
     void ode_system(const state_vector_t &Y, state_vector_t &dYdt, double t);
 
     void load_config(CfgReader &cfg);
+
+    void change_contacts_state();
 };
 
 #endif // PKD15_H

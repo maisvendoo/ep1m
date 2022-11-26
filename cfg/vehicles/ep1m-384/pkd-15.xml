@@ -3,7 +3,8 @@
 	<Device>
 		<Order>1</Order>
 
-		<tau>1.0</tau>		
+		<tau>1.0</tau>
+		<p_nom>0.5</p_nom>		
 
 	</Device>
 </Config>

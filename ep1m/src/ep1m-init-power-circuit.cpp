@@ -40,4 +40,16 @@ void EP1m::initPowerCircuit()
 
     reversor = new Reversor();
     reversor->read_custom_config(config_dir + QDir::separator() + "reversor");
+
+    // Тормозной переключатель QT1
+    qt1 = new BrakeSwitcher(9);
+    qt1->setInitContactState(0, true);
+    qt1->setInitContactState(1, true);
+    qt1->setInitContactState(2, true);
+    qt1->setInitContactState(3, true);
+    qt1->setInitContactState(4, false);
+    qt1->setInitContactState(5, false);
+    qt1->setInitContactState(6, false);
+    qt1->setInitContactState(7, true);
+    qt1->setInitContactState(8, true);
 }

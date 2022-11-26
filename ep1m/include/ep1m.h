@@ -93,6 +93,9 @@ private:
     /// Передаточное число тягового редуктора
     double ip;
 
+    /// Сигнал на проводе Н36
+    bool is_H36;
+
     /// Реверсор
     Reversor *reversor;
 
@@ -177,6 +180,12 @@ private:
 
     /// Тормозной переключатель
     BrakeSwitcher *qt1;
+
+    /// Контактор KM41
+    Relay       *km41;
+
+    /// Контактор KM42
+    Relay       *km42;
 
     enum
     {
