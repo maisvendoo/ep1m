@@ -129,11 +129,6 @@ void EP1m::stepTractionControl(double t, double dt)
             kt10->getContactState(0) &&
             ( (kt1->getContactState(1) && kv15->getContactState(0)) || kv22->getContactState(1) );
 
-    if (!is_KV15_on)
-    {
-        int a = 0;
-    }
-
     kv15->setVoltage(Ucc * static_cast<double>(is_KV15_on));
     kv15->step(t, dt);
 

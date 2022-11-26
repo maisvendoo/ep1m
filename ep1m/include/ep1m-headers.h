@@ -33,5 +33,6 @@
 #include    "hysteresis-relay.h"
 #include    "time-relay.h"
 #include    "pkd-15.h"
+#include    "fast-switch.h"
 
 #endif // EP1M_HEADERS_H

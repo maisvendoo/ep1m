@@ -57,11 +57,13 @@ void EP1m::stepPowerCircuit(double t, double dt)
 
         // Моделируем работу ТЭД
         trac_motor[i]->step(t, dt);
+
+        fast_switch[i]->step(t, dt);
     }
 
-    vip[VIP1]->setU1(trac_trans->getUt1());
-    vip[VIP1]->setU2(trac_trans->getUt2());
-    vip[VIP1]->setU3(trac_trans->getUt3());
+    vip[VIP1]->setU1(trac_trans->getUt1() * static_cast<double>(fast_switch[TRAC_MOTOR1]->getContactState(0)));
+    vip[VIP1]->setU2(trac_trans->getUt2() * static_cast<double>(fast_switch[TRAC_MOTOR2]->getContactState(0)));
+    vip[VIP1]->setU3(trac_trans->getUt3() * static_cast<double>(fast_switch[TRAC_MOTOR3]->getContactState(0)));
 
     // Полный ток, потребляемый от ВИП1
     double I_vip1 = trac_motor[TRAC_MOTOR1]->getAncorCurrent() +
@@ -71,9 +73,9 @@ void EP1m::stepPowerCircuit(double t, double dt)
     vip[VIP1]->setI_out(I_vip1);
     vip[VIP1]->step(t, dt);
 
-    vip[VIP2]->setU1(trac_trans->getUt1());
-    vip[VIP2]->setU2(trac_trans->getUt2());
-    vip[VIP2]->setU3(trac_trans->getUt3());
+    vip[VIP2]->setU1(trac_trans->getUt1() * static_cast<double>(fast_switch[TRAC_MOTOR4]->getContactState(0)));
+    vip[VIP2]->setU2(trac_trans->getUt2() * static_cast<double>(fast_switch[TRAC_MOTOR5]->getContactState(0)));
+    vip[VIP2]->setU3(trac_trans->getUt3() * static_cast<double>(fast_switch[TRAC_MOTOR6]->getContactState(0)));
 
     // Полный ток, потребляемый от ВИП2
     double I_vip2 = trac_motor[TRAC_MOTOR4]->getAncorCurrent() +

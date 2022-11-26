@@ -222,6 +222,9 @@ private:
 
     std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
 
+    /// Быстродействующие выключатели ТЭД
+    std::array<FastSwitch *, TRAC_MOTORS_NUM> fast_switch;
+
     /// Выпрямительно инверторные преобразователи
     enum
     {

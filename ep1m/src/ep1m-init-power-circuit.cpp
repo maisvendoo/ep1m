@@ -30,6 +30,11 @@ void EP1m::initPowerCircuit()
         trac_motor[i]->read_custom_config(config_dir + QDir::separator() + "nb-520v");
         trac_motor[i]->load_magnetic_char(config_dir + QDir::separator() + "nb-520v.txt");
         trac_motor[i]->load_eff_coeff(config_dir + QDir::separator() + "nb-520v-eff-coeff.txt");
+
+        fast_switch[i] = new FastSwitch();
+        fast_switch[i]->read_custom_config(config_dir + QDir::separator() + "mk-69");
+        fast_switch[i]->setInitContactState(0, false);
+        fast_switch[i]->setInitContactState(1, true);
     }
 
     vip[VIP1] = new RectInvertConverter();
