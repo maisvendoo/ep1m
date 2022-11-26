@@ -12,6 +12,8 @@ BrakeSwitcher::BrakeSwitcher(size_t num_contacts, QObject *parent)
   , p_nom(0.5)
   , omega_nom(0.0)
   , omega(0.0)
+  , dir(1)
+  , dir_old(dir)
 {
     setY(0, 1.0);
     contact.resize(num_contacts);
@@ -34,15 +36,22 @@ void BrakeSwitcher::preStep(state_vector_t &Y, double t)
     Q_UNUSED(t)
 
     double omg = p * omega_nom / p_nom;
-    int dir  = static_cast<int>(trac_valve_state) -
+    dir  = static_cast<int>(trac_valve_state) -
             static_cast<double>(brake_valve_state);
 
     omega = omg * dir;
 
     Y[0] = cut(Y[0], 0.0, 1.0);
 
-    if ( (Y[0] < 0.05) || (Y[0] > 0.95) )
+    if ( (Y[0] < 0.05) && (dir == -1) )
+    {
         change_contacts_state();
+    }
+
+    if ( (Y[0] > 0.95) && (dir == 1) )
+    {
+        change_contacts_state();
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -80,6 +89,11 @@ void BrakeSwitcher::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void BrakeSwitcher::change_contacts_state()
 {
+    if (dir == dir_old)
+        return;
+
+    dir_old = dir;
+
     for (size_t i = 0; i < contact.size(); ++i)
     {
         contact[i] = !contact[i];

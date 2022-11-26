@@ -43,6 +43,7 @@ void EP1m::initPowerCircuit()
 
     // Тормозной переключатель QT1
     qt1 = new BrakeSwitcher(9);
+    qt1->read_custom_config(config_dir + QDir::separator() + "pkd-15");
     qt1->setInitContactState(0, true);
     qt1->setInitContactState(1, true);
     qt1->setInitContactState(2, true);

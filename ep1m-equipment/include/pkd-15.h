@@ -63,6 +63,10 @@ private:
     /// Условная скорость переключения фактическая
     double omega;
 
+    int dir;
+
+    int dir_old;
+
     std::vector<bool>    contact;
 
     void preStep(state_vector_t &Y, double t);
