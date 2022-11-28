@@ -41,4 +41,11 @@ void EP1m::setSignalsModuleInputs()
                                            brake_mech[i]->getBrakeCylinderPressure() >
                                            msud->getOutputData().TC_min_press);
     }
+
+    signals_module->setLampInputSignal(SM_TD1, fast_switch[TRAC_MOTOR1]->getContactState(2));
+    signals_module->setLampInputSignal(SM_TD2, fast_switch[TRAC_MOTOR2]->getContactState(2));
+    signals_module->setLampInputSignal(SM_TD3, fast_switch[TRAC_MOTOR3]->getContactState(2));
+    signals_module->setLampInputSignal(SM_TD4, fast_switch[TRAC_MOTOR4]->getContactState(2));
+    signals_module->setLampInputSignal(SM_TD5, fast_switch[TRAC_MOTOR5]->getContactState(2));
+    signals_module->setLampInputSignal(SM_TD6, fast_switch[TRAC_MOTOR6]->getContactState(2));
 }

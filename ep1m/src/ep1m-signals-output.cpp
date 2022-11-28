@@ -114,4 +114,11 @@ void EP1m::signalsOutput()
     }
 
     analogSignal[REF_SPEED] = TO_FLOAT(km->getRefSpeedLevel());
+
+    analogSignal[LAMP_TD1] = TO_FLOAT(signals_module->getLampState(SM_TD1));
+    analogSignal[LAMP_TD2] = TO_FLOAT(signals_module->getLampState(SM_TD2));
+    analogSignal[LAMP_TD3] = TO_FLOAT(signals_module->getLampState(SM_TD3));
+    analogSignal[LAMP_TD4] = TO_FLOAT(signals_module->getLampState(SM_TD4));
+    analogSignal[LAMP_TD5] = TO_FLOAT(signals_module->getLampState(SM_TD5));
+    analogSignal[LAMP_TD6] = TO_FLOAT(signals_module->getLampState(SM_TD6));
 }

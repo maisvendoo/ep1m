@@ -35,6 +35,7 @@ void EP1m::initPowerCircuit()
         fast_switch[i]->read_custom_config(config_dir + QDir::separator() + "mk-69");
         fast_switch[i]->setInitContactState(0, false);
         fast_switch[i]->setInitContactState(1, true);
+        fast_switch[i]->setInitContactState(2, true);
     }
 
     vip[VIP1] = new RectInvertConverter();

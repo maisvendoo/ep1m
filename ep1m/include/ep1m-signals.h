@@ -63,6 +63,13 @@ enum
     LAMP_MV2 = 53,
     LAMP_MV3 = 54,
 
+    LAMP_TD1 = 55,
+    LAMP_TD2 = 56,
+    LAMP_TD3 = 57,
+    LAMP_TD4 = 58,
+    LAMP_TD5 = 59,
+    LAMP_TD6 = 60,
+
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
     SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1
