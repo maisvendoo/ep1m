@@ -165,4 +165,19 @@ void EP1m::stepTractionControl(double t, double dt)
     fast_switch[TRAC_MOTOR1]->setPowerOn(is_Power_On_1_3);
     fast_switch[TRAC_MOTOR2]->setPowerOn(is_Power_On_1_3);
     fast_switch[TRAC_MOTOR3]->setPowerOn(is_Power_On_1_3);
+
+    // Включение БВ от ВИП2 на ТЭД4, ТЭД5, ТЭД6
+    bool is_Hold_4_6 = km42->getContactState(0) &&
+            (!main_switch->getState());
+
+
+    fast_switch[TRAC_MOTOR4]->setHold(is_Hold_4_6);
+    fast_switch[TRAC_MOTOR5]->setHold(is_Hold_4_6);
+    fast_switch[TRAC_MOTOR6]->setHold(is_Hold_4_6);
+
+    bool is_Power_On_4_6 = is_N211_on && kv21->getContactState(1);
+
+    fast_switch[TRAC_MOTOR4]->setPowerOn(is_Power_On_4_6);
+    fast_switch[TRAC_MOTOR5]->setPowerOn(is_Power_On_4_6);
+    fast_switch[TRAC_MOTOR6]->setPowerOn(is_Power_On_4_6);
 }
