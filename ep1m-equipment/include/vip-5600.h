@@ -2,6 +2,7 @@
 #define     VIP_5600_H
 
 #include    "device.h"
+#include    "vip-5600-defines.h"
 
 //------------------------------------------------------------------------------
 //
@@ -57,29 +58,7 @@ private:
     double U_out;
 
     /// Ток нагрузки ВИП
-    double I_out;
-
-    struct zone_t
-    {
-        double Umin;
-        double Umax;
-
-        zone_t()
-            : Umin(0.0)
-            , Umax(0.0)
-        {
-
-        }
-    };
-
-    enum
-    {
-        ZONES_NUM = 4,
-        ZONE1 = 0,
-        ZONE2 = 1,
-        ZONE3 = 2,
-        ZONE4 = 3
-    };
+    double I_out;    
 
     /// Данные по выходным параметров зон регулирования
     std::array<zone_t, ZONES_NUM> zone;

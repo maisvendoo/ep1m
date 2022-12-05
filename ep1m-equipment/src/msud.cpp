@@ -109,7 +109,12 @@ void MSUD::load_config(CfgReader &cfg)
 
     while (!secNode.isNull())
     {
+        zone_t zone;
 
+        cfg.getDouble(secNode, "Umin", zone.Umin);
+        cfg.getDouble(secNode, "Umax", zone.Umax);
+
+        vip_zone.push_back(zone);
 
         secNode = cfg.getNextSection();
     }
@@ -183,6 +188,8 @@ void MSUD::main_loop(double t, double dt)
     motor_fans_control(t, dt);
 
     brake_cylinders_pressure_control(t, dt);
+
+    traction_control(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -281,6 +288,45 @@ void MSUD::brake_cylinders_pressure_control(double t, double dt)
     {
         msud_output.TC_status = MSUD_STATUS_OFF;
     }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::traction_control(double t, double dt)
+{
+    if (msud_input.is_auto_reg)
+    {
+        auto_traction_control(t, dt);
+    }
+    else
+    {
+        manual_traction_control(t, dt);
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::manual_traction_control(double t, double dt)
+{
+
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::auto_traction_control(double t, double dt)
+{
+
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::select_traction_VIP_Zone(double Ud)
+{
+
 }
 
 //------------------------------------------------------------------------------

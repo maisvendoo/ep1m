@@ -24,6 +24,8 @@ void EP1m::stepMSUD(double t, double dt)
         msud_input.TC_press[i] = brake_mech[i]->getBrakeCylinderPressure();
     }
 
+    msud_input.is_auto_reg = tumblers[TUMBLER_AUTO_MODE].getState();
+
     bool is_MSUD_on = km43->getContactState(1);
 
     msud->setPowerVoltage(Ucc * static_cast<double>(is_MSUD_on));

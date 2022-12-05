@@ -64,6 +64,9 @@ struct msud_input_t
     /// Признак включения ПЧФ
     bool is_PCHF_On;
 
+    /// Режим управления (Авторегулирование/Ручной)
+    bool is_auto_reg;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -79,7 +82,8 @@ struct msud_input_t
     msud_input_t()
         : tumbler_MPK(false)
         , is_automatic_mode(false)
-        , is_PCHF_On(false)        
+        , is_PCHF_On(false)
+        , is_auto_reg(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);
@@ -108,6 +112,15 @@ struct msud_output_t
     double TC_min_press;
 
     int TC_status;
+
+    /// Уровень напряжение на выходе ВИП (от 0.0 до 4.0) отображаемый на БИ
+    double vip_voltage_level;
+
+    /// Номер зоны ВИП
+    size_t zone_num;
+
+    /// Угол открытия тиристоров
+    double alpha;
 
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;

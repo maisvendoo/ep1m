@@ -128,9 +128,9 @@ void EP1m::stepTractionControl(double t, double dt)
             qt1->getContactState(3) &&
             kt10->getContactState(0);
 
-    bool is_KV15_on = is_N40_on ||
-            (kt1->getContactState(1) && kv15->getContactState(0)) ||
-            kv22->getContactState(1);
+    bool is_KV15_on = is_N40_on &&
+            ( (kt1->getContactState(1) && kv15->getContactState(0)) ||
+               kv22->getContactState(1) );
 
     kv15->setVoltage(Ucc * static_cast<double>(is_KV15_on));
     kv15->step(t, dt);

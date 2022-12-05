@@ -4,6 +4,7 @@
 #include    "device.h"
 
 #include    "msud-data.h"
+#include    "vip-5600-defines.h"
 
 //------------------------------------------------------------------------------
 //
@@ -73,6 +74,8 @@ private:
 
     msud_output_t msud_output;
 
+    std::vector<zone_t> vip_zone;
+
      void ode_system(const state_vector_t &Y,
                      state_vector_t &dYdt,
                      double t) override;
@@ -95,6 +98,18 @@ private:
 
      // Контроль давления в ТЦ
      void brake_cylinders_pressure_control(double t, double dt);
+
+     // Управление тягой
+     void traction_control(double t, double dt);
+
+     // Ручное управление тягой
+     void manual_traction_control(double t, double dt);
+
+     // Авторегулирование в тяге
+     void auto_traction_control(double t, double dt);
+
+     // Выбор зоны ВИП в тяге по требуемому напряжению на ТЭД
+     void select_traction_VIP_Zone(double Ud);
 
 private slots:
 
