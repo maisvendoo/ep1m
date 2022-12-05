@@ -59,7 +59,7 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
         {
             E = cPhi(beta * Y[0] * revers_state) * omega;
 
-            M = Y[0] * cPhi(beta * Y[0] * revers_state) * eff_coef.getValue(Y[0]);
+            M = Y[0] * cPhi(beta * Y[0] * revers_state);// * eff_coef.getValue(Y[0]);
 
             break;
         }
@@ -143,5 +143,5 @@ void TractionMotor::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 double TractionMotor::cPhi(double If)
 {
-    return 0.93 * magnetic_char.getValue(If);
+    return magnetic_char.getValue(If);
 }

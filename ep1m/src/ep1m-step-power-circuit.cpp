@@ -72,6 +72,8 @@ void EP1m::stepPowerCircuit(double t, double dt)
             trac_motor[TRAC_MOTOR3]->getAncorCurrent();
 
     vip[VIP1]->setI_out(I_vip1);
+    vip[VIP1]->setAlpha(msud->getOutputData().alpha);
+    vip[VIP1]->setZoneNum(msud->getOutputData().zone_num);
     vip[VIP1]->step(t, dt);
 
     vip[VIP2]->setU1(trac_trans->getUt1() * static_cast<double>(fast_switch[TRAC_MOTOR4]->getContactState(0)));
@@ -84,6 +86,8 @@ void EP1m::stepPowerCircuit(double t, double dt)
             trac_motor[TRAC_MOTOR6]->getAncorCurrent();
 
     vip[VIP2]->setI_out(I_vip2);
+    vip[VIP1]->setAlpha(msud->getOutputData().alpha);
+    vip[VIP1]->setZoneNum(msud->getOutputData().zone_num);
     vip[VIP2]->step(t, dt);
 
     // Работа реверсивного переключателя

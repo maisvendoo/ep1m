@@ -15,4 +15,5 @@ void EP1m::initPanel()
     signals_module = new SignalizationModule();
 
     tumblers[BUTTON_EMERGENCY_BRAKE].set();
+    //tumblers[TUMBLER_AUTO_MODE].set();
 }

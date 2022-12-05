@@ -53,7 +53,7 @@ void RectInvertConverter::preStep(state_vector_t &Y, double t)
     double Umin = zone[zoneNum - 1].Umin;
     double Umax = zone[zoneNum - 1].Umax;
 
-    double E_out = (Umin  + (Umax - Umax) * cos(alpha * Physics::PI / 180.0)) * K_rect;
+    double E_out = (Umin  + (Umax - Umin) * cos(alpha * Physics::PI / 180.0)) * K_rect;
 
     // Вычисляем выходное напряжение с учетом тока нагрузки
     U_out = E_out - r * I_out;

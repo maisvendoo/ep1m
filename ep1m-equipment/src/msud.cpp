@@ -310,7 +310,20 @@ void MSUD::traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_traction_control(double t, double dt)
 {
+    // Максимальное напряжение на выходе ВИП
+    double Ud_max = (*(vip_zone.end()-1)).Umax;
 
+    double Ud = msud_input.km_trac_level * Ud_max;
+    size_t zone_idx = select_traction_VIP_Zone(Ud);
+    msud_output.zone_num = zone_idx + 1;
+
+    double Umin = vip_zone[zone_idx].Umin;
+    double Umax = vip_zone[zone_idx].Umax;
+
+    double cos_alpha = (Ud - Umin) / (Umax - Umin);
+
+    msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
+    msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
 }
 
 //------------------------------------------------------------------------------
@@ -324,9 +337,21 @@ void MSUD::auto_traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void MSUD::select_traction_VIP_Zone(double Ud)
+size_t MSUD::select_traction_VIP_Zone(double Ud)
 {
+    size_t zone_idx = 0;
 
+    for (size_t i = 0; i < vip_zone.size(); ++i)
+    {
+        if ( (Ud >= vip_zone[i].Umin) && (Ud < vip_zone[i].Umax) )
+        {
+            zone_idx = i;
+            return zone_idx;
+
+        }
+    }
+
+    return zone_idx - 1;
 }
 
 //------------------------------------------------------------------------------

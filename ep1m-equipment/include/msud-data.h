@@ -2,6 +2,7 @@
 #define     MSUD_DATA_H
 
 #include    <array>
+#include    "physics.h"
 
 // Режимы работы статуса оборудования
 //------------------------------------------------------------------------------
@@ -67,6 +68,12 @@ struct msud_input_t
     /// Режим управления (Авторегулирование/Ручной)
     bool is_auto_reg;
 
+    /// Положение главного вала КМ в тяге
+    double km_trac_level;
+
+    /// Положение главного вала КМ в рекуперации
+    double km_brake_level;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -84,6 +91,8 @@ struct msud_input_t
         , is_automatic_mode(false)
         , is_PCHF_On(false)
         , is_auto_reg(false)
+        , km_trac_level(0.0)
+        , km_brake_level(0.0)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);
@@ -136,6 +145,9 @@ struct msud_output_t
         , is_MV_low_freq(false)
         , TC_min_press(0.11)
         , TC_status(0)
+        , vip_voltage_level(0.0)
+        , zone_num(1)
+        , alpha(Physics::PI / 2.0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);

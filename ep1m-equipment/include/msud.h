@@ -109,7 +109,7 @@ private:
      void auto_traction_control(double t, double dt);
 
      // Выбор зоны ВИП в тяге по требуемому напряжению на ТЭД
-     void select_traction_VIP_Zone(double Ud);
+     size_t select_traction_VIP_Zone(double Ud);
 
 private slots:
 

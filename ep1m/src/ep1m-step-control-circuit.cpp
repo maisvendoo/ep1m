@@ -151,6 +151,12 @@ void EP1m::stepTractionControl(double t, double dt)
     km42->setVoltage(Ucc * static_cast<double>(is_KM42_on));
     km42->step(t, dt);
 
+    // Запуск реле времени КТ1
+    bool is_KT1_on = km41->getContactState(1) && km42->getContactState(1);
+
+    kt1->setControlVoltage(Ucc * static_cast<double>(is_KT1_on));
+    kt1->step(t, dt);
+
     // Включение БВ от ВИП1 на ТЭД1, ТЭД2, ТЭД3
     bool is_Hold_1_3 = km41->getContactState(0) &&
             (!main_switch->getState());
