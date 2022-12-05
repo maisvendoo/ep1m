@@ -2,6 +2,7 @@
 #define     FAST_SWITCH_H
 
 #include    "relay.h"
+#include    "trigger.h"
 
 //------------------------------------------------------------------------------
 //
@@ -32,6 +33,12 @@ private:
 
     /// Ток через главные контакты
     double Id;
+
+    /// Ток уставки через главные контакты
+    double Id_max;
+
+    /// Триггер, для описания состояния включающей катушки
+    Trigger power_on_coil;
 
     void preStep(state_vector_t &Y, double t);
 

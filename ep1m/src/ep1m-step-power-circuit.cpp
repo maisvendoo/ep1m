@@ -58,6 +58,7 @@ void EP1m::stepPowerCircuit(double t, double dt)
         // Моделируем работу ТЭД
         trac_motor[i]->step(t, dt);
 
+        fast_switch[i]->setControlVoltage(Ucc);
         fast_switch[i]->step(t, dt);
     }
 

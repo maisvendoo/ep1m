@@ -96,6 +96,9 @@ private:
     /// Сигнал на проводе Н36
     bool is_H36;
 
+    /// Сигнал на проводе Н211
+    bool is_N211_on;
+
     /// Реверсор
     Reversor *reversor;
 

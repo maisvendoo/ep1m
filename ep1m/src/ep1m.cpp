@@ -28,6 +28,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , charge_press(0.5)
   , ip(1.0)
   , is_H36(false)
+  , is_N211_on(false)
 {
     Uks = 25000.0;
     alsn_info.code_alsn = KLUB_ALSN_GREEN;
