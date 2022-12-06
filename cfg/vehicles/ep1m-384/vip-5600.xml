@@ -3,7 +3,7 @@
 	<Device>
 		<Order>1</Order>
 
-		<InternalRes>0.03</InternalRes>	
+		<InternalRes>0.01</InternalRes>	
 		<K_rect>0.9</K_rect>
 
 	</Device>
