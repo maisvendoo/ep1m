@@ -458,7 +458,7 @@ void MsudDisplay::slotUpdateTimer()
         }
 
         //
-        man21_->setVal_zonaVIP(0);
+        man21_->setVal_zonaVIP(input_signals[SIGNAL_MSUD_VIP_ZONE]);
 
         //
         man22_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]);

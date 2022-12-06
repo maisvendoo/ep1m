@@ -121,4 +121,6 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_TD4] = TO_FLOAT(signals_module->getLampState(SM_TD4));
     analogSignal[LAMP_TD5] = TO_FLOAT(signals_module->getLampState(SM_TD5));
     analogSignal[LAMP_TD6] = TO_FLOAT(signals_module->getLampState(SM_TD6));
+
+    analogSignal[SIGNAL_MSUD_VIP_ZONE] = TO_FLOAT(msud->getOutputData().vip_voltage_level);
 }

@@ -76,9 +76,9 @@ void EP1m::keyProcess()
     if (getKeyState(KEY_F))
     {
         if (isShift())
-            tumblers[TUMBLER_AUTO_MODE].set();
-        else
             tumblers[TUMBLER_AUTO_MODE].reset();
+        else
+            tumblers[TUMBLER_AUTO_MODE].set();
     }
 
     // Отключение ПЧФ

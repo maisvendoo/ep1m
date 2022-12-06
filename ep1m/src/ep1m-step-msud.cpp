@@ -24,7 +24,7 @@ void EP1m::stepMSUD(double t, double dt)
         msud_input.TC_press[i] = brake_mech[i]->getBrakeCylinderPressure();
     }
 
-    msud_input.is_auto_reg = tumblers[TUMBLER_AUTO_MODE].getState();
+    msud_input.is_auto_reg = !tumblers[TUMBLER_AUTO_MODE].getState();
     msud_input.km_trac_level = km->getTracLevel();
     msud_input.km_brake_level = km->getBrakeLevel();
 
