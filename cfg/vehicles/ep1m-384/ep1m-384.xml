@@ -22,6 +22,8 @@
         <AnimationsConfigDir>EP1m-384</AnimationsConfigDir>
 
         <DriverPos>0.635 9.291 3.5</DriverPos> 
+		
+		<isRegistratorOn>1</isRegistartorOn>
 
     </Vehicle>
 </Config>

@@ -13,7 +13,7 @@ class Registrator : public Device
 
 public:
 
-    Registrator(QString fileName, double interval = 0.1, QObject *parent = Q_NULLPTR);
+    Registrator(double interval = 0.1, QObject *parent = Q_NULLPTR);
 
     ~Registrator();
 
@@ -24,9 +24,12 @@ private:
     bool    first_print;
     double  tau;
     double  interval;
+    QString fileName;
     QString path;
 
     QFile   *file;
+
+    void ode_system(const state_vector_t &Y, state_vector_t &dYdt, double t);
 
     void load_config(CfgReader &cfg);
 };

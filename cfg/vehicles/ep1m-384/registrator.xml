@@ -2,5 +2,6 @@
 <Config>
 	<Device>
 		<Interval>0.1</Interval>
+		<FileName>reg_data</FileName>
 	</Device>
 </Config>
