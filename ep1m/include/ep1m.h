@@ -99,6 +99,9 @@ private:
     /// Сигнал на проводе Н211
     bool is_N211_on;
 
+    /// Регистрировать параметры движения
+    bool is_Registarator_on;
+
     /// Реверсор
     Reversor *reversor;
 
@@ -190,6 +193,9 @@ private:
     /// Контактор KM42
     Relay       *km42;
 
+    /// Регистратор параметров движения (для отладки и испытаний)
+    Registrator *registrator;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -279,6 +285,9 @@ private:
     /// Инициализация озвучки
     void initSounds();
 
+    /// Инициализация регистратора параметров движения
+    void initRegistartor();
+
     void stepControlPower(double t, double dt);
 
     void stepControlCircuit(double t, double dt);
@@ -322,6 +331,10 @@ private:
     void initBrakeDevices(double p0, double pTM, double PFL) override;
 
     void load_brakes_config(QString path);
+
+    double calcTracForce();
+
+    void stepRegistration(double t, double dt);
 };
 
 #endif // EP1M_H

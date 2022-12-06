@@ -29,6 +29,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , ip(1.0)
   , is_H36(false)
   , is_N211_on(false)
+  , is_Registarator_on(false)
 {
     Uks = 25000.0;
     alsn_info.code_alsn = KLUB_ALSN_GREEN;
@@ -82,6 +83,9 @@ void EP1m::initialization()
 
     // Инициализация озвучки
     initSounds();
+
+    // Инициализация регистратора
+    initRegistartor();
 }
 
 //------------------------------------------------------------------------------
@@ -124,6 +128,9 @@ void EP1m::step(double t, double dt)
 
     // Отладочный вывод
     stepDebugPrint(t, dt);
+
+    // Регистрация параметров движения
+    stepRegistration(t, dt);
 }
 
 //------------------------------------------------------------------------------

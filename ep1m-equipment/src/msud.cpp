@@ -331,7 +331,9 @@ void MSUD::manual_traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_traction_control(double t, double dt)
 {
-
+    msud_output.alpha = 90.0;
+    msud_output.zone_num = 1;
+    msud_output.vip_voltage_level = 0.0;
 }
 
 //------------------------------------------------------------------------------
