@@ -4,7 +4,7 @@
 		<Order>1</Order>
 
 		<InternalRes>0.024</InternalRes>	
-		<K_rect>0.9</K_rect>
+		<K_rect>0.95</K_rect>
 
 	</Device>
 </Config>

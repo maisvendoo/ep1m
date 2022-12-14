@@ -316,6 +316,9 @@ void MSUD::manual_traction_control(double t, double dt)
     double Ud = msud_input.km_trac_level * Ud_max;
     size_t zone_idx = select_traction_VIP_Zone(Ud);
     msud_output.zone_num = zone_idx + 1;
+    msud_output.zone_num = cut(msud_output.zone_num,
+                               static_cast<size_t>(1),
+                               static_cast<size_t>(4));
 
     double Umin = vip_zone[zone_idx].Umin;
     double Umax = vip_zone[zone_idx].Umax;
