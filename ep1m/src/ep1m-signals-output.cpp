@@ -123,4 +123,26 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_TD6] = TO_FLOAT(signals_module->getLampState(SM_TD6));
 
     analogSignal[SIGNAL_MSUD_VIP_ZONE] = TO_FLOAT(msud->getOutputData().vip_voltage_level);
+
+    if (reversor->getState() == 1)
+        analogSignal[SIGNAL_MSUD_REVERSOR] = 1.0f;
+
+    if (reversor->getState() == -1)
+        analogSignal[SIGNAL_MSUD_REVERSOR] = 2.0f;
+
+    if (qt1->getContactState(9))
+        analogSignal[SIGNAL_MSUD_TRACTION_TYPE] = 1.0f;
+    else
+        analogSignal[SIGNAL_MSUD_TRACTION_TYPE] = 2.0f;
+
+    bool circuit_state = true;
+    for (size_t i = 0; i < fast_switch.size(); ++i)
+    {
+        circuit_state = circuit_state && (!fast_switch[i]->getContactState(2));
+    }
+
+    if (circuit_state)
+        analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 1.0f;
+    else
+        analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 2.0f;
 }

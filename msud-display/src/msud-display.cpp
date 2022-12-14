@@ -404,9 +404,9 @@ void MsudDisplay::slotUpdateTimer()
     input_signals[SIGNAL_MSUD_OV] = 1;
     input_signals[SIGNAL_MSUD_MPK] = 2;
 */
-    input_signals[SIGNAL_MSUD_REVERSOR] = 2;
-    input_signals[SIGNAL_MSUD_TRACTION_TYPE] = 1;
-    input_signals[SIGNAL_MSUD_TRACTION_STATE] = 2;
+    //input_signals[SIGNAL_MSUD_REVERSOR] = 2;
+    //input_signals[SIGNAL_MSUD_TRACTION_TYPE] = 1;
+    //input_signals[SIGNAL_MSUD_TRACTION_STATE] = 2;
     //input_signals[SIGNAL_MSUD_TRACTION] = 78;
     //input_signals[SIGNAL_MSUD_CURCUIT_VOZB] = 240;
     //input_signals[SIGNAL_MSUD_SPEED1] = 30.5;
@@ -493,7 +493,7 @@ void MsudDisplay::slotUpdateTimer()
     else if (static_cast<int>(input_signals[SIGNAL_MSUD_REVERSOR]) == 2)
         labPC1_->setText(REVERSOR_BWD);
     else
-        labPC1_->setText("");
+        labPC1_->setText(REVERSOR_FWD);
 
     if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_TYPE]) == 1)
     {
