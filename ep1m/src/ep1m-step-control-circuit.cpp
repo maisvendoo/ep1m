@@ -136,7 +136,9 @@ void EP1m::stepTractionControl(double t, double dt)
     kv15->step(t, dt);
 
     // Включение контактора KM41
-    bool is_KM41_on = kv23->getContactState(0) &&
+    bool is_H153 = kv23->getContactState(0);
+
+    bool is_KM41_on = is_H153 &&
             kv15->getContactState(1) &&
             qt1->getContactState(7);
 
@@ -144,7 +146,9 @@ void EP1m::stepTractionControl(double t, double dt)
     km41->step(t, dt);
 
     // Включение контактора KM42
-    bool is_KM42_on = kv23->getContactState(1) &&
+    bool is_H163 = kv23->getContactState(1);
+
+    bool is_KM42_on = is_H163 &&
             kv15->getContactState(2) &&
             qt1->getContactState(8);
 
@@ -158,7 +162,7 @@ void EP1m::stepTractionControl(double t, double dt)
     kt1->step(t, dt);
 
     // Включение БВ от ВИП1 на ТЭД1, ТЭД2, ТЭД3
-    bool is_Hold_1_3 = km41->getContactState(0) &&
+    bool is_Hold_1_3 = (km41->getContactState(0) || is_H153) &&
             (!main_switch->getState());
 
 
@@ -173,7 +177,7 @@ void EP1m::stepTractionControl(double t, double dt)
     fast_switch[TRAC_MOTOR3]->setPowerOn(is_Power_On_1_3);
 
     // Включение БВ от ВИП2 на ТЭД4, ТЭД5, ТЭД6
-    bool is_Hold_4_6 = km42->getContactState(0) &&
+    bool is_Hold_4_6 = (km42->getContactState(0) || is_H163) &&
             (!main_switch->getState());
 
 
