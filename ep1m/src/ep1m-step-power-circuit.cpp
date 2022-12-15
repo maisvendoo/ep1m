@@ -99,12 +99,13 @@ void EP1m::stepPowerCircuit(double t, double dt)
     qt1->setPressure(0.55 * main_res->getPressure());
 
     // Сигнал на проводе Н36
-    is_H36 = epk->getStateKey() &&
-            sp4->getOutput() &&
-            kv84->getContactState(0) &&
-            kv12->getContactState(0) &&
-            kv13->getContactState(0) &&
-            kv14->getContactState(0);
+    is_H36 = km->isContacts9_10() &&
+             epk->getStateKey() &&
+             sp4->getOutput() &&
+             kv84->getContactState(0) &&
+             kv12->getContactState(0) &&
+             kv13->getContactState(0) &&
+             kv14->getContactState(0);
 
     bool is_QT1_trac = is_H36 &&
             ( kt1->getContactState(0) || qt1->getContactState(1) );

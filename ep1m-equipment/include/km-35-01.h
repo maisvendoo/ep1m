@@ -39,6 +39,31 @@ public:
         return (revers_pos == 1) || (revers_pos == -1);
     }
 
+    bool isContacts7_8() const
+    {
+        return (revers_pos == 1) || (revers_pos == -1);
+    }
+
+    bool isContacts9_10() const
+    {
+        return mode_pos == 1;
+    }
+
+    bool isContacts11_12() const
+    {
+        return mode_pos == -1;
+    }
+
+    bool isContscts3_4() const
+    {
+        return revers_pos == -1;
+    }
+
+    bool isContscts1_2() const
+    {
+        return revers_pos == 1;
+    }
+
     void setFwdKeyState(bool key_state) { fwd_key_state = key_state; }
 
     void setBwdKeyState(bool key_state) { bwd_key_state = key_state; }
