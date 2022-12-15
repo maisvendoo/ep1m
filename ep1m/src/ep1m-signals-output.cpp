@@ -150,4 +150,12 @@ void EP1m::signalsOutput()
         analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 1.0f;
     else
         analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 2.0f;
+
+    bool is_DM_low = signals_module->getLampState(SM_DM1) ||
+                     signals_module->getLampState(SM_DM2);
+
+    if (is_DM_low)
+        analogSignal[SIGNAL_MSUD_DM] = 1.0f;
+    else
+        analogSignal[SIGNAL_MSUD_DM] = 0.0f;
 }
