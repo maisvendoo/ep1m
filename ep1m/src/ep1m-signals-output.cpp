@@ -90,7 +90,12 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!main_compressor->isStarted());
 
     analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = 0.0f;
-    analogSignal[SIGNAL_MSUD_TRACTION] = TO_FLOAT(msud_input.Ia[TRAC_MOTOR1] * 100.0 / 1300.0);
+
+    double trac_level = msud_input.Ia[TRAC_MOTOR1] * 100.0 / 1300.0;
+    trac_level = cut(trac_level, 0.0, 100.0);
+    analogSignal[SIGNAL_MSUD_TRACTION] = TO_FLOAT(trac_level);
+
+    analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getFieldCurrent());
 
     analogSignal[SIGNAL_MSUD_CURRENT_EPT] = ept_current[0];
     analogSignal[SIGNAL_MSUD_VOLTAGE_EPT] = ept_converter->getU_out();

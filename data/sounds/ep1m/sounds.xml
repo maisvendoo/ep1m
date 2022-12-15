@@ -298,6 +298,39 @@
 		<Loop>1</Loop>
 		<PlayOnStart>1</PlayOnStart>
 	</Sound>
+	
+	<!-- Щелчек рукоятки крана 215 -->
+	<Sound>
+		<Name>254-chelk</Name>
+		<Path>254-chelk.wav</Path>
+		<InitVolume>100</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+	
+	<!-- Звук наполнения крана 215 -->
+	<Sound>
+		<Name>254_vpusk</Name>
+		<Path>254_vpusk.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
+	
+	<!-- Звук отпуска крана 215 -->
+	<Sound>
+		<Name>254_vypusk</Name>
+		<Path>254_vypusk.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+	</Sound>
 
 	<Sound>
 		<Name>EPK</Name>

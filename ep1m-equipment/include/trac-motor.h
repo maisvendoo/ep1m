@@ -22,7 +22,16 @@ public:
 
     double getAncorCurrent() const { return getY(0); }
 
-    double getFieldCurrent() const  { return getY(1); }
+    double getFieldCurrent() const
+    {
+        if (mode == 1)
+            return beta * getY(0);
+
+        if (mode == -1)
+            return getY(1);
+
+        return 0;
+    }
 
     double getTorque() const { return M; }
 
