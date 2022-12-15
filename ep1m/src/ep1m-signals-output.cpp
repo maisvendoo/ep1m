@@ -158,4 +158,7 @@ void EP1m::signalsOutput()
         analogSignal[SIGNAL_MSUD_DM] = 1.0f;
     else
         analogSignal[SIGNAL_MSUD_DM] = 0.0f;
+
+    analogSignal[LAMP_DM1] = signals_module->getLampState(SM_DM1);
+    analogSignal[LAMP_DM2] = signals_module->getLampState(SM_DM2);
 }

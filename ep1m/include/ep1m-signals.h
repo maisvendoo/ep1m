@@ -69,6 +69,8 @@ enum
     LAMP_TD4 = 58,
     LAMP_TD5 = 59,
     LAMP_TD6 = 60,
+    LAMP_DM1 = 61,
+    LAMP_DM2 = 62,
 
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
