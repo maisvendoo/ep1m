@@ -92,4 +92,23 @@ void EP1m::initSounds()
 
     connect(horn, &EP1mHorn::soundPlay, this, &EP1m::soundPlay);
     connect(horn, &EP1mHorn::soundStop, this, &EP1m::soundStop);
+
+    connect(kv21, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv22, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv23, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv11, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv12, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv13, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv14, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv84, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kv15, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kt10, &TimeRelay::soundPlay, this, &EP1m::soundPlay);
+    connect(kt1, &TimeRelay::soundPlay, this, &EP1m::soundPlay);
+    connect(km41, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(km42, &Relay::soundPlay, this, &EP1m::soundPlay);
+
+    for (size_t i = 0; i < fast_switch.size(); ++i)
+    {
+        connect(fast_switch[i], &FastSwitch::soundPlay, this, &EP1m::soundPlay);
+    }
 }

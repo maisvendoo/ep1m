@@ -139,7 +139,7 @@ enum
     SIGNAL_MSUD_OSLAB_POLE1     = 191, // Ослбаление поля 1
     SIGNAL_MSUD_OSLAB_POLE2     = 192, // Ослбаление поля 2
     SIGNAL_MSUD_OSLAB_POLE3     = 193, // Ослбаление поля 3
-    SIGNAL_MSUD_VIP_ZONE        = 64,  // Зона ВИП
+    SIGNAL_MSUD_VIP_ZONE        = 96,  // Зона ВИП
 
 
 
