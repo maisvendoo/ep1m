@@ -196,6 +196,9 @@ private:
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;
 
+    /// Свисток и тифон
+    EP1mHorn *horn;
+
     enum
     {
         PANT_NUMBER = 2,
@@ -282,6 +285,9 @@ private:
     /// Инициализация устройств безопасности
     void initSafetyDevices();
 
+    /// Инициализация прочих устройств
+    void initOtherEquipment();
+
     /// Инициализация озвучки
     void initSounds();
 
@@ -316,6 +322,8 @@ private:
     void stepEPT(double t, double dt);
 
     void stepSafetyDevices(double t, double dt);
+
+    void stepOtherEquipment(double t, double dt);
 
     void signalsOutput();
 

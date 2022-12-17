@@ -72,6 +72,9 @@ enum
     LAMP_DM1 = 61,
     LAMP_DM2 = 62,
 
+    BUTTON_SVISTOK = 63,
+    BUTTON_TIFON = 64,
+
     SIGNAL_TUMBLER_AUX_MACHINES = 65, // Вспомогательные машины
     SIGNAL_TUMBLER_COMPRESSOR = 66, // Компрессор
     SIGNAL_TUMBLER_MOTOR_FAN1 = 67, // Вентилятор 1

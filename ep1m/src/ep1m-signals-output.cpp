@@ -163,4 +163,7 @@ void EP1m::signalsOutput()
     analogSignal[LAMP_DM2] = signals_module->getLampState(SM_DM2);
 
     analogSignal[STRELKA_I_TED] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getAncorCurrent() / 1500.0);
+
+    analogSignal[BUTTON_SVISTOK] = TO_FLOAT(horn->isSvistok());
+    analogSignal[BUTTON_TIFON] = TO_FLOAT(horn->isTifon());
 }

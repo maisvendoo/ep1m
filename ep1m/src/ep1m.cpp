@@ -81,6 +81,9 @@ void EP1m::initialization()
     // Инициализация приборов безопасности
     initSafetyDevices();
 
+    // Инициализация прочих устройств
+    initOtherEquipment();
+
     // Инициализация озвучки
     initSounds();
 
@@ -122,6 +125,9 @@ void EP1m::step(double t, double dt)
 
     // Работа приборов безопасности
     stepSafetyDevices(t, dt);
+
+    // Работа прочих устройств
+    stepOtherEquipment(t, dt);
 
     // Вывод сигналов к внешней модели
     signalsOutput();

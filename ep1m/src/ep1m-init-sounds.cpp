@@ -89,4 +89,7 @@ void EP1m::initSounds()
     connect(reversor, &Reversor::soundPlay, this, &EP1m::soundPlay);
 
     connect(km43, &Relay::soundPlay, this, &EP1m::soundPlay);
+
+    connect(horn, &EP1mHorn::soundPlay, this, &EP1m::soundPlay);
+    connect(horn, &EP1mHorn::soundStop, this, &EP1m::soundStop);
 }

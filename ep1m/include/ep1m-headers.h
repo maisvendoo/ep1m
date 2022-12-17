@@ -35,5 +35,6 @@
 #include    "pkd-15.h"
 #include    "fast-switch.h"
 #include    "registrator.h"
+#include    "ep1m-horn.h"
 
 #endif // EP1M_HEADERS_H
