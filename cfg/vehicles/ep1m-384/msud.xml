@@ -12,8 +12,8 @@
 		<AlphaMin>9.0</AlphaMin>
 		<AlphaMax>90.0</AlphaMax>
 
-		<Ktp>1.0</Ktp>
-		<Kti>0.0</Kti>
+		<Ktp>0.005</Ktp>
+		<Kti>0.0001</Kti>
 		<Ktv>1.0</Ktv>
 
 	</Device>

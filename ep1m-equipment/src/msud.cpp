@@ -29,6 +29,7 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Ktp(0.0)
   , Kti(0.0)
   , Ktv(0.0)
+  , dIa(0.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -74,6 +75,16 @@ void MSUD::ode_system(const state_vector_t &Y,
     Q_UNUSED(Y)
     Q_UNUSED(dYdt)
     Q_UNUSED(t)
+
+    dYdt[0] = Kti * dIa;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::preStep(state_vector_t &Y, double t)
+{
+    Y[0] = cut(Y[0], 0.0, 1.0);
 }
 
 //------------------------------------------------------------------------------
@@ -362,6 +373,32 @@ void MSUD::auto_traction_control(double t, double dt)
     msud_output.alpha = 90.0;
     msud_output.zone_num = 1;
     msud_output.vip_voltage_level = 0.0;
+
+    // Рассчитываем заданный ток якоря
+    double Ia_ref = msud_input.km_trac_level * 1600.0;
+    dIa = pf(Ia_ref - msud_input.Ia[TRAC_MOTOR1]);
+
+    double U_max = (*(vip_zone.end() - 1)).Umax;
+
+    double u = Ktp * dIa + getY(0);
+
+    u = cut(u, 0.0, 1.0);
+
+    double Ud = U_max * u;
+
+    size_t zone_idx = select_traction_VIP_Zone(Ud);
+    msud_output.zone_num = zone_idx + 1;
+    msud_output.zone_num = cut(msud_output.zone_num,
+                               static_cast<size_t>(1),
+                               static_cast<size_t>(4));
+
+    double Umin = vip_zone[zone_idx].Umin;
+    double Umax = vip_zone[zone_idx].Umax;
+
+    double cos_alpha = (Ud - Umin) / (Umax - Umin);
+
+    msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
+    msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
 }
 
 //------------------------------------------------------------------------------

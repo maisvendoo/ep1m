@@ -88,6 +88,9 @@ private:
     /// Коэффициент пропорциональной части регулятора скорости в тяге
     double Ktv;
 
+    /// Ошибка по току якоря ТЭД
+    double dIa;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
@@ -97,6 +100,8 @@ private:
      void ode_system(const state_vector_t &Y,
                      state_vector_t &dYdt,
                      double t) override;
+
+     void preStep(state_vector_t &Y, double t) override;
 
      void stepDiscrete(double t, double dt) override;
 
