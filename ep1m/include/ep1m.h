@@ -199,6 +199,9 @@ private:
     /// Свисток и тифон
     EP1mHorn *horn;
 
+    /// Шунты ослабления возбуждения ТЭД
+    ShuntsModule *shunts;
+
     enum
     {
         PANT_NUMBER = 2,

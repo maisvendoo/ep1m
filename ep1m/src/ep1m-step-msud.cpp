@@ -5,6 +5,8 @@
 //------------------------------------------------------------------------------
 void EP1m::stepMSUD(double t, double dt)
 {
+    msud->setControl(keys);
+
     for (size_t i = 0; i < motor_fan.size(); ++i)
         msud_input.mv_state[i] = !motor_fan[i]->isNoReady();
 

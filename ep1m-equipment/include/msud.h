@@ -5,6 +5,7 @@
 
 #include    "msud-data.h"
 #include    "vip-5600-defines.h"
+#include    "shunts-module-defines.h"
 
 //------------------------------------------------------------------------------
 //
@@ -68,7 +69,15 @@ private:
 
     double I_fan_sw_max;
 
-    bool is_pchf_ignored;    
+    bool is_pchf_ignored;
+
+    bool key_state_plus;
+
+    bool old_key_state_plus;
+
+    bool key_state_minus;
+
+    bool old_key_state_minus;
 
     msud_input_t msud_input;
 
@@ -83,6 +92,8 @@ private:
      void stepDiscrete(double t, double dt) override;
 
      void load_config(CfgReader &cfg) override;
+
+     void stepKeysControl(double t, double dt) override;
 
      // Обработка переходов мсуд из состояния в состояние
      void stateProcess(double t, double dt);

@@ -21,7 +21,11 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , fan_runout_time(10.0)
   , I_fan_sw_min(480)
   , I_fan_sw_max(510)
-  , is_pchf_ignored(false)  
+  , is_pchf_ignored(false)
+  , key_state_plus(false)
+  , old_key_state_plus(false)
+  , key_state_minus(false)
+  , old_key_state_minus(false)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -118,6 +122,14 @@ void MSUD::load_config(CfgReader &cfg)
 
         secNode = cfg.getNextSection();
     }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::stepKeysControl(double t, double dt)
+{
+
 }
 
 //------------------------------------------------------------------------------

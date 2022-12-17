@@ -60,4 +60,8 @@ void EP1m::initPowerCircuit()
     qt1->setInitContactState(7, true);
     qt1->setInitContactState(8, true);
     qt1->setInitContactState(9, true);
+
+    // Шунты ослабления возбуждения
+    shunts = new ShuntsModule();
+    shunts->read_custom_config(config_dir + QDir::separator() + "shunts-module");
 }
