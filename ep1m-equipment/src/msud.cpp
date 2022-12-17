@@ -129,7 +129,11 @@ void MSUD::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void MSUD::stepKeysControl(double t, double dt)
 {
+    old_key_state_plus = key_state_plus;
+    key_state_plus = getKeyState(KEY_Equals);
 
+    old_key_state_minus = key_state_minus;
+    key_state_minus = getKeyState(KEY_Minus);
 }
 
 //------------------------------------------------------------------------------
@@ -315,6 +319,8 @@ void MSUD::traction_control(double t, double dt)
     {
         manual_traction_control(t, dt);
     }
+
+    field_weak_control(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -375,6 +381,43 @@ size_t MSUD::select_traction_VIP_Zone(double Ud)
         zone_idx = 0;
 
     return zone_idx;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::field_weak_control(double t, double dt)
+{
+    // Работа только при полностью открытой 4-й зоне ВИП
+    if (static_cast<int>(msud_output.vip_voltage_level) != ZONE4 + 1)
+    {
+        msud_output.field_weak_step = STEP0;
+        return;
+    }
+
+    if (key_state_plus && !old_key_state_plus)
+    {
+        msud_output.field_weak_step++;
+    }
+
+    if (key_state_minus && !old_key_state_minus)
+    {
+        msud_output.field_weak_step--;
+    }
+
+    msud_output.field_weak_step = cut(msud_output.field_weak_step,
+                                      static_cast<size_t>(STEP0),
+                                      static_cast<size_t>(STEP3));
+
+    std::fill(msud_output.op.begin(), msud_output.op.end(), true);
+
+    for (size_t i = 0; i < msud_output.op.size(); ++i)
+    {
+        if (i <= msud_output.field_weak_step)
+            msud_output.op[i] = false;
+        else
+            msud_output.op[i] = true;
+    }
 }
 
 //------------------------------------------------------------------------------

@@ -52,6 +52,9 @@ void EP1m::stepPowerCircuit(double t, double dt)
         // Передаем модели двигателя данные об угловой скорости его вала
         trac_motor[i]->setOmega(wheel_omega[i] * ip);
 
+        // Задаем степень ослебления возбуждения
+        trac_motor[i]->setFieldWeak(shunts->getBeta());
+
         // Выдаем момент на тяговые оси
         Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
 
@@ -113,4 +116,7 @@ void EP1m::stepPowerCircuit(double t, double dt)
     qt1->setTracValveState(is_QT1_trac);
 
     qt1->step(t, dt);
+
+    shunts->setStep(msud->getOutputData().field_weak_step);
+    shunts->step(t, dt);
 }

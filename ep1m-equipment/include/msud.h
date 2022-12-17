@@ -122,6 +122,9 @@ private:
      // Выбор зоны ВИП в тяге по требуемому напряжению на ТЭД
      size_t select_traction_VIP_Zone(double Ud);
 
+     // Управление ослаблением возбуждения ТЭД в тяге
+     void field_weak_control(double t, double dt);
+
 private slots:
 
      void slotLoadTimer();

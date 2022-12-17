@@ -415,9 +415,9 @@ void MsudDisplay::slotUpdateTimer()
     //input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2] = 1100;
     //input_signals[SIGNAL_MSUD_CURRENT_EPT] = 4.6;
     //input_signals[SIGNAL_MSUD_VOLTAGE_EPT] = 22;
-    input_signals[SIGNAL_MSUD_OSLAB_POLE1] = 1;
-    input_signals[SIGNAL_MSUD_OSLAB_POLE2] = 1;
-    input_signals[SIGNAL_MSUD_OSLAB_POLE3] = 1;
+    //input_signals[SIGNAL_MSUD_OSLAB_POLE1] = 0;
+    //input_signals[SIGNAL_MSUD_OSLAB_POLE2] = 1;
+    //input_signals[SIGNAL_MSUD_OSLAB_POLE3] = 1;
 
     fon_->setVisible(static_cast<bool>(input_signals[SIGNAL_MSUD_POWER_SUPPLAY]));
 

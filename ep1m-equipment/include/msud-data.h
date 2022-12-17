@@ -3,6 +3,7 @@
 
 #include    <array>
 #include    "physics.h"
+#include    "shunts-module-defines.h"
 
 // Режимы работы статуса оборудования
 //------------------------------------------------------------------------------
@@ -131,12 +132,18 @@ struct msud_output_t
     /// Угол открытия тиристоров
     double alpha;
 
+    /// Ступень ослабления возбуждения
+    size_t field_weak_step;
+
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_norm;
     /// Наполнение ТЦ тележек
     std::array<bool, TRAC_MOTORS_NUM / 2> TC_full;
+
+    /// Сгнализация супеней ОП
+    std::array<bool, NUM_STEPS> op;
 
     msud_output_t()
         : state(MSUD_OFF)
@@ -148,10 +155,12 @@ struct msud_output_t
         , vip_voltage_level(0.0)
         , zone_num(1)
         , alpha(Physics::PI / 2.0)
+        , field_weak_step(0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
         std::fill(TC_full.begin(), TC_full.end(), false);
+        std::fill(op.begin(), op.end(), true);
     }
 };
 

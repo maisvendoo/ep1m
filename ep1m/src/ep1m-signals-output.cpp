@@ -170,4 +170,8 @@ void EP1m::signalsOutput()
 
     analogSignal[BUTTON_SVISTOK] = TO_FLOAT(horn->isSvistok());
     analogSignal[BUTTON_TIFON] = TO_FLOAT(horn->isTifon());
+
+    analogSignal[SIGNAL_MSUD_OSLAB_POLE1] = TO_FLOAT(msud->getOutputData().op[STEP1]);
+    analogSignal[SIGNAL_MSUD_OSLAB_POLE2] = TO_FLOAT(msud->getOutputData().op[STEP2]);
+    analogSignal[SIGNAL_MSUD_OSLAB_POLE3] = TO_FLOAT(msud->getOutputData().op[STEP3]);
 }
