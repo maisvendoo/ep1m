@@ -78,6 +78,7 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN2 = 68, // Вентилятор 2
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
 
+    STRELKA_I_TED = 97, // Ток якоря тяговых двигателей
     STRELKA_U_KS = 98, // Напряжение КС
 
     STRELKA_EPT_VOLT = 99,
