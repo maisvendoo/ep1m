@@ -146,6 +146,10 @@ void EP1m::signalsOutput()
         circuit_state = circuit_state && (!fast_switch[i]->getContactState(2));
     }
 
+    circuit_state = circuit_state &&
+            km41->getContactState(0) &&
+            km42->getContactState(0);
+
     if (circuit_state)
         analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 1.0f;
     else
