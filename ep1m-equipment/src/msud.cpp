@@ -356,7 +356,13 @@ size_t MSUD::select_traction_VIP_Zone(double Ud)
         }
     }
 
-    return zone_idx - 1;
+    if (Ud >= (*(vip_zone.end() - 1)).Umax)
+        zone_idx = vip_zone.size() - 1;
+
+    if (Ud < (*(vip_zone.begin())).Umin)
+        zone_idx = 0;
+
+    return zone_idx;
 }
 
 //------------------------------------------------------------------------------
