@@ -26,6 +26,9 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , old_key_state_plus(false)
   , key_state_minus(false)
   , old_key_state_minus(false)
+  , Ktp(0.0)
+  , Kti(0.0)
+  , Ktv(0.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -122,6 +125,10 @@ void MSUD::load_config(CfgReader &cfg)
 
         secNode = cfg.getNextSection();
     }
+
+    cfg.getDouble(secName, "Ktp", Ktp);
+    cfg.getDouble(secName, "Kti", Kti);
+    cfg.getDouble(secName, "Ktv", Ktv);
 }
 
 //------------------------------------------------------------------------------
@@ -391,7 +398,6 @@ void MSUD::field_weak_control(double t, double dt)
     // Работа только при полностью открытой 4-й зоне ВИП
     if (static_cast<int>(msud_output.vip_voltage_level) != ZONE4 + 1)
     {
-        msud_output.field_weak_step = STEP0;
         return;
     }
 

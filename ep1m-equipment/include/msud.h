@@ -79,6 +79,15 @@ private:
 
     bool old_key_state_minus;
 
+    /// Коэффициент пропорциональной части регулятора тока в тяге
+    double Ktp;
+
+    /// Коэффициент интегральной части регулятора тока в тяге
+    double Kti;
+
+    /// Коэффициент пропорциональной части регулятора скорости в тяге
+    double Ktv;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
