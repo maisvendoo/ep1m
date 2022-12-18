@@ -30,6 +30,7 @@ void EP1m::stepMSUD(double t, double dt)
     msud_input.km_trac_level = km->getTracLevel();
     msud_input.km_brake_level = km->getBrakeLevel();
     msud_input.km_ref_velocity_level = km->getRefSpeedLevel();
+    msud_input.V_cur = qAbs(wheel_omega[TRAC_MOTOR1] * wheel_diameter * Physics::kmh / 2.0);
 
     bool is_MSUD_on = km43->getContactState(1);
 

@@ -89,8 +89,8 @@ void EP1m::stepPowerCircuit(double t, double dt)
             trac_motor[TRAC_MOTOR6]->getAncorCurrent();
 
     vip[VIP2]->setI_out(I_vip2);
-    vip[VIP1]->setAlpha(msud->getOutputData().alpha);
-    vip[VIP1]->setZoneNum(msud->getOutputData().zone_num);
+    vip[VIP2]->setAlpha(msud->getOutputData().alpha);
+    vip[VIP2]->setZoneNum(msud->getOutputData().zone_num);
     vip[VIP2]->step(t, dt);
 
     // Работа реверсивного переключателя

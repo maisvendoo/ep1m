@@ -91,6 +91,15 @@ private:
     /// Ошибка по току якоря ТЭД
     double dIa;
 
+    /// Конструкционная скорость электровоза
+    double Vmax;
+
+    /// Ошибка по скорости
+    double dV;
+
+    /// Коэффициент интегральной части регулятора скорости
+    double Ktvi;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
@@ -132,6 +141,9 @@ private:
 
      // Авторегулирование в тяге
      void auto_traction_control(double t, double dt);
+
+     // Сброс управления ВИП в тяге
+     void reset_traction_control();
 
      // Выбор зоны ВИП в тяге по требуемому напряжению на ТЭД
      size_t select_traction_VIP_Zone(double Ud);

@@ -78,6 +78,15 @@ struct msud_input_t
     /// Положение задатчика скорости
     double km_ref_velocity_level;
 
+    /// Текущая скорость электровоза, км/ч
+    double V_cur;
+
+    /// Признак сбора тяги
+    bool is_traction;
+
+    /// Признак сбора рекуперации
+    bool is_brake;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -98,6 +107,9 @@ struct msud_input_t
         , km_trac_level(0.0)
         , km_brake_level(0.0)
         , km_ref_velocity_level(0.0)
+        , V_cur(0.0)
+        , is_traction(false)
+        , is_brake(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);

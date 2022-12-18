@@ -187,4 +187,16 @@ void EP1m::stepTractionControl(double t, double dt)
     fast_switch[TRAC_MOTOR4]->setPowerOn(is_Power_On_4_6);
     fast_switch[TRAC_MOTOR5]->setPowerOn(is_Power_On_4_6);
     fast_switch[TRAC_MOTOR6]->setPowerOn(is_Power_On_4_6);
+
+    bool circuit_state = true;
+    for (size_t i = 0; i < fast_switch.size(); ++i)
+    {
+        circuit_state = circuit_state && (!fast_switch[i]->getContactState(2));
+    }
+
+    circuit_state = circuit_state &&
+            km41->getContactState(0) &&
+            km42->getContactState(0);
+
+    msud_input.is_traction = circuit_state;
 }

@@ -30,6 +30,9 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Kti(0.0)
   , Ktv(0.0)
   , dIa(0.0)
+  , Vmax(140.0)
+  , dV(0.0)
+  , Ktvi(0.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -77,6 +80,8 @@ void MSUD::ode_system(const state_vector_t &Y,
     Q_UNUSED(t)
 
     dYdt[0] = Kti * dIa;
+
+    dYdt[1] = Ktvi * dV;
 }
 
 //------------------------------------------------------------------------------
@@ -84,7 +89,8 @@ void MSUD::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void MSUD::preStep(state_vector_t &Y, double t)
 {
-    Y[0] = cut(Y[0], 0.0, 1.0);
+    Y[0] = cut(Y[0], -1.0, 1.0);
+    Y[1] = cut(Y[1], -1.0, 1.0);
 }
 
 //------------------------------------------------------------------------------
@@ -140,6 +146,8 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Ktp", Ktp);
     cfg.getDouble(secName, "Kti", Kti);
     cfg.getDouble(secName, "Ktv", Ktv);
+    cfg.getDouble(secName, "Vmax", Vmax);
+    cfg.getDouble(secName, "Ktvi", Ktvi);
 }
 
 //------------------------------------------------------------------------------
@@ -331,7 +339,10 @@ void MSUD::traction_control(double t, double dt)
 {
     if (msud_input.is_auto_reg)
     {
-        auto_traction_control(t, dt);
+        if (msud_input.is_traction)
+            auto_traction_control(t, dt);
+        else
+            reset_traction_control();
     }
     else
     {
@@ -370,13 +381,19 @@ void MSUD::manual_traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_traction_control(double t, double dt)
 {
-    msud_output.alpha = 90.0;
-    msud_output.zone_num = 1;
-    msud_output.vip_voltage_level = 0.0;
+    double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
-    // Рассчитываем заданный ток якоря
-    double Ia_ref = msud_input.km_trac_level * 1600.0;
-    dIa = pf(Ia_ref - msud_input.Ia[TRAC_MOTOR1]);
+    // Рассчитываем максимальный заданный ток якоря
+    double Ia_ref_max = msud_input.km_trac_level * 1600.0;
+
+    // Вычисляем ошибку по скорости
+    double dV = V_ref - msud_input.V_cur;
+
+    double Ia_ref = Ktv * dV + getY(1);
+
+    Ia_ref = cut(Ia_ref, 0.0, Ia_ref_max);
+
+    dIa = Ia_ref - msud_input.Ia[TRAC_MOTOR1];
 
     double U_max = (*(vip_zone.end() - 1)).Umax;
 
@@ -399,6 +416,17 @@ void MSUD::auto_traction_control(double t, double dt)
 
     msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
     msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::reset_traction_control()
+{
+    msud_output.alpha = 90.0;
+    msud_output.zone_num = ZONE1 + 1;
+    msud_output.vip_voltage_level = 0.0;
+    msud_output.field_weak_step = STEP0;
 }
 
 //------------------------------------------------------------------------------

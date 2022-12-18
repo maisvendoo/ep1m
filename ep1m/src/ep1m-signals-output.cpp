@@ -140,17 +140,8 @@ void EP1m::signalsOutput()
     else
         analogSignal[SIGNAL_MSUD_TRACTION_TYPE] = 2.0f;
 
-    bool circuit_state = true;
-    for (size_t i = 0; i < fast_switch.size(); ++i)
-    {
-        circuit_state = circuit_state && (!fast_switch[i]->getContactState(2));
-    }
 
-    circuit_state = circuit_state &&
-            km41->getContactState(0) &&
-            km42->getContactState(0);
-
-    if (circuit_state)
+    if (msud_input.is_traction || msud_input.is_brake)
         analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 1.0f;
     else
         analogSignal[SIGNAL_MSUD_TRACTION_STATE] = 2.0f;

@@ -23,7 +23,7 @@
 
         <DriverPos>0.635 9.291 3.5</DriverPos> 
 		
-		<isRegistratorOn>0</isRegistartorOn>
+		<isRegistratorOn>1</isRegistartorOn>
 
     </Vehicle>
 </Config>

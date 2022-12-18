@@ -13,8 +13,11 @@
 		<AlphaMax>90.0</AlphaMax>
 
 		<Ktp>0.001</Ktp>
-		<Kti>0.001</Kti>
-		<Ktv>1.0</Ktv>
+		<Kti>0.01</Kti>
+		<Ktv>500.0</Ktv>
+		<Ktvi>0.0</Ktvi>
+
+		<Vmax>160.0</Vmax>
 
 	</Device>
 	
