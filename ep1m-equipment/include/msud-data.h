@@ -75,6 +75,9 @@ struct msud_input_t
     /// Положение главного вала КМ в рекуперации
     double km_brake_level;
 
+    /// Положение задатчика скорости
+    double km_ref_velocity_level;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -94,6 +97,7 @@ struct msud_input_t
         , is_auto_reg(false)
         , km_trac_level(0.0)
         , km_brake_level(0.0)
+        , km_ref_velocity_level(0.0)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);
