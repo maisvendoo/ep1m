@@ -361,19 +361,8 @@ void MSUD::manual_traction_control(double t, double dt)
     double Ud_max = (*(vip_zone.end()-1)).Umax;
 
     double Ud = msud_input.km_trac_level * Ud_max;
-    size_t zone_idx = select_traction_VIP_Zone(Ud);
-    msud_output.zone_num = zone_idx + 1;
-    msud_output.zone_num = cut(msud_output.zone_num,
-                               static_cast<size_t>(1),
-                               static_cast<size_t>(4));
 
-    double Umin = vip_zone[zone_idx].Umin;
-    double Umax = vip_zone[zone_idx].Umax;
-
-    double cos_alpha = (Ud - Umin) / (Umax - Umin);
-
-    msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
-    msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
+    vip_control(Ud);
 }
 
 //------------------------------------------------------------------------------
@@ -381,41 +370,36 @@ void MSUD::manual_traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_traction_control(double t, double dt)
 {
+    // Расчитываем абсолютное значение заданной скорости (км/ч)
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
     // Рассчитываем максимальный заданный ток якоря
     double Ia_ref_max = msud_input.km_trac_level * 1600.0;
 
-    // Вычисляем ошибку по скорости
+    // Вычисляем ошибку по скорости (км/ч)
     double dV = V_ref - msud_input.V_cur;
 
+    // Определяем требуемый якоря ток в тяге
     double Ia_ref = Ktv * dV + getY(1);
 
+    // Ограничиваем ток величиной, заданной с главного вала КМ
     Ia_ref = cut(Ia_ref, 0.0, Ia_ref_max);
 
+    // Расчет ошибки по току
     dIa = Ia_ref - msud_input.Ia[TRAC_MOTOR1];
 
+    // Максимальное напряжение, которое способен выдать ВИП
     double U_max = (*(vip_zone.end() - 1)).Umax;
 
+    // Расчитываем относительную величину напряжения ВИТ
     double u = Ktp * dIa + getY(0);
 
     u = cut(u, 0.0, 1.0);
 
+    // Рассчитываем абсолютную величину напряжения ВИП
     double Ud = U_max * u;
 
-    size_t zone_idx = select_traction_VIP_Zone(Ud);
-    msud_output.zone_num = zone_idx + 1;
-    msud_output.zone_num = cut(msud_output.zone_num,
-                               static_cast<size_t>(1),
-                               static_cast<size_t>(4));
-
-    double Umin = vip_zone[zone_idx].Umin;
-    double Umax = vip_zone[zone_idx].Umax;
-
-    double cos_alpha = (Ud - Umin) / (Umax - Umin);
-
-    msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
-    msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
+    vip_control(Ud);
 }
 
 //------------------------------------------------------------------------------
@@ -453,6 +437,26 @@ size_t MSUD::select_traction_VIP_Zone(double Ud)
         zone_idx = 0;
 
     return zone_idx;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::vip_control(double Ud)
+{
+    size_t zone_idx = select_traction_VIP_Zone(Ud);
+    msud_output.zone_num = zone_idx + 1;
+    msud_output.zone_num = cut(msud_output.zone_num,
+                               static_cast<size_t>(1),
+                               static_cast<size_t>(4));
+
+    double Umin = vip_zone[zone_idx].Umin;
+    double Umax = vip_zone[zone_idx].Umax;
+
+    double cos_alpha = (Ud - Umin) / (Umax - Umin);
+
+    msud_output.alpha = acos(cos_alpha) * 180.0 / Physics::PI;
+    msud_output.vip_voltage_level = static_cast<double>(zone_idx) + cos_alpha;
 }
 
 //------------------------------------------------------------------------------
