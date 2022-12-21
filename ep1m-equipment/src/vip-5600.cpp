@@ -57,6 +57,10 @@ void RectInvertConverter::preStep(state_vector_t &Y, double t)
 
     // Вычисляем выходное напряжение с учетом тока нагрузки
     U_out = E_out - r * I_out;
+
+    DebugMsg = QString("%1; %2;")
+            .arg(E_out, 9, 'f', 4)
+            .arg(U_out, 9, 'f', 4);
 }
 
 //------------------------------------------------------------------------------

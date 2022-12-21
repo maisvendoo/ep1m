@@ -23,7 +23,8 @@ void EP1m::stepDebugPrint(double t, double dt)
             .arg(static_cast<int>(km41->getContactState(0)))
             .arg(static_cast<int>(km41->getContactState(0)));
 */
-    DebugMsg = QString("%1")
-            .arg(trac_motor[0]->getDebugMsg(), 1);
-
+    DebugMsg = QString("%1; %2 %3")
+            .arg(t, 7, 'f', 3)
+            .arg(vip[VIP1]->getDebugMsg())
+            .arg(trac_motor[0]->getDebugMsg());
 }
