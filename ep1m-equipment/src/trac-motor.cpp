@@ -83,9 +83,13 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
 
             break;
     }
-    DebugMsg = QString("Y[0]: %1 | beta: %2 | cPhi: %3 | E: %4 | M: %5")
+/*    DebugMsg = QString("Y[0]: %1 | cPhi: %2 | E: %3 | M: %4")
             .arg(Y[0], 9, 'f', 4)
-            .arg(beta, 5, 'f', 3)
+            .arg(cPhi(beta * Y[0] * revers_state), 9, 'f', 4)
+            .arg(E, 9, 'f', 4)
+            .arg(M, 9, 'f', 4);*/
+    DebugMsg = QString("%1; %2; %3; %4; ")
+            .arg(Y[0], 9, 'f', 4)
             .arg(cPhi(beta * Y[0] * revers_state), 9, 'f', 4)
             .arg(E, 9, 'f', 4)
             .arg(M, 9, 'f', 4);
