@@ -250,6 +250,8 @@ private:
 
     std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
 
+    QList<QString> tap_sounds;
+
     void initialization() override;
 
     /// Инициализация подсистемы питания цепей управления
@@ -294,6 +296,9 @@ private:
     /// Инициализация озвучки
     void initSounds();
 
+    /// Инициализация перестуков
+    void initTapSounds();
+
     /// Инициализация регистратора параметров движения
     void initRegistartor();
 
@@ -327,6 +332,8 @@ private:
     void stepSafetyDevices(double t, double dt);
 
     void stepOtherEquipment(double t, double dt);
+
+    void stepTapSounds();
 
     void signalsOutput();
 

@@ -415,4 +415,183 @@
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
 
+	<Sound>
+		<Name>tap_5-10</Name>
+		<Path>5-10.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			5.000	100
+			11.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_10-20</Name>
+		<Path>10-20.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			11.000	100
+			21.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_20-30</Name>
+		<Path>20-30.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			21.000	100
+			31.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_30-40</Name>
+		<Path>30-40.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			31.000	100
+			41.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_40-50</Name>
+		<Path>40-50.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			41.000	100
+			51.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_50-60</Name>
+		<Path>50-60.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			51.000	100
+			61.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_60-70</Name>
+		<Path>60-70.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			61.000	100
+			71.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_70-80</Name>
+		<Path>70-80.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			71.000	100
+			81.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_80-90</Name>
+		<Path>80-90.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			81.000	100
+			91.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_90-100</Name>
+		<Path>90-100.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			91.000	100
+			101.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_100-110</Name>
+		<Path>100-110.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			101.000	100
+			111.000	0
+		</VolumeCurve>
+	</Sound>
+	
+	<Sound>
+		<Name>tap_110-~</Name>
+		<Path>110-~.wav</Path>
+		<InitVolume>0</InitVolume>
+		<MaxVolume>100</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>1</PlayOnStart>
+		<VolumeCurve>
+			0.000	0
+			111.000	100
+		</VolumeCurve>
+	</Sound>
+
 </Config>

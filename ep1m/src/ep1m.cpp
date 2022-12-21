@@ -87,6 +87,9 @@ void EP1m::initialization()
     // Инициализация озвучки
     initSounds();
 
+    // Инициализация звуков перестука
+    initTapSounds();
+
     // Инициализация регистратора
     initRegistartor();
 }
@@ -128,6 +131,9 @@ void EP1m::step(double t, double dt)
 
     // Работа прочих устройств
     stepOtherEquipment(t, dt);
+
+    // Перустуки
+    stepTapSounds();
 
     // Вывод сигналов к внешней модели
     signalsOutput();
