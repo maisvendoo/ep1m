@@ -22,22 +22,12 @@ void EP1m::stepRegistration(double t, double dt)
 {
     if (!is_Registarator_on)
         return;
-/*
+
     QString line = QString("%1 %2 %3 %4")
             .arg(t, 10, 'f', 1)
             .arg(velocity * Physics::kmh, 6, '2', 1)
             .arg(trac_motor[0]->getAncorCurrent(), 7, 'f', 2)
             .arg(calcTracForce() / 1000.0, 6, '2', 1);
-*/
-    // t; vipE; vipU; motorE; (I; dI/dt;)x4
-    QString line = QString("%1; %2 %3")
-            .arg(t, 7, 'f', 3)
-            .arg(vip[VIP1]->getDebugMsg())
-            .arg(trac_motor[0]->getDebugMsg());
 
-    if (velocity > (100 / Physics::kmh))
-        registrator->print(line, t, dt);
-/*
     registrator->print(line, t, dt);
-*/
 }

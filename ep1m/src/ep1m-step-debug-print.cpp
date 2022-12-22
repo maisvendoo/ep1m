@@ -7,7 +7,7 @@ void EP1m::stepDebugPrint(double t, double dt)
 {
     Q_UNUSED(t)
     Q_UNUSED(dt)
-/*
+
     DebugMsg = QString("Пульт: %1 Ucc: %2 ВВК: %3 Uсн: %4 Реверс: %5 ГВ: %6 УК: %7 KT10: %8 KT1: %9 KV22: %10 KV15: %11 KM41: %12 KM42: %13")
             .arg(static_cast<int>(tumblers_panel->getUnlockKeyState()), 1)
             .arg(static_cast<float>(Ucc), 5, 'f', 2)
@@ -22,9 +22,4 @@ void EP1m::stepDebugPrint(double t, double dt)
             .arg(static_cast<int>(kv15->getContactState(0)), 1)
             .arg(static_cast<int>(km41->getContactState(0)))
             .arg(static_cast<int>(km41->getContactState(0)));
-*/
-    DebugMsg = QString("%1; %2 %3")
-            .arg(t, 7, 'f', 3)
-            .arg(vip[VIP1]->getDebugMsg())
-            .arg(trac_motor[0]->getDebugMsg());
 }
