@@ -6,5 +6,5 @@
 void EP1m::initSafetyDevices()
 {
     klub_BEL = new KLUB();
-    klub_BEL->setMaxVelocity(140.0);
+    klub_BEL->setMaxVelocity(340.0);
 }
