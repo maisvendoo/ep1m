@@ -29,6 +29,5 @@ void EP1m::stepRegistration(double t, double dt)
             .arg(trac_motor[0]->getAncorCurrent(), 7, 'f', 2)
             .arg(calcTracForce() / 1000.0, 6, '2', 1);
 
-
     registrator->print(line, t, dt);
 }
