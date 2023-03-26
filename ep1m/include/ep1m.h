@@ -127,7 +127,7 @@ private:
 
     BrakeCrane *brake_crane;
 
-    AutoTrainStopEPK150 *epk;
+    AutoTrainStop *epk;
 
     /// Запасный резервуар
     Reservoir *aux_res;

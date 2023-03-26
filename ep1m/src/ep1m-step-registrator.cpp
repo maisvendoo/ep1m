@@ -9,7 +9,7 @@ double EP1m::calcTracForce()
 
     for (size_t i = 1; i < Q_a.size(); ++i)
     {
-        trac_force += 2 * Q_a[i] / wheel_diameter;
+        trac_force += 2 * Q_a[i] / wheel_diameter[i - 1];
     }
 
     return trac_force;

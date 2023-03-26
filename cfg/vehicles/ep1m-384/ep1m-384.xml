@@ -6,13 +6,14 @@
         <Length>22.532</Length>
         <WheelDiameter>1.25</WheelDiameter>
         <MainResist>loco-resist</MainResist>
+        <WheelRailFriction>loco-AC</WheelRailFriction>
         <NumAxis>6</NumAxis>
         <SoundDir>ep1m</SoundDir>
-        <WheelInertia>2.0</WheelInertia>
-		<ReductorCoeff>3.38</ReductorCoeff>
+        <WheelInertia>100.0</WheelInertia>
+        <ReductorCoeff>3.38</ReductorCoeff>
 
-		<MainResLeak>4e-5</MainResLeak>
-		
+        <MainResLeak>4e-5</MainResLeak>
+
         <ExtModelName>EP1m-384/EP1m.osgt</ExtModelName>
         <ModelShift>0.0 0.0 0.3</ModelShift>
 
@@ -22,8 +23,8 @@
         <AnimationsConfigDir>EP1m-384</AnimationsConfigDir>
 
         <DriverPos>0.635 9.291 3.5</DriverPos> 
-		
-		<isRegistratorOn>1</isRegistartorOn>
+
+        <isRegistratorOn>1</isRegistartorOn>
 
     </Vehicle>
 </Config>

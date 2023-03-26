@@ -62,7 +62,7 @@ void EP1m::stepControlCircuit(double t, double dt)
             kv44->getContactState(2) &&
             kv23->getContactState(0);
 
-    main_switch->setReturn(return_GV);        
+    main_switch->setReturn(return_GV);
 
     stepTractionControl(t, dt);
 }
@@ -88,7 +88,7 @@ bool EP1m::getHoldingCoilState()
 void EP1m::stepTractionControl(double t, double dt)
 {
     bool is_KV11_KV12_on = km->isContacts5_6() &&
-            epk->getEmeggencyBrakeContact();
+            epk->getEmergencyBrakeContact();
 
     kv11->setVoltage(Ucc * static_cast<double>(is_KV11_KV12_on));
     kv11->step(t, dt);
