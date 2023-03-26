@@ -47,12 +47,12 @@ void EP1m::signalsOutput()
     analogSignal[KVT215_AXIS] = TO_FLOAT(loco_crane->getHandlePosition());
     analogSignal[KVT215_RUK] = TO_FLOAT(loco_crane->getHandleShift());
 
-    analogSignal[SIGNAL_WHEEL1] = TO_FLOAT(dir * wheel_rotation_angle[0] / 2.0 / Physics::PI);
-    analogSignal[SIGNAL_WHEEL2] = TO_FLOAT(dir * wheel_rotation_angle[1] / 2.0 / Physics::PI);
-    analogSignal[SIGNAL_WHEEL3] = TO_FLOAT(dir * wheel_rotation_angle[2] / 2.0 / Physics::PI);
-    analogSignal[SIGNAL_WHEEL4] = TO_FLOAT(dir * wheel_rotation_angle[3] / 2.0 / Physics::PI);
-    analogSignal[SIGNAL_WHEEL5] = TO_FLOAT(dir * wheel_rotation_angle[4] / 2.0 / Physics::PI);
-    analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(dir * wheel_rotation_angle[5] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL1] = TO_FLOAT(wheel_rotation_angle[0] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL2] = TO_FLOAT(wheel_rotation_angle[1] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL3] = TO_FLOAT(wheel_rotation_angle[2] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL4] = TO_FLOAT(wheel_rotation_angle[3] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL5] = TO_FLOAT(wheel_rotation_angle[4] / 2.0 / Physics::PI);
+    analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(wheel_rotation_angle[5] / 2.0 / Physics::PI);
 
     analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
     analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->getStateKey());

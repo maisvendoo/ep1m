@@ -18,7 +18,7 @@ void EP1m::initBrakeEquipment()
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {
         brake_mech[i] = new TrolleyBrakeMech();
-        brake_mech[i]->setEffFricRadius(wheel_diameter / 2.0);
+        brake_mech[i]->setEffFricRadius(wheel_diameter[i * 2] / 2.0);
     }
 
     brake_mech[FWD_TROLLEY]->read_custom_config(config_dir +
