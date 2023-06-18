@@ -6,7 +6,7 @@
         <!-- <MainReservoirPressure>0.7</MainReservoirPressure> -->
 
         <!-- Темп утечек из ГР -->
-        <MainReservoirFlow>1.1e-4</MainReservoirFlow>
+        <MainReservoirFlow>1.0e-6</MainReservoirFlow>
 
         <!-- Зарядное давление, МПа -->
         <!-- <ChargingPressure>0.52</ChargingPressure> -->

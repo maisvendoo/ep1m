@@ -7,22 +7,33 @@
 		<InitAngle>0.0</InitAngle>
 		<Duration>4.0</Duration>
 		<Precision>0.01</Precision>
-		<Axis>0.0 -1.0 0.0</Axis>
+		<Axis>0.0 1.0 0.0</Axis>
+		<!-- <FixedSignal>0.5</FixedSignal> -->
 	</AnalogRotation>
 
 	<KeyPoint>
+		<Param>-1.0</Param>
+		<Value>-119.5</Value>
+	</KeyPoint>
+
+	<KeyPoint>
+		<Param>-0.5</Param>
+		<Value>-60.2</Value>
+	</KeyPoint>
+
+	<KeyPoint>
 		<Param>0.0</Param>
-		<Value>0.0</Value>
+		<Value>0.3</Value>
 	</KeyPoint>
 
 	<KeyPoint>
 		<Param>0.5</Param>
-		<Value>61.34</Value>
+		<Value>61.4</Value>
 	</KeyPoint>
 
 	<KeyPoint>
 		<Param>1.0</Param>
-		<Value>121.75</Value>
+		<Value>122.0</Value>
 	</KeyPoint>
 
 </Config>

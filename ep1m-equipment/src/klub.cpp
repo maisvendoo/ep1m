@@ -126,6 +126,7 @@ void KLUB::setTrainLength(double train_length)
     if (this->train_length == train_length)
         return;
 
+    double length_diff = train_length - this->train_length;
     this->train_length = train_length;
 
     if (limits.empty())
@@ -134,7 +135,7 @@ void KLUB::setTrainLength(double train_length)
     {
         if (limits[i + dir].value > limits[i].value)
         {
-            limits[i + hs_p(dir)].coord += dir * train_length;
+            limits[i + hs_p(dir)].coord += dir * length_diff;
         }
     }
 }

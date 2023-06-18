@@ -54,13 +54,13 @@ void EP1m::initSounds()
     connect(main_switch, &ProtectiveDevice::soundPlay,
             this, &EP1m::soundPlay);
 
-    connect(main_compressor, &MotorCompressor::soundPlay,
+    connect(motor_compressor, &ACMotorCompressor::soundPlay,
             this, &EP1m::soundPlay);
 
-    connect(main_compressor, &MotorCompressor::soundStop,
+    connect(motor_compressor, &ACMotorCompressor::soundStop,
             this, &EP1m::soundStop);
 
-    connect(main_compressor, &MotorCompressor::soundSetPitch,
+    connect(motor_compressor, &ACMotorCompressor::soundSetPitch,
             this, &EP1m::soundSetPitch);
 
     for (size_t i = 0; i < motor_fan.size(); ++i)
@@ -72,7 +72,7 @@ void EP1m::initSounds()
                 this, &EP1m::soundStop);
     }
 
-    connect(ubt, &BrakeLock::soundPlay, this, &EP1m::soundPlay);
+    connect(brake_lock, &BrakeLock::soundPlay, this, &EP1m::soundPlay);
 
     connect(brake_crane, &BrakeCrane::soundPlay, this, &EP1m::soundPlay);
     connect(brake_crane, &BrakeCrane::soundSetVolume, this, &EP1m::soundSetVolume);
@@ -90,8 +90,8 @@ void EP1m::initSounds()
 
     connect(km43, &Relay::soundPlay, this, &EP1m::soundPlay);
 
-    connect(horn, &EP1mHorn::soundPlay, this, &EP1m::soundPlay);
-    connect(horn, &EP1mHorn::soundStop, this, &EP1m::soundStop);
+    connect(horn, &TrainHorn::soundPlay, this, &EP1m::soundPlay);
+    connect(horn, &TrainHorn::soundStop, this, &EP1m::soundStop);
 
     connect(kv21, &Relay::soundPlay, this, &EP1m::soundPlay);
     connect(kv22, &Relay::soundPlay, this, &EP1m::soundPlay);

@@ -38,10 +38,10 @@ void EP1m::signalsOutput()
 
     analogSignal[LAMP_NCH] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
 
-    analogSignal[STRELKA_GR] = TO_FLOAT(main_res->getPressure() / 1.6);
-    analogSignal[STRELKA_TM] = TO_FLOAT(pTM / 1.0);
-    analogSignal[STRELKA_UR] = TO_FLOAT(brake_crane->getEqReservoirPressure() / 1.0);
-    analogSignal[STRELKA_TC] = TO_FLOAT(brake_mech[FWD_TROLLEY]->getBrakeCylinderPressure() / 1.6);
+    analogSignal[STRELKA_GR] = TO_FLOAT(main_reservoir->getPressure() / 1.6);
+    analogSignal[STRELKA_TM] = TO_FLOAT(brakepipe->getPressure() / 1.0);
+    analogSignal[STRELKA_UR] = TO_FLOAT(brake_crane->getERpressure() / 1.0);
+    analogSignal[STRELKA_TC] = TO_FLOAT(brake_mech[TROLLEY_FWD]->getBCpressure() / 1.6);
 
     analogSignal[RUK_395] = TO_FLOAT(brake_crane->getHandlePosition());
     analogSignal[KVT215_AXIS] = TO_FLOAT(loco_crane->getHandlePosition());
@@ -57,24 +57,24 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
     analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->getStateKey());
 
-    analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = pTM;
-    analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = brake_crane->getEqReservoirPressure();
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = TO_FLOAT(brakepipe->getPressure());
+    analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = TO_FLOAT(brake_crane->getERpressure());
     analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
-    analogSignal[SIGNAL_KLUB_U_ALSN] = alsn_info.code_alsn;
+    analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(alsn_info.code_alsn);
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
 
-    analogSignal[LAMP_EPT_O] = ept_pass_control->stateReleaseLamp();
-    analogSignal[LAMP_EPT_P] = ept_pass_control->stateHoldLamp();
-    analogSignal[LAMP_EPT_T] = ept_pass_control->stateBrakeLamp();
+    analogSignal[LAMP_EPT_O] = TO_FLOAT(epb_control->stateReleaseLamp());
+    analogSignal[LAMP_EPT_P] = TO_FLOAT(epb_control->stateHoldLamp());
+    analogSignal[LAMP_EPT_T] = TO_FLOAT(epb_control->stateBrakeLamp());
 
-    analogSignal[STRELKA_EPT_AMP] = ept_current[0] / 10.0;
-    analogSignal[STRELKA_EPT_VOLT] = ept_converter->getU_out() / 150.0;
+    analogSignal[STRELKA_EPT_AMP] = epb_converter->getOutputCurrent() / 10.0;
+    analogSignal[STRELKA_EPT_VOLT] = epb_converter->getOutputVoltage() / 150.0;
 
     analogSignal[RB1] = TO_FLOAT(tumblers[BUTTON_RB].getState());
     analogSignal[RBS] = TO_FLOAT(tumblers[BUTTON_RBS].getState());
@@ -86,8 +86,8 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km->getTracLevel() +
                                                            qAbs(km->getBrakeLevel())) * 1600.0);
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = msud_input.Ia[TRAC_MOTOR1];
-    analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!main_compressor->isStarted() && press_reg->getState());
-    analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!main_compressor->isStarted());
+    analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!motor_compressor->isPowered() && press_reg->getState());
+    analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!motor_compressor->isPowered());
 
     analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = 0.0f;
 
@@ -97,8 +97,8 @@ void EP1m::signalsOutput()
 
     analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getFieldCurrent());
 
-    analogSignal[SIGNAL_MSUD_CURRENT_EPT] = ept_current[0];
-    analogSignal[SIGNAL_MSUD_VOLTAGE_EPT] = ept_converter->getU_out();
+    analogSignal[SIGNAL_MSUD_CURRENT_EPT] = TO_FLOAT(abs(epb_converter->getOutputCurrent()));
+    analogSignal[SIGNAL_MSUD_VOLTAGE_EPT] = TO_FLOAT(epb_converter->getOutputVoltage());
 
     analogSignal[SIGNAL_MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
     analogSignal[SIGNAL_MSUD_MPK] = TO_FLOAT(static_cast<int>(msud_input.tumbler_MPK) + 1);

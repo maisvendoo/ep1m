@@ -1,5 +1,5 @@
-#ifndef     BLOK_H
-#define     BLOK_H
+#ifndef     KLUB_H
+#define     KLUB_H
 
 #include    "device.h"
 #include    "klub-speed-limits.h"
@@ -246,4 +246,4 @@ private slots:
    void onBeepTimer();
 };
 
-#endif // BLOK_H
+#endif // KLUB_H

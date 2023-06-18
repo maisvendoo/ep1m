@@ -9,6 +9,8 @@ Manometer::Manometer(QSize _size, QString manName, int maxValScale,
                      QWidget *parent, bool _flag, QString labelColor)
     : QLabel(parent)
 {
+    Q_UNUSED(_flag)
+
     this->resize(_size);
 
 

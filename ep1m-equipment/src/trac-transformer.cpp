@@ -41,6 +41,9 @@ void TractionTransformer::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void TractionTransformer::stepDiscrete(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     if (qAbs(U1) >= 19000.0)
         emit soundPlay("Trac_Transformer");
     else

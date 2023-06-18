@@ -89,6 +89,8 @@ void MSUD::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void MSUD::preStep(state_vector_t &Y, double t)
 {
+    Q_UNUSED(t)
+
     Y[0] = cut(Y[0], -1.0, 1.0);
     Y[1] = cut(Y[1], -1.0, 1.0);
 }
@@ -155,6 +157,9 @@ void MSUD::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void MSUD::stepKeysControl(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     old_key_state_plus = key_state_plus;
     key_state_plus = getKeyState(KEY_Equals);
 
@@ -357,6 +362,9 @@ void MSUD::traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_traction_control(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     // Максимальное напряжение на выходе ВИП
     double Ud_max = (*(vip_zone.end()-1)).Umax;
 
@@ -370,6 +378,9 @@ void MSUD::manual_traction_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_traction_control(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     // Расчитываем абсолютное значение заданной скорости (км/ч)
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
@@ -464,6 +475,9 @@ void MSUD::vip_control(double Ud)
 //------------------------------------------------------------------------------
 void MSUD::field_weak_control(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     // Работа только при полностью открытой 4-й зоне ВИП
     if (static_cast<int>(msud_output.vip_voltage_level) != ZONE4 + 1)
     {
@@ -524,7 +538,7 @@ void MSUD::slotLowFreqTimer()
 {
     for (size_t i = 0; i < msud_output.mv_freq_norm.size(); ++i)
     {
-        msud_output.mv_freq_norm[i] = false;        
+        msud_output.mv_freq_norm[i] = false;
     }
 
     if (!runOutTimer->isStarted())

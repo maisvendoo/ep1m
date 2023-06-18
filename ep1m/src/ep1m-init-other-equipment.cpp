@@ -5,5 +5,5 @@
 //------------------------------------------------------------------------------
 void EP1m::initOtherEquipment()
 {
-    horn = new EP1mHorn();
+    horn = new TrainHorn();
 }

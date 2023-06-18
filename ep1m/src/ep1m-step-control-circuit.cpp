@@ -59,7 +59,7 @@ void EP1m::stepControlCircuit(double t, double dt)
             is_N211_on &&
             kv41->getContactState(1) &&
             kv39->getContactState(1) &&
-            kv44->getContactState(2) &&
+            kv44->getContactState(3) &&
             kv23->getContactState(0);
 
     main_switch->setReturn(return_GV);
@@ -97,7 +97,7 @@ void EP1m::stepTractionControl(double t, double dt)
     kv12->step(t, dt);
 
     // Контроль давления в тормозной магистрали
-    sp4->setInput(pTM);
+    sp4->setInput(brakepipe->getPressure());
     sp4->step(t, dt);
 
     // Контакт экстренного торможения на кране машиниста

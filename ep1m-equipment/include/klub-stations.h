@@ -1,5 +1,5 @@
-#ifndef BLOK_STATIONS_H
-#define BLOK_STATIONS_H
+#ifndef KLUB_STATIONS_H
+#define KLUB_STATIONS_H
 
 #include    <QString>
 
@@ -21,4 +21,4 @@ struct station_t
     }
 };
 
-#endif // BLOK_STATIONS_H
+#endif // KLUB_STATIONS_H

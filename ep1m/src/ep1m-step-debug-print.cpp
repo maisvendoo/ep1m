@@ -5,21 +5,38 @@
 //------------------------------------------------------------------------------
 void EP1m::stepDebugPrint(double t, double dt)
 {
-    Q_UNUSED(t)
     Q_UNUSED(dt)
 
-    DebugMsg = QString("Пульт: %1 Ucc: %2 ВВК: %3 Uсн: %4 Реверс: %5 ГВ: %6 УК: %7 KT10: %8 KT1: %9 KV22: %10 KV15: %11 KM41: %12 KM42: %13")
-            .arg(static_cast<int>(tumblers_panel->getUnlockKeyState()), 1)
-            .arg(static_cast<float>(Ucc), 5, 'f', 2)
-            .arg(static_cast<int>(safety_valve->getState()), 1)
-            .arg(static_cast<float>(trac_trans->getControlPowerVoltage()), 5, 'f', 2)
-            .arg(static_cast<int>(km->getReversHandlePos()), 2)
-            .arg(static_cast<int>(main_switch->getState()), 1)
-            .arg(static_cast<int>(getHoldingCoilState()), 1)
-            .arg(static_cast<int>(kt10->getContactState(0)), 1)
-            .arg(static_cast<int>(kt1->getContactState(1)), 1)
-            .arg(static_cast<int>(kv22->getContactState(0)), 1)
-            .arg(static_cast<int>(kv15->getContactState(0)), 1)
-            .arg(static_cast<int>(km41->getContactState(0)))
-            .arg(static_cast<int>(km41->getContactState(0)));
+    DebugMsg = QString("t%1 s|")
+            .arg(t, 7, 'f', 1);
+    DebugMsg += QString("x%1 km|V%2 km/h|")
+            .arg(railway_coord / 1000.0, 8, 'f', 3)
+            .arg(velocity * Physics::kmh, 6, 'f', 1);
+    DebugMsg += QString("pBP%1|pBC%2|pSR%3|")
+            .arg(10.0 * brakepipe->getPressure(), 6, 'f', 2)
+            .arg(10.0 * brake_mech[TROLLEY_FWD]->getBCpressure(), 6, 'f', 2)
+            .arg(10.0 * supply_reservoir->getPressure(), 6, 'f', 2);
+    DebugMsg += QString("pFL%1|pER%2|395:%3|254:%4%|")
+            .arg(10.0 * main_reservoir->getPressure(), 6, 'f', 2)
+            .arg(10.0 * brake_crane->getERpressure(), 6, 'f', 2)
+            .arg(brake_crane->getPositionName(), 3)
+            .arg(loco_crane->getHandlePosition() * 100.0, 3, 'f', 0);
+    DebugMsg += QString("Rev%1|T:%2%|")
+            .arg(km->getReversHandlePos(), 2)
+            .arg(100.0 * km->getHandlePosition(), 4, 'f', 0);
+
+    QString traction_reg = "";
+    if (tumblers[TUMBLER_AUTO_MODE].getState())
+        traction_reg = QString("V:off|I:%1 /%3 A")
+                .arg(msud_input.Ia[TRAC_MOTOR1], 6, 'f', 0)
+                .arg((km->getTracLevel() - km->getBrakeLevel()) * 1600.0, 6, 'f', 0);
+    else
+        traction_reg = QString("V:%1 /%2 |I:%3 A")
+                .arg(velocity * Physics::kmh, 4, 'f', 0)
+                .arg(km->getRefSpeedLevel() * 160.0, 4, 'f', 0)
+                .arg(msud_input.Ia[TRAC_MOTOR1], 6, 'f', 0);
+
+    DebugMsg += traction_reg;
+
+    DebugMsg += QString("          ");
 }

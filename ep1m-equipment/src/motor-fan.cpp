@@ -94,6 +94,7 @@ bool MotorFan::isNoReady() const
 //------------------------------------------------------------------------------
 void MotorFan::preStep(state_vector_t &Y, double t)
 {
+    Q_UNUSED(Y)
     Q_UNUSED(t)
 
     //QString sndName = QString("Motor_Fan%1").arg(idx);

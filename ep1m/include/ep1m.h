@@ -57,13 +57,25 @@ private:
     /// Промежуточное реле KV39
     Relay           *kv39;
 
-    Relay           *kv21;
+    Relay   *kv21;
 
-    Relay           *kv22;
+    Relay   *kv22;
 
-    Relay           *kv23;
+    Relay   *kv23;
 
-    Relay           *kv41;
+    Relay   *kv41;
+
+    Relay   *km7;
+
+    Relay   *km8;
+
+    Relay   *km9;
+
+    Relay   *km11;
+
+    Relay   *km12;
+
+    Relay   *km13;
 
     /// Контроллер машиниста
     TracController  *km;
@@ -73,22 +85,8 @@ private:
 
     bool return_GV;
 
-    /// Главный (питательный) резервуар
-    Reservoir   *main_res;
-
-    /// Темп утечки из главного резервуара
-    double main_res_leak;
-
-    /// Мотор-компрессор
-    MotorCompressor *main_compressor;
-
-    /// Реле-регулятор давления
-    PressureRegulator *press_reg;
-
     /// Преобразователь частоты и числа фаз (ПЧФ)
     FreqPhaseConverter *freq_phase_conv;
-
-    double  charge_press;
 
     /// Передаточное число тягового редуктора
     double ip;
@@ -105,54 +103,101 @@ private:
     /// Реверсор
     Reversor *reversor;
 
+    /// Темп утечки из главного резервуара
+    double main_res_leak;
+
+    /// Мотор-компрессор
+    ACMotorCompressor   *motor_compressor;
+
+    /// Регулятор давления в ГР
+    PressureRegulator   *press_reg;
+
+    /// Главный резервуар
+    Reservoir           *main_reservoir;
+
+    /// Концевой кран питательной магистрали спереди
+    PneumoAngleCock     *anglecock_fl_fwd;
+
+    /// Концевой кран питательной магистрали сзади
+    PneumoAngleCock     *anglecock_fl_bwd;
+
+    /// Рукав питательной  магистрали спереди
+    PneumoHose          *hose_fl_fwd;
+
+    /// Рукав питательной  магистрали сзади
+    PneumoHose          *hose_fl_bwd;
+
+    double  charge_press;
+
     /// Сигнализатор давления в ТМ
     HysteresisRelay *sp4;
 
-    Relay   *km7;
+    /// Блокировочное устройство УБТ усл.№367м
+    BrakeLock           *brake_lock;
 
-    Relay   *km8;
+    /// Поездной кран машиниста усл.№395
+    BrakeCrane          *brake_crane;
 
-    Relay   *km9;
+    /// Кран впомогательного тормоза усл.№254
+    LocoCrane           *loco_crane;
 
-    Relay   *km11;
+    /// ЭПК автостопа
+    AutoTrainStop       *epk;
 
-    Relay   *km12;
-
-    Relay   *km13;
-
-
-    BrakeLock *ubt;
-
-    LocoCrane *loco_crane;
-
-    BrakeCrane *brake_crane;
-
-    AutoTrainStop *epk;
-
-    /// Запасный резервуар
-    Reservoir *aux_res;
+    /// Тормозная магистраль
+    Reservoir           *brakepipe;
 
     /// Воздухораспределитель
-    AirDistributor *air_dist;
+    AirDistributor      *air_dist;
 
     /// Электровоздухораспределитель
-    ElectroAirDistributor *electro_air_dist;
+    ElectroAirDistributor  *electro_air_dist;
 
-    PneumoReley *rd4;
+    /// Запасный резервуар
+    Reservoir           *supply_reservoir;
 
-    PneumoReley *rd1;
-    PneumoReley *rd2;
-    PneumoReley *rd3;
+    /// Концевой кран тормозной магистрали спереди
+    PneumoAngleCock     *anglecock_bp_fwd;
 
-    SwitchingValve *kp1;
-    SwitchingValve *kp2;
-    SwitchingValve *kp5;
+    /// Концевой кран тормозной магистрали сзади
+    PneumoAngleCock     *anglecock_bp_bwd;
 
-    PneumoSplitter *ps1;
-    PneumoSplitter *ps2;
+    /// Рукав тормозной магистрали спереди
+    PneumoHoseEPB       *hose_bp_fwd;
 
-    EPTConverter *ept_converter;
-    EPTPassControl *ept_pass_control;
+    /// Рукав тормозной магистрали сзади
+    PneumoHoseEPB       *hose_bp_bwd;
+
+    /// Повторительное пневмореле для давления от воздухораспределителя РД4
+    PneumoRelay *air_dist_pressure_relay;
+
+    /// Переключательный клапан КП5
+    SwitchingValve      *bc_switch_valve;
+
+    /// Тройники для распределения воздуха от переключательного клапана
+    /// к тележкам
+    std::array<PneumoSplitter *, 2> bc_splitter;
+
+    enum
+    {
+        NUM_TROLLEYS = 3,
+        NUM_AXIS_PER_TROLLEY = 2,
+        TROLLEY_FWD = 0,
+        TROLLEY_MID = 1,
+        TROLLEY_BWD = 2
+    };
+
+    /// Повторительное реле давления тележек
+    std::array<PneumoRelay *, NUM_TROLLEYS> bc_pressure_relay;
+
+    /// Тормозные механизмы тележек
+    std::array<BrakeMech *, NUM_TROLLEYS> brake_mech;
+
+    /// Источник питания ЭПТ
+    EPBConverter        *epb_converter;
+
+    /// Блок управления двухпроводного ЭПТ
+    EPBControl          *epb_control;
 
     /// Блок электронный локомотивный (БЭЛ)
     KLUB    *klub_BEL;
@@ -197,7 +242,7 @@ private:
     Registrator *registrator;
 
     /// Свисток и тифон
-    EP1mHorn *horn;
+    TrainHorn *horn;
 
     /// Шунты ослабления возбуждения ТЭД
     ShuntsModule *shunts;
@@ -223,17 +268,6 @@ private:
 
     /// Мотор-вентиляторы М11 - М13
     std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
-
-    /// Тормозные механизмы тележек
-    enum
-    {
-        TROLLEYS_NUM = 3,
-        FWD_TROLLEY = 0,
-        MID_TROLLEY = 1,
-        BWD_TROLLEY = 2
-    };
-
-    std::array<TrolleyBrakeMech *, TROLLEYS_NUM> brake_mech;
 
     std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
 
@@ -272,20 +306,20 @@ private:
     /// Инициализация силовой схемы
     void initPowerCircuit();
 
-    /// Инициализация системы подготовки сжатого воздуха
-    void initAirSupplySystem();
+    /// Инициализация питательной магистрали
+    void initPneumoSupply(QString modules_dir);
+
+    /// Инициализация приборов управления тормозами
+    void initBrakesControl(QString modules_dir);
+
+    /// Инициализация тормозного оборудования
+    void initBrakesEquipment(QString modules_dir);
+
+    /// Инициализация ЭПТ
+    void initEPB(QString modules_dir);
 
     /// Инициализация вспомогательных машин
     void initAuxMachines();
-
-    /// Инициализация приборов управления тормозами
-    void initBrakeControl();
-
-    /// Инициализация приборов торможения
-    void initBrakeEquipment();
-
-    /// Инициализация ЭПТ
-    void initEPT();
 
     /// Инициализация устройств безопасности
     void initSafetyDevices();
@@ -319,15 +353,19 @@ private:
 
     void stepPowerCircuit(double t, double dt);
 
-    void stepAirSupplySystem(double t, double dt);
+    /// Шаг моделирования питательной магистрали
+    void stepPneumoSupply(double t, double dt);
+
+    /// Шаг моделирования приборов управления тормозами
+    void stepBrakesControl(double t, double dt);
+
+    /// Шаг моделирования тормозного оборудования
+    void stepBrakesEquipment(double t, double dt);
+
+    /// Шаг моделирования ЭПТ
+    void stepEPB(double t, double dt);
 
     void stepAuxMachines(double t, double dt);
-
-    void stepBrakeControl(double t, double dt);
-
-    void stepBrakeEquipment(double t, double dt);
-
-    void stepEPT(double t, double dt);
 
     void stepSafetyDevices(double t, double dt);
 
@@ -346,7 +384,7 @@ private:
 
     void loadConfig(QString path) override;
 
-    void initBrakeDevices(double p0, double pTM, double PFL) override;
+    void initBrakeDevices(double p0, double pBP, double PFL) override;
 
     void load_brakes_config(QString path);
 

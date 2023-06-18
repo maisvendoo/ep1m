@@ -29,8 +29,8 @@ void EP1m::setSignalsModuleInputs()
     signals_module->setLampInputSignal(SM_GV, main_switch->getState());
 
     // Состояние мотор-компрессоров
-    signals_module->setLampInputSignal(SM_MK1, !main_compressor->isStarted());
-    signals_module->setLampInputSignal(SM_MK2, !main_compressor->isStarted());
+    signals_module->setLampInputSignal(SM_MK1, !motor_compressor->isPowered());
+    signals_module->setLampInputSignal(SM_MK2, !motor_compressor->isPowered());
 
     // Состояние мотор-вертиляторов
     signals_module->setLampInputSignal(SM_V1, motor_fan[MV1]->isNoReady());
@@ -43,7 +43,7 @@ void EP1m::setSignalsModuleInputs()
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {
         signals_module->setLampInputSignal(SM_LAMP_TC3 + i,
-                                           brake_mech[i]->getBrakeCylinderPressure() >
+                                           brake_mech[i]->getBCpressure() >
                                            msud->getOutputData().TC_min_press);
     }
 

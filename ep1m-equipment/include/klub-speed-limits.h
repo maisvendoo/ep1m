@@ -1,5 +1,5 @@
-#ifndef     BLOK_SPEED_LIMITS_H
-#define     BLOK_SPEED_LIMITS_H
+#ifndef     KLUB_SPEED_LIMITS_H
+#define     KLUB_SPEED_LIMITS_H
 
 //------------------------------------------------------------------------------
 //
@@ -17,4 +17,4 @@ struct speed_limit_t
     }
 };
 
-#endif // BLOK_SPEED_LIMITS_H
+#endif // KLUB_SPEED_LIMITS_H

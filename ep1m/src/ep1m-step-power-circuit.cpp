@@ -99,7 +99,7 @@ void EP1m::stepPowerCircuit(double t, double dt)
     reversor->step(t, dt);
 
     // Работа тормозного переключателя
-    qt1->setPressure(0.55 * main_res->getPressure());
+    qt1->setPressure(0.55 * main_reservoir->getPressure());
 
     // Сигнал на проводе Н36
     is_H36 = km->isContacts9_10() &&

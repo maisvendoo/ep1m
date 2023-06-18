@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    "filesystem.h"
+
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -20,16 +22,13 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , km(Q_NULLPTR)
   , signals_module(Q_NULLPTR)
   , return_GV(false)
-  , main_res(Q_NULLPTR)
-  , main_res_leak(0.0)
-  , main_compressor(Q_NULLPTR)
-  , press_reg(Q_NULLPTR)
   , freq_phase_conv(Q_NULLPTR)
-  , charge_press(0.5)
   , ip(1.0)
   , is_H36(false)
   , is_N211_on(false)
   , is_Registarator_on(false)
+  , main_res_leak(1e-6)
+  , charge_press(0.5)
 {
     Uks = 25000.0;
     alsn_info.code_alsn = KLUB_ALSN_GREEN;
@@ -48,6 +47,9 @@ EP1m::~EP1m()
 //------------------------------------------------------------------------------
 void EP1m::initialization()
 {
+    FileSystem &fs = FileSystem::getInstance();
+    QString modules_dir(fs.getModulesDir().c_str());
+
     // Инициализация питания цепей управления
     initControlPower();
 
@@ -67,16 +69,19 @@ void EP1m::initialization()
     initPowerCircuit();
 
     // Инициализация системы подготовки сжатого воздуха
-    initAirSupplySystem();
+    initPneumoSupply(modules_dir);
+
+    // Инициализация приборов управления тормозами
+    initBrakesControl(modules_dir);
+
+    // Инициализация приборов торможения
+    initBrakesEquipment(modules_dir);
+
+    // Инициализация ЭПТ
+    initEPB(modules_dir);
 
     // Инициализация вспомогательных машин
     initAuxMachines();
-
-    // Инициализация приборов управления тормозами
-    initBrakeControl();
-
-    // Инициализация приборов торможения
-    initBrakeEquipment();
 
     // Инициализация приборов безопасности
     initSafetyDevices();
@@ -114,17 +119,20 @@ void EP1m::step(double t, double dt)
     // Работа силовой схемы
     stepPowerCircuit(t, dt);
 
-    // Работа системы полготовки сжатого воздуха
-    stepAirSupplySystem(t, dt);
+    // Работа системы подготовки сжатого воздуха
+    stepPneumoSupply(t, dt);
+
+    // Работа приборов управления тормозами
+    stepBrakesControl(t, dt);
+
+    // Работа приборов торможения
+    stepBrakesEquipment(t, dt);
+
+    // Работа ЭПТ
+    stepEPB(t, dt);
 
     // Работа вспомогательных машин
     stepAuxMachines(t, dt);
-
-    // Работа приборов управления тормозами
-    stepBrakeControl(t, dt);
-
-    // Работа приборов торможения
-    stepBrakeEquipment(t, dt);
 
     // Работа приборов безопасности
     stepSafetyDevices(t, dt);
@@ -132,7 +140,7 @@ void EP1m::step(double t, double dt)
     // Работа прочих устройств
     stepOtherEquipment(t, dt);
 
-    // Перустуки
+    // Перестуки
     stepTapSounds();
 
     // Вывод сигналов к внешней модели

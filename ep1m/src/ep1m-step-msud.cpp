@@ -23,7 +23,7 @@ void EP1m::stepMSUD(double t, double dt)
 
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {
-        msud_input.TC_press[i] = brake_mech[i]->getBrakeCylinderPressure();
+        msud_input.TC_press[i] = brake_mech[i]->getBCpressure();
     }
 
     msud_input.is_auto_reg = !tumblers[TUMBLER_AUTO_MODE].getState();
