@@ -142,7 +142,7 @@ void EP1m::step(double t, double dt)
     stepDebugPrint(t, dt);
 
     // Регистрация параметров движения
-    stepRegistration(t, dt);
+    //stepRegistration(t, dt);
 }
 
 //------------------------------------------------------------------------------
