@@ -69,9 +69,10 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
 
-    //analogSignal[SIGNAL_KLUB_U_STATION_NUM] = klub_BEL->getStationIndex();
+    analogSignal[SIGNAL_KLUB_U_STATION_NUM] = klub_BEL->getStationIndex();
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = klub_BEL->getCurrentSpeedLimit();
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = klub_BEL->getNextSpeedLimit();
+    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
 
     analogSignal[LAMP_EPT_O] = ept_pass_control->stateReleaseLamp();
     analogSignal[LAMP_EPT_P] = ept_pass_control->stateHoldLamp();

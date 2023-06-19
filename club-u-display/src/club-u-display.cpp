@@ -209,7 +209,7 @@ void ClubUDisplay::slotUpdateTimer()
     topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
     topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
     int stationNum = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_NUM]);
-    if ((stationsCount_ > 0) && (stationNum < stationsCount_))
+    if ( (stationsCount_ > 0) && (stationNum < stationsCount_) && (stationNum > 0) )
         topBlock_->setStationName(stations[stationNum]);
 
     middleBlock_->setSpeedLimitVisible(true);
