@@ -62,6 +62,8 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
+    analogSignal[SIGNAL_KLUB_U_STATION_NUM] = klub_BEL->getStationIndex();
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
     analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(alsn_info.code_alsn);
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
