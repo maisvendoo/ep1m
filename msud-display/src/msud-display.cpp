@@ -435,8 +435,8 @@ void MsudDisplay::slotUpdateTimer()
         }
 
         //
-        man11_->setVal_Line(input_signals[SIGNAL_MSUD_SPEED2]);
-        man11_->setVal_Arrow(input_signals[SIGNAL_MSUD_SPEED1]);
+        man11_->setVal_Line(qAbs(input_signals[SIGNAL_MSUD_SPEED2]));
+        man11_->setVal_Arrow(qAbs(input_signals[SIGNAL_MSUD_SPEED1]));
 
         //
         man12_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2]);
