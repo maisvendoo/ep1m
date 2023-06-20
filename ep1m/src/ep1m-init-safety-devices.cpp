@@ -25,7 +25,7 @@ void EP1m::initSafetyDevices()
     klub_BEL->setDirection(dir * orient);
     klub_BEL->setTrainLength(length);
 
-    // Загрузка станций в БЛОК
+    // Загрузка станций в КЛУБ
     path = QDir::toNativeSeparators(route_dir) +
             QDir::separator() + "stations.conf";
 

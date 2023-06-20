@@ -20,9 +20,6 @@ double EP1m::calcTracForce()
 //------------------------------------------------------------------------------
 void EP1m::stepRegistration(double t, double dt)
 {
-    if (!is_Registarator_on)
-        return;
-
     QString line = QString("%1 %2 %3 %4")
             .arg(t, 10, 'f', 1)
             .arg(velocity * Physics::kmh, 6, '2', 1)

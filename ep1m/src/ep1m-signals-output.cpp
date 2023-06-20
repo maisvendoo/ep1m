@@ -63,10 +63,10 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
-    analogSignal[SIGNAL_KLUB_U_STATION_NUM] = klub_BEL->getStationIndex();
+    analogSignal[SIGNAL_KLUB_U_STATION_NUM] = TO_FLOAT(klub_BEL->getStationIndex());
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
     analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(alsn_info.code_alsn);
-    analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1;
+    analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
@@ -87,7 +87,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km->getTracLevel() +
                                                            qAbs(km->getBrakeLevel())) * 1600.0);
-    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = msud_input.Ia[TRAC_MOTOR1];
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT(msud_input.Ia[TRAC_MOTOR1]);
     analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!motor_compressor->isPowered() && press_reg->getState());
     analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!motor_compressor->isPowered());
 
@@ -117,7 +117,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_status);
     for (size_t i = 0; i < brake_mech.size(); ++i)
     {
-        analogSignal[LAMP_TC3 + i] = signals_module->getLampState(SM_LAMP_TC3 + i);
+        analogSignal[LAMP_TC3 + i] = TO_FLOAT(signals_module->getLampState(SM_LAMP_TC3 + i));
     }
 
     analogSignal[REF_SPEED] = TO_FLOAT(km->getRefSpeedLevel());
@@ -156,8 +156,8 @@ void EP1m::signalsOutput()
     else
         analogSignal[SIGNAL_MSUD_DM] = 0.0f;
 
-    analogSignal[LAMP_DM1] = signals_module->getLampState(SM_DM1);
-    analogSignal[LAMP_DM2] = signals_module->getLampState(SM_DM2);
+    analogSignal[LAMP_DM1] = TO_FLOAT(signals_module->getLampState(SM_DM1));
+    analogSignal[LAMP_DM2] = TO_FLOAT(signals_module->getLampState(SM_DM2));
 
     analogSignal[STRELKA_I_TED] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getAncorCurrent() / 1500.0);
 
