@@ -137,6 +137,13 @@ void TracController::stepKeysControl(double t, double dt)
         {
             if (brake.getState())
                 dir = -1;
+
+            if (isControl())
+            {
+                mode_pos = 0;
+                brakeTimer.stop();
+                brake.reset();
+            }
         }
         else
         {
@@ -156,7 +163,7 @@ void TracController::stepKeysControl(double t, double dt)
 
         if (getKeyState(KEY_D))
         {
-            if (trac_level == 0)
+            if ( (trac_level == 0) || isControl() )
             {
                 mode_pos = 0;
                 tracTimer.stop();
