@@ -102,6 +102,9 @@ private:
     /// Регистрировать параметры движения
     bool is_Registarator_on;
 
+    /// Сигнал на проводе Н45
+    bool is_N45_on;
+
     /// Реверсор
     Reversor *reversor;
 
@@ -192,6 +195,12 @@ private:
 
     /// Контактор KM42
     Relay       *km42;
+
+    /// Реле выдержки времени КТ4
+    TimeRelay   *kt4;
+
+    /// Реле выдержки времени КТ5
+    TimeRelay   *kt5;
 
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;

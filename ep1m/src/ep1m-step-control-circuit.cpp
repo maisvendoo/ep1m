@@ -216,5 +216,14 @@ void EP1m::stepTractionControl(double t, double dt)
 //------------------------------------------------------------------------------
 void EP1m::stepRecuperationControl(double t, double dt)
 {
+    is_N45_on = km->isContacts11_12();
 
+    // Цепь подготовки реле КТ4
+    bool is_KT4_on = is_N45_on &&
+            km41->getContactState(4) &&
+            km42->getContactState(4);
+
+    kt4->setControlVoltage(Ucc * static_cast<double>(is_KT4_on));
+
+    kt4->step(t, dt);
 }

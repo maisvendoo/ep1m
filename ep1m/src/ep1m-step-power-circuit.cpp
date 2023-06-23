@@ -110,10 +110,17 @@ void EP1m::stepPowerCircuit(double t, double dt)
              kv13->getContactState(0) &&
              kv14->getContactState(0);
 
+    // Питание катушки "Тяга"
     bool is_QT1_trac = is_H36 &&
             ( kt1->getContactState(0) || qt1->getContactState(1) );
 
-    qt1->setTracValveState(is_QT1_trac);
+    qt1->setTracValveState(static_cast<double>(is_QT1_trac));
+
+    // Питание катушки "Торможение"
+    bool is_QT1_brake = is_N45_on &&
+            ( kt1->getContactState(4) || qt1->getContactState(4) );
+
+    qt1->setBrakeValveState(static_cast<double>(is_QT1_brake));
 
     qt1->step(t, dt);
 
