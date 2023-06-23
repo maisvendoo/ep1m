@@ -65,6 +65,8 @@ void EP1m::stepControlCircuit(double t, double dt)
     main_switch->setReturn(return_GV);        
 
     stepTractionControl(t, dt);
+
+    stepRecuperationControl(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -115,7 +117,15 @@ void EP1m::stepTractionControl(double t, double dt)
     kv84->step(t, dt);
 
     // Включение реле времени KT10
-    kt10->setControlVoltage(Ucc * static_cast<double>(reversor->isNoZero()));
+    bool is_N3_on = km->isContacts13_14() &&
+            km->isContscts1_2() &&
+            reversor->isForward();
+
+    bool is_N4_on = km->isContacts13_14() &&
+            km->isContscts3_4() &&
+            reversor->isBackward();
+
+    kt10->setControlVoltage(Ucc * static_cast<double>(is_N3_on || is_N4_on));
     kt10->step(t, dt);
 
     // Включение реле KV14
@@ -199,4 +209,12 @@ void EP1m::stepTractionControl(double t, double dt)
             km42->getContactState(0);
 
     msud_input.is_traction = circuit_state;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::stepRecuperationControl(double t, double dt)
+{
+
 }

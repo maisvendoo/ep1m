@@ -23,7 +23,11 @@ public:
 
     void setBackwardValveState(bool backward_valve) { this->backward_valve = backward_valve; }
 
-    bool isNoZero() { return (state == 1) || (state == -1); }
+    bool isNoZero() const { return (state == 1) || (state == -1); }
+
+    bool isForward() const { return state == 1; }
+
+    bool isBackward() const { return state == -1; }
 
 private:
 

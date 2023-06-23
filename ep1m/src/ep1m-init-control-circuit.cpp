@@ -105,12 +105,16 @@ void EP1m::initControlCircuit()
     kt10->setInitContactState(3, false);
     kt10->setTimeout(1.5);
 
-    kt1 = new TimeRelay(4);
+    kt1 = new TimeRelay(5);
     kt1->read_custom_config(config_dir + QDir::separator() + "mk-69");
+
+    // Контакты цепи схемы "Тяга"
     kt1->setInitContactState(0, true);
     kt1->setInitContactState(1, false);
     kt1->setInitContactState(2, false);
     kt1->setInitContactState(3, false);
+    // Контакты цепи схемы "Рекуперация"
+    kt1->setInitContactState(4, true);
     kt1->setTimeout(1.5);
 
     km41 = new Relay(4);
