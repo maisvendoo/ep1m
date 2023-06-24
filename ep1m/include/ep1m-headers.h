@@ -37,5 +37,6 @@
 #include    "registrator.h"
 #include    "ep1m-horn.h"
 #include    "shunts-module.h"
+#include    "vuv-118.h"
 
 #endif // EP1M_HEADERS_H

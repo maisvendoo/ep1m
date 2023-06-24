@@ -14,6 +14,7 @@ BrakeSwitcher::BrakeSwitcher(size_t num_contacts, QObject *parent)
   , omega(0.0)
   , dir(1)
   , dir_old(dir)
+  , mode(1)
 {
     setY(0, 1.0);
     contact.resize(num_contacts);
@@ -46,11 +47,13 @@ void BrakeSwitcher::preStep(state_vector_t &Y, double t)
     if ( (Y[0] < 0.05) && (dir == -1) )
     {
         change_contacts_state();
+        mode = 1;
     }
 
     if ( (Y[0] > 0.95) && (dir == 1) )
     {
         change_contacts_state();
+        mode = -1;
     }
 }
 

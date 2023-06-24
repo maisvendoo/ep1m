@@ -10,6 +10,7 @@ TractionMotor::TractionMotor(QObject *parent) : Device(parent)
   , Ta(0.5)
   , Rf(0.0068)
   , Rd(0.0065)
+  , Rb(0.083)
   , Tf(0.1)
   , beta(0.97)
   , revers_state(1)
@@ -72,6 +73,8 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
         }
     case -1:
         {
+            M = Y[0] * cPhi(Y[1] * revers_state) * eff_coef.getValue(Y[0]);
+
             break;
         }
 
@@ -98,7 +101,7 @@ void TractionMotor::ode_system(const state_vector_t &Y,
 
             double R = Ra + beta * (Rf + Rd);
 
-            dYdt[0] = (Ua - Y[0] * R - E) / Ta / Ra;
+            dYdt[0] = (Ua - Y[0] * R - E) / Ta / R;
 
             dYdt[1] = 0;
 
@@ -107,6 +110,13 @@ void TractionMotor::ode_system(const state_vector_t &Y,
 
     case -1:
         {
+            E = cPhi(Y[1] * revers_state) * omega;
+
+            double R = Ra + Rb;
+
+            dYdt[0] = (Ua - Y[0] * R - E) / Ta / R;
+
+            dYdt[1] = (Uf - Y[1] * (Rf + Rd) ) / Tf / (Rf + Rd);
 
             break;
         }
@@ -134,6 +144,7 @@ void TractionMotor::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Ra", Ra);
     cfg.getDouble(secName, "Rf", Rf);
     cfg.getDouble(secName, "Rd", Rd);
+    cfg.getDouble(secName, "Rb", Rb);
     cfg.getDouble(secName, "Ta", Ta);
     cfg.getDouble(secName, "Tf", Tf);
 }

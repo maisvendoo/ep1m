@@ -65,4 +65,6 @@ void EP1m::initPowerCircuit()
     // Шунты ослабления возбуждения
     shunts = new ShuntsModule();
     shunts->read_custom_config(config_dir + QDir::separator() + "shunts-module");
+
+    field_rect = new FieldRect();
 }

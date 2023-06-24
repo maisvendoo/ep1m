@@ -220,6 +220,9 @@ private:
     /// Шунты ослабления возбуждения ТЭД
     ShuntsModule *shunts;
 
+    /// Выпрямительна установка возбуждения ВУВ-118
+    FieldRect *field_rect;
+
     enum
     {
         PANT_NUMBER = 2,
