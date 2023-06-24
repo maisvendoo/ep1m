@@ -9,6 +9,7 @@ void EP1m::stepBrakesEquipment(double t, double dt)
     double BP_flow = 0.0;
     BP_flow += air_dist->getBPflow();
     BP_flow += brake_lock->getBPflow();
+    BP_flow += epk->getBPflow();
     BP_flow += anglecock_bp_fwd->getFlowToPipe();
     BP_flow += anglecock_bp_bwd->getFlowToPipe();
     brakepipe->setFlow(BP_flow);

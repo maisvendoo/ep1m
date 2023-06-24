@@ -23,6 +23,7 @@ void EP1m::stepPneumoSupply(double t, double dt)
     double FL_flow = 0.0;
     FL_flow += motor_compressor->getFLflow();
     FL_flow += brake_lock->getFLflow();
+    FL_flow += epk->getFLflow();
     FL_flow += bc_pressure_relay[TROLLEY_FWD]->getFLflow();
     FL_flow += bc_pressure_relay[TROLLEY_MID]->getFLflow();
     FL_flow += bc_pressure_relay[TROLLEY_BWD]->getFLflow();
