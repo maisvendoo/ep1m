@@ -81,4 +81,13 @@ void EP1m::stepAuxMachines(double t, double dt)
 
     motor_fan[MV3]->setFreq(freq_MV13);
     motor_fan[MV3]->step(t, dt);
+
+    // Цепь питания вентилятора ББР
+    bool is_MV14_on = km14->getContactState(0);
+
+    motor_fan[MV4]->setU_power(freq_phase_conv->getOutputVoltage() *
+                               static_cast<double>(is_MV14_on));
+
+    motor_fan[MV4]->setFreq(freq_phase_conv->getFrequencyNorm());
+    motor_fan[MV4]->step(t, dt);
 }

@@ -226,4 +226,13 @@ void EP1m::stepRecuperationControl(double t, double dt)
     kt4->setControlVoltage(Ucc * static_cast<double>(is_KT4_on));
 
     kt4->step(t, dt);
+
+    // Цепь контактора вертилятора ББР
+    bool is_KM14_on = tumblers_panel->getTumblerState(TUMBLER_AUX_MACHINES) &&
+            qt1->getContactState(4) &&
+            kt10->getContactState(4);
+
+
+    km14->setVoltage(Ucc * static_cast<double>(is_KM14_on));
+    km14->step(t, dt);
 }
