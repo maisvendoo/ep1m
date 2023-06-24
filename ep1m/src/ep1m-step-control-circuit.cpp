@@ -137,7 +137,7 @@ void EP1m::stepTractionControl(double t, double dt)
             qt1->getContactState(2) &&
             qt1->getContactState(3);
 
-    bool is_N53_on = is_N45_on;
+    is_N53_on = is_N45_on;
 
     for (size_t i = 0; i < fast_switch.size(); ++i)
     {
@@ -159,8 +159,8 @@ void EP1m::stepTractionControl(double t, double dt)
     bool is_H153 = kv23->getContactState(0) || km41->getContactState(0);
 
     bool is_KM41_on = is_H153 &&
-            kv15->getContactState(2) &&
-            qt1->getContactState(7);
+            ( (kv15->getContactState(2) && qt1->getContactState(7)) ||
+              kt5->getContactState(0));
 
     km41->setVoltage(Ucc * static_cast<double>(is_KM41_on));
     km41->step(t, dt);
@@ -169,8 +169,8 @@ void EP1m::stepTractionControl(double t, double dt)
     bool is_H163 = kv23->getContactState(1) || km42->getContactState(0);
 
     bool is_KM42_on = is_H163 &&
-            kv15->getContactState(3) &&
-            qt1->getContactState(8);
+            ( (kv15->getContactState(3) && qt1->getContactState(8)) ||
+              kt5->getContactState(1));
 
     km42->setVoltage(Ucc * static_cast<double>(is_KM42_on));
     km42->step(t, dt);
@@ -245,4 +245,12 @@ void EP1m::stepRecuperationControl(double t, double dt)
 
     km14->setVoltage(Ucc * static_cast<double>(is_KM14_on));
     km14->step(t, dt);
+
+
+    // Цепь подготовки реле КТ5
+    bool is_KT5_on = is_N53_on && kv15->getContactState(4);
+
+    kt5->setControlVoltage(Ucc * static_cast<double>(is_KT5_on));
+
+    kt5->step(t, dt);
 }

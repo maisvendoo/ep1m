@@ -31,6 +31,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , is_N211_on(false)
   , is_Registarator_on(false)
   , is_N45_on(false)
+  , is_N53_on(false)
 {
     Uks = 25000.0;
     alsn_info.code_alsn = KLUB_ALSN_GREEN;
