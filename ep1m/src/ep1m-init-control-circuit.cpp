@@ -152,4 +152,9 @@ void EP1m::initControlCircuit()
     km14->read_custom_config(config_dir + QDir::separator() + "mk-69");
     km14->setInitContactState(0, false);
     km14->setInitContactState(1, false);
+
+    k1 = new Relay(5);
+    k1->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    k1->setInitContactState(0, false);
+    k1->setInitContactState(1, false);
 }

@@ -248,9 +248,18 @@ void EP1m::stepRecuperationControl(double t, double dt)
 
 
     // Цепь подготовки реле КТ5
-    bool is_KT5_on = is_N53_on && kv15->getContactState(4);
+    bool is_N55_on = is_N53_on && kv15->getContactState(4);
+
+    bool is_KT5_on = is_N55_on;
 
     kt5->setControlVoltage(Ucc * static_cast<double>(is_KT5_on));
 
     kt5->step(t, dt);
+
+    // Цепь подготовки контактора К1
+    bool is_N57_on = is_N55_on && kt4->getContactState(0);
+
+    k1->setVoltage(Ucc * static_cast<double>(is_N57_on));
+
+    k1->step(t, dt);
 }
