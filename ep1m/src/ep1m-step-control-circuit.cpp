@@ -133,10 +133,20 @@ void EP1m::stepTractionControl(double t, double dt)
     kv14->step(t, dt);
 
     // Включение реле KV15
-    bool is_N40_on = is_H36 &&
+    bool is_N39_on = is_H36 &&
             qt1->getContactState(2) &&
-            qt1->getContactState(3) &&
-            kt10->getContactState(0);
+            qt1->getContactState(3);
+
+    bool is_N53_on = is_N45_on;
+
+    for (size_t i = 0; i < fast_switch.size(); ++i)
+    {
+        is_N53_on = is_N53_on && fast_switch[i]->getContactState(3);
+    }
+
+    bool is_N54_on = is_N53_on && km14->getContactState(1);
+
+    bool is_N40_on = (is_N39_on || is_N54_on) && kt10->getContactState(0);
 
     bool is_KV15_on = is_N40_on &&
             ( (kt1->getContactState(1) && kv15->getContactState(1)) ||

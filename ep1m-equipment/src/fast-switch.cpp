@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-FastSwitch::FastSwitch(QObject *parent) : Relay(3, parent)
+FastSwitch::FastSwitch(QObject *parent) : Relay(4, parent)
   , Uc(0.0)
   , is_power_On(false)
   , is_Hold(false)
