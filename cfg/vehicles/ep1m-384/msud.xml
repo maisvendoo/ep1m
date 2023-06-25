@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
 	<Device>
-		<Order>2</Order>
+		<Order>4</Order>
 		<FanSwitchTimeout>80.0</FanSwitchTimeout>
 		<FanBustInterval>2.5</FanBustInterval>
 		<FanRunoutTime>10.0</FanRunoutTime>
@@ -12,10 +12,16 @@
 		<AlphaMin>9.0</AlphaMin>
 		<AlphaMax>90.0</AlphaMax>
 
+		
 		<Ktp>0.001</Ktp>
 		<Kti>0.01</Kti>
 		<Ktv>500.0</Ktv>
 		<Ktvi>0.0</Ktvi>
+
+		<Krp>0.001</Krp>
+		<Kri>0.01</Kri>
+		<Krv>500.0</Krv>
+		<Krvi>0.0</Krvi>
 
 		<Vmax>160.0</Vmax>
 

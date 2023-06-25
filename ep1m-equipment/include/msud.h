@@ -100,6 +100,18 @@ private:
     /// Коэффициент интегральной части регулятора скорости
     double Ktvi;
 
+    /// Коэффициент пропорциональной части регулятора тока в рекуперации
+    double Krp;
+
+    /// Коэффициент интегральной части регулятора тока в рекуперации
+    double Kri;
+
+    /// Коэффициент пропорциональной части регулятора скорости в рекуперации
+    double Krv;
+
+    /// Коэффициент интегральной части регулятора скорости в рекуперации
+    double Krvi;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;
@@ -153,6 +165,21 @@ private:
 
      // Управление ослаблением возбуждения ТЭД в тяге
      void field_weak_control(double t, double dt);
+
+     // Управление рекуперацией
+     void recuperation_control(double t, double dt);
+
+     // Авторегулирование в рекуперации
+     void auto_recuperation_control(double t, double dt);
+
+     // Ручное управление рекуперацией
+     void manual_recuperation_control(double t, double dt);
+
+     // Сброс управления ВИПи ВУВ в рекуперации
+     void reset_recuperaion_control();
+
+     // Регулирование тормозного тока
+     void brake_current_regulator(double Ia_ref);
 
 private slots:
 
