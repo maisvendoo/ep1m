@@ -40,6 +40,11 @@ public:
         return false;
     }
 
+    int getMotorMode() const
+    {
+        return mode;
+    }
+
 private:
 
     /// Время переключения с одного положения на другое
@@ -66,6 +71,8 @@ private:
     int dir;
 
     int dir_old;
+
+    int mode;
 
     std::vector<bool>    contact;
 

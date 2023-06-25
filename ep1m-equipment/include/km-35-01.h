@@ -64,6 +64,11 @@ public:
         return revers_pos == 1;
     }
 
+    bool isContacts13_14() const
+    {
+        return (mode_pos == 1) || (mode_pos == -1);
+    }
+
     void setFwdKeyState(bool key_state) { fwd_key_state = key_state; }
 
     void setBwdKeyState(bool key_state) { bwd_key_state = key_state; }

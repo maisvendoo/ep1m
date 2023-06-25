@@ -81,12 +81,14 @@ void EP1m::initControlCircuit()
     kv14->setInitContactState(2, false);
     kv14->setInitContactState(3, false);
 
-    kv15 = new Relay(4);
+    kv15 = new Relay(6);
     kv15->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kv15->setInitContactState(0, false);
     kv15->setInitContactState(1, false);
     kv15->setInitContactState(2, false);
     kv15->setInitContactState(3, false);
+    kv15->setInitContactState(4, false);
+    kv15->setInitContactState(5, false);
 
     sp4 = new HysteresisRelay(0.27, 0.45);
 
@@ -97,33 +99,62 @@ void EP1m::initControlCircuit()
     kv84->setInitContactState(2, false);
     kv84->setInitContactState(3, false);
 
-    kt10 = new TimeRelay(4);
+    kt10 = new TimeRelay(6);
     kt10->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kt10->setInitContactState(0, false);
     kt10->setInitContactState(1, false);
     kt10->setInitContactState(2, false);
     kt10->setInitContactState(3, false);
+    kt10->setInitContactState(4, false);
+    kt10->setInitContactState(5, false);
     kt10->setTimeout(1.5);
 
-    kt1 = new TimeRelay(4);
+    kt1 = new TimeRelay(5);
     kt1->read_custom_config(config_dir + QDir::separator() + "mk-69");
+
+    // Контакты цепи схемы "Тяга"
     kt1->setInitContactState(0, true);
     kt1->setInitContactState(1, false);
     kt1->setInitContactState(2, false);
     kt1->setInitContactState(3, false);
+    // Контакты цепи схемы "Рекуперация"
+    kt1->setInitContactState(4, true);
     kt1->setTimeout(1.5);
 
-    km41 = new Relay(4);
+    km41 = new Relay(5);
     km41->read_custom_config(config_dir + QDir::separator() + "mk-69");
     km41->setInitContactState(0, false);
     km41->setInitContactState(1, false);
     km41->setInitContactState(2, false);
     km41->setInitContactState(3, false);
+    km41->setInitContactState(4, true);
 
-    km42 = new Relay(4);
+    km42 = new Relay(5);
     km42->read_custom_config(config_dir + QDir::separator() + "mk-69");
     km42->setInitContactState(0, false);
     km42->setInitContactState(1, false);
     km42->setInitContactState(2, false);
     km42->setInitContactState(3, false);
+    km42->setInitContactState(4, true);
+
+    kt4 = new TimeRelay(5);
+    kt4->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    kt4->setInitContactState(0, true);
+    kt4->setTimeout(1.5);
+
+    kt5 = new TimeRelay(5);
+    kt5->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    kt5->setInitContactState(0, false);
+    kt5->setInitContactState(1, false);
+    kt5->setTimeout(1.5);
+
+    km14 = new Relay(5);
+    km14->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    km14->setInitContactState(0, false);
+    km14->setInitContactState(1, false);
+
+    k1 = new Relay(5);
+    k1->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    k1->setInitContactState(0, false);
+    k1->setInitContactState(1, false);
 }

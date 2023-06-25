@@ -65,6 +65,8 @@ void EP1m::stepControlCircuit(double t, double dt)
     main_switch->setReturn(return_GV);
 
     stepTractionControl(t, dt);
+
+    stepRecuperationControl(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -115,7 +117,15 @@ void EP1m::stepTractionControl(double t, double dt)
     kv84->step(t, dt);
 
     // Включение реле времени KT10
-    kt10->setControlVoltage(Ucc * static_cast<double>(reversor->isNoZero()));
+    bool is_N3_on = km->isContacts13_14() &&
+            km->isContscts1_2() &&
+            reversor->isForward();
+
+    bool is_N4_on = km->isContacts13_14() &&
+            km->isContscts3_4() &&
+            reversor->isBackward();
+
+    kt10->setControlVoltage(Ucc * static_cast<double>(is_N3_on || is_N4_on));
     kt10->step(t, dt);
 
     // Включение реле KV14
@@ -123,10 +133,20 @@ void EP1m::stepTractionControl(double t, double dt)
     kv14->step(t, dt);
 
     // Включение реле KV15
-    bool is_N40_on = is_H36 &&
+    bool is_N39_on = is_H36 &&
             qt1->getContactState(2) &&
-            qt1->getContactState(3) &&
-            kt10->getContactState(0);
+            qt1->getContactState(3);
+
+    is_N53_on = is_N45_on;
+
+    for (size_t i = 0; i < fast_switch.size(); ++i)
+    {
+        is_N53_on = is_N53_on && fast_switch[i]->getContactState(3);
+    }
+
+    bool is_N54_on = is_N53_on && km14->getContactState(1);
+
+    bool is_N40_on = (is_N39_on || is_N54_on) && kt10->getContactState(0);
 
     bool is_KV15_on = is_N40_on &&
             ( (kt1->getContactState(1) && kv15->getContactState(1)) ||
@@ -139,8 +159,8 @@ void EP1m::stepTractionControl(double t, double dt)
     bool is_H153 = kv23->getContactState(0) || km41->getContactState(0);
 
     bool is_KM41_on = is_H153 &&
-            kv15->getContactState(2) &&
-            qt1->getContactState(7);
+            ( (kv15->getContactState(2) && qt1->getContactState(7)) ||
+              kt5->getContactState(0));
 
     km41->setVoltage(Ucc * static_cast<double>(is_KM41_on));
     km41->step(t, dt);
@@ -149,8 +169,8 @@ void EP1m::stepTractionControl(double t, double dt)
     bool is_H163 = kv23->getContactState(1) || km42->getContactState(0);
 
     bool is_KM42_on = is_H163 &&
-            kv15->getContactState(3) &&
-            qt1->getContactState(8);
+            ( (kv15->getContactState(3) && qt1->getContactState(8)) ||
+              kt5->getContactState(1));
 
     km42->setVoltage(Ucc * static_cast<double>(is_KM42_on));
     km42->step(t, dt);
@@ -199,4 +219,49 @@ void EP1m::stepTractionControl(double t, double dt)
             km42->getContactState(0);
 
     msud_input.is_traction = circuit_state;
+
+    msud_input.is_brake = circuit_state && k1->getContactState(1);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::stepRecuperationControl(double t, double dt)
+{
+    is_N45_on = km->isContacts11_12();
+
+    // Цепь подготовки реле КТ4
+    bool is_KT4_on = is_N45_on &&
+            km41->getContactState(4) &&
+            km42->getContactState(4);
+
+    kt4->setControlVoltage(Ucc * static_cast<double>(is_KT4_on));
+
+    kt4->step(t, dt);
+
+    // Цепь контактора вертилятора ББР
+    bool is_KM14_on = tumblers_panel->getTumblerState(TUMBLER_AUX_MACHINES) &&
+            qt1->getContactState(4) &&
+            kt10->getContactState(4);
+
+
+    km14->setVoltage(Ucc * static_cast<double>(is_KM14_on));
+    km14->step(t, dt);
+
+
+    // Цепь подготовки реле КТ5
+    bool is_N55_on = is_N53_on && kv15->getContactState(4);
+
+    bool is_KT5_on = is_N55_on;
+
+    kt5->setControlVoltage(Ucc * static_cast<double>(is_KT5_on));
+
+    kt5->step(t, dt);
+
+    // Цепь подготовки контактора К1
+    bool is_N57_on = is_N55_on && kt4->getContactState(0);
+
+    k1->setVoltage(Ucc * static_cast<double>(is_N57_on));
+
+    k1->step(t, dt);
 }

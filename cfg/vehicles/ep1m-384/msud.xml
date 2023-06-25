@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
     <Device>
-        <Order>2</Order>
+        <Order>4</Order>
         <SubStepNum>1</SubStepNum>
         <Solver>euler</Solver>
 
@@ -20,8 +20,12 @@
         <Ktv>500.0</Ktv>
         <Ktvi>0.0</Ktvi>
 
-        <Vmax>160.0</Vmax>
+        <Krp>0.001</Krp>
+        <Kri>0.01</Kri>
+        <Krv>500.0</Krv>
+        <Krvi>0.0</Krvi>
 
+        <Vmax>160.0</Vmax>
     </Device>
 
     <!-- Диапазон напряжений зон ВИП -->

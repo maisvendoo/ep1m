@@ -185,6 +185,16 @@
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
 	</Sound>
+
+	<Sound>
+		<Name>Motor_Fan4_low</Name>
+		<Path>mv3_low.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
 	
 	<Sound>
 		<Name>Motor_Fan1_norm</Name>
@@ -208,6 +218,16 @@
 	
 	<Sound>
 		<Name>Motor_Fan3_norm</Name>
+		<Path>mv3_norm.wav</Path>
+		<InitVolume>25</InitVolume>
+		<MaxVolume>25</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+	</Sound>
+
+	<Sound>
+		<Name>Motor_Fan4_norm</Name>
 		<Path>mv3_norm.wav</Path>
 		<InitVolume>25</InitVolume>
 		<MaxVolume>25</MaxVolume>

@@ -106,6 +106,10 @@ void EP1m::initSounds()
     connect(kt1, &TimeRelay::soundPlay, this, &EP1m::soundPlay);
     connect(km41, &Relay::soundPlay, this, &EP1m::soundPlay);
     connect(km42, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kt4, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(kt5, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(km14, &Relay::soundPlay, this, &EP1m::soundPlay);
+    connect(k1, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     for (size_t i = 0; i < fast_switch.size(); ++i)
     {

@@ -27,6 +27,8 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , is_H36(false)
   , is_N211_on(false)
   , is_Registarator_on(false)
+  , is_N45_on(false)
+  , is_N53_on(false)
   , main_res_leak(1e-6)
   , charge_press(0.5)
 {

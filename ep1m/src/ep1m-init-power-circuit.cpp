@@ -35,7 +35,8 @@ void EP1m::initPowerCircuit()
         fast_switch[i]->read_custom_config(config_dir + QDir::separator() + "bv-8");
         fast_switch[i]->setInitContactState(0, false);
         fast_switch[i]->setInitContactState(1, true);
-        fast_switch[i]->setInitContactState(2, true);        
+        fast_switch[i]->setInitContactState(2, true);
+        fast_switch[i]->setInitContactState(3, false);
     }
 
     vip[VIP1] = new RectInvertConverter();
@@ -64,4 +65,6 @@ void EP1m::initPowerCircuit()
     // Шунты ослабления возбуждения
     shunts = new ShuntsModule();
     shunts->read_custom_config(config_dir + QDir::separator() + "shunts-module");
+
+    field_rect = new FieldRect();
 }

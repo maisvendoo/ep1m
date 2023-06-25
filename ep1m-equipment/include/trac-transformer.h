@@ -18,6 +18,8 @@ public:
 
     double getControlPowerVoltage() const { return U2cc; }
 
+    double getFieldRectVoltage() const { return U2f; }
+
     double getUt1() const { return Ut1; }
 
     double getUt2() const { return Ut2; }
@@ -35,11 +37,17 @@ private:
     /// Напряжение обмотки питания собственных нужд
     double U2cc;
 
+    /// Напряжениее на омотке питания ВУВ-118
+    double U2f;
+
     /// Коэффициент передачи на четверть тяговой полуобмотки
     double K1_4;
 
     /// Коэфициент передачи на половину тяговой полуобмотки
     double K2_4;
+
+    /// Коэффициент передачи на омотку питания ВУВ-118
+    double Kf;
 
     /// Напряжение первой секции тяговогой обмотки (четверть)
     double Ut1;

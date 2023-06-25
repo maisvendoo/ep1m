@@ -8,8 +8,8 @@
         <Ra>0.007</Ra>
         <Rf>0.03</Rf>
         <Rd>0.0</Rd>
+        <Rb>0.083</Rb>
         <Ta>0.5</Ta>
         <Tf>0.5</Tf>
-
     </Device>
 </Config>

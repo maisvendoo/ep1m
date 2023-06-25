@@ -41,19 +41,29 @@ void EP1m::stepPowerCircuit(double t, double dt)
     trac_motor[TRAC_MOTOR5]->setAncorVoltage(vip[VIP2]->getU_out() * static_cast<double>(fast_switch[TRAC_MOTOR5]->getContactState(0)));
     trac_motor[TRAC_MOTOR6]->setAncorVoltage(vip[VIP2]->getU_out() * static_cast<double>(fast_switch[TRAC_MOTOR6]->getContactState(0)));
 
+
+    field_rect->setInputVoltage(trac_trans->getFieldRectVoltage());
+    field_rect->setVoltageLevel(msud->getOutputData().field_level);
+    field_rect->step(t, dt);
+
     for (size_t i = 0; i < trac_motor.size(); ++i)
     {
         // Передаем состояние реверсивного переключателя
         trac_motor[i]->setReversSate(reversor->getState());
 
         // Режим работы ТЭД от QT1
-        trac_motor[i]->setMode(qt1->getContactState(0));
+        trac_motor[i]->setMode(qt1->getMotorMode());
 
         // Передаем модели двигателя данные об угловой скорости его вала
         trac_motor[i]->setOmega(wheel_omega[i] * ip);
 
         // Задаем степень ослебления возбуждения
         trac_motor[i]->setFieldWeak(shunts->getBeta());
+
+        // Задаем напряжение на обмотке возбуждения (для рекуперации)
+        double Uf = field_rect->getOutputVoltage() / trac_motor.size();
+
+        trac_motor[i]->setFieldVoltage(Uf * static_cast<double>(k1->getContactState(0)));
 
         // Выдаем момент на тяговые оси
         Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
@@ -110,10 +120,17 @@ void EP1m::stepPowerCircuit(double t, double dt)
              kv13->getContactState(0) &&
              kv14->getContactState(0);
 
+    // Питание катушки "Тяга"
     bool is_QT1_trac = is_H36 &&
             ( kt1->getContactState(0) || qt1->getContactState(1) );
 
-    qt1->setTracValveState(is_QT1_trac);
+    qt1->setTracValveState(static_cast<double>(is_QT1_trac));
+
+    // Питание катушки "Торможение"
+    bool is_QT1_brake = is_N45_on &&
+            ( kt1->getContactState(4) || qt1->getContactState(4) );
+
+    qt1->setBrakeValveState(static_cast<double>(is_QT1_brake));
 
     qt1->step(t, dt);
 

@@ -33,6 +33,10 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Vmax(140.0)
   , dV(0.0)
   , Ktvi(0.0)
+  , Krp(0.0)
+  , Kri(0.0)
+  , Krv(0.0)
+  , Krvi(0.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -82,6 +86,10 @@ void MSUD::ode_system(const state_vector_t &Y,
     dYdt[0] = Kti * dIa;
 
     dYdt[1] = Ktvi * dV;
+
+    dYdt[2] = Kri * dIa;
+
+    dYdt[3] = Krvi * dV;
 }
 
 //------------------------------------------------------------------------------
@@ -93,6 +101,8 @@ void MSUD::preStep(state_vector_t &Y, double t)
 
     Y[0] = cut(Y[0], -1.0, 1.0);
     Y[1] = cut(Y[1], -1.0, 1.0);
+    Y[2] = cut(Y[0], -1.0, 1.0);
+    Y[3] = cut(Y[1], -1.0, 1.0);
 }
 
 //------------------------------------------------------------------------------
@@ -150,6 +160,11 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Ktv", Ktv);
     cfg.getDouble(secName, "Vmax", Vmax);
     cfg.getDouble(secName, "Ktvi", Ktvi);
+
+    cfg.getDouble(secName, "Krp", Krp);
+    cfg.getDouble(secName, "Kri", Kri);
+    cfg.getDouble(secName, "Krv", Krv);
+    cfg.getDouble(secName, "Krvi", Krvi);
 }
 
 //------------------------------------------------------------------------------
@@ -237,6 +252,8 @@ void MSUD::main_loop(double t, double dt)
     brake_cylinders_pressure_control(t, dt);
 
     traction_control(t, dt);
+
+    recuperation_control(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -507,6 +524,64 @@ void MSUD::field_weak_control(double t, double dt)
         else
             msud_output.op[i] = true;
     }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::recuperation_control(double t, double dt)
+{
+    if (msud_input.is_auto_reg)
+    {
+        if (msud_input.is_brake)
+        {
+            auto_recuperation_control(t, dt);
+        }
+        else
+        {
+            reset_recuperaion_control();
+        }
+    }
+    else
+    {
+        manual_recuperation_control(t, dt);
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::auto_recuperation_control(double t, double dt)
+{
+
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::manual_recuperation_control(double t, double dt)
+{
+
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::reset_recuperaion_control()
+{
+    msud_output.alpha = 90.0;
+    msud_output.zone_num = ZONE1 + 1;
+    msud_output.vip_voltage_level = 0.0;
+    msud_output.field_level = 0.0;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::brake_current_regulator(double Ia_ref)
+{
+    // Вычисляем ошибку по току якоря
+    dIa = Ia_ref - qAbs(msud_input.Ia[TRAC_MOTOR1]);
 }
 
 //------------------------------------------------------------------------------
