@@ -24,11 +24,18 @@ public:
         this->U_in = U_in;
     }
 
+    void setVoltageLevel(double voltage_level)
+    {
+        this->voltage_level = cut(voltage_level, 0.0, 1.0);
+    }
+
 private:
 
     double U_in;
 
     double U_out;
+
+    double voltage_level;
 
     void preStep(state_vector_t &Y, double t);
 

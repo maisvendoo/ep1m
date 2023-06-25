@@ -219,6 +219,8 @@ void EP1m::stepTractionControl(double t, double dt)
             km42->getContactState(0);
 
     msud_input.is_traction = circuit_state;
+
+    msud_input.is_brake = circuit_state && k1->getContactState(1);
 }
 
 //------------------------------------------------------------------------------

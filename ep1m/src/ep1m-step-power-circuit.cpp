@@ -42,6 +42,8 @@ void EP1m::stepPowerCircuit(double t, double dt)
     trac_motor[TRAC_MOTOR6]->setAncorVoltage(vip[VIP2]->getU_out() * static_cast<double>(fast_switch[TRAC_MOTOR6]->getContactState(0)));
 
 
+    field_rect->setInputVoltage(trac_trans->getFieldRectVoltage());
+    field_rect->setVoltageLevel(msud->getOutputData().field_level);
     field_rect->step(t, dt);
 
     for (size_t i = 0; i < trac_motor.size(); ++i)

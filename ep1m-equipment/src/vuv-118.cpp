@@ -6,6 +6,7 @@
 FieldRect::FieldRect(QObject *parent) : Device(parent)
   , U_in(0.0)
   , U_out(0.0)
+  , voltage_level(0.0)
 {
 
 }
@@ -23,7 +24,10 @@ FieldRect::~FieldRect()
 //------------------------------------------------------------------------------
 void FieldRect::preStep(state_vector_t &Y, double t)
 {
+    Q_UNUSED(Y)
+    Q_UNUSED(t)
 
+    U_out = 0.45 * voltage_level * U_in;
 }
 
 //------------------------------------------------------------------------------
@@ -33,7 +37,9 @@ void FieldRect::ode_system(const state_vector_t &Y,
                            state_vector_t &dYdt,
                            double t)
 {
-
+    Q_UNUSED(Y)
+    Q_UNUSED(dYdt)
+    Q_UNUSED(t)
 }
 
 //------------------------------------------------------------------------------
@@ -41,6 +47,6 @@ void FieldRect::ode_system(const state_vector_t &Y,
 //------------------------------------------------------------------------------
 void FieldRect::load_config(CfgReader &cfg)
 {
-
+    Q_UNUSED(cfg)
 }
 

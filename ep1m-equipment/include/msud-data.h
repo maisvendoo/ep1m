@@ -152,6 +152,9 @@ struct msud_output_t
     /// Ступень ослабления возбуждения
     size_t field_weak_step;
 
+    /// Уровень тока возбуждения от ВУВ
+    double field_level;
+
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
@@ -173,6 +176,7 @@ struct msud_output_t
         , zone_num(1)
         , alpha(Physics::PI / 2.0)
         , field_weak_step(0)
+        , field_level(0.0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
