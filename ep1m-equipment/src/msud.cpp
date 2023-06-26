@@ -580,18 +580,24 @@ void MSUD::reset_recuperaion_control()
 void MSUD::brake_current_regulator(double Ia_ref)
 {
     // Вычисляем ошибку по току якоря
-    dIa = Ia_ref - msud_input.Ia[TRAC_MOTOR1];
+    double Ia = msud_input.Ia[TRAC_MOTOR1];
+
+    dIa = Ia_ref - Ia;
 
     // Максимальное напряжение, которое способен выдать ВИП
     double U_max = (*(vip_zone.end() - 1)).Umax;
 
     double u = Krp * dIa + getY(2);
 
-    u = cut(u, 0.0, 1.0);
+    u = cut(u, -1.0, 0.0);
 
-    double Ud = U_max * (1 - u);
+    double Ud = U_max * (1 + u) * hs_n(Ia);
 
     vip_control(Ud);
+
+    double s = pow(72.0 / (msud_input.V_cur + 0.1), 2);
+
+    msud_output.field_level = s * qAbs(u);
 }
 
 //------------------------------------------------------------------------------

@@ -73,7 +73,7 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
         }
     case -1:
         {
-            M = Y[0] * cPhi(Y[1] * revers_state) * eff_coef.getValue(Y[0]);
+            M = Y[0] * cPhi(Y[1] * revers_state) * eff_coef.getValue(qAbs(Y[0]));
 
             break;
         }
