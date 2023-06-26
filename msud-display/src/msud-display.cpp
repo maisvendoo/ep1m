@@ -503,7 +503,7 @@ void MsudDisplay::slotUpdateTimer()
     else if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_TYPE]) == 2)
     {
         labPC2_->setText(POWER_CIRCUIT_RECUPERATION);
-        labPC2_->setStyleSheet("color: red;");
+        labPC2_->setStyleSheet("color: yellow;");
     }
     else
         labPC2_->setText("");

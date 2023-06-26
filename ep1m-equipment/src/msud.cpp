@@ -39,6 +39,7 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Krvi(0.0)
   , Ib_max(950.0)
   , If_max(845.0)
+  , Vp(72.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -103,8 +104,8 @@ void MSUD::preStep(state_vector_t &Y, double t)
 
     Y[0] = cut(Y[0], -1.0, 1.0);
     Y[1] = cut(Y[1], -1.0, 1.0);
-    Y[2] = cut(Y[0], -1.0, 1.0);
-    Y[3] = cut(Y[1], -1.0, 1.0);
+    Y[2] = cut(Y[2], -1.0, 1.0);
+    Y[3] = cut(Y[3], -Ib_max, Ib_max);
 }
 
 //------------------------------------------------------------------------------
@@ -160,7 +161,7 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Ktp", Ktp);
     cfg.getDouble(secName, "Kti", Kti);
     cfg.getDouble(secName, "Ktv", Ktv);
-    cfg.getDouble(secName, "Vmax", Vmax);
+    cfg.getDouble(secName, "Vmax", msud_output.Vmax);
     cfg.getDouble(secName, "Ktvi", Ktvi);
 
     cfg.getDouble(secName, "Krp", Krp);
@@ -168,8 +169,10 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Krv", Krv);
     cfg.getDouble(secName, "Krvi", Krvi);
 
-    cfg.getDouble(secName, "Ib_max", Ib_max);
-    cfg.getDouble(secName, "If_max", If_max);
+    cfg.getDouble(secName, "Ib_max", msud_output.Ib_max);
+    cfg.getDouble(secName, "If_max", msud_output.If_max);
+    cfg.getDouble(secName, "Ia_max", msud_output.Ia_max);
+    cfg.getDouble(secName, "Vp", Vp);
 }
 
 //------------------------------------------------------------------------------
@@ -410,10 +413,10 @@ void MSUD::auto_traction_control(double t, double dt)
     Q_UNUSED(dt)
 
     // Расчитываем абсолютное значение заданной скорости (км/ч)
-    double V_ref = msud_input.km_ref_velocity_level * Vmax;
+    double V_ref = msud_input.km_ref_velocity_level * msud_output.Vmax;
 
     // Рассчитываем максимальный заданный ток якоря
-    double Ia_ref_max = msud_input.km_trac_level * 1600.0;
+    double Ia_ref_max = msud_input.km_trac_level * msud_output.Ia_max;
 
     // Вычисляем ошибку по скорости (км/ч)
     double dV = V_ref - msud_input.V_cur;
@@ -568,11 +571,11 @@ void MSUD::auto_recuperation_control(double t, double dt)
 {
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
-    dV = - nf(V_ref - msud_input.V_cur);
+    dV = V_ref - msud_input.V_cur;
 
     double I_ref = Krv * dV + getY(3);
 
-    I_ref = cut(I_ref, - Ib_max * msud_input.km_brake_level, 0.0);
+    I_ref = cut(I_ref, - msud_output.Ib_max * msud_input.km_brake_level, 0.0);
 
     brake_current_regulator(I_ref);
 }
@@ -582,7 +585,26 @@ void MSUD::auto_recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_recuperation_control(double t, double dt)
 {
-    brake_current_regulator(-Ib_max * msud_input.km_brake_level);
+    //brake_current_regulator(-msud_output.Ib_max * msud_input.km_brake_level);
+    double Ia_ref = -msud_output.Ib_max * msud_input.km_brake_level;
+
+    // Вычисляем ошибку по току якоря
+    double Ia = msud_input.Ia[TRAC_MOTOR1];
+
+    dIa = Ia_ref - Ia;
+
+    // Максимальное напряжение, которое способен выдать ВИП
+    double U_max = (*(vip_zone.end() - 1)).Umax;
+
+    double u = Krp * dIa + getY(2);
+
+    u = cut(u, -1.0, 0.0);
+
+    double Ud = U_max * (1 + u) * hs_n(Ia);
+
+    vip_control(Ud);
+
+    msud_output.field_level = msud_input.km_ref_velocity_level;
 }
 
 //------------------------------------------------------------------------------
@@ -617,7 +639,7 @@ void MSUD::brake_current_regulator(double Ia_ref)
 
     vip_control(Ud);
 
-    double s = pow(72.0 / (msud_input.V_cur + 0.1), 2);
+    double s = pow(Vp / (msud_input.V_cur + 0.1), 2);
 
     msud_output.field_level = s * qAbs(u);
 }

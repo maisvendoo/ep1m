@@ -97,11 +97,9 @@ void EP1m::initialization()
     // Инициализация звуков перестука
     initTapSounds();
 
-    if (!is_Registarator_on)
-        return;
-
     // Инициализация регистратора
-    initRegistartor();
+    if (is_Registarator_on)
+        initRegistartor();
 }
 
 //------------------------------------------------------------------------------
@@ -154,11 +152,9 @@ void EP1m::step(double t, double dt)
     // Отладочный вывод
     stepDebugPrint(t, dt);
 
-    if (!is_Registarator_on)
-        return;
-
     // Регистрация параметров движения
-    stepRegistration(t, dt);
+    if (is_Registarator_on)
+        stepRegistration(t, dt);
 }
 
 //------------------------------------------------------------------------------

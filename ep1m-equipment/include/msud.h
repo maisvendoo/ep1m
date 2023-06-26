@@ -118,6 +118,9 @@ private:
     /// Ограничение по току обмотки возбуждения
     double If_max;
 
+    /// Скорость перехода на постоянную величину тормозного усилия, км/ч
+    double Vp;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;

@@ -155,6 +155,18 @@ struct msud_output_t
     /// Уровень тока возбуждения от ВУВ
     double field_level;
 
+    /// Ограничение тока ББР
+    double Ib_max;
+
+    /// Ограниение тока возбуждения
+    double If_max;
+
+    /// Ограничение тока якоря
+    double Ia_max;
+
+    /// Максимальная задаваемая скорость
+    double Vmax;
+
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
@@ -177,6 +189,10 @@ struct msud_output_t
         , alpha(Physics::PI / 2.0)
         , field_weak_step(0)
         , field_level(0.0)
+        , Ib_max(950.0)
+        , If_max(845.0)
+        , Ia_max(1300.0)
+        , Vmax(140.0)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
