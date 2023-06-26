@@ -39,6 +39,7 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Krvi(0.0)
   , Ib_max(950.0)
   , If_max(845.0)
+  , Vp(72.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -101,8 +102,8 @@ void MSUD::preStep(state_vector_t &Y, double t)
 {
     Y[0] = cut(Y[0], -1.0, 1.0);
     Y[1] = cut(Y[1], -1.0, 1.0);
-    Y[2] = cut(Y[0], -1.0, 1.0);
-    Y[3] = cut(Y[1], -1.0, 1.0);
+    Y[2] = cut(Y[2], -1.0, 1.0);
+    Y[3] = cut(Y[3], -1.0, 1.0);
 }
 
 //------------------------------------------------------------------------------
@@ -168,6 +169,7 @@ void MSUD::load_config(CfgReader &cfg)
 
     cfg.getDouble(secName, "Ib_max", Ib_max);
     cfg.getDouble(secName, "If_max", If_max);
+    cfg.getDouble(secName, "Vp", Vp);
 }
 
 //------------------------------------------------------------------------------
@@ -603,7 +605,7 @@ void MSUD::brake_current_regulator(double Ia_ref)
 
     vip_control(Ud);
 
-    double s = pow(72.0 / (msud_input.V_cur + 0.1), 2);
+    double s = pow(Vp / (msud_input.V_cur + 0.1), 2);
 
     msud_output.field_level = s * qAbs(u);
 }
