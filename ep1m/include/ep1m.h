@@ -106,7 +106,7 @@ private:
     bool is_N45_on;
 
     /// Сигнал на проводе Н53
-    bool is_N53_on;
+    bool is_N53_on;    
 
     /// Реверсор
     Reversor *reversor;
