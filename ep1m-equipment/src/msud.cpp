@@ -356,10 +356,15 @@ void MSUD::traction_control(double t, double dt)
 {
     if (msud_input.is_auto_reg)
     {
-        if (msud_input.is_traction)
+        if ( (msud_input.is_traction) && (!msud_input.is_brake) )
+        {
             auto_traction_control(t, dt);
+        }
         else
-            reset_traction_control();
+        {
+            if (!msud_input.is_brake)
+                reset_traction_control();
+        }
     }
     else
     {
@@ -525,7 +530,8 @@ void MSUD::recuperation_control(double t, double dt)
         }
         else
         {
-            reset_recuperaion_control();
+            if (!msud_input.is_traction)
+                reset_recuperaion_control();
         }
     }
     else
