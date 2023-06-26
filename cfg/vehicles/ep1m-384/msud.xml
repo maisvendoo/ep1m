@@ -21,15 +21,17 @@
 		<Krp>0.001</Krp>
 		<Kri>0.01</Kri>
 		<Krv>500.0</Krv>
-		<Krvi>0.0</Krvi>
+		<Krvi>10.0</Krvi>
 		
 		<Ib_max>950.0</Ib_max>
 		
 		<If_max>845.0</If_max>
 
+		<Ia_max>1300.0</Ia_max>
+
 		<Vp>72.0</Vp>
 
-		<Vmax>160.0</Vmax>
+		<Vmax>140.0</Vmax>
 
 	</Device>
 	

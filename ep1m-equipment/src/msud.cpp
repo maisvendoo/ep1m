@@ -103,7 +103,7 @@ void MSUD::preStep(state_vector_t &Y, double t)
     Y[0] = cut(Y[0], -1.0, 1.0);
     Y[1] = cut(Y[1], -1.0, 1.0);
     Y[2] = cut(Y[2], -1.0, 1.0);
-    Y[3] = cut(Y[3], -1.0, 1.0);
+    Y[3] = cut(Y[3], -Ib_max, Ib_max);
 }
 
 //------------------------------------------------------------------------------
@@ -167,8 +167,9 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Krv", Krv);
     cfg.getDouble(secName, "Krvi", Krvi);
 
-    cfg.getDouble(secName, "Ib_max", Ib_max);
-    cfg.getDouble(secName, "If_max", If_max);
+    cfg.getDouble(secName, "Ib_max", msud_output.Ib_max);
+    cfg.getDouble(secName, "If_max", msud_output.If_max);
+    cfg.getDouble(secName, "Ia_max", msud_output.Ia_max);
     cfg.getDouble(secName, "Vp", Vp);
 }
 
@@ -404,7 +405,7 @@ void MSUD::auto_traction_control(double t, double dt)
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
     // Рассчитываем максимальный заданный ток якоря
-    double Ia_ref_max = msud_input.km_trac_level * 1600.0;
+    double Ia_ref_max = msud_input.km_trac_level * msud_output.Ia_max;
 
     // Вычисляем ошибку по скорости (км/ч)
     double dV = V_ref - msud_input.V_cur;
@@ -556,11 +557,11 @@ void MSUD::auto_recuperation_control(double t, double dt)
 {
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
-    dV = - nf(V_ref - msud_input.V_cur);
+    dV = V_ref - msud_input.V_cur;
 
     double I_ref = Krv * dV + getY(3);
 
-    I_ref = cut(I_ref, - Ib_max * msud_input.km_brake_level, 0.0);
+    I_ref = cut(I_ref, - msud_output.Ib_max * msud_input.km_brake_level, 0.0);
 
     brake_current_regulator(I_ref);
 }
@@ -570,7 +571,7 @@ void MSUD::auto_recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_recuperation_control(double t, double dt)
 {
-    brake_current_regulator(-Ib_max * msud_input.km_brake_level);
+    brake_current_regulator(-msud_output.Ib_max * msud_input.km_brake_level);
 }
 
 //------------------------------------------------------------------------------
