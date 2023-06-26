@@ -112,6 +112,12 @@ private:
     /// Коэффициент интегральной части регулятора скорости в рекуперации
     double Krvi;
 
+    /// Ограничение по току балластных резисторов
+    double Ib_max;
+
+    /// Ограничение по току обмотки возбуждения
+    double If_max;
+
     msud_input_t msud_input;
 
     msud_output_t msud_output;

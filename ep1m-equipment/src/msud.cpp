@@ -37,6 +37,8 @@ MSUD::MSUD(QObject *parent) : Device(parent)
   , Kri(0.0)
   , Krv(0.0)
   , Krvi(0.0)
+  , Ib_max(950.0)
+  , If_max(845.0)
 {
     connect(normalFreqTimer, &Timer::process, this, &MSUD::slotNormalFreqTimer);
 
@@ -163,6 +165,9 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Kri", Kri);
     cfg.getDouble(secName, "Krv", Krv);
     cfg.getDouble(secName, "Krvi", Krvi);
+
+    cfg.getDouble(secName, "Ib_max", Ib_max);
+    cfg.getDouble(secName, "If_max", If_max);
 }
 
 //------------------------------------------------------------------------------
@@ -368,7 +373,8 @@ void MSUD::traction_control(double t, double dt)
     }
     else
     {
-        manual_traction_control(t, dt);
+        if (msud_input.is_traction)
+            manual_traction_control(t, dt);
     }
 
     field_weak_control(t, dt);
@@ -536,7 +542,8 @@ void MSUD::recuperation_control(double t, double dt)
     }
     else
     {
-        manual_recuperation_control(t, dt);
+        if (msud_input.is_brake)
+            manual_recuperation_control(t, dt);
     }
 }
 
@@ -553,7 +560,7 @@ void MSUD::auto_recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_recuperation_control(double t, double dt)
 {
-
+    brake_current_regulator(-Ib_max * msud_input.km_brake_level);
 }
 
 //------------------------------------------------------------------------------
@@ -573,7 +580,18 @@ void MSUD::reset_recuperaion_control()
 void MSUD::brake_current_regulator(double Ia_ref)
 {
     // Вычисляем ошибку по току якоря
-    dIa = Ia_ref - qAbs(msud_input.Ia[TRAC_MOTOR1]);
+    dIa = Ia_ref - msud_input.Ia[TRAC_MOTOR1];
+
+    // Максимальное напряжение, которое способен выдать ВИП
+    double U_max = (*(vip_zone.end() - 1)).Umax;
+
+    double u = Krp * dIa + getY(2);
+
+    u = cut(u, 0.0, 1.0);
+
+    double Ud = U_max * (1 - u);
+
+    vip_control(Ud);
 }
 
 //------------------------------------------------------------------------------
