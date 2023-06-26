@@ -35,7 +35,7 @@ public:
 
     double getTorque() const { return M; }
 
-    void setMode(bool is_motor) { this->mode = is_motor; }
+    void setMode(int mode) { this->mode = mode; }
 
     void setOmega(double omega) { this->omega = omega; }
 

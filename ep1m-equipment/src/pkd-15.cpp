@@ -47,13 +47,13 @@ void BrakeSwitcher::preStep(state_vector_t &Y, double t)
     if ( (Y[0] < 0.05) && (dir == -1) )
     {
         change_contacts_state();
-        mode = 1;
+        mode = -1;
     }
 
     if ( (Y[0] > 0.95) && (dir == 1) )
     {
         change_contacts_state();
-        mode = -1;
+        mode = 1;
     }
 }
 

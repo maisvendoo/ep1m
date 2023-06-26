@@ -87,12 +87,21 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
     analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km->getTracLevel() +
                                                            qAbs(km->getBrakeLevel())) * 1600.0);
-    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT(msud_input.Ia[TRAC_MOTOR1]);
+
+    analogSignal[SIGNAL_MSUD_CURRENT_ANHCOR1] = TO_FLOAT(qAbs(msud_input.Ia[TRAC_MOTOR1]));
     analogSignal[SIGNAL_MSUD_MK] = TO_FLOAT(!motor_compressor->isPowered() && press_reg->getState());
     analogSignal[SIGNAL_MSUD_DM] = TO_FLOAT(!motor_compressor->isPowered());
 
-    double trac_level = msud_input.Ia[TRAC_MOTOR1] * 100.0 / 1300.0;
+    double trac_level = 0;
+
+    if (msud_input.is_traction)
+        trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / 1300.0);
+
+    if (msud_input.is_brake)
+        trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / 950.0);
+
     trac_level = cut(trac_level, 0.0, 100.0);
+
     analogSignal[SIGNAL_MSUD_TRACTION] = TO_FLOAT(trac_level);
 
     analogSignal[SIGNAL_MSUD_CURCUIT_VOZB] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getFieldCurrent());
