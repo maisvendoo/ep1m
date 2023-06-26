@@ -159,7 +159,7 @@ void MSUD::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Ktp", Ktp);
     cfg.getDouble(secName, "Kti", Kti);
     cfg.getDouble(secName, "Ktv", Ktv);
-    cfg.getDouble(secName, "Vmax", Vmax);
+    cfg.getDouble(secName, "Vmax", msud_output.Vmax);
     cfg.getDouble(secName, "Ktvi", Ktvi);
 
     cfg.getDouble(secName, "Krp", Krp);
@@ -402,7 +402,7 @@ void MSUD::manual_traction_control(double t, double dt)
 void MSUD::auto_traction_control(double t, double dt)
 {
     // Расчитываем абсолютное значение заданной скорости (км/ч)
-    double V_ref = msud_input.km_ref_velocity_level * Vmax;
+    double V_ref = msud_input.km_ref_velocity_level * msud_output.Vmax;
 
     // Рассчитываем максимальный заданный ток якоря
     double Ia_ref_max = msud_input.km_trac_level * msud_output.Ia_max;

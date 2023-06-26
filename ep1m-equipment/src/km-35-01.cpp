@@ -222,6 +222,12 @@ void TracController::stepKeysControl(double t, double dt)
     if (getKeyState(KEY_E))
     {
         ref_speed_dir = -1;
+
+        if (isControl())
+        {
+            ref_speed_dir = 0;
+            ref_speed_level = 0;
+        }
     }
 
     speedTimer.step(t, dt);

@@ -86,7 +86,7 @@ void EP1m::signalsOutput()
 
     bool is_visible = msud->getOutputData().state == MSUD_READY;
     analogSignal[SIGNAL_MSUD_POWER_SUPPLAY] = TO_FLOAT(is_visible);
-    analogSignal[SIGNAL_MSUD_SPEED2] = TO_FLOAT(km->getRefSpeedLevel() * 160.0);
+    analogSignal[SIGNAL_MSUD_SPEED2] = TO_FLOAT(km->getRefSpeedLevel() * msud->getOutputData().Vmax);
     analogSignal[SIGNAL_MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
 
     double Ia_max = 0;
