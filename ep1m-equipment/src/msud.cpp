@@ -571,7 +571,26 @@ void MSUD::auto_recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_recuperation_control(double t, double dt)
 {
-    brake_current_regulator(-msud_output.Ib_max * msud_input.km_brake_level);
+    //brake_current_regulator(-msud_output.Ib_max * msud_input.km_brake_level);
+    double Ia_ref = -msud_output.Ib_max * msud_input.km_brake_level;
+
+    // Вычисляем ошибку по току якоря
+    double Ia = msud_input.Ia[TRAC_MOTOR1];
+
+    dIa = Ia_ref - Ia;
+
+    // Максимальное напряжение, которое способен выдать ВИП
+    double U_max = (*(vip_zone.end() - 1)).Umax;
+
+    double u = Krp * dIa + getY(2);
+
+    u = cut(u, -1.0, 0.0);
+
+    double Ud = U_max * (1 + u) * hs_n(Ia);
+
+    vip_control(Ud);
+
+    msud_output.field_level = msud_input.km_ref_velocity_level;
 }
 
 //------------------------------------------------------------------------------
