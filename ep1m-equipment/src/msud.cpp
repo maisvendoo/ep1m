@@ -552,7 +552,15 @@ void MSUD::recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_recuperation_control(double t, double dt)
 {
+    double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
+    dV = - nf(V_ref - msud_input.V_cur);
+
+    double I_ref = Krv * dV + getY(3);
+
+    I_ref = cut(I_ref, - Ib_max * msud_input.km_brake_level, 0.0);
+
+    brake_current_regulator(I_ref);
 }
 
 //------------------------------------------------------------------------------
