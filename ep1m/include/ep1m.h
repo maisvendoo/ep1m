@@ -217,6 +217,9 @@ private:
     /// датчик аварийного давления в ТМ SP6
     PressureSensor  *sp6;
 
+    /// вентиль замещения ЭДТ
+    ElectroPneumoValve *Y4;
+
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;
 
