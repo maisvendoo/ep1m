@@ -369,6 +369,7 @@ void MSUD::traction_control(double t, double dt)
         if ( (msud_input.is_traction) && (!msud_input.is_brake) )
         {
             auto_traction_control(t, dt);
+            field_weak_control(t, dt);
         }
         else
         {
@@ -379,10 +380,16 @@ void MSUD::traction_control(double t, double dt)
     else
     {
         if (msud_input.is_traction)
+        {
             manual_traction_control(t, dt);
-    }
-
-    field_weak_control(t, dt);
+            field_weak_control(t, dt);
+        }
+        else
+        {
+            if (!msud_input.is_brake)
+                reset_traction_control();
+        }
+    }    
 }
 
 //------------------------------------------------------------------------------
