@@ -157,4 +157,7 @@ void EP1m::initControlCircuit()
     k1->read_custom_config(config_dir + QDir::separator() + "mk-69");
     k1->setInitContactState(0, false);
     k1->setInitContactState(1, false);
+
+    Y3 = new ElectroPneumoValve();
+    Y3->read_custom_config(config_dir + QDir::separator() + "epv");
 }
