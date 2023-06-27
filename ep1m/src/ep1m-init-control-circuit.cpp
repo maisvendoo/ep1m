@@ -172,4 +172,7 @@ void EP1m::initControlCircuit()
 
     sp3 = new PressureSensor();
     sp3->read_custom_config(config_dir + QDir::separator() + "sp3");
+
+    Y5 = new ElectroPneumoValve();
+    Y5->read_custom_config(config_dir + QDir::separator() + "epv");
 }

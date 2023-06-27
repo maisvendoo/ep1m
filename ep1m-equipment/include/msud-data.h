@@ -167,6 +167,9 @@ struct msud_output_t
     /// Максимальная задаваемая скорость
     double Vmax;
 
+    /// Сигнал отсутствия усиление торможения от вентиля Y5
+    bool is_not_brake_boost;
+
     /// Включение МВ на низкой частоте
     std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
     /// Включение МВ на нормальной частоте
@@ -193,6 +196,7 @@ struct msud_output_t
         , If_max(845.0)
         , Ia_max(1300.0)
         , Vmax(140.0)
+        , is_not_brake_boost(true)
     {
         std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
         std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);

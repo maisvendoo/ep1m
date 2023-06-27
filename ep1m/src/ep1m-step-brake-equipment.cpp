@@ -53,13 +53,19 @@ void EP1m::stepBrakeEquipment(double t, double dt)
 
     pneumo_red_panel->setPipeLinePressure(main_res->getPressure());
     pneumo_red_panel->setPressure1(Y4->getInputPressure());
+    pneumo_red_panel->setPressure5(Y5->getInputPressure());
     pneumo_red_panel->step(t, dt);
 
     Y4->setInputFlow(pneumo_red_panel->getOutputFlow1());
-    Y4->setOutputPressure(kp1->getPressure1());
+    Y4->setOutputPressure(kp2->getPressure1());
     Y4->step(t, dt);
 
-    kp1->setInputFlow1(Y4->getOutputFlow());
+    Y5->setVoltage(Ucc * static_cast<double>(msud->getOutputData().is_not_brake_boost));
+    Y5->setInputFlow(pneumo_red_panel->getOutputFlow5());
+    Y5->setOutputPressure(kp1->getPressure1());
+    Y5->step(t, dt);
+
+    kp1->setInputFlow1(Y5->getOutputFlow());
     kp1->setInputFlow2(rd4->getBrakeCylAirFlow());
     kp1->setOutputPressure(Y3->getInputPressure());
     kp1->step(t, dt);
@@ -68,7 +74,7 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     Y3->setOutputPressure(kp2->getPressure2());
     Y3->step(t, dt);
 
-    kp2->setInputFlow1(0.0);
+    kp2->setInputFlow1(Y4->getOutputFlow());
     kp2->setInputFlow2(Y3->getOutputFlow());
     kp2->setOutputPressure(kp5->getPressure1());
     kp2->step(t, dt);

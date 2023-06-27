@@ -220,6 +220,9 @@ private:
     /// вентиль замещения ЭДТ
     ElectroPneumoValve *Y4;
 
+    /// вентиль усиления торможения Y5
+    ElectroPneumoValve *Y5;
+
     /// панель пневматических редукторов
     PneumoReducerPanel *pneumo_red_panel;
 
