@@ -186,4 +186,6 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_MSUD_OSLAB_POLE1] = TO_FLOAT(msud->getOutputData().op[STEP1]);
     analogSignal[SIGNAL_MSUD_OSLAB_POLE2] = TO_FLOAT(msud->getOutputData().op[STEP2]);
     analogSignal[SIGNAL_MSUD_OSLAB_POLE3] = TO_FLOAT(msud->getOutputData().op[STEP3]);
+
+    analogSignal[BUTTON_BRAKE_RELEASE] = TO_FLOAT(tumblers[BRAKE_RELEASE_BUTTON].getState());
 }

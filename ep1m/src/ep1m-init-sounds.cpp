@@ -27,6 +27,9 @@ void EP1m::initSounds()
     tumblers[BUTTON_RBS].setOnSoundName("");
     tumblers[BUTTON_RBS].setOffSoundName("");
 
+    tumblers[BRAKE_RELEASE_BUTTON].setOnSoundName("");
+    tumblers[BRAKE_RELEASE_BUTTON].setOffSoundName("");
+
     tumblers[EPK_KEY].setOnSoundName("EPK_Key");
     tumblers[EPK_KEY].setOffSoundName("EPK_Key");
 

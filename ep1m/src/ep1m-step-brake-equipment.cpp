@@ -39,7 +39,7 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     auxRate = air_dist->getAuxRate() + epk->getEmergencyBrakeRate();
     air_dist->step(t, dt);
 
-    electro_air_dist->setControlLine(ept_control[0]);
+    electro_air_dist->setControlLine(ept_control[0] * static_cast<double>(!tumblers[BRAKE_RELEASE_BUTTON].getState()));
     electro_air_dist->setQbc_in(air_dist->getBrakeCylinderAirFlow());
     electro_air_dist->setPbc_in(rd4->getWorkPressure());
     electro_air_dist->setInputSupplyReservoirFlow(air_dist->getAirSupplyFlow());
