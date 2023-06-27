@@ -10,7 +10,9 @@ class TimeRelay : public Relay
 {
 public:
 
-    TimeRelay(size_t num_contacts = 1, QObject *parent = Q_NULLPTR);
+    TimeRelay(size_t num_contacts = 1,
+              bool is_On_delay = true,
+              QObject *parent = Q_NULLPTR);
 
     ~TimeRelay();
 
@@ -44,6 +46,9 @@ private:
     /// Флаг срабатывания
     bool        is_started;
 
+    /// Флаг подачи задержки при включении
+    bool        is_On_delay;
+
     void setVoltage(double U) override;
 
     void preStep(state_vector_t &Y, double t) override;
@@ -51,6 +56,10 @@ private:
     void ode_system(const state_vector_t &Y, state_vector_t &dYdt, double t) override;
 
     void load_config(CfgReader &cfg) override;
+
+    void onDelayProcess();
+
+    void offDelayProcess();
 
 private slots:
 

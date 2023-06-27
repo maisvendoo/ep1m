@@ -101,7 +101,7 @@ void EP1m::initControlCircuit()
     kv84->setInitContactState(2, false);
     kv84->setInitContactState(3, false);
 
-    kt10 = new TimeRelay(6);
+    kt10 = new TimeRelay(6, false);
     kt10->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kt10->setInitContactState(0, false);
     kt10->setInitContactState(1, false);
@@ -144,11 +144,11 @@ void EP1m::initControlCircuit()
     kt4->setInitContactState(0, true);
     kt4->setTimeout(1.5);
 
-    kt5 = new TimeRelay(5);
+    kt5 = new TimeRelay(5, false);
     kt5->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kt5->setInitContactState(0, false);
     kt5->setInitContactState(1, false);
-    kt5->setTimeout(1.5);
+    kt5->setTimeout(2.0);
 
     km14 = new Relay(5);
     km14->read_custom_config(config_dir + QDir::separator() + "mk-69");
