@@ -444,6 +444,7 @@ void MSUD::reset_traction_control()
     msud_output.zone_num = ZONE1 + 1;
     msud_output.vip_voltage_level = 0.0;
     msud_output.field_weak_step = STEP0;
+    std::fill(msud_output.op.begin(), msud_output.op.end(), true);
 }
 
 //------------------------------------------------------------------------------
