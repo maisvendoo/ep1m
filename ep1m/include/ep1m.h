@@ -223,6 +223,9 @@ private:
     /// панель пневматических редукторов
     PneumoReducerPanel *pneumo_red_panel;
 
+    /// датчик давления магистрали ТЦ1 иТЦ2
+    PressureSensor *sp3;
+
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;
 

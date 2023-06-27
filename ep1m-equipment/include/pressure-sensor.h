@@ -19,9 +19,14 @@ public:
         this->p_in = p_in;
     }
 
-    bool getContactState() const
+    bool getOpenContactState() const
     {
         return getY(0) >= p_ref;
+    }
+
+    bool getClosedContactState() const
+    {
+        return getY(0) <= p_ref;
     }
 
 private:
