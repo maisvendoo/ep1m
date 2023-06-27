@@ -264,4 +264,13 @@ void EP1m::stepRecuperationControl(double t, double dt)
     k1->setVoltage(Ucc * static_cast<double>(is_N57_on));
 
     k1->step(t, dt);
+
+    sp6->setInputPressure(pTM);
+    sp6->step(t, dt);
+
+    bool is_Y3_on = is_N55_on &&
+            kv21->getContactState(3) &&
+            sp6->getContactState();
+
+    Y3->setVoltage(Ucc * static_cast<double>(is_Y3_on));
 }

@@ -20,11 +20,13 @@ void EP1m::initControlCircuit()
     kv39->setInitContactState(1, false);
     kv39->setInitContactState(2, false);
 
-    kv21 = new Relay(3);
+    kv21 = new Relay(5);
     kv21->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kv21->setInitContactState(0, false);
     kv21->setInitContactState(1, false);
     kv21->setInitContactState(2, false);
+    kv21->setInitContactState(3, true);
+    kv21->setInitContactState(4, true);
 
     kv22 = new Relay(3);
     kv22->read_custom_config(config_dir + QDir::separator() + "mk-69");
@@ -160,4 +162,7 @@ void EP1m::initControlCircuit()
 
     Y3 = new ElectroPneumoValve();
     Y3->read_custom_config(config_dir + QDir::separator() + "epv");
+
+    sp6 = new PressureSensor();
+    sp6->read_custom_config(config_dir + QDir::separator() + "sp6");
 }

@@ -214,6 +214,9 @@ private:
     /// вентиль отпуска
     ElectroPneumoValve *Y3;
 
+    /// датчик аварийного давления в ТМ SP6
+    PressureSensor  *sp6;
+
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;
 

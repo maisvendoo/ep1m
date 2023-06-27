@@ -39,5 +39,6 @@
 #include    "shunts-module.h"
 #include    "vuv-118.h"
 #include    "epv.h"
+#include    "pressure-sensor.h"
 
 #endif // EP1M_HEADERS_H
