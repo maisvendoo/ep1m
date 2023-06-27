@@ -35,7 +35,7 @@ public:
     void init(double pTM, double pFL);
 
     // ПЕРЕНЕСТИ ЭТОТ МЕТОД В СЛЕДУЮЩИЙ ВЫПУСК RRS
-    bool getEmeggencyBrakeContact() const { return is_whistle; }
+    bool getEmeggencyBrakeContact() const { return is_emergency_brake; }
 
 private:
 
@@ -70,6 +70,8 @@ private:
     double is_whistle_on;
 
     bool is_whistle;
+
+    bool is_emergency_brake;
 
     std::array<double, MAX_FLOW_COEFFS> K;
 

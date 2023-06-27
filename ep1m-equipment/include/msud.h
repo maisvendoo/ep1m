@@ -190,6 +190,9 @@ private:
      // Регулирование тормозного тока
      void brake_current_regulator(double Ia_ref);
 
+     // Отработка усиления торможения при ЭТ
+     void emergancy_brake_boost();
+
 private slots:
 
      void slotLoadTimer();

@@ -29,6 +29,7 @@ AutoTrainStopEPK150::AutoTrainStopEPK150(QObject *parent)
     , emergencyRate(0.0)
     , is_whistle_on(0.0)
     , is_whistle(false)
+    , is_emergency_brake(false)
 {
     std::fill(K.begin(), K.end(), 0.0);
     std::fill(k.begin(), k.end(), 0.0);   
@@ -94,6 +95,8 @@ void AutoTrainStopEPK150::ode_system(const state_vector_t &Y,
     dYdt[1] = Q2 / V2;
 
     dYdt[2] = Q1 / V1;
+
+    is_emergency_brake = u4 >= 0.9;
 
     emergencyRate = K[3] * pTM * u4;
 }

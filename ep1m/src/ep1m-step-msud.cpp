@@ -32,6 +32,9 @@ void EP1m::stepMSUD(double t, double dt)
     msud_input.km_ref_velocity_level = km->getRefSpeedLevel();
     msud_input.V_cur = qAbs(wheel_omega[TRAC_MOTOR1] * wheel_diameter * Physics::kmh / 2.0);
 
+    msud_input.is_emergency_brake = (brake_crane->getPositionName() == "VI") ||
+            epk->getEmeggencyBrakeContact();
+
     bool is_MSUD_on = km43->getContactState(1);
 
     msud->setPowerVoltage(Ucc * static_cast<double>(is_MSUD_on));

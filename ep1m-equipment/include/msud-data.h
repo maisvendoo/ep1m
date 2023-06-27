@@ -88,6 +88,9 @@ struct msud_input_t
     /// Признак сбора рекуперации
     bool is_brake;
 
+    /// Признак экстренного торможения
+    bool is_emergency_brake;
+
     /// Токи якоря тяговых двигателей
     std::array<double, TRAC_MOTORS_NUM> Ia;
 
@@ -111,6 +114,7 @@ struct msud_input_t
         , V_cur(0.0)
         , is_traction(false)
         , is_brake(false)
+        , is_emergency_brake(false)
     {
         std::fill(Ia.begin(), Ia.end(), 0.0);
         std::fill(If.begin(), If.end(), 0.0);
