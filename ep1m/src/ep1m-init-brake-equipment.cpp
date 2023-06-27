@@ -70,4 +70,10 @@ void EP1m::initBrakeEquipment()
     electro_air_dist->read_config("evr305");
 
     initEPT();
+
+    pneumo_red_panel = new PneumoReducerPanel();
+    pneumo_red_panel->setCustomConfigDir(config_dir);
+    pneumo_red_panel->read_custom_config(config_dir +
+                                         QDir::separator() +
+                                         "pneumo-reducer-panel");
 }

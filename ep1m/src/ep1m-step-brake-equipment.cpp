@@ -51,7 +51,15 @@ void EP1m::stepBrakeEquipment(double t, double dt)
     rd4->setBrakeCylPressure(kp1->getPressure2());
     rd4->step(t, dt);
 
-    kp1->setInputFlow1(0.0);
+    pneumo_red_panel->setPipeLinePressure(main_res->getPressure());
+    pneumo_red_panel->setPressure1(Y4->getInputPressure());
+    pneumo_red_panel->step(t, dt);
+
+    Y4->setInputFlow(pneumo_red_panel->getOutputFlow1());
+    Y4->setOutputPressure(kp1->getPressure1());
+    Y4->step(t, dt);
+
+    kp1->setInputFlow1(Y4->getOutputFlow());
     kp1->setInputFlow2(rd4->getBrakeCylAirFlow());
     kp1->setOutputPressure(Y3->getInputPressure());
     kp1->step(t, dt);

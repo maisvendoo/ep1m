@@ -278,5 +278,5 @@ void EP1m::stepRecuperationControl(double t, double dt)
             kv21->getContactState(4) &&
             k1->getContactState(2);
 
-    Y4->setVoltage(Ucc * static_cast<double>(is_Y4_on));
+    Y4->setVoltage(Ucc * static_cast<double>(!is_Y4_on));
 }

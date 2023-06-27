@@ -220,6 +220,9 @@ private:
     /// вентиль замещения ЭДТ
     ElectroPneumoValve *Y4;
 
+    /// панель пневматических редукторов
+    PneumoReducerPanel *pneumo_red_panel;
+
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;
 
