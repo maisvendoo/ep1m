@@ -20,11 +20,13 @@ void EP1m::initControlCircuit()
     kv39->setInitContactState(1, false);
     kv39->setInitContactState(2, false);
 
-    kv21 = new Relay(3);
+    kv21 = new Relay(5);
     kv21->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kv21->setInitContactState(0, false);
     kv21->setInitContactState(1, false);
     kv21->setInitContactState(2, false);
+    kv21->setInitContactState(3, true);
+    kv21->setInitContactState(4, true);
 
     kv22 = new Relay(3);
     kv22->read_custom_config(config_dir + QDir::separator() + "mk-69");
@@ -99,7 +101,7 @@ void EP1m::initControlCircuit()
     kv84->setInitContactState(2, false);
     kv84->setInitContactState(3, false);
 
-    kt10 = new TimeRelay(6);
+    kt10 = new TimeRelay(6, false);
     kt10->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kt10->setInitContactState(0, false);
     kt10->setInitContactState(1, false);
@@ -142,11 +144,11 @@ void EP1m::initControlCircuit()
     kt4->setInitContactState(0, true);
     kt4->setTimeout(1.5);
 
-    kt5 = new TimeRelay(5);
+    kt5 = new TimeRelay(5, false);
     kt5->read_custom_config(config_dir + QDir::separator() + "mk-69");
     kt5->setInitContactState(0, false);
     kt5->setInitContactState(1, false);
-    kt5->setTimeout(1.5);
+    kt5->setTimeout(2.0);
 
     km14 = new Relay(5);
     km14->read_custom_config(config_dir + QDir::separator() + "mk-69");
@@ -157,4 +159,20 @@ void EP1m::initControlCircuit()
     k1->read_custom_config(config_dir + QDir::separator() + "mk-69");
     k1->setInitContactState(0, false);
     k1->setInitContactState(1, false);
+    k1->setInitContactState(2, true);
+
+    Y3 = new ElectroPneumoValve();
+    Y3->read_custom_config(config_dir + QDir::separator() + "epv");
+
+    sp6 = new PressureSensor();
+    sp6->read_custom_config(config_dir + QDir::separator() + "sp6");
+
+    Y4 = new ElectroPneumoValve();
+    Y4->read_custom_config(config_dir + QDir::separator() + "epv");
+
+    sp3 = new PressureSensor();
+    sp3->read_custom_config(config_dir + QDir::separator() + "sp3");
+
+    Y5 = new ElectroPneumoValve();
+    Y5->read_custom_config(config_dir + QDir::separator() + "epv");
 }

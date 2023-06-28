@@ -17,7 +17,7 @@
 
         <Ktp>0.001</Ktp>
         <Kti>0.01</Kti>
-        <Ktv>500.0</Ktv>
+        <Ktv>1000.0</Ktv>
         <Ktvi>0.0</Ktvi>
 
         <Krp>0.001</Krp>

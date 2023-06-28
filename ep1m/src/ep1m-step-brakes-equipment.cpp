@@ -24,7 +24,7 @@ void EP1m::stepBrakesEquipment(double t, double dt)
     // Электровоздухораспределитель
     electro_air_dist->setAirdistBCflow(air_dist->getBCflow());
     electro_air_dist->setAirdistSRflow(air_dist->getSRflow());
-    electro_air_dist->setBCpressure(bc_switch_valve->getPressure2());
+    electro_air_dist->setBCpressure(kp5->getPressure2());
     electro_air_dist->setSRpressure(supply_reservoir->getPressure());
     electro_air_dist->step(t, dt);
 

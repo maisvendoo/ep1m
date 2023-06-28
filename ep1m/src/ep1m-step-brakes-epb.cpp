@@ -31,6 +31,18 @@ void EP1m::stepEPB(double t, double dt)
     double epb_work_f = epb_control->getWorkFrequency();
 
     // Управление электровоздухораспределителем
+    double evr_U = 0.0;
+    double evr_f = 0.0;
+    // Если не нажата кнопка "Отпуск тормозов" - управление от линий ЭПТ
+    if (!tumblers[BRAKE_RELEASE_BUTTON].getState())
+    {
+        evr_U = epb_work_U + hose_bp_fwd->getVoltage(0) + hose_bp_bwd->getVoltage(0);
+        evr_f = epb_work_f + hose_bp_fwd->getFrequency(0) + hose_bp_bwd->getFrequency(0);
+    }
+    electro_air_dist->setVoltage  (0, evr_U);
+    electro_air_dist->setFrequency(0, evr_f);
+
+    // Управление электровоздухораспределителем
     electro_air_dist->setVoltage  (0,  epb_work_U
         + hose_bp_fwd->getVoltage(0) + hose_bp_bwd->getVoltage(0) );
     electro_air_dist->setFrequency(0,  epb_work_f

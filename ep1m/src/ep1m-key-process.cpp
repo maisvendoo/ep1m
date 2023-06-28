@@ -89,4 +89,10 @@ void EP1m::keyProcess()
         else
             tumblers[TUMBLER_PCHF].reset();
     }
+
+    // Отпуск тормозов
+    if (getKeyState(KEY_R))
+        tumblers[BRAKE_RELEASE_BUTTON].set();
+    else
+        tumblers[BRAKE_RELEASE_BUTTON].reset();
 }

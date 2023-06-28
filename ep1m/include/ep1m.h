@@ -104,7 +104,7 @@ private:
     bool is_N45_on;
 
     /// Сигнал на проводе Н53
-    bool is_N53_on;    
+    bool is_N53_on;
 
     /// Реверсор
     Reversor *reversor;
@@ -175,10 +175,16 @@ private:
     PneumoHoseEPB       *hose_bp_bwd;
 
     /// Повторительное пневмореле для давления от воздухораспределителя РД4
-    PneumoRelay *air_dist_pressure_relay;
+    PneumoRelay         *rd4;
+
+    /// Переключательный клапан КП1
+    SwitchingValve      *kp1;
+
+    /// Переключательный клапан КП2
+    SwitchingValve      *kp2;
 
     /// Переключательный клапан КП5
-    SwitchingValve      *bc_switch_valve;
+    SwitchingValve      *kp5;
 
     /// Тройники для распределения воздуха от переключательного клапана
     /// к тележкам
@@ -250,11 +256,29 @@ private:
     /// Реле выдержки времени КТ5
     TimeRelay   *kt5;
 
-    /// контактор мотор-вентилятора ББР
+    /// Контактор мотор-вентилятора ББР
     Relay       *km14;
 
-    /// контактор Ку
+    /// Контактор К1
     Relay       *k1;
+
+    /// Вентиль отпуска
+    ElectroPneumoValve *Y3;
+
+    /// Датчик аварийного давления в ТМ SP6
+    PressureSensor  *sp6;
+
+    /// Вентиль замещения ЭДТ
+    ElectroPneumoValve *Y4;
+
+    /// Вентиль усиления торможения Y5
+    ElectroPneumoValve *Y5;
+
+    /// Панель пневматических редукторов
+    PneumoReducerPanel *pneumo_red_panel;
+
+    /// Датчик давления магистрали передней тележки (ТЦ1 и ТЦ2)
+    PressureSensor *sp3;
 
     /// Регистратор параметров движения (для отладки и испытаний)
     Registrator *registrator;

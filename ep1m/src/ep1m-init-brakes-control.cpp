@@ -24,13 +24,25 @@ void EP1m::initBrakesControl(QString modules_dir)
     epk->read_config("epk150");
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4
-    air_dist_pressure_relay = new PneumoRelay();
-    air_dist_pressure_relay->read_custom_config(config_dir + QDir::separator() + "rd4");
+    rd4 = new PneumoRelay();
+    rd4->read_custom_config(config_dir + QDir::separator() + "rd4");
 
+    // Переключательный клапан КП1
+    kp1 = new SwitchingValve();
+    kp1->read_custom_config("zpk");
+    // Переключательный клапан КП2
+    kp2 = new SwitchingValve();
+    kp2->read_custom_config("zpk");
     // Переключательный клапан КП5
-    bc_switch_valve = new SwitchingValve();
-    bc_switch_valve->read_custom_config(config_dir + QDir::separator() + "kp5");
+    kp5 = new SwitchingValve();
+    kp5->read_custom_config(config_dir + QDir::separator() + "kp5");
 
+    // Пневмопанель
+    pneumo_red_panel = new PneumoReducerPanel();
+    pneumo_red_panel->setCustomConfigDir(config_dir);
+    pneumo_red_panel->read_custom_config(config_dir +
+                                         QDir::separator() +
+                                         "pneumo-reducer-panel");
     // Тройники
     bc_splitter[0] = new PneumoSplitter();
     bc_splitter[0]->read_config("pneumo-splitter");

@@ -29,5 +29,8 @@
 #include    "registrator.h"
 #include    "shunts-module.h"
 #include    "vuv-118.h"
+#include    "epv.h"
+#include    "pressure-sensor.h"
+#include    "pneumo-reducer-panel.h"
 
 #endif // EP1M_HEADERS_H

@@ -144,7 +144,12 @@ void EP1m::stepTractionControl(double t, double dt)
         is_N53_on = is_N53_on && fast_switch[i]->getContactState(3);
     }
 
-    bool is_N54_on = is_N53_on && km14->getContactState(1);
+    bool is_N54_on = is_N53_on &&
+            km14->getContactState(1) &&
+            sp3->getClosedContactState();
+
+    sp3->setInputPressure(brake_mech[TROLLEY_FWD]->getBCpressure());
+    sp3->step(t, dt);
 
     bool is_N40_on = (is_N39_on || is_N54_on) && kt10->getContactState(0);
 
@@ -264,4 +269,18 @@ void EP1m::stepRecuperationControl(double t, double dt)
     k1->setVoltage(Ucc * static_cast<double>(is_N57_on));
 
     k1->step(t, dt);
+
+    sp6->setInputPressure(brakepipe->getPressure());
+    sp6->step(t, dt);
+
+    bool is_Y3_on = (is_N55_on && kv21->getContactState(3) && sp6->getOpenContactState()) ||
+            (tumblers[BRAKE_RELEASE_BUTTON].getState() && km->isContacts5_6());
+
+    Y3->setVoltage(Ucc * static_cast<double>(is_Y3_on));
+
+    bool is_Y4_on = is_N45_on &&
+            kv21->getContactState(4) &&
+            k1->getContactState(2);
+
+    Y4->setVoltage(Ucc * static_cast<double>(!is_Y4_on));
 }

@@ -262,6 +262,8 @@ void MSUD::main_loop(double t, double dt)
     traction_control(t, dt);
 
     recuperation_control(t, dt);
+
+    emergancy_brake_boost();
 }
 
 //------------------------------------------------------------------------------
@@ -642,6 +644,21 @@ void MSUD::brake_current_regulator(double Ia_ref)
     double s = pow(Vp / (msud_input.V_cur + 0.1), 2);
 
     msud_output.field_level = s * qAbs(u);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void MSUD::emergancy_brake_boost()
+{
+    if ( (msud_input.V_cur > 60) && msud_input.is_emergency_brake )
+    {
+        msud_output.is_not_brake_boost = false;
+    }
+    else
+    {
+        msud_output.is_not_brake_boost = true;
+    }
 }
 
 //------------------------------------------------------------------------------
