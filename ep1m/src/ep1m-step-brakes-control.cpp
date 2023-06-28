@@ -69,14 +69,14 @@ void EP1m::stepBrakesControl(double t, double dt)
     // Входы от усилителя торможения У5 и повторителя давления от воздухораспределителя
     kp1->setInputFlow1(Y5->getOutputFlow());
     kp1->setInputFlow2(rd4->getPipeFlow());
-    kp1->setOutputPressure(bc_splitter[0]->getInputPressure());
+    kp1->setOutputPressure(Y3->getInputPressure());
     kp1->step(t, dt);
 
     // Переключательный клапан КП2
     // Входы от крана локомотивного тормоза через УБТ и от клапана КП2
-    kp2->setInputFlow1(brake_lock->getBCflow());
+    kp2->setInputFlow1(Y3->getOutputFlow());
     kp2->setInputFlow2(rd4->getPipeFlow());
-    kp2->setOutputPressure(bc_splitter[0]->getInputPressure());
+    kp2->setOutputPressure(kp5->getPressure2());
     kp2->step(t, dt);
 
     // Переключательный клапан КП5

@@ -571,6 +571,9 @@ void MSUD::recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::auto_recuperation_control(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     double V_ref = msud_input.km_ref_velocity_level * Vmax;
 
     dV = V_ref - msud_input.V_cur;
@@ -587,6 +590,9 @@ void MSUD::auto_recuperation_control(double t, double dt)
 //------------------------------------------------------------------------------
 void MSUD::manual_recuperation_control(double t, double dt)
 {
+    Q_UNUSED(t)
+    Q_UNUSED(dt)
+
     //brake_current_regulator(-msud_output.Ib_max * msud_input.km_brake_level);
     double Ia_ref = -msud_output.Ib_max * msud_input.km_brake_level;
 
