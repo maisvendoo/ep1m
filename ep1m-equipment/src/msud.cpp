@@ -374,6 +374,7 @@ void MSUD::traction_control(double t, double dt)
         if ( (msud_input.is_traction) && (!msud_input.is_brake) )
         {
             auto_traction_control(t, dt);
+            field_weak_control(t, dt);
         }
         else
         {
@@ -384,10 +385,16 @@ void MSUD::traction_control(double t, double dt)
     else
     {
         if (msud_input.is_traction)
+        {
             manual_traction_control(t, dt);
-    }
-
-    field_weak_control(t, dt);
+            field_weak_control(t, dt);
+        }
+        else
+        {
+            if (!msud_input.is_brake)
+                reset_traction_control();
+        }
+    }    
 }
 
 //------------------------------------------------------------------------------
@@ -455,6 +462,7 @@ void MSUD::reset_traction_control()
     msud_output.zone_num = ZONE1 + 1;
     msud_output.vip_voltage_level = 0.0;
     msud_output.field_weak_step = STEP0;
+    std::fill(msud_output.op.begin(), msud_output.op.end(), true);
 }
 
 //------------------------------------------------------------------------------
