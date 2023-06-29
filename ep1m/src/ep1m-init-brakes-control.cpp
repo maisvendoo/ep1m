@@ -29,10 +29,10 @@ void EP1m::initBrakesControl(QString modules_dir)
 
     // Переключательный клапан КП1
     kp1 = new SwitchingValve();
-    kp1->read_custom_config("zpk");
+    kp1->read_config("zpk");
     // Переключательный клапан КП2
     kp2 = new SwitchingValve();
-    kp2->read_custom_config("zpk");
+    kp2->read_config("zpk");
     // Переключательный клапан КП5
     kp5 = new SwitchingValve();
     kp5->read_custom_config(config_dir + QDir::separator() + "kp5");

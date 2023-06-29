@@ -42,13 +42,13 @@ void ElectroPneumoValve::ode_system(const state_vector_t &Y,
 
     double Q2 = K[2] * p_out;
 
-    dYdt[1] = (Q_in - Q1) / Vk;
-
     double u1 = static_cast<double>(!getContactState(0));
 
     double u2 = static_cast<double>(getContactState(0));
 
     Q_out = Q1 * u1 - Q2 * u2;
+
+    dYdt[1] = (Q_in - Q1 * u1) / Vk;
 }
 
 //------------------------------------------------------------------------------

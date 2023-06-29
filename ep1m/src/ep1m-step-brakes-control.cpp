@@ -51,12 +51,12 @@ void EP1m::stepBrakesControl(double t, double dt)
 
     // Вентиль отпуска тормозов У1
     Y3->setInputFlow(kp1->getOutputFlow());
-    Y3->setOutputPressure(kp2->getPressure2());
+    Y3->setOutputPressure(kp2->getPressure1());
     Y3->step(t, dt);
 
     // Вентиль замещения ЭДТ У4
     Y4->setInputFlow(pneumo_red_panel->getOutputFlow1());
-    Y4->setOutputPressure(kp2->getPressure1());
+    Y4->setOutputPressure(kp2->getPressure2());
     Y4->step(t, dt);
 
     // Вентиль усилителя торможения У5
@@ -73,9 +73,9 @@ void EP1m::stepBrakesControl(double t, double dt)
     kp1->step(t, dt);
 
     // Переключательный клапан КП2
-    // Входы от крана локомотивного тормоза через УБТ и от клапана КП2
+    // Входы от отпускного вентиля У3 и от вентиля замещения У4
     kp2->setInputFlow1(Y3->getOutputFlow());
-    kp2->setInputFlow2(rd4->getPipeFlow());
+    kp2->setInputFlow2(Y4->getOutputFlow());
     kp2->setOutputPressure(kp5->getPressure2());
     kp2->step(t, dt);
 

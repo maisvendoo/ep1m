@@ -42,12 +42,6 @@ void EP1m::stepEPB(double t, double dt)
     electro_air_dist->setVoltage  (0, evr_U);
     electro_air_dist->setFrequency(0, evr_f);
 
-    // Управление электровоздухораспределителем
-    electro_air_dist->setVoltage  (0,  epb_work_U
-        + hose_bp_fwd->getVoltage(0) + hose_bp_bwd->getVoltage(0) );
-    electro_air_dist->setFrequency(0,  epb_work_f
-        + hose_bp_fwd->getFrequency(0) + hose_bp_bwd->getFrequency(0) );
-
     // Межвагонные сигналы линий ЭПТ по рукавам тормозной магистрали
     // Рабочая линия спереди
     hose_bp_fwd->setVoltage  (0, hose_bp_bwd->getVoltage(0) + epb_work_U);

@@ -2,11 +2,11 @@
 <Config>
 	<Device>
 		<Order>1</Order>
-			
+		<SubStepNum>1</SubStepNum>
+		<Solver>euler</Solver>
+
 		<p_kp1>0.15</p_kp1>
 		<p_kp5>0.70</p_kp5>
-		<K1>0.1</K1>
-		<K5>0.1</K5>
 
 	</Device>
 </Config>

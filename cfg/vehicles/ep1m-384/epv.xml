@@ -2,17 +2,19 @@
 <Config>
 	<Device>
 		<Order>2</Order>
+		<SubStepNum>1</SubStepNum>
+		<Solver>euler</Solver>
 
 		<U_nom>50.0</U_nom>
 		<R>48.1</R>
 		<T>0.2</T>
 		<level_off>0.6</level_off>
 		<level_on>0.7</level_on>
-		
+
 		<Vk>0.002</Vk>
-		
+
 		<K1>1e-2</K1>
-		<K2>1e-2</K2>		
+		<K2>1e-2</K2>
 
 	</Device>
 </Config>
