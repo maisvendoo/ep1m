@@ -94,5 +94,5 @@ void EP1m::keyProcess()
     if (getKeyState(KEY_R))
         tumblers[BRAKE_RELEASE_BUTTON].set();
     else
-        tumblers[BRAKE_RELEASE_BUTTON].reset();
+        tumblers[BRAKE_RELEASE_BUTTON].reset();    
 }

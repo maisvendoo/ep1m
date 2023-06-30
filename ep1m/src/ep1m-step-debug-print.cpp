@@ -36,7 +36,7 @@ void EP1m::stepDebugPrint(double t, double dt)
                 .arg(km->getRefSpeedLevel() * 160.0, 4, 'f', 0)
                 .arg(msud_input.Ia[TRAC_MOTOR1], 6, 'f', 0);
 
-    DebugMsg += traction_reg;
+    DebugMsg += traction_reg;    
 
     DebugMsg += QString("          ");
 }

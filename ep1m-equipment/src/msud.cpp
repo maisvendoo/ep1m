@@ -522,6 +522,8 @@ void MSUD::field_weak_control(double t, double dt)
     // Работа только при полностью открытой 4-й зоне ВИП
     if (static_cast<int>(msud_output.vip_voltage_level) != ZONE4 + 1)
     {
+        std::fill(msud_output.op.begin(), msud_output.op.end(), true);
+        msud_output.field_weak_step = STEP0;
         return;
     }
 
