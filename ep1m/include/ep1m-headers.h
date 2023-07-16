@@ -26,7 +26,6 @@
 #include    "time-relay.h"
 #include    "pkd-15.h"
 #include    "fast-switch.h"
-#include    "registrator.h"
 #include    "shunts-module.h"
 #include    "vuv-118.h"
 #include    "epv.h"
