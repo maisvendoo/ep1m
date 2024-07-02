@@ -94,6 +94,7 @@ void EP1m::initSounds()
     connect(km43, &Relay::soundPlay, this, &EP1m::soundPlay);
 
     connect(horn, &TrainHorn::soundPlay, this, &EP1m::soundPlay);
+    connect(horn, &TrainHorn::soundSetVolume, this, &EP1m::soundSetVolume);
     connect(horn, &TrainHorn::soundStop, this, &EP1m::soundStop);
 
     connect(kv21, &Relay::soundPlay, this, &EP1m::soundPlay);

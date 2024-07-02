@@ -9,4 +9,5 @@ void EP1m::initOtherEquipment(const QString &modules_dir, const QString &custom_
     (void) custom_cfg_dir;
 
     horn = new TrainHorn();
+    horn->read_config("train-horn");
 }

@@ -55,7 +55,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(wheel_rotation_angle[5] / 2.0 / Physics::PI);
 
     analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
-    analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->getStateKey());
+    analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->isKeyOn());
     analogSignal[SIGNAL_KLUB_U_REVERSOR] = TO_FLOAT(km->getReversHandlePos());
     analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = TO_FLOAT(brakepipe->getPressure());
     analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = TO_FLOAT(brake_crane->getERpressure());
