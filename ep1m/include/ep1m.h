@@ -301,6 +301,9 @@ private:
     /// Свисток и тифон
     TrainHorn *horn;
 
+    /// Система подачи песка
+    SandingSystem *sand_system;
+
     /// Шунты ослабления возбуждения ТЭД
     ShuntsModule *shunts;
 

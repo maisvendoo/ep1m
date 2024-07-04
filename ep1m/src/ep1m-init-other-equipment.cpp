@@ -10,4 +10,10 @@ void EP1m::initOtherEquipment(const QString &modules_dir, const QString &custom_
 
     horn = new TrainHorn();
     horn->read_config("train-horn");
+
+    // Система подачи песка
+    sand_system = new SandingSystem();
+    sand_system->read_config("sanding-system");
+    sand_system->setSandMassMax(payload_mass);
+    sand_system->setSandLevel(payload_coeff);
 }

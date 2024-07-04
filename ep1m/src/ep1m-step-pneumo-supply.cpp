@@ -23,6 +23,7 @@ void EP1m::stepPneumoSupply(double t, double dt)
     double FL_flow = 0.0;
     FL_flow += motor_compressor->getFLflow();
     FL_flow += horn->getFLflow();
+    FL_flow += sand_system->getFLflow();
     FL_flow += brake_lock->getFLflow();
     FL_flow += epk->getFLflow();
     FL_flow += pneumo_red_panel->getFLflow();
