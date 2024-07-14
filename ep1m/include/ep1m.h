@@ -457,6 +457,8 @@ private:
 
     void signalsOutput();
 
+    void stepSoundSignals(double t, double dt);
+
     /// Отладочная печать по F1
     void stepDebugPrint(double t, double dt);
 

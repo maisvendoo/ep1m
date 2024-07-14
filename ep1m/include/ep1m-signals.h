@@ -151,7 +151,11 @@ enum
     SIGNAL_WHEEL3 = 196, // Колесная пара 3
     SIGNAL_WHEEL4 = 197, // Колесная пара 4
     SIGNAL_WHEEL5 = 198, // Колесная пара 5
-    SIGNAL_WHEEL6 = 199  // Колесная пара 6
+    SIGNAL_WHEEL6 = 199,  // Колесная пара 6
+
+    // Звуки
+    SOUND_SVISTOK = 201,
+    SOUND_TIFON = 202
 };
 
 #endif // EP1M_SIGNALS_H

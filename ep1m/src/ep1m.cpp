@@ -171,6 +171,9 @@ void EP1m::step(double t, double dt)
     // Вывод сигналов к внешней модели
     signalsOutput();
 
+    // Вывод сигналов для звуков
+    stepSoundSignals(t, dt);
+
     // Отладочный вывод
     stepDebugPrint(t, dt);
 

@@ -22,7 +22,7 @@ void EP1m::initPowerCircuit(const QString &modules_dir, const QString &custom_cf
 
     safety_valve = new ElectroValve();
     safety_valve->read_config("vz-6", custom_cfg_dir);
-    safety_valve->setSoundName("Lock_VVK");
+
 
     for (size_t i = 0; i < trac_motor.size(); ++i)
     {
