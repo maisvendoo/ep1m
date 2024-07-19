@@ -29,6 +29,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_LOCO_CRANE_BC_DRAIN_FLOW] = loco_crane->getSoundSignal(LocoCrane::BC_DRAIN_FLOW_SOUND);
 
     // Тумблеры центральной панели
+
+    // верхний ряд слева направо
     analogSignal[SOUND_TUMBLER_MSUD_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MSUD, Trigger::ON_SOUND);
     analogSignal[SOUND_TUMBLER_MSUD_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MSUD, Trigger::OFF_SOUND);
     analogSignal[SOUND_TUMBLER_LOCK_VVK_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_LOCK_VVK, Trigger::ON_SOUND);
@@ -41,4 +43,18 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TUMBLER_RETURN_PROTECTION_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_RETURN_PROTECTION, Trigger::OFF_SOUND);
     analogSignal[SOUND_TUMBLER_MAIN_SWITCH_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MAIN_SWITCH, Trigger::ON_SOUND);
     analogSignal[SOUND_TUMBLER_MAIN_SWITCH_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MAIN_SWITCH, Trigger::OFF_SOUND);
+
+    // нижний ряд справа налево
+    analogSignal[SOUND_TUMBLER_AUX_MACHINES_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_AUX_MACHINES, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_AUX_MACHINES_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_AUX_MACHINES, Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_COMPRESSOR_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_COMPRESSOR, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_COMPRESSOR_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_COMPRESSOR, Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN1_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN1, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN1_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN1, Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN2_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN2, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN2_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN2, Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN3_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN3, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_MOTOR_FAN3_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN3, Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_EPT_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_EPT, Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_EPT_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_EPT, Trigger::OFF_SOUND);
 }

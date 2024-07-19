@@ -313,4 +313,148 @@
 		<LocalPosition>0.88 10.15 2.74</LocalPosition>
 	</Sound>
 
+	<!-- Тумблер вспом. машины включение -->
+	<Sound>
+		<SignalID>232</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.88 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер вспом. машины выключение -->
+	<Sound>
+		<SignalID>233</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.88 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер компрессор включение -->
+	<Sound>
+		<SignalID>234</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.85 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер компрессор выключение -->
+	<Sound>
+		<SignalID>235</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.85 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ1 включение -->
+	<Sound>
+		<SignalID>236</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.82 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ1 выключение -->
+	<Sound>
+		<SignalID>237</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.82 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ2 включение -->
+	<Sound>
+		<SignalID>238</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.79 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ2 выключение -->
+	<Sound>
+		<SignalID>239</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.79 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ3 включение -->
+	<Sound>
+		<SignalID>240</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.77 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер МВ3 выключение -->
+	<Sound>
+		<SignalID>241</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.77 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер ЭПТ включение -->
+	<Sound>
+		<SignalID>242</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.74 10.01 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер ЭПТ выключение -->
+	<Sound>
+		<SignalID>243</SignalID>
+		<Filename>tumbler.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.74 10.01 2.74</LocalPosition>
+	</Sound>
+
 </Config>
