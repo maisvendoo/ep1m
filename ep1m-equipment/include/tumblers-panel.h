@@ -46,6 +46,11 @@ public:
 
     bool getUnlockKeyState() const;
 
+    float getTumblerSoundSignal(size_t tumbler_idx, size_t idx = Trigger::CHANGE_SOUND)
+    {
+        return tumblers[tumbler_idx].getSoundSignal(idx);
+    }
+
 private:
 
     Trigger unlock_panel_key;
