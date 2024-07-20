@@ -553,4 +553,28 @@
 		<LocalPosition>0.58 -1.28 2.61</LocalPosition>
 	</Sound>
 
+	<!-- Главная рукоятка КМ -->
+	<Sound>
+		<SignalID>204</SignalID>
+		<Filename>km.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.5 10.1 2.76</LocalPosition>
+	</Sound>
+
+	<!-- Реверсиваня рукоятка КМ -->
+	<Sound>
+		<SignalID>203</SignalID>
+		<Filename>revers.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.4 10.1 2.7</LocalPosition>
+	</Sound>
+
 </Config>

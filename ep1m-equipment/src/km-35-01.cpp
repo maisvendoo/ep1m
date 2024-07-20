@@ -11,8 +11,6 @@ TracController::TracController(QObject *parent) : Device(parent)
   , bwd_key_state(false)
   , old_bwd_key_state(false)
   , revers_pos(0)
-  , reversSoundName("Revers")
-  , mainHandleSoundName("KM_main")
   , old_traction_key(false)
   , old_brake_key(false)
   , trac_level(0)
@@ -64,7 +62,7 @@ void TracController::preStep(state_vector_t &Y, double t)
 
     if (mode_pos != mode_pos_old)
     {
-        emit soundPlay(mainHandleSoundName);
+        sound_states[MAIN_HANDLE].play(true);
         mode_pos_old = mode_pos;
     }
 }
@@ -196,7 +194,7 @@ void TracController::stepKeysControl(double t, double dt)
         revers_pos++;
 
         if (revers_pos <= 1)
-            emit soundPlay(reversSoundName);
+            sound_states[REVERS_HANDLE].play(true);
     }
 
     if (bwd_key_state && !old_bwd_key_state && isZero())
@@ -204,7 +202,7 @@ void TracController::stepKeysControl(double t, double dt)
         revers_pos--;
 
         if (revers_pos >= -1)
-            emit soundPlay(reversSoundName);
+            sound_states[REVERS_HANDLE].play(true);
     }
 
     revers_pos = cut(revers_pos, -1, 1);

@@ -83,6 +83,17 @@ public:
 
     double getRefSpeedLevel() const { return static_cast<double>(ref_speed_level) / 100.0; }
 
+    enum
+    {
+        MAIN_HANDLE = 0,
+        REVERS_HANDLE = 1
+    };
+
+    float getSoundSignal(size_t state_idx)
+    {
+        return sound_states[state_idx].createSoundSignal();
+    }
+
 private:
 
     /// Позиция, определяющая состояние схемы
@@ -98,9 +109,9 @@ private:
 
     int revers_pos;
 
-    QString reversSoundName;
+    //QString reversSoundName;
 
-    QString mainHandleSoundName;
+    //QString mainHandleSoundName;
 
     bool old_traction_key;
 
@@ -127,6 +138,8 @@ private:
     Trigger traction;
 
     Trigger brake;
+
+    std::array<sound_state_t, 2> sound_states;
 
     void preStep(state_vector_t &Y, double t) override;
 
