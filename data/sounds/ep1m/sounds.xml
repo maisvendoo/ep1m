@@ -466,7 +466,79 @@
 		<InitPitch>1.0</InitPitch>
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
-		<LocalPosition>0.0 0.0 2.5</LocalPosition>
+		<LocalPosition>0.32 2.16 2.94</LocalPosition>
+	</Sound>
+
+	<!-- МВ1 пониженная частота -->
+	<Sound>
+		<SignalID>245</SignalID>
+		<Filename>mv_low.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.06 3.79 4.75</LocalPosition>
+	</Sound>
+
+	<!-- МВ1 нормальная частота -->
+	<Sound>
+		<SignalID>246</SignalID>
+		<Filename>mv_norm.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.06 3.79 4.75</LocalPosition>
+	</Sound>
+
+	<!-- МВ2 пониженная частота -->
+	<Sound>
+		<SignalID>247</SignalID>
+		<Filename>mv_low.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.51 0.22 3.99</LocalPosition>
+	</Sound>
+
+	<!-- МВ2 нормальная частота -->
+	<Sound>
+		<SignalID>248</SignalID>
+		<Filename>mv_norm.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.51 0.22 3.99</LocalPosition>
+	</Sound>
+
+	<!-- МВ3 пониженная частота -->
+	<Sound>
+		<SignalID>249</SignalID>
+		<Filename>mv_low.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.04 -4.69 4.74</LocalPosition>
+	</Sound>
+
+	<!-- МВ3 нормальная частота -->
+	<Sound>
+		<SignalID>250</SignalID>
+		<Filename>mv_norm.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.04 -4.69 4.74</LocalPosition>
 	</Sound>
 
 </Config>

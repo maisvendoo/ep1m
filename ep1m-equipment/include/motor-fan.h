@@ -20,6 +20,14 @@ public:
 
     bool isNoReady() const;
 
+    enum
+    {
+        LOW_FREQ = 0,
+        HIGH_FREQ = 1
+    };
+
+    float getSoundSignal(size_t freq = HIGH_FREQ);
+
 private:
 
     /// Индекс (по сути номер мотор-вентилятора в схеме)
@@ -46,9 +54,10 @@ private:
     /// Текущая частота питающего напряжения
     double f;
 
-    bool is_low_freq;
+    bool is_low_freq;    
 
-    QString sndName;
+    sound_state_t state_low_freq;
+    sound_state_t state_high_freq;
 
     /// Номинальная частота питающего напряжения
     const double fn = 50.0;

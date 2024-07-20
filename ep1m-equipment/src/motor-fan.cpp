@@ -15,8 +15,7 @@ MotorFan::MotorFan(size_t idx, QObject *parent) : Device(parent)
   , J(0.5)
   , is_no_ready(1.0)
   , f(50.0)
-  , is_low_freq(true)
-  , sndName("")
+  , is_low_freq(true)  
 {
 
 }
@@ -34,18 +33,19 @@ MotorFan::~MotorFan()
 //------------------------------------------------------------------------------
 void MotorFan::setU_power(double value)
 {
-    QString lowSndName = QString("Motor_Fan%1_low").arg(idx);
-    QString normSndName = QString("Motor_Fan%1_norm").arg(idx);
+    //QString lowSndName = QString("Motor_Fan%1_low").arg(idx);
+    //QString normSndName = QString("Motor_Fan%1_norm").arg(idx);
+    sound_state_t *cur_state = &state_low_freq;
 
     if (f < 17)
     {
         if (!is_low_freq)
         {
-            emit soundStop(normSndName);
-            sndName = lowSndName;
+            state_high_freq.play(false);
+            cur_state = &state_low_freq;
 
             if (!is_no_ready)
-                emit soundPlay(sndName);
+                cur_state->play(true);
 
             is_low_freq = true;
         }
@@ -54,11 +54,12 @@ void MotorFan::setU_power(double value)
     {
         if (is_low_freq)
         {
-            emit soundStop(lowSndName);
-            sndName = normSndName;
+            state_low_freq.play(false);
+            cur_state = &state_high_freq;
+
 
             if (!is_no_ready)
-                emit soundPlay(sndName);
+                cur_state->play(true);
 
             is_low_freq = false;
         }
@@ -67,13 +68,13 @@ void MotorFan::setU_power(double value)
 
     if (floor(value) > 0 && floor(U_power) == 0)
     {
-        emit soundPlay(sndName);
+        cur_state->play(true);
         is_no_ready = false;
     }
 
     if (floor(value) == 0 && floor(U_power) > 0)
     {
-        emit soundStop(sndName);
+        cur_state->play(false);
         is_no_ready = true;
     }
 
@@ -87,6 +88,26 @@ void MotorFan::setU_power(double value)
 bool MotorFan::isNoReady() const
 {
     return is_no_ready;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+float MotorFan::getSoundSignal(size_t freq)
+{
+    float signal = 0.0f;
+
+    switch (freq)
+    {
+    case LOW_FREQ:
+        signal = state_low_freq.createSoundSignal();
+        break;
+    case HIGH_FREQ:
+        signal = state_high_freq.createSoundSignal();
+        break;
+    }
+
+    return signal;
 }
 
 //------------------------------------------------------------------------------

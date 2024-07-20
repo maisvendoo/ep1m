@@ -60,4 +60,12 @@ void EP1m::stepSoundSignals(double t, double dt)
 
     // Тяговый трансформатор
     analogSignal[SOUND_TRANSFORMER] = trac_trans->getSoundSignal();
+
+    // Мотор-вентиляторы
+    analogSignal[SOUND_FAN1_LOW] = motor_fan[MV1]->getSoundSignal(MotorFan::LOW_FREQ);
+    analogSignal[SOUND_FAN1_HIGH] = motor_fan[MV1]->getSoundSignal(MotorFan::HIGH_FREQ);
+    analogSignal[SOUND_FAN2_LOW] = motor_fan[MV2]->getSoundSignal(MotorFan::LOW_FREQ);
+    analogSignal[SOUND_FAN2_HIGH] = motor_fan[MV2]->getSoundSignal(MotorFan::HIGH_FREQ);
+    analogSignal[SOUND_FAN3_LOW] = motor_fan[MV3]->getSoundSignal(MotorFan::LOW_FREQ);
+    analogSignal[SOUND_FAN3_HIGH] = motor_fan[MV3]->getSoundSignal(MotorFan::HIGH_FREQ);
 }
