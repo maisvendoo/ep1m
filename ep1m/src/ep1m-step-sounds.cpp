@@ -68,4 +68,5 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_FAN2_HIGH] = motor_fan[MV2]->getSoundSignal(MotorFan::HIGH_FREQ);
     analogSignal[SOUND_FAN3_LOW] = motor_fan[MV3]->getSoundSignal(MotorFan::LOW_FREQ);
     analogSignal[SOUND_FAN3_HIGH] = motor_fan[MV3]->getSoundSignal(MotorFan::HIGH_FREQ);
+    analogSignal[SOUND_FAN4] = motor_fan[MV4]->getSoundSignal(MotorFan::HIGH_FREQ);
 }

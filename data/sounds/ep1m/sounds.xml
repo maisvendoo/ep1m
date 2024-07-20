@@ -541,4 +541,16 @@
 		<LocalPosition>0.04 -4.69 4.74</LocalPosition>
 	</Sound>
 
+	<!-- МВ охлаждения блока балластных резисторов -->
+	<Sound>
+		<SignalID>251</SignalID>
+		<Filename>mv_norm.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.58 -1.28 2.61</LocalPosition>
+	</Sound>
+
 </Config>
