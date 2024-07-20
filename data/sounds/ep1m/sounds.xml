@@ -685,4 +685,52 @@
 		<LocalPosition>0.06 -2.66 2.46</LocalPosition>
 	</Sound>
 
+	<!-- Задний токоприемник подъем -->
+	<Sound>
+		<SignalID>261</SignalID>
+		<Filename>TPUp.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 -7.2 5.19</LocalPosition>
+	</Sound>
+
+	<!-- Задний токоприемник опускание -->
+	<Sound>
+		<SignalID>262</SignalID>
+		<Filename>TPDown.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 -7.2 5.19</LocalPosition>
+	</Sound>
+
+	<!-- Передний токоприемник подъем -->
+	<Sound>
+		<SignalID>263</SignalID>
+		<Filename>TPUp.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 -7.2 5.19</LocalPosition>
+	</Sound>
+
+	<!-- Передний токоприемник опускание -->
+	<Sound>
+		<SignalID>264</SignalID>
+		<Filename>TPDown.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 7.2 5.19</LocalPosition>
+	</Sound>
+
 </Config>

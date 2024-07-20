@@ -86,4 +86,10 @@ void EP1m::stepSoundSignals(double t, double dt)
 
     // Мотор-компрессор
     analogSignal[SOUND_COMPRESSOR] = motor_compressor->getSoundSignal();
+
+    // Токоприемники
+    analogSignal[SOUND_PANT1_UP] = pant[PANT1]->getSoundSignal(Pantograph::UP_SOUND);
+    analogSignal[SOUND_PANT1_DOWN] = pant[PANT1]->getSoundSignal(Pantograph::DOWN_SOUND);
+    analogSignal[SOUND_PANT2_UP] = pant[PANT2]->getSoundSignal(Pantograph::UP_SOUND);
+    analogSignal[SOUND_PANT2_DOWN] = pant[PANT2]->getSoundSignal(Pantograph::DOWN_SOUND);
 }
