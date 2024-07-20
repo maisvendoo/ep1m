@@ -577,4 +577,100 @@
 		<LocalPosition>0.4 10.1 2.7</LocalPosition>
 	</Sound>
 
+	<!-- Тумблер ПЧФ вкл-->
+	<Sound>
+		<SignalID>252</SignalID>
+		<Filename>small_tumbler_on.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.15 9.87 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер ПЧФ выкл-->
+	<Sound>
+		<SignalID>253</SignalID>
+		<Filename>small_tumbler_off.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.15 9.87 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "Сигнализация" вкл-->
+	<Sound>
+		<SignalID>254</SignalID>
+		<Filename>small_tumbler_on.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.15 9.92 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "Сигнализация" выкл-->
+	<Sound>
+		<SignalID>255</SignalID>
+		<Filename>small_tumbler_off.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.15 9.92 2.74</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "Авторегулирование" вкл-->
+	<Sound>
+		<SignalID>256</SignalID>
+		<Filename>small_tumbler_on.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.10 10.09 2.75</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "Авторегулирование" выкл-->
+	<Sound>
+		<SignalID>257</SignalID>
+		<Filename>small_tumbler_off.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.10 10.09 2.75</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "МПК" вкл-->
+	<Sound>
+		<SignalID>258</SignalID>
+		<Filename>small_tumbler_on.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.06 10.09 2.75</LocalPosition>
+	</Sound>
+
+	<!-- Тумблер "МПК" выкл-->
+	<Sound>
+		<SignalID>259</SignalID>
+		<Filename>small_tumbler_off.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.06 10.09 2.75</LocalPosition>
+	</Sound>
+
 </Config>

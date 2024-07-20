@@ -73,4 +73,14 @@ void EP1m::stepSoundSignals(double t, double dt)
     // Контроллер машиниста
     analogSignal[SOUND_CONTROLLER] = km->getSoundSignal(TracController::MAIN_HANDLE);
     analogSignal[SOUND_REVERSOR] = km->getSoundSignal(TracController::REVERS_HANDLE);
+
+    // Маленькие тумблерки разного назначения
+    analogSignal[SOUND_TUMBLER_PCHF_ON] = tumblers[TUMBLER_PCHF].getSoundSignal(Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_PCHF_OFF] = tumblers[TUMBLER_PCHF].getSoundSignal(Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_SIGNALING_ON] = tumblers[TUMBLER_BS_002].getSoundSignal(Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_SIGNALING_OFF] = tumblers[TUMBLER_BS_002].getSoundSignal(Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_AUTOREG_ON] = tumblers[TUMBLER_AUTO_MODE].getSoundSignal(Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_AUTOREG_OFF] = tumblers[TUMBLER_AUTO_MODE].getSoundSignal(Trigger::OFF_SOUND);
+    analogSignal[SOUND_TUMBLER_MPK_ON] = tumblers[TUMBLER_MPK].getSoundSignal(Trigger::ON_SOUND);
+    analogSignal[SOUND_TUMBLER_MPK_OFF] = tumblers[TUMBLER_MPK].getSoundSignal(Trigger::OFF_SOUND);
 }
