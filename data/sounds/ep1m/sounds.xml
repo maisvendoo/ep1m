@@ -673,4 +673,16 @@
 		<LocalPosition>1.06 10.09 2.75</LocalPosition>
 	</Sound>
 
+	<!-- Мотор-компрессор -->
+	<Sound>
+		<SignalID>260</SignalID>
+		<Filename>compressor.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.06 -2.66 2.46</LocalPosition>
+	</Sound>
+
 </Config>

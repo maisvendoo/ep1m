@@ -83,4 +83,7 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TUMBLER_AUTOREG_OFF] = tumblers[TUMBLER_AUTO_MODE].getSoundSignal(Trigger::OFF_SOUND);
     analogSignal[SOUND_TUMBLER_MPK_ON] = tumblers[TUMBLER_MPK].getSoundSignal(Trigger::ON_SOUND);
     analogSignal[SOUND_TUMBLER_MPK_OFF] = tumblers[TUMBLER_MPK].getSoundSignal(Trigger::OFF_SOUND);
+
+    // Мотор-компрессор
+    analogSignal[SOUND_COMPRESSOR] = motor_compressor->getSoundSignal();
 }
