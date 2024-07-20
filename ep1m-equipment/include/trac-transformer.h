@@ -26,6 +26,11 @@ public:
 
     double getUt3() const { return Ut3; }
 
+    float getSoundSignal(size_t idx = Trigger::ON_SOUND)
+    {
+        return sound_state.createSoundSignal();
+    }
+
 private:
 
     /// Напряжение на первичной обмотке
@@ -57,6 +62,8 @@ private:
 
     /// Напряжение третьей секции тяговой обмотки (последняя половина)
     double Ut3;
+
+    sound_state_t sound_state;
 
     void ode_system(const state_vector_t &Y,
                     state_vector_t &dYdt,

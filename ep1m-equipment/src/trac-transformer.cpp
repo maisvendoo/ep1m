@@ -46,10 +46,8 @@ void TractionTransformer::stepDiscrete(double t, double dt)
     Q_UNUSED(t)
     Q_UNUSED(dt)
 
-    if (qAbs(U1) >= 19000.0)
-        emit soundPlay("Trac_Transformer");
-    else
-        emit soundStop("Trac_Transformer");
+    sound_state.play(U1 >= 19000.0);
+    sound_state.volume = U1 / 25000.0;
 
     U2cc = Kcc * U1;
     U2f = Kf * U1;

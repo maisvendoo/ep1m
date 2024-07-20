@@ -57,4 +57,7 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TUMBLER_MOTOR_FAN3_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_MOTOR_FAN3, Trigger::OFF_SOUND);
     analogSignal[SOUND_TUMBLER_EPT_ON] = tumblers_panel->getTumblerSoundSignal(TUMBLER_EPT, Trigger::ON_SOUND);
     analogSignal[SOUND_TUMBLER_EPT_OFF] = tumblers_panel->getTumblerSoundSignal(TUMBLER_EPT, Trigger::OFF_SOUND);
+
+    // Тяговый трансформатор
+    analogSignal[SOUND_TRANSFORMER] = trac_trans->getSoundSignal();
 }

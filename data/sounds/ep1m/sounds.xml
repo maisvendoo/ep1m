@@ -457,4 +457,16 @@
 		<LocalPosition>0.74 10.01 2.74</LocalPosition>
 	</Sound>
 
+	<!-- Тяговый трансформатор -->
+	<Sound>
+		<SignalID>244</SignalID>
+		<Filename>trans.wav</Filename>
+		<InitVolume>0.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 0.0 2.5</LocalPosition>
+	</Sound>
+
 </Config>
