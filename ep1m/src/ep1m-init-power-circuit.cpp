@@ -17,7 +17,6 @@ void EP1m::initPowerCircuit(const QString &modules_dir, const QString &custom_cf
 
     main_switch = new ProtectiveDevice();
 
-
     trac_trans = new TractionTransformer();
 
     safety_valve = new ElectroValve();

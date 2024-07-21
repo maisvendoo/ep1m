@@ -92,4 +92,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_PANT1_DOWN] = pant[PANT1]->getSoundSignal(Pantograph::DOWN_SOUND);
     analogSignal[SOUND_PANT2_UP] = pant[PANT2]->getSoundSignal(Pantograph::UP_SOUND);
     analogSignal[SOUND_PANT2_DOWN] = pant[PANT2]->getSoundSignal(Pantograph::DOWN_SOUND);
+
+    // Главный выключатель
+    analogSignal[SOUND_MAIN_SWITCH_ON] = main_switch->getSoundSignal(ProtectiveDevice::ON_SOUND);
+    analogSignal[SOUND_MAIN_SWITCH_OFF] = main_switch->getSoundSignal(ProtectiveDevice::OFF_SOUND);
 }

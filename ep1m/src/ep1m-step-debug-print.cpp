@@ -8,7 +8,7 @@ void EP1m::stepDebugPrint(double t, double dt)
     (void) t;
     (void) dt;
 
-    DebugMsg = "";
+    /*DebugMsg = "";
     DebugMsg += QString("x%1 km|V%2 km/h|")
                     .arg(railway_coord / 1000.0, 8, 'f', 3)
                     .arg(velocity * Physics::kmh, 6, 'f', 1);
@@ -42,5 +42,9 @@ void EP1m::stepDebugPrint(double t, double dt)
                     .arg(anglecock_bp_fwd->isOpened())
                     .arg(anglecock_bp_bwd->isOpened())
                     .arg(hose_bp_fwd->isConnected())
-                    .arg(hose_bp_bwd->isConnected());
+                    .arg(hose_bp_bwd->isConnected());*/
+
+    DebugMsg = QString("ГВ: %1| KV41.0: %2")
+                   .arg(main_switch->getState())
+                   .arg(kv41->getContactState(0));
 }

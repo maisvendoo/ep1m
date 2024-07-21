@@ -733,4 +733,28 @@
 		<LocalPosition>0.0 7.2 5.19</LocalPosition>
 	</Sound>
 
+	<!-- Главный выключатель включение -->
+	<Sound>
+		<SignalID>265</SignalID>
+		<Filename>gv_on.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.68 1.42 5.05</LocalPosition>
+	</Sound>
+
+	<!-- Главный выключатель выключение -->
+	<Sound>
+		<SignalID>266</SignalID>
+		<Filename>gv_off.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.68 1.42 5.05</LocalPosition>
+	</Sound>
+
 </Config>

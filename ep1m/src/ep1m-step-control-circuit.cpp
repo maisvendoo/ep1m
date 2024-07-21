@@ -47,9 +47,10 @@ void EP1m::stepControlCircuit(double t, double dt)
             tumblers[BUTTON_MAIN_SWITCH_OFF].getState() &&
             tumblers_panel->getTumblerState(TUMBLER_RETURN_PROTECTION);
 
-    bool is_kv41_on =
-            is_N211_on && ((!main_switch->getState()) ||
-            (kv21->getContactState(0) && kv41->getContactState(0)));
+    is_N212_on = is_N211_on && kv21->getContactState(0);
+
+    bool is_kv41_on = (is_N212_on && kv41->getContactState(0)) ||
+                      (is_N212_on && main_switch->getState());
 
     kv41->setVoltage(Ucc * static_cast<double>(is_kv41_on));
     kv41->step(t, dt);
@@ -186,27 +187,27 @@ void EP1m::stepTractionControl(double t, double dt)
     kt1->step(t, dt);
 
     // Включение БВ от ВИП1 на ТЭД1, ТЭД2, ТЭД3
-    bool is_Hold_1_3 = is_H153 && (!main_switch->getState());
+    bool is_Hold_1_3 = is_H153 && (main_switch->getState());
 
 
     fast_switch[TRAC_MOTOR1]->setHold(is_Hold_1_3);
     fast_switch[TRAC_MOTOR2]->setHold(is_Hold_1_3);
     fast_switch[TRAC_MOTOR3]->setHold(is_Hold_1_3);
 
-    bool is_Power_On_1_3 = is_N211_on && kv21->getContactState(1);
+    bool is_Power_On_1_3 = is_N212_on;
 
     fast_switch[TRAC_MOTOR1]->setPowerOn(is_Power_On_1_3);
     fast_switch[TRAC_MOTOR2]->setPowerOn(is_Power_On_1_3);
     fast_switch[TRAC_MOTOR3]->setPowerOn(is_Power_On_1_3);
 
     // Включение БВ от ВИП2 на ТЭД4, ТЭД5, ТЭД6
-    bool is_Hold_4_6 = is_H163 && (!main_switch->getState());
+    bool is_Hold_4_6 = is_H163 && (main_switch->getState());
 
     fast_switch[TRAC_MOTOR4]->setHold(is_Hold_4_6);
     fast_switch[TRAC_MOTOR5]->setHold(is_Hold_4_6);
     fast_switch[TRAC_MOTOR6]->setHold(is_Hold_4_6);
 
-    bool is_Power_On_4_6 = is_N211_on && kv21->getContactState(1);
+    bool is_Power_On_4_6 = is_N212_on;
 
     fast_switch[TRAC_MOTOR4]->setPowerOn(is_Power_On_4_6);
     fast_switch[TRAC_MOTOR5]->setPowerOn(is_Power_On_4_6);

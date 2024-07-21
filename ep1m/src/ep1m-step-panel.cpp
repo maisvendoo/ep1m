@@ -26,7 +26,7 @@ void EP1m::stepPanel(double t, double dt)
 void EP1m::setSignalsModuleInputs()
 {
     // Состояние ГВ
-    signals_module->setLampInputSignal(SM_GV, main_switch->getState());
+    signals_module->setLampInputSignal(SM_GV, !main_switch->getState());
 
     // Состояние мотор-компрессоров
     signals_module->setLampInputSignal(SM_MK1, !motor_compressor->isPowered());

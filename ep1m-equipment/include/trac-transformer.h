@@ -26,7 +26,7 @@ public:
 
     double getUt3() const { return Ut3; }
 
-    float getSoundSignal(size_t idx = Trigger::ON_SOUND)
+    float getSoundSignal()
     {
         return sound_state.createSoundSignal();
     }
