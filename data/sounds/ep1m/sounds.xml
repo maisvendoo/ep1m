@@ -16,7 +16,7 @@
 	<!-- Тифон -->
 	<Sound>
 		<SignalID>202</SignalID>
-		<Filename>VL60-tifon.wav</Filename>
+		<Filename>tifon.wav</Filename>
 		<InitVolume>1.0</InitVolume>
 		<MaxVolume>1.0</MaxVolume>
 		<InitPitch>1.0</InitPitch>
