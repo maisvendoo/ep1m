@@ -242,7 +242,22 @@ enum
     SOUND_KM9 = 279,
     SOUND_KM11 = 280,
     SOUND_KM12 = 281,
-    SOUND_KM13 = 282
+    SOUND_KM13 = 282,
+
+    SOUND_KM43 = 283,
+    SOUND_KV11 = 284,
+    SOUND_KV12 = 285,
+    SOUND_KV13 = 286,
+    SOUND_KV14 = 287,
+    SOUND_KV15 = 288,
+    SOUND_KT10 = 289,
+    SOUND_KT1 = 290,
+    SOUND_KM41 = 291,
+    SOUND_KM42 = 292,
+    SOUND_KT4 = 293,
+    SOUND_KT5 = 294,
+    SOUND_KM14 = 295,
+    SOUND_K1 = 296
 };
 
 #endif // EP1M_SIGNALS_H
