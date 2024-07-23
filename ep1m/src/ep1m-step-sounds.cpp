@@ -96,4 +96,23 @@ void EP1m::stepSoundSignals(double t, double dt)
     // Главный выключатель
     analogSignal[SOUND_MAIN_SWITCH_ON] = main_switch->getSoundSignal(ProtectiveDevice::ON_SOUND);
     analogSignal[SOUND_MAIN_SWITCH_OFF] = main_switch->getSoundSignal(ProtectiveDevice::OFF_SOUND);
+
+    // Ключ ЭПК
+    analogSignal[SOUND_EPK_KEY_ON] = tumblers[EPK_KEY].getSoundSignal(Trigger::ON_SOUND);
+    analogSignal[SOUND_EPK_KEY_OFF] = tumblers[EPK_KEY].getSoundSignal(Trigger::OFF_SOUND);
+
+    analogSignal[SOUND_KM5] = km5->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_VZ6] = safety_valve->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV44] = kv44->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV39] = kv39->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV21] = kv21->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV22] = kv22->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV23] = kv23->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KV41] = kv41->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM7] = km7->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM8] = km8->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM9] = km9->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM11] = km11->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM12] = km12->getSoundSignal(Relay::CHANGE_SOUND);
+    analogSignal[SOUND_KM13] = km13->getSoundSignal(Relay::CHANGE_SOUND);
 }

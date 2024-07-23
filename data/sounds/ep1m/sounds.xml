@@ -757,4 +757,196 @@
 		<LocalPosition>0.68 1.42 5.05</LocalPosition>
 	</Sound>
 
+	<!-- Ключ ЭПК вкл. -->
+	<Sound>
+		<SignalID>267</SignalID>
+		<Filename>epk_vkl.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.23 9.02 2.5</LocalPosition>
+	</Sound>
+
+	<!-- Ключ ЭПК выкл. -->
+	<Sound>
+		<SignalID>268</SignalID>
+		<Filename>epk_vkl.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.23 9.02 2.5</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM5 -->
+	<Sound>
+		<SignalID>269</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.52 5.95 3.25</LocalPosition>
+	</Sound>
+
+	<!-- Вентиль защиты ВЗ-6 -->
+	<Sound>
+		<SignalID>270</SignalID>
+		<Filename>lock_vvk.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.00 2.16 2.94</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV44 -->
+	<Sound>
+		<SignalID>271</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.40 -3.16 4.10</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV39 -->
+	<Sound>
+		<SignalID>272</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.00 -7.56 3.35</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV21 -->
+	<Sound>
+		<SignalID>273</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.00 -7.56 3.35</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV22 -->
+	<Sound>
+		<SignalID>274</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.00 -7.56 3.35</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV23 -->
+	<Sound>
+		<SignalID>275</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.53 5.21 2.69</LocalPosition>
+	</Sound>
+
+	<!-- Реле промежуточное KV41 -->
+	<Sound>
+		<SignalID>276</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.00 -7.56 3.35</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM7 -->
+	<Sound>
+		<SignalID>277</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM8 -->
+	<Sound>
+		<SignalID>278</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM9 -->
+	<Sound>
+		<SignalID>279</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM11 -->
+	<Sound>
+		<SignalID>280</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM12 -->
+	<Sound>
+		<SignalID>281</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
+	<!-- Контактор KM13 -->
+	<Sound>
+		<SignalID>282</SignalID>
+		<Filename>relay.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.64 -6.53 3.31</LocalPosition>
+	</Sound>
+
 </Config>
