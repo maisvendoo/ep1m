@@ -35,14 +35,14 @@ void MotorFan::setU_power(double value)
 {
     //QString lowSndName = QString("Motor_Fan%1_low").arg(idx);
     //QString normSndName = QString("Motor_Fan%1_norm").arg(idx);
-    sound_state_t *cur_state = &state_low_freq;
+    sound_state_t *cur_state = &sound_state[LOW_FREQ];
 
     if (f < 17)
     {
         if (!is_low_freq)
         {
-            state_high_freq.play(false);
-            cur_state = &state_low_freq;
+            sound_state[HIGH_FREQ].play(false);
+            cur_state = &sound_state[LOW_FREQ];
 
             if (!is_no_ready)
                 cur_state->play(true);
@@ -54,8 +54,8 @@ void MotorFan::setU_power(double value)
     {
         if (is_low_freq)
         {
-            state_low_freq.play(false);
-            cur_state = &state_high_freq;
+            sound_state[LOW_FREQ].play(false);
+            cur_state = &sound_state[HIGH_FREQ];
 
 
             if (!is_no_ready)
@@ -93,21 +93,9 @@ bool MotorFan::isNoReady() const
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-float MotorFan::getSoundSignal(size_t freq)
+float MotorFan::getSoundSignal(size_t freq) const
 {
-    float signal = 0.0f;
-
-    switch (freq)
-    {
-    case LOW_FREQ:
-        signal = state_low_freq.createSoundSignal();
-        break;
-    case HIGH_FREQ:
-        signal = state_high_freq.createSoundSignal();
-        break;
-    }
-
-    return signal;
+    return sound_state[freq].createSoundSignal();
 }
 
 //------------------------------------------------------------------------------

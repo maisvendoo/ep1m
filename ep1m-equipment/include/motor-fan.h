@@ -26,7 +26,7 @@ public:
         HIGH_FREQ = 1
     };
 
-    float getSoundSignal(size_t freq = HIGH_FREQ);
+    float getSoundSignal(size_t freq = HIGH_FREQ) const override;
 
 private:
 
@@ -56,8 +56,7 @@ private:
 
     bool is_low_freq;    
 
-    sound_state_t state_low_freq;
-    sound_state_t state_high_freq;
+    std::array<sound_state_t, 2> sound_state;
 
     /// Номинальная частота питающего напряжения
     const double fn = 50.0;
