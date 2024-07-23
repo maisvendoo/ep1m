@@ -89,7 +89,7 @@ public:
         REVERS_HANDLE = 1
     };
 
-    float getSoundSignal(size_t state_idx)
+    float getSoundSignal(size_t state_idx) const override
     {
         return sound_states[state_idx].createSoundSignal();
     }
