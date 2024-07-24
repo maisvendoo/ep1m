@@ -1117,4 +1117,28 @@
 		<LocalPosition>-0.53 5.21 2.69</LocalPosition>
 	</Sound>
 
+	<!-- Включение КЛУБ и зуммер -->
+	<Sound>
+		<SignalID>297</SignalID>
+		<Filename>klub_On.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.8 9.5 2.69</LocalPosition>
+	</Sound>
+
+	<!-- Включение КЛУБ и зуммер -->
+	<Sound>
+		<SignalID>298</SignalID>
+		<Filename>klub_buttons.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>0</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.8 9.5 2.69</LocalPosition>
+	</Sound>
+
 </Config>

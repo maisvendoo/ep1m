@@ -301,18 +301,18 @@ void KLUB::sounds_process()
     if ( (state_RB && (!state_RB_old)) ||
          (state_RB_old && (!state_RB)) )
     {
-        emit soundPlay("KLUB_RB");
+        sound_states[BUTTON_SOUND].play(true);
     }
 
     if ( (state_RBS && (!state_RBS_old)) ||
          (state_RBS_old && (!state_RBS)) )
     {
-        emit soundPlay("KLUB_RB");
+        sound_states[BUTTON_SOUND].play(true);
     }
 
     if (key_epk && !key_epk_old)
     {
-        emit soundPlay("KLUB_On");
+        sound_states[ON_SOUND].play(true);
     }
 
     state_RB_old = state_RB;
@@ -505,5 +505,5 @@ void KLUB::onSafetyTimer()
 //------------------------------------------------------------------------------
 void KLUB::onBeepTimer()
 {
-    emit soundPlay("KLUB_RB");
+    sound_states[BUTTON_SOUND].play(true);
 }

@@ -109,6 +109,18 @@ public:
 
    bool isTractionAllowed() const { return is_trac_allowed; }
 
+   enum
+   {
+       NUM_SOUNDS = 2,
+       ON_SOUND = 0,
+       BUTTON_SOUND = 1
+   };
+
+   float getSoundSignal(size_t idx = ON_SOUND) const override
+   {
+       return sound_states[idx].createSoundSignal();
+   }
+
 private:
 
    double U_pow;
@@ -207,6 +219,8 @@ private:
 
    /// Мвссив значений скоростей для численного дифференцирования
    std::array<double, DIFF_NUM> v_i;
+
+   std::array<sound_state_t, 2> sound_states;
 
    void preStep(state_vector_t &Y, double t) override;
 

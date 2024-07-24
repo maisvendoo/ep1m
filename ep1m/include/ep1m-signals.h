@@ -257,7 +257,9 @@ enum
     SOUND_KT4 = 293,
     SOUND_KT5 = 294,
     SOUND_KM14 = 295,
-    SOUND_K1 = 296
+    SOUND_K1 = 296,
+    SOUND_KLUB_ON = 297,
+    SOUND_KLUB_BUTTONS = 298
 };
 
 #endif // EP1M_SIGNALS_H
