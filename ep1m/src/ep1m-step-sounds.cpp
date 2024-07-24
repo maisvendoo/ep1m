@@ -131,6 +131,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_KM42] = km42->getSoundSignal(Relay::CHANGE_SOUND);
     analogSignal[SOUND_KM14] = km14->getSoundSignal(Relay::CHANGE_SOUND);
     analogSignal[SOUND_K1] = k1->getSoundSignal(Relay::CHANGE_SOUND);
+
+    // КЛУБ
     analogSignal[SOUND_KLUB_ON] = klub_BEL->getSoundSignal(KLUB::ON_SOUND);
     analogSignal[SOUND_KLUB_BUTTONS] = klub_BEL->getSoundSignal(KLUB::BUTTON_SOUND);
 }
