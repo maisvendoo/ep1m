@@ -275,7 +275,14 @@ enum
     SOUND_110_120 = 310,
     SOUND_120_130 = 311,
     SOUND_130_140 = 312,
-    SOUND_140_INF = 313
+    SOUND_140_INF = 313,
+
+    SOUND_TED1 = 314,
+    SOUND_TED2 = 315,
+    SOUND_TED3 = 316,
+    SOUND_TED4 = 317,
+    SOUND_TED5 = 318,
+    SOUND_TED6 = 319
 };
 
 #endif // EP1M_SIGNALS_H

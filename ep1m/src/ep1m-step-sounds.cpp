@@ -153,4 +153,11 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_120_130] = sound_state_t::createSoundSignal((Vkmh > 120.0) && (Vkmh <= 130.0));
     analogSignal[SOUND_130_140] = sound_state_t::createSoundSignal((Vkmh > 130.0) && (Vkmh <= 140.0));
     analogSignal[SOUND_140_INF] = sound_state_t::createSoundSignal(Vkmh > 140.0);
+
+    analogSignal[SOUND_TED1] = trac_motor[TRAC_MOTOR1]->getSoundSignal();
+    analogSignal[SOUND_TED2] = trac_motor[TRAC_MOTOR2]->getSoundSignal();
+    analogSignal[SOUND_TED3] = trac_motor[TRAC_MOTOR3]->getSoundSignal();
+    analogSignal[SOUND_TED4] = trac_motor[TRAC_MOTOR4]->getSoundSignal();
+    analogSignal[SOUND_TED5] = trac_motor[TRAC_MOTOR5]->getSoundSignal();
+    analogSignal[SOUND_TED6] = trac_motor[TRAC_MOTOR6]->getSoundSignal();
 }

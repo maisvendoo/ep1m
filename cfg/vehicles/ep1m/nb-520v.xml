@@ -11,5 +11,6 @@
 		<Rb>0.083</Rb>
 		<Ta>0.5</Ta>
 		<Tf>0.5</Tf>
+		<omega_nom>105.2</omega_nom>
 	</Device>
 </Config>

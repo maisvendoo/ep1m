@@ -54,10 +54,14 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(t)
 
+    sound_state.volume = static_cast<float>(pf(abs(Y[0]) - 100.0) / 1000.0);
+    sound_state.pitch = static_cast<float>(abs(omega) / omega_nom);
+
     switch (mode)
     {
     case 1:
         {
+            //sound_state.play(true);
             M = Y[0] * cPhi(beta * Y[0] * revers_state) * eff_coef.getValue(Y[0]);
 
             break;
@@ -65,6 +69,8 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
 
     case 0:
         {
+            //sound_state.play(false);
+
             M = 0;
 
             Y[0] = Y[1] = 0.0;
@@ -73,6 +79,8 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
         }
     case -1:
         {
+            //sound_state.play(true);
+
             M = Y[0] * cPhi(Y[1] * revers_state) * eff_coef.getValue(qAbs(Y[0]));
 
             break;
@@ -81,7 +89,7 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
     default:
 
             break;
-    }
+    }    
 }
 
 //------------------------------------------------------------------------------
@@ -147,6 +155,7 @@ void TractionMotor::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Rb", Rb);
     cfg.getDouble(secName, "Ta", Ta);
     cfg.getDouble(secName, "Tf", Tf);
+    cfg.getDouble(secName, "omega_nom", omega_nom);
 }
 
 //------------------------------------------------------------------------------

@@ -78,7 +78,7 @@
 		<SignalID>212</SignalID>
 		<Filename>395_2.wav</Filename>
 		<InitVolume>0.0</InitVolume>
-		<MaxVolume>1.0</MaxVolume>
+		<MaxVolume>0.3</MaxVolume>
 		<InitPitch>1.0</InitPitch>
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
@@ -1305,6 +1305,80 @@
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
 		<LocalPosition>0.0 0.0 2.5</LocalPosition>
+	</Sound>
+
+	<!-- Тяговые электродвигатели -->
+	
+	<!-- ТЭД1 -->
+	<Sound>
+		<SignalID>314</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 7.547 0.81</LocalPosition>
+	</Sound>
+
+	<!-- ТЭД2 -->
+	<Sound>
+		<SignalID>315</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.19 5.811 0.81</LocalPosition>
+	</Sound>
+
+	<!-- ТЭД3 -->
+	<Sound>
+		<SignalID>316</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<!-- ТЭД4 -->
+	<Sound>
+		<SignalID>317</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.19 -0.86 0.81</LocalPosition>
+	</Sound>
+
+	<!-- ТЭД5 -->
+	<Sound>
+		<SignalID>318</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 -5.811 0.81</LocalPosition>
+	</Sound>
+
+	<!-- ТЭД6 -->
+	<Sound>
+		<SignalID>319</SignalID>
+		<Filename>TED.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.19 -7.547 0.81</LocalPosition>
 	</Sound>
 
 </Config>

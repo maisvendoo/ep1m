@@ -49,6 +49,12 @@ public:
 
     void setReversSate(int revers_state) { this->revers_state = revers_state; }
 
+    float getSoundSignal(size_t idx = 0) const override
+    {
+        (void) idx;
+        return sound_state.createSoundSignal();
+    }
+
 private:
 
     /// Напряжение якоря
@@ -94,6 +100,10 @@ private:
     double  In;
 
     double  E;
+
+    double omega_nom = 105.2;
+
+    sound_state_t sound_state{true, 0.0, 0.0};
 
     /// Характеристика намагничивания
     LinearInterpolation   magnetic_char;
