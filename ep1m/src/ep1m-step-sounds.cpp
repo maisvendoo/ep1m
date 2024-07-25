@@ -154,7 +154,79 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_130_140] = sound_state_t::createSoundSignal((Vkmh > 130.0) && (Vkmh <= 140.0));
     analogSignal[SOUND_140_INF] = sound_state_t::createSoundSignal(Vkmh > 140.0);
 
-    analogSignal[SOUND_TED_4_6] = sound_state_t::createSoundSignal((Vkmh > 1.0) && (Vkmh <= 6.0));
-    analogSignal[SOUND_TED_6_8] = sound_state_t::createSoundSignal((Vkmh > 6.0) && (Vkmh <= 8.0));
-    analogSignal[SOUND_TED_8_10] = sound_state_t::createSoundSignal((Vkmh > 8.0) && (Vkmh <= 10.0));
+    bool is_motors_On = false;
+
+    for (size_t i = 0; i < trac_motor.size(); ++i)
+    {
+        is_motors_On = is_motors_On || qAbs(trac_motor[i]->getAncorCurrent()) >= 100.0;
+    }
+
+    analogSignal[SOUND_TED_4_6] = sound_state_t::createSoundSignal((Vkmh > 4) && (Vkmh <=6) && is_motors_On);
+    analogSignal[SOUND_TED_6_8] = sound_state_t::createSoundSignal((Vkmh > 6) && (Vkmh <=8) && is_motors_On);
+    analogSignal[SOUND_TED_8_10] = sound_state_t::createSoundSignal((Vkmh > 8) && (Vkmh <=10) && is_motors_On);
+    analogSignal[SOUND_TED_10_12] = sound_state_t::createSoundSignal((Vkmh > 10) && (Vkmh <=12) && is_motors_On);
+    analogSignal[SOUND_TED_12_14] = sound_state_t::createSoundSignal((Vkmh > 12) && (Vkmh <=14) && is_motors_On);
+    analogSignal[SOUND_TED_14_16] = sound_state_t::createSoundSignal((Vkmh > 14) && (Vkmh <=16) && is_motors_On);
+    analogSignal[SOUND_TED_16_18] = sound_state_t::createSoundSignal((Vkmh > 16) && (Vkmh <=18) && is_motors_On);
+    analogSignal[SOUND_TED_18_20] = sound_state_t::createSoundSignal((Vkmh > 18) && (Vkmh <=20) && is_motors_On);
+    analogSignal[SOUND_TED_20_22] = sound_state_t::createSoundSignal((Vkmh > 20) && (Vkmh <=22) && is_motors_On);
+    analogSignal[SOUND_TED_22_24] = sound_state_t::createSoundSignal((Vkmh > 22) && (Vkmh <=24) && is_motors_On);
+    analogSignal[SOUND_TED_24_26] = sound_state_t::createSoundSignal((Vkmh > 24) && (Vkmh <=26) && is_motors_On);
+    analogSignal[SOUND_TED_26_28] = sound_state_t::createSoundSignal((Vkmh > 26) && (Vkmh <=28) && is_motors_On);
+    analogSignal[SOUND_TED_28_30] = sound_state_t::createSoundSignal((Vkmh > 28) && (Vkmh <=30) && is_motors_On);
+    analogSignal[SOUND_TED_30_32] = sound_state_t::createSoundSignal((Vkmh > 30) && (Vkmh <=32) && is_motors_On);
+    analogSignal[SOUND_TED_32_34] = sound_state_t::createSoundSignal((Vkmh > 32) && (Vkmh <=34) && is_motors_On);
+    analogSignal[SOUND_TED_34_36] = sound_state_t::createSoundSignal((Vkmh > 34) && (Vkmh <=36) && is_motors_On);
+    analogSignal[SOUND_TED_36_38] = sound_state_t::createSoundSignal((Vkmh > 36) && (Vkmh <=38) && is_motors_On);
+    analogSignal[SOUND_TED_38_40] = sound_state_t::createSoundSignal((Vkmh > 38) && (Vkmh <=40) && is_motors_On);
+    analogSignal[SOUND_TED_40_42] = sound_state_t::createSoundSignal((Vkmh > 40) && (Vkmh <=42) && is_motors_On);
+    analogSignal[SOUND_TED_42_44] = sound_state_t::createSoundSignal((Vkmh > 42) && (Vkmh <=44) && is_motors_On);
+    analogSignal[SOUND_TED_44_46] = sound_state_t::createSoundSignal((Vkmh > 44) && (Vkmh <=46) && is_motors_On);
+    analogSignal[SOUND_TED_46_48] = sound_state_t::createSoundSignal((Vkmh > 46) && (Vkmh <=48) && is_motors_On);
+    analogSignal[SOUND_TED_48_50] = sound_state_t::createSoundSignal((Vkmh > 48) && (Vkmh <=50) && is_motors_On);
+    analogSignal[SOUND_TED_50_52] = sound_state_t::createSoundSignal((Vkmh > 50) && (Vkmh <=52) && is_motors_On);
+    analogSignal[SOUND_TED_52_54] = sound_state_t::createSoundSignal((Vkmh > 52) && (Vkmh <=54) && is_motors_On);
+    analogSignal[SOUND_TED_54_56] = sound_state_t::createSoundSignal((Vkmh > 54) && (Vkmh <=56) && is_motors_On);
+    analogSignal[SOUND_TED_56_58] = sound_state_t::createSoundSignal((Vkmh > 56) && (Vkmh <=58) && is_motors_On);
+    analogSignal[SOUND_TED_58_60] = sound_state_t::createSoundSignal((Vkmh > 58) && (Vkmh <=60) && is_motors_On);
+    analogSignal[SOUND_TED_60_62] = sound_state_t::createSoundSignal((Vkmh > 60) && (Vkmh <=62) && is_motors_On);
+    analogSignal[SOUND_TED_62_64] = sound_state_t::createSoundSignal((Vkmh > 62) && (Vkmh <=64) && is_motors_On);
+    analogSignal[SOUND_TED_64_66] = sound_state_t::createSoundSignal((Vkmh > 64) && (Vkmh <=66) && is_motors_On);
+    analogSignal[SOUND_TED_66_68] = sound_state_t::createSoundSignal((Vkmh > 66) && (Vkmh <=68) && is_motors_On);
+    analogSignal[SOUND_TED_68_70] = sound_state_t::createSoundSignal((Vkmh > 68) && (Vkmh <=70) && is_motors_On);
+    analogSignal[SOUND_TED_70_72] = sound_state_t::createSoundSignal((Vkmh > 70) && (Vkmh <=72) && is_motors_On);
+    analogSignal[SOUND_TED_72_74] = sound_state_t::createSoundSignal((Vkmh > 72) && (Vkmh <=74) && is_motors_On);
+    analogSignal[SOUND_TED_74_76] = sound_state_t::createSoundSignal((Vkmh > 74) && (Vkmh <=76) && is_motors_On);
+    analogSignal[SOUND_TED_76_78] = sound_state_t::createSoundSignal((Vkmh > 76) && (Vkmh <=78) && is_motors_On);
+    analogSignal[SOUND_TED_78_80] = sound_state_t::createSoundSignal((Vkmh > 78) && (Vkmh <=80) && is_motors_On);
+    analogSignal[SOUND_TED_80_82] = sound_state_t::createSoundSignal((Vkmh > 80) && (Vkmh <=82) && is_motors_On);
+    analogSignal[SOUND_TED_82_84] = sound_state_t::createSoundSignal((Vkmh > 82) && (Vkmh <=84) && is_motors_On);
+    analogSignal[SOUND_TED_84_86] = sound_state_t::createSoundSignal((Vkmh > 84) && (Vkmh <=86) && is_motors_On);
+    analogSignal[SOUND_TED_86_88] = sound_state_t::createSoundSignal((Vkmh > 86) && (Vkmh <=88) && is_motors_On);
+    analogSignal[SOUND_TED_88_90] = sound_state_t::createSoundSignal((Vkmh > 88) && (Vkmh <=90) && is_motors_On);
+    analogSignal[SOUND_TED_90_92] = sound_state_t::createSoundSignal((Vkmh > 90) && (Vkmh <=92) && is_motors_On);
+    analogSignal[SOUND_TED_92_94] = sound_state_t::createSoundSignal((Vkmh > 92) && (Vkmh <=94) && is_motors_On);
+    analogSignal[SOUND_TED_94_96] = sound_state_t::createSoundSignal((Vkmh > 94) && (Vkmh <=96) && is_motors_On);
+    analogSignal[SOUND_TED_96_98] = sound_state_t::createSoundSignal((Vkmh > 96) && (Vkmh <=98) && is_motors_On);
+    analogSignal[SOUND_TED_98_100] = sound_state_t::createSoundSignal((Vkmh > 98) && (Vkmh <=100) && is_motors_On);
+    analogSignal[SOUND_TED_100_102] = sound_state_t::createSoundSignal((Vkmh > 100) && (Vkmh <=102) && is_motors_On);
+    analogSignal[SOUND_TED_102_104] = sound_state_t::createSoundSignal((Vkmh > 102) && (Vkmh <=104) && is_motors_On);
+    analogSignal[SOUND_TED_104_106] = sound_state_t::createSoundSignal((Vkmh > 104) && (Vkmh <=106) && is_motors_On);
+    analogSignal[SOUND_TED_106_108] = sound_state_t::createSoundSignal((Vkmh > 106) && (Vkmh <=108) && is_motors_On);
+    analogSignal[SOUND_TED_108_110] = sound_state_t::createSoundSignal((Vkmh > 108) && (Vkmh <=110) && is_motors_On);
+    analogSignal[SOUND_TED_110_112] = sound_state_t::createSoundSignal((Vkmh > 110) && (Vkmh <=112) && is_motors_On);
+    analogSignal[SOUND_TED_112_114] = sound_state_t::createSoundSignal((Vkmh > 112) && (Vkmh <=114) && is_motors_On);
+    analogSignal[SOUND_TED_114_116] = sound_state_t::createSoundSignal((Vkmh > 114) && (Vkmh <=116) && is_motors_On);
+    analogSignal[SOUND_TED_116_118] = sound_state_t::createSoundSignal((Vkmh > 116) && (Vkmh <=118) && is_motors_On);
+    analogSignal[SOUND_TED_118_120] = sound_state_t::createSoundSignal((Vkmh > 118) && (Vkmh <=120) && is_motors_On);
+    analogSignal[SOUND_TED_120_122] = sound_state_t::createSoundSignal((Vkmh > 120) && (Vkmh <=122) && is_motors_On);
+    analogSignal[SOUND_TED_122_124] = sound_state_t::createSoundSignal((Vkmh > 122) && (Vkmh <=124) && is_motors_On);
+    analogSignal[SOUND_TED_124_126] = sound_state_t::createSoundSignal((Vkmh > 124) && (Vkmh <=126) && is_motors_On);
+    analogSignal[SOUND_TED_126_128] = sound_state_t::createSoundSignal((Vkmh > 126) && (Vkmh <=128) && is_motors_On);
+    analogSignal[SOUND_TED_128_130] = sound_state_t::createSoundSignal((Vkmh > 128) && (Vkmh <=130) && is_motors_On);
+    analogSignal[SOUND_TED_130_132] = sound_state_t::createSoundSignal((Vkmh > 130) && (Vkmh <=132) && is_motors_On);
+    analogSignal[SOUND_TED_132_134] = sound_state_t::createSoundSignal((Vkmh > 132) && (Vkmh <=134) && is_motors_On);
+    analogSignal[SOUND_TED_134_136] = sound_state_t::createSoundSignal((Vkmh > 134) && (Vkmh <=136) && is_motors_On);
+    analogSignal[SOUND_TED_136_138] = sound_state_t::createSoundSignal((Vkmh > 136) && (Vkmh <=138) && is_motors_On);
+    analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && (Vkmh <=140) && is_motors_On);
 }
