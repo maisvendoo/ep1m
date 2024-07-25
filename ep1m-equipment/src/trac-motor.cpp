@@ -54,8 +54,8 @@ void TractionMotor::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(t)
 
-    sound_state.volume = static_cast<float>(pf(abs(Y[0]) - 100.0) / 1000.0);
-    sound_state.pitch = static_cast<float>(abs(omega) / omega_nom);
+    sound_state.volume = 1.0f;//static_cast<float>(pf(abs(Y[0]) - 100.0) / 1000.0);
+    sound_state.pitch = static_cast<float>(abs(omega) / 10.0);
 
     switch (mode)
     {

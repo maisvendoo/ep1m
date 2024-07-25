@@ -138,7 +138,7 @@ void EP1m::stepSoundSignals(double t, double dt)
 
     // Перестуки
     double Vkmh = abs(velocity) * Physics::kmh;
-    analogSignal[SOUND_5_10] = sound_state_t::createSoundSignal((Vkmh > 1.0) && (Vkmh <= 10.0), Vkmh / 5.0);
+    analogSignal[SOUND_5_10] = sound_state_t::createSoundSignal((Vkmh > 1.0) && (Vkmh <= 10.0));
     analogSignal[SOUND_10_20] = sound_state_t::createSoundSignal((Vkmh > 10.0) && (Vkmh <= 20.0));
     analogSignal[SOUND_20_30] = sound_state_t::createSoundSignal((Vkmh > 20.0) && (Vkmh <= 30.0));
     analogSignal[SOUND_30_40] = sound_state_t::createSoundSignal((Vkmh > 30.0) && (Vkmh <= 40.0));
@@ -154,10 +154,7 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_130_140] = sound_state_t::createSoundSignal((Vkmh > 130.0) && (Vkmh <= 140.0));
     analogSignal[SOUND_140_INF] = sound_state_t::createSoundSignal(Vkmh > 140.0);
 
-    analogSignal[SOUND_TED1] = trac_motor[TRAC_MOTOR1]->getSoundSignal();
-    analogSignal[SOUND_TED2] = trac_motor[TRAC_MOTOR2]->getSoundSignal();
-    analogSignal[SOUND_TED3] = trac_motor[TRAC_MOTOR3]->getSoundSignal();
-    analogSignal[SOUND_TED4] = trac_motor[TRAC_MOTOR4]->getSoundSignal();
-    analogSignal[SOUND_TED5] = trac_motor[TRAC_MOTOR5]->getSoundSignal();
-    analogSignal[SOUND_TED6] = trac_motor[TRAC_MOTOR6]->getSoundSignal();
+    analogSignal[SOUND_TED_4_6] = sound_state_t::createSoundSignal((Vkmh > 1.0) && (Vkmh <= 6.0));
+    analogSignal[SOUND_TED_6_8] = sound_state_t::createSoundSignal((Vkmh > 6.0) && (Vkmh <= 8.0));
+    analogSignal[SOUND_TED_8_10] = sound_state_t::createSoundSignal((Vkmh > 8.0) && (Vkmh <= 10.0));
 }

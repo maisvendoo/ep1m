@@ -1,0 +1,748 @@
+	<Sound>
+		<SignalID>314</SignalID>
+		<Filename>TED/ted_4-6.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>315</SignalID>
+		<Filename>TED/ted_6-8.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>316</SignalID>
+		<Filename>TED/ted_8-10.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>317</SignalID>
+		<Filename>TED/ted_10-12.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>318</SignalID>
+		<Filename>TED/ted_12-14.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>319</SignalID>
+		<Filename>TED/ted_14-16.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>320</SignalID>
+		<Filename>TED/ted_16-18.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>321</SignalID>
+		<Filename>TED/ted_18-20.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>322</SignalID>
+		<Filename>TED/ted_20-22.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>323</SignalID>
+		<Filename>TED/ted_22-24.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>324</SignalID>
+		<Filename>TED/ted_24-26.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>325</SignalID>
+		<Filename>TED/ted_26-28.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>326</SignalID>
+		<Filename>TED/ted_28-30.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>327</SignalID>
+		<Filename>TED/ted_30-32.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>328</SignalID>
+		<Filename>TED/ted_32-34.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>329</SignalID>
+		<Filename>TED/ted_34-36.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>330</SignalID>
+		<Filename>TED/ted_36-38.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>331</SignalID>
+		<Filename>TED/ted_38-40.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>332</SignalID>
+		<Filename>TED/ted_40-42.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>333</SignalID>
+		<Filename>TED/ted_42-44.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>334</SignalID>
+		<Filename>TED/ted_44-46.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>335</SignalID>
+		<Filename>TED/ted_46-48.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>336</SignalID>
+		<Filename>TED/ted_48-50.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>337</SignalID>
+		<Filename>TED/ted_50-52.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>338</SignalID>
+		<Filename>TED/ted_52-54.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>339</SignalID>
+		<Filename>TED/ted_54-56.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>340</SignalID>
+		<Filename>TED/ted_56-58.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>341</SignalID>
+		<Filename>TED/ted_58-60.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>342</SignalID>
+		<Filename>TED/ted_60-62.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>343</SignalID>
+		<Filename>TED/ted_62-64.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>344</SignalID>
+		<Filename>TED/ted_64-66.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>345</SignalID>
+		<Filename>TED/ted_66-68.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>346</SignalID>
+		<Filename>TED/ted_68-70.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>347</SignalID>
+		<Filename>TED/ted_70-72.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>348</SignalID>
+		<Filename>TED/ted_72-74.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>349</SignalID>
+		<Filename>TED/ted_74-76.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>350</SignalID>
+		<Filename>TED/ted_76-78.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>351</SignalID>
+		<Filename>TED/ted_78-80.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>352</SignalID>
+		<Filename>TED/ted_80-82.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>353</SignalID>
+		<Filename>TED/ted_82-84.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>354</SignalID>
+		<Filename>TED/ted_84-86.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>355</SignalID>
+		<Filename>TED/ted_86-88.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>356</SignalID>
+		<Filename>TED/ted_88-90.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>357</SignalID>
+		<Filename>TED/ted_90-92.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>358</SignalID>
+		<Filename>TED/ted_92-94.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>359</SignalID>
+		<Filename>TED/ted_94-96.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>360</SignalID>
+		<Filename>TED/ted_96-98.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>361</SignalID>
+		<Filename>TED/ted_98-100.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>362</SignalID>
+		<Filename>TED/ted_100-102.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>363</SignalID>
+		<Filename>TED/ted_102-104.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>364</SignalID>
+		<Filename>TED/ted_104-106.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>365</SignalID>
+		<Filename>TED/ted_106-108.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>366</SignalID>
+		<Filename>TED/ted_108-110.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>367</SignalID>
+		<Filename>TED/ted_110-112.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>368</SignalID>
+		<Filename>TED/ted_112-114.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>369</SignalID>
+		<Filename>TED/ted_114-116.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>370</SignalID>
+		<Filename>TED/ted_116-118.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>371</SignalID>
+		<Filename>TED/ted_118-120.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>372</SignalID>
+		<Filename>TED/ted_120-122.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>373</SignalID>
+		<Filename>TED/ted_122-124.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>374</SignalID>
+		<Filename>TED/ted_124-126.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>375</SignalID>
+		<Filename>TED/ted_126-128.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>376</SignalID>
+		<Filename>TED/ted_128-130.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>377</SignalID>
+		<Filename>TED/ted_130-132.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>378</SignalID>
+		<Filename>TED/ted_132-134.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>379</SignalID>
+		<Filename>TED/ted_134-136.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>380</SignalID>
+		<Filename>TED/ted_136-138.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
+	<Sound>
+		<SignalID>381</SignalID>
+		<Filename>TED/ted_138-140.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>-0.19 0.86 0.81</LocalPosition>
+	</Sound>
+
