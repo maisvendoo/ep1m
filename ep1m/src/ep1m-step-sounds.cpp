@@ -154,6 +154,7 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_130_140] = sound_state_t::createSoundSignal((Vkmh > 130.0) && (Vkmh <= 140.0));
     analogSignal[SOUND_140_INF] = sound_state_t::createSoundSignal(Vkmh > 140.0);
 
+    // Проверяем ток тяговых двигателей
     bool is_motors_On = false;
 
     for (size_t i = 0; i < trac_motor.size(); ++i)
@@ -228,5 +229,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TED_132_134] = sound_state_t::createSoundSignal((Vkmh > 132) && (Vkmh <=134) && is_motors_On);
     analogSignal[SOUND_TED_134_136] = sound_state_t::createSoundSignal((Vkmh > 134) && (Vkmh <=136) && is_motors_On);
     analogSignal[SOUND_TED_136_138] = sound_state_t::createSoundSignal((Vkmh > 136) && (Vkmh <=138) && is_motors_On);
-    analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && (Vkmh <=140) && is_motors_On);
+    analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && is_motors_On);
+
+    // Свисток ЭПК
+    analogSignal[SOUND_EPK] = epk->getSoundSignal();
 }
