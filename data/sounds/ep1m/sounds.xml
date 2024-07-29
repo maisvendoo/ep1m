@@ -2067,4 +2067,16 @@
 		<LocalPosition>1.23 9.02 2.5</LocalPosition>
 	</Sound>
 
+	<!-- Песочница -->
+	<Sound>
+		<SignalID>383</SignalID>
+		<Filename>sandbox.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.5 9.8 1.0</LocalPosition>
+	</Sound>
+
 </Config>

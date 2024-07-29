@@ -233,4 +233,7 @@ void EP1m::stepSoundSignals(double t, double dt)
 
     // Свисток ЭПК
     analogSignal[SOUND_EPK] = epk->getSoundSignal();
+
+    // Песочница
+    analogSignal[SOUND_SAND_DELIVERY] = sand_system->getSoundSignal();
 }

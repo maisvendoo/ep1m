@@ -346,7 +346,8 @@ enum
     SOUND_TED_136_138 = 380,
     SOUND_TED_138_140 = 381,
 
-    SOUND_EPK = 382
+    SOUND_EPK = 382,
+    SOUND_SAND_DELIVERY = 383
 };
 
 #endif // EP1M_SIGNALS_H
