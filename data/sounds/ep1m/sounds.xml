@@ -56,7 +56,7 @@
 		<InitVolume>0.0</InitVolume>
 		<MaxVolume>1.0</MaxVolume>
 		<InitPitch>1.0</InitPitch>
-		<Loop>0</Loop>
+		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
 		<LocalPosition>1.2 9.7 2.7</LocalPosition>
 	</Sound>
@@ -718,7 +718,7 @@
 		<InitPitch>1.0</InitPitch>
 		<Loop>0</Loop>
 		<PlayOnStart>0</PlayOnStart>
-		<LocalPosition>0.0 -7.2 5.19</LocalPosition>
+		<LocalPosition>0.0 7.2 5.19</LocalPosition>
 	</Sound>
 
 	<!-- Передний токоприемник опускание -->
@@ -2067,7 +2067,7 @@
 		<LocalPosition>1.23 9.02 2.5</LocalPosition>
 	</Sound>
 
-	<!-- Песочница -->
+	<!-- Песочница спереди -->
 	<Sound>
 		<SignalID>383</SignalID>
 		<Filename>sandbox.wav</Filename>
@@ -2076,7 +2076,19 @@
 		<InitPitch>1.0</InitPitch>
 		<Loop>1</Loop>
 		<PlayOnStart>0</PlayOnStart>
-		<LocalPosition>1.5 9.8 1.0</LocalPosition>
+		<LocalPosition>0.0 8.3 0.0</LocalPosition>
+	</Sound>
+
+	<!-- Песочница сзади -->
+	<Sound>
+		<SignalID>383</SignalID>
+		<Filename>sandbox.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>0.0 -8.3 0.0</LocalPosition>
 	</Sound>
 
 </Config>
