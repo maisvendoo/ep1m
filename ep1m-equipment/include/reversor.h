@@ -29,6 +29,12 @@ public:
 
     bool isBackward() const { return state == -1; }
 
+    /// Звук переключения
+    virtual sound_state_t getSoundState(size_t idx = 0) const;
+
+    /// Сигнал звука переключения
+    virtual float getSoundSignal(size_t idx = 0) const;
+
 private:
 
     /// Состояние реверсора (для модели ТЭД)
@@ -49,11 +55,12 @@ private:
     /// Заданное положение вала реверсора
     int         pos_ref;
 
-    int         pos_ref_old;
-
     double      K;
 
     double      eps;
+
+    /// Звук переключения
+    sound_state_t reversor_sound = sound_state_t();
 
     void preStep(state_vector_t &Y, double t);
 

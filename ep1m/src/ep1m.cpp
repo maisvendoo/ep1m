@@ -71,12 +71,6 @@ void EP1m::initialization()
     // Инициализация прочих устройств
     initOtherEquipment(modules_dir, custom_cfg_dir);
 
-    // Инициализация озвучки
-    initSounds();
-
-    // Инициализация звуков перестука
-    initTapSounds();
-
     // Инициализация регистратора
     if (is_Registrator_on)
         initRegistartor(modules_dir, custom_cfg_dir);
@@ -133,9 +127,6 @@ void EP1m::step(double t, double dt)
 
     // Работа прочих устройств
     stepOtherEquipment(t, dt);
-
-    // Перестуки
-    stepTapSounds();
 
     // Вывод сигналов к внешней модели
     signalsOutput();

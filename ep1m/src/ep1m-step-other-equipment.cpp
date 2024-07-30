@@ -22,16 +22,3 @@ void EP1m::stepOtherEquipment(double t, double dt)
     payload_coeff = sand_system->getSandLevel();
     setPayloadCoeff(payload_coeff);
 }
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void EP1m::stepTapSounds()
-{
-    double speed = abs(this->velocity) * 3.6;
-
-    for (int i = 0; i < tap_sounds.count(); ++i)
-    {
-        emit volumeCurveStep(tap_sounds[i], static_cast<float>(speed));
-    }
-}

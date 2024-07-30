@@ -18,20 +18,20 @@ public:
 
 private:
 
-     /// Имя модуля сцепного устройства
-     QString coupling_module_name = "sa3";
-     /// Имя конфига сцепного устройства
-     QString coupling_config_name = "sa3";
+    /// Имя модуля сцепного устройства
+    QString coupling_module_name = "sa3";
+    /// Имя конфига сцепного устройства
+    QString coupling_config_name = "sa3";
 
-     /// Сцепка спереди
-     Coupling *coupling_fwd = Q_NULLPTR;
-     /// Сцепка сзади
-     Coupling *coupling_bwd = Q_NULLPTR;
+    /// Сцепка спереди
+    Coupling *coupling_fwd = Q_NULLPTR;
+    /// Сцепка сзади
+    Coupling *coupling_bwd = Q_NULLPTR;
 
-     /// Расцепной рычаг спереди
-     OperatingRod *oper_rod_fwd = Q_NULLPTR;
-     /// Расцепной рычаг сзади
-     OperatingRod *oper_rod_bwd = Q_NULLPTR;
+    /// Расцепной рычаг спереди
+    OperatingRod *oper_rod_fwd = Q_NULLPTR;
+    /// Расцепной рычаг сзади
+    OperatingRod *oper_rod_bwd = Q_NULLPTR;
 
     /// Панель тумблеров
     EP1MTumblersPanel   *tumblers_panel = Q_NULLPTR;
@@ -396,12 +396,6 @@ private:
     /// Инициализация прочих устройств
     void initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
 
-    /// Инициализация озвучки
-    void initSounds();
-
-    /// Инициализация перестуков
-    void initTapSounds();
-
     /// Инициализация регистратора параметров движения
     void initRegistartor(const QString &modules_dir, const QString &custom_cfg_dir);
 
@@ -455,8 +449,6 @@ private:
     void stepSafetyDevices(double t, double dt);
 
     void stepOtherEquipment(double t, double dt);
-
-    void stepTapSounds();
 
     void signalsOutput();
 

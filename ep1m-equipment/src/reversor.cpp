@@ -10,7 +10,6 @@ Reversor::Reversor(QObject *parent) : Device(parent)
   , forward_valve(false)
   , backward_valve(false)
   , pos_ref(0)
-  , pos_ref_old(0)
   , K(10.0)
   , eps(0.99)
 {
@@ -28,16 +27,34 @@ Reversor::~Reversor()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+sound_state_t Reversor::getSoundState(size_t idx) const
+{
+    (void) idx;
+    return reversor_sound;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+float Reversor::getSoundSignal(size_t idx) const
+{
+    (void) idx;
+    return reversor_sound.createSoundSignal();
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void Reversor::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(t)
 
-    pos_ref_old = pos_ref;
+    int pos_ref_old = pos_ref;
     pos_ref = static_cast<int>(forward_valve) - static_cast<int>(backward_valve);
 
     if (pos_ref != pos_ref_old)
     {
-        emit soundPlay("Reversor");
+        reversor_sound.play();
     }
 
     omega = shaft_omega_max * cut(K * (pos_ref - Y[0]), -1.0, 1.0);
