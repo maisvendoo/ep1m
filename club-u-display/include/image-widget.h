@@ -24,7 +24,7 @@ class ImageWidget : public QLabel
 public:
     ImageWidget(QString resprefix, QString imgname, QSize imgsize,
                 QWidget* parent = Q_NULLPTR);
-    ~ImageWidget();
+    virtual ~ImageWidget();
 
     // Установка картинки
     void setImage(QString resprefix, QString imgname);
