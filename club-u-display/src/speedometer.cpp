@@ -134,7 +134,7 @@ void Speedometer::loadScalePontsCoolrds_(QString txt_path, QVector<QPoint> &vec)
         while (!fileTxt.atEnd())
         {
             QString str = fileTxt.readLine();
-            QStringList strList = str.split(" ", QString::SkipEmptyParts);
+            QStringList strList = str.split(" ");
             int x = strList[0].toInt();
             int y = strList[1].toInt();
             vec.append(QPoint(x, y));

@@ -12,10 +12,10 @@ set (CMAKE_SHARED_MODULE_PREFIX "")
 
 add_definitions(-DMSUD_DISPLAY_LIBRARY)
 
-find_package(Qt5 COMPONENTS Xml REQUIRED)
-find_package(Qt5 COMPONENTS Gui REQUIRED)
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS OpenGL REQUIRED)
+find_package(Qt6 COMPONENTS Xml REQUIRED)
+find_package(Qt6 COMPONENTS Gui REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 
 set(RRS_VERSION 1.3.0)
 
@@ -39,9 +39,9 @@ target_include_directories (${TARGET} PRIVATE ./include/)
 target_include_directories (${TARGET} PRIVATE ../ep1m/include)
 target_include_directories (${TARGET} PRIVATE ../ep1m-equipment/include)
 
-target_link_libraries (${TARGET} Qt5::Xml)
-target_link_libraries (${TARGET} Qt5::Gui)
-target_link_libraries (${TARGET} Qt5::Widgets)
-target_link_libraries (${TARGET} Qt5::OpenGL)
+target_link_libraries (${TARGET} Qt6::Xml)
+target_link_libraries (${TARGET} Qt6::Gui)
+target_link_libraries (${TARGET} Qt6::Widgets)
+target_link_libraries (${TARGET} Qt6::OpenGL)
 target_link_libraries (${TARGET} device)
 target_link_libraries (${TARGET} display)
