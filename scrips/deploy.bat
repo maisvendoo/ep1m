@@ -1,5 +1,5 @@
 set ADDON_NAME=ep1m
-set VERSION=v2.0.0
+set VERSION=v2.0.1
 set DIR_NAME=%ADDON_NAME%-%VERSION%
 
 set PKG_DIR=..\..\package
