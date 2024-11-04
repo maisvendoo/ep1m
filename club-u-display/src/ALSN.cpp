@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 ALSN::ALSN(QSize _size, QWidget *parent)
     : QLabel(parent)
-    , oldColor_(ALSN_COLORS::RED_YELLOW)
+    , oldColor_(ALSN_COLORS::WHITE)
     , oldFreeBlocks_(0)
 {
     this->resize(_size);

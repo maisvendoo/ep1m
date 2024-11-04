@@ -8,7 +8,6 @@
 EP1m::EP1m(QObject *parent) : Vehicle (parent)  
 {
     Uks = 25000.0;
-    alsn_info.code_alsn = KLUB_ALSN_GREEN;
 }
 
 //------------------------------------------------------------------------------

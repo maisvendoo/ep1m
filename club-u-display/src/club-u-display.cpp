@@ -36,8 +36,7 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setPalette(QPalette(QColor(0, 0, 0)));
 
     this->setLayout(new QVBoxLayout);
-    this-> setFocusPolicy(Qt::FocusPolicy::NoFocus);
-
+    this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 }
 
 
@@ -71,24 +70,25 @@ void ClubUDisplay::init()
 //------------------------------------------------------------------------------
 void ClubUDisplay::loadStations()
 {
-    QString path = QDir::toNativeSeparators(route_dir) +
-            QDir::separator() +
-            "stations.conf";
+    QString path = QDir::toNativeSeparators(route_dir);
+    path += QDir::separator() + QString("topology");
+    path += QDir::separator() + QString("stations.conf");
 
     QFile stations_file(path);
 
-    if (stations_file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!stations_file.open(QIODevice::ReadOnly))
     {
-        while (!stations_file.atEnd())
-        {
-            QByteArray line = stations_file.readLine();
-            QStringList tokens = QString(line).remove('\n').split(';');
+        return;
+    }
 
-            if (tokens.size() < 3)
-                continue;
+    QTextStream stream(&stations_file);
 
-            stations.push_back(tokens[2]);
-        }
+    while (!stream.atEnd())
+    {
+        QString line = stream.readLine();
+        QStringList tokens = line.split('\t');
+
+        stations.push_back(tokens[0]);
     }
 
     stationsCount_ = stations.size();

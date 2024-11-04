@@ -2,15 +2,16 @@
 #define     KLUB_H
 
 #include    "device.h"
-#include    "klub-speed-limits.h"
 #include    "klub-stations.h"
-#include    "klub-alsn.h"
+#include    "ALSN-struct.h"
+#include    "speedmap.h"
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
 enum
 {
+    NUM_LAMPS = 8,
     WHITE_LAMP = 0,
     RED_LAMP = 1,
     RED_YELLOW_LAMP = 2,
@@ -34,12 +35,20 @@ public:
 
     void step(double t, double dt) override;
 
-   /// Прием кода АЛСН
-   void setAlsnCode(int code_alsn)
-   {
-       old_code_alsn = this->code_alsn;
-       this->code_alsn = code_alsn;
-   };
+    /// Прием кода АЛСН
+    void setAlsnCode(ALSN code_alsn)
+    {
+        old_code_alsn = this->code_alsn;
+        this->code_alsn = code_alsn;
+    };
+
+    /// Модуль работы с ограничениями скорости на путевой топологии
+    void setSpeedMapModule(SpeedMap *device)
+    {
+        speedmap = device;
+        speedmap->setDirection(dir);
+        speedmap->setCurrentSearchDistance(train_length);
+    }
 
    /// Прием состояния РБ
    void setRBstate(bool state) { state_RB = state; };
@@ -68,6 +77,18 @@ public:
         return 0.0f;
    }
 
+   /// Получить активную лампу локомотивного световора
+   float getLampNum()
+   {
+       for (int i = 0; i <= GREEN_LAMP1; ++i)
+       {
+           if (lamps[i] == 1.0f)
+               return static_cast<float>(i);
+       }
+
+       return 0.0f;
+   }
+
    double getCurrentSpeedLimit() const { return current_limit; }
 
    double getNextSpeedLimit() const { return next_limit; }
@@ -76,7 +97,7 @@ public:
 
    void setVoltage(double U_pow) { this->U_pow = U_pow; }
 
-   double getVelocityKmh() const { return qAbs(v_kmh); }
+   double getVelocityKmh() const { return v_kmh; }
 
    /// Сигнал "Проверка бдительности"
    bool isCheckVigilanse() const { return check_vigilance; }
@@ -84,22 +105,30 @@ public:
    /// Вернуть ускорение поезда
    double getAcceleration() const { return acceleration; }
 
-   /// Задать координату
+   /// Задать координату центра локомотива в пространстве
+   void setCoord(dvec3 coord) { this->coord = coord; }
+
+   /// Задать координату по железнодорожному пикетажу
    void setRailCoord(double rail_coord) { this->rail_coord = rail_coord; }
 
-   /// Задать длину поезда
-   void setTrainLength(double train_length);
+    /// Задать длину поезда
+    void setTrainLength(double train_length)
+    {
+        this->train_length = train_length;
+        speedmap->setCurrentSearchDistance(train_length);
+    }
 
    /// Задать конструкционную скорость
    void setMaxVelocity(double v_max) { this->v_max = v_max; }
 
-   /// Загрузка скоростей из ЭК
-   void loadSpeedsMap(QString path);
-
    /// Загрузка станций из ЭК
    void loadStationsMap(QString path);
 
-   void setDirection(int dir) { this->dir = dir; }
+    void setDirection(int dir)
+    {
+        this->dir = dir;
+        speedmap->setDirection(dir);
+    }
 
    double getLimitDistance() const { return limit_dist; }
 
@@ -123,90 +152,94 @@ public:
 
 private:
 
-   double U_pow;
+   double U_pow = 0.0;
 
-   double U_nom;
+   double U_nom = 50.0;
 
-   int code_alsn;
+   ALSN code_alsn = ALSN::NO_CODE;
 
-   int old_code_alsn;
+   ALSN old_code_alsn = ALSN::NO_CODE;
 
-   bool state_RB;
+   bool state_RB = false;
 
-   bool state_RB_old;
+   bool state_RB_old = false;
 
-   bool state_RBS;
+   bool state_RBS = false;
 
-   bool state_RBS_old;
+   bool state_RBS_old = false;
 
-   bool state_EPK;
+   bool state_EPK = false;
 
-   double v_kmh;
+   double v_kmh = 0.0;
 
-   double v;
+   double v = 0.0;
 
    /// Шаг дифференцирования скорости
-   double delta_t;
+   double delta_t = 0.1;
 
-   size_t v_count;
+   size_t v_count = 0;
 
-   double t_diff;
+   double t_diff = 0.0;
 
-   double acceleration;
+   double acceleration = 0.0;
 
-   bool key_epk;
+   bool key_epk = false;
 
-   bool key_epk_old;
+   bool key_epk_old = false;
 
-   bool is_dislplay_ON;
+   bool is_dislplay_ON = false;
 
-   bool check_vigilance;
+   bool check_vigilance = false;
 
-   enum
-   {
-       NUM_LAMPS = 8
-   };
+   double beep_interval = 0.5;
 
-   Timer *safety_timer;
+   Timer *beepTimer = new Timer(beep_interval, false);
 
-   Timer *beepTimer;
+   Timer *safety_timer = new Timer(45.0, false);
 
-   double beep_interval;
-
-   double rail_coord;
-
-   double train_length;
+   double train_length = 22.532;
 
    /// Конструкционная скорость
-   double v_max;
+   double v_max = 160.0;
 
    /// Текущее ограничение скорости
-   double current_limit;
+   double current_limit = 300.0;
 
    /// Следующее ограничение скорости
-   double next_limit;
+   double next_limit = 300.0;
 
-   int dir;
+   /// Направление
+   int dir = 1;
 
    /// Дистанция до ограничения
-   double limit_dist;
+   double limit_dist = 0.0;
 
    /// Индекс станции из ЭК
-   int station_idx;
+   int station_idx = -1;
 
    /// Флаг окончания поиска начальной станции
-   bool begin_station_finded;
+   bool begin_station_finded = false;
 
    /// Признак разрешения тяги
-   bool is_trac_allowed;
+   bool is_trac_allowed = false;
 
-   /// База ограничений скорости
-   std::vector<speed_limit_t> limits;
+    /// Модуль работы с ограничениями скорости на путевой топологии
+    SpeedMap *speedmap;
 
-   /// База станций
+    /// Координата локомотива по железнодорожному пикетажу
+    double rail_coord = 0.0;
+
+    /// Положение центра локомотива в пространстве
+    dvec3 coord;
+
+    /// Радиус поиска ближайшей станции
+    double station_search_radius = 5000.0;
+
+    /// База станций
     std::vector<station_t> stations;
 
-   std::array<float, NUM_LAMPS> lamps;
+    std::array<float, NUM_LAMPS> lamps = {0.0f, 0.0f, 0.0f, 0.0f,
+                                          0.0f, 0.0f, 0.0f, 0.0f};
 
    Trigger epk_state;
 
@@ -218,9 +251,9 @@ private:
    };
 
    /// Мвссив значений скоростей для численного дифференцирования
-   std::array<double, DIFF_NUM> v_i;
+   std::array<double, DIFF_NUM> v_i = {0.0, 0.0, 0.0};
 
-   std::array<sound_state_t, 2> sound_states;
+   std::array<sound_state_t, NUM_SOUNDS> sound_states;
 
    void preStep(state_vector_t &Y, double t) override;
 
@@ -230,7 +263,7 @@ private:
 
    void load_config(CfgReader &cfg) override;
 
-   void alsn_process(int code_alsn);
+   void alsn_process(ALSN code_alsn);
 
    /// Озвучка
    void sounds_process();
@@ -243,9 +276,6 @@ private:
 
    /// Расчет ограничений
    void calc_speed_limits();
-
-   /// Поиск текущего и следующего ограничения в базе
-   void findLimits(speed_limit_t &cur_limit, speed_limit_t &next_limit);
 
    /// Определение текущей станции
    void stations_process();

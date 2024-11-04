@@ -65,7 +65,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
     analogSignal[SIGNAL_KLUB_U_STATION_NUM] = TO_FLOAT(klub_BEL->getStationIndex());
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
-    analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(alsn_info.code_alsn);
+    analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(klub_BEL->getLampNum());
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;

@@ -8,9 +8,9 @@ void EP1m::stepDebugPrint(double t, double dt)
     (void) t;
     (void) dt;
 
-    /*DebugMsg = "";
+    DebugMsg = "";
     DebugMsg += QString("x%1 km|V%2 km/h|")
-                    .arg(railway_coord / 1000.0, 8, 'f', 3)
+                    .arg(profile_point_data.railway_coord / 1000.0, 10, 'f', 3)
                     .arg(velocity * Physics::kmh, 6, 'f', 1);
     DebugMsg += QString("pBP%1|pBC%2|pSR%3|")
                     .arg(10.0 * brakepipe->getPressure(), 6, 'f', 2)
@@ -38,13 +38,54 @@ void EP1m::stepDebugPrint(double t, double dt)
 
     DebugMsg += traction_reg;
 
-    DebugMsg += QString("BP:Anglecock F%1 B%2|Hose F%3 B%4|")
-                    .arg(anglecock_bp_fwd->isOpened())
-                    .arg(anglecock_bp_bwd->isOpened())
-                    .arg(hose_bp_fwd->isConnected())
-                    .arg(hose_bp_bwd->isConnected());*/
+    DebugMsg += QString("\n");
+    DebugMsg += QString("%1%2%3-%4-couplings-%5-%6%7%8")
+                    .arg(coupling_fwd->isLinked() ? "=" : " ")
+                    .arg(coupling_fwd->isCoupled() ? "=" : " ")
+                    .arg((coupling_fwd->getOutputSignal(COUPL_OUTPUT_REF_STATE) > -0.5) ? "=" : ">")
+                    .arg((oper_rod_fwd->getOperatingState() > -0.5) ? "|" : "/")
+                    .arg((oper_rod_bwd->getOperatingState() > -0.5) ? "|" : "\\")
+                    .arg((coupling_bwd->getOutputSignal(COUPL_OUTPUT_REF_STATE) > -0.5) ? "=" : "<")
+                    .arg(coupling_bwd->isCoupled() ? "=" : " ")
+                    .arg(coupling_bwd->isLinked() ? "=" : " ");
+    DebugMsg += QString("  |  ");
+    DebugMsg += QString("%1%2/=%3==BP==%4=\\%5%6")
+                    .arg(hose_bp_fwd->isLinked() ? "\\" : " ")
+                    .arg(hose_bp_fwd->isConnected() ? "_" : " ")
+                    .arg(anglecock_bp_fwd->isOpened() ? "/" : "|")
+                    .arg(anglecock_bp_bwd->isOpened() ? "\\" : "|")
+                    .arg(hose_bp_bwd->isConnected() ? "_" : " ")
+                    .arg(hose_bp_bwd->isLinked() ? "/" : " ");
+    DebugMsg += QString("  |  ");
+    DebugMsg += QString("%1%2/=%3==FL==%4=\\%5%6")
+                    .arg(hose_fl_fwd->isLinked() ? "\\" : " ")
+                    .arg(hose_fl_fwd->isConnected() ? "_" : " ")
+                    .arg(anglecock_fl_fwd->isOpened() ? "/" : "|")
+                    .arg(anglecock_fl_bwd->isOpened() ? "\\" : "|")
+                    .arg(hose_fl_bwd->isConnected() ? "_" : " ")
+                    .arg(hose_fl_bwd->isLinked() ? "/" : " ");
 
-    DebugMsg = QString("ГВ: %1| KV41.0: %2")
-                   .arg(main_switch->getState())
-                   .arg(kv41->getContactState(0));
+    DebugMsg += QString("\n");
+    DebugMsg += QString("FWD Speed limit %1 km/h | Next %2 km/h (%3 m)")
+                    .arg(speedmap_fwd->getCurrentLimit(), 3, 'f', 0)
+                    .arg(speedmap_fwd->getNextLimit(), 3, 'f', 0)
+                    .arg(speedmap_fwd->getNextLimitDistance(), 6, 'f', 1);
+    DebugMsg += QString("  |  ");
+    DebugMsg += QString("BWD Speed limit %1 km/h | Next %2 km/h (%3 m)")
+                    .arg(speedmap_bwd->getCurrentLimit(), 3, 'f', 0)
+                    .arg(speedmap_bwd->getNextLimit(), 3, 'f', 0)
+                    .arg(speedmap_bwd->getNextLimitDistance(), 6, 'f', 1);
+
+    DebugMsg += QString("\n");
+    DebugMsg += QString("FWD Signal code %1 (%2 Hz) | Next %3 (%4 m)")
+                    .arg(coil_ALSN_fwd->getCode(), 1)
+                    .arg(coil_ALSN_fwd->getFrequency(), 3, 'f', 0)
+                    .arg(coil_ALSN_fwd->getNextSignalLiter())
+                    .arg(coil_ALSN_fwd->getNextSignalDistance(), 6, 'f', 1);
+    DebugMsg += QString("  |  ");
+    DebugMsg += QString("BWD Signal code %1 (%2 Hz) | Next %3 (%4 m)")
+                    .arg(coil_ALSN_bwd->getCode(), 1)
+                    .arg(coil_ALSN_bwd->getFrequency(), 3, 'f', 0)
+                    .arg(coil_ALSN_bwd->getNextSignalLiter())
+                    .arg(coil_ALSN_bwd->getNextSignalDistance(), 6, 'f', 1);
 }

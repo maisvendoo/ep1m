@@ -350,7 +350,18 @@ private:
 
     std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
 
-    QList<QString> tap_sounds;
+    /// Ограничения скорости на путевой инфраструктуре для кабины А
+    SpeedMap    *speedmap_fwd = Q_NULLPTR;
+    /// Ограничения скорости на путевой инфраструктуре для кабины Б
+    SpeedMap    *speedmap_bwd = Q_NULLPTR;
+
+    /// Приёмная катушка АЛСН для кабины А
+    CoilALSN    *coil_ALSN_fwd = Q_NULLPTR;
+    /// Приёмная катушка АЛСН для кабины Б
+    CoilALSN    *coil_ALSN_bwd = Q_NULLPTR;
+
+    /// Дешифратор сигнала АЛСН
+    DecoderALSN *alsn_decoder = Q_NULLPTR;
 
     void initialization() override;
 
