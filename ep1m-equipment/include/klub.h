@@ -68,7 +68,7 @@ public:
    /// Выдача состояния цепи удерживающей катушки ЭПК
    bool getEPKstate() { return epk_state.getState(); };
 
-   /// Получить состояние лампы локомотивного световора
+   /// Получить состояние лампы локомотивного светофора
    float getLampState(size_t lamp_idx)
    {
        if (lamp_idx < lamps.size())
@@ -77,7 +77,7 @@ public:
         return 0.0f;
    }
 
-   /// Получить активную лампу локомотивного световора
+   /// Получить активную лампу локомотивного светофора
    float getLampNum()
    {
        for (int i = 0; i <= GREEN_LAMP1; ++i)
@@ -115,7 +115,8 @@ public:
     void setTrainLength(double train_length)
     {
         this->train_length = train_length;
-        speedmap->setCurrentSearchDistance(train_length);
+        if (speedmap)
+            speedmap->setCurrentSearchDistance(train_length);
     }
 
    /// Задать конструкционную скорость
@@ -127,7 +128,8 @@ public:
     void setDirection(int dir)
     {
         this->dir = dir;
-        speedmap->setDirection(dir);
+        if (speedmap)
+            speedmap->setDirection(dir);
     }
 
    double getLimitDistance() const { return limit_dist; }
@@ -217,20 +219,17 @@ private:
    /// Индекс станции из ЭК
    int station_idx = -1;
 
-   /// Флаг окончания поиска начальной станции
-   bool begin_station_finded = false;
-
    /// Признак разрешения тяги
    bool is_trac_allowed = false;
 
     /// Модуль работы с ограничениями скорости на путевой топологии
-    SpeedMap *speedmap;
+    SpeedMap *speedmap = nullptr;
 
     /// Координата локомотива по железнодорожному пикетажу
     double rail_coord = 0.0;
 
     /// Положение центра локомотива в пространстве
-    dvec3 coord;
+    dvec3 coord = {0.0, 0.0, 0.0};
 
     /// Радиус поиска ближайшей станции
     double station_search_radius = 5000.0;
@@ -279,9 +278,6 @@ private:
 
    /// Определение текущей станции
    void stations_process();
-
-   /// Поиск начальной станции
-   void find_begin_station();
 
 private slots:
 

@@ -4,7 +4,6 @@
 #include    <QTimer>
 
 #include    "display.h"
-#include "registrator.h"
 
 class ALSN;
 class TopBlock;
