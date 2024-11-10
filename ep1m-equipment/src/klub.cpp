@@ -69,7 +69,7 @@ void KLUB::loadStationsMap(QString path)
 QString KLUB::getStationText() const
 {
     QString tmp = station_text;
-    tmp.resize(STATION_MAX_SYMBOLS);
+    tmp.resize(STATION_MAX_SYMBOLS, QChar(' '));
     return tmp;
 }
 
@@ -79,7 +79,7 @@ QString KLUB::getStationText() const
 QString KLUB::getInfoText() const
 {
     QString tmp = info_text;
-    tmp.resize(INFO_MAX_SYMBOLS);
+    tmp.resize(INFO_MAX_SYMBOLS, QChar(' '));
     return tmp;
 }
 
@@ -110,7 +110,8 @@ void KLUB::preStep(state_vector_t &Y, double t)
 
     stations_process();
 
-    info_text = "светофор  test литер нм1";
+    // ТЕСТОВАЯ ЗАГЛУШКА
+    info_text = "светофор-(test)литер нм1";
 
     speed_control();
 

@@ -211,7 +211,7 @@ void ClubUDisplay::slotUpdateTimer()
     for (size_t i = 0; i < 8; ++i)
     {
         int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_SYMB1 + i]);
-        text.push_back((c > 0) ? QChar(c) : QChar(' '));
+        text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
     }
     topBlock_->setStationName(text);
 
@@ -232,7 +232,7 @@ void ClubUDisplay::slotUpdateTimer()
     for (size_t i = 0; i < 24; ++i)
     {
         int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STRING_SYMB1 + i]);
-        text.push_back((c > 0) ? QChar(c) : QChar(' '));
+        text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
     }
     bottomBlock_->setTargetName(text);
 

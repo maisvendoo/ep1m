@@ -180,6 +180,7 @@ enum
     SIGNAL_MSUD_OSLAB_POLE2     = 192, // Ослбаление поля 2
     SIGNAL_MSUD_OSLAB_POLE3     = 193, // Ослбаление поля 3
     SIGNAL_MSUD_VIP_ZONE        = 96,  // Зона ВИП
+    SIGNAL_MSUD_TIME            = 95,  // Текущее время
 
 
 

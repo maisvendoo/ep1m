@@ -73,8 +73,9 @@ void EP1m::signalsOutput()
     int cur_time = QTime::currentTime().hour() * 3600 +
                    QTime::currentTime().minute() * 60 +
                    QTime::currentTime().second();
+
+    analogSignal[SIGNAL_KLUB_U_TIME] = analogSignal[SIGNAL_MSUD_TIME] = TO_FLOAT(cur_time);
     analogSignal[SIGNAL_KLUB_U_SHEDULE_TIME] = 0.0f;
-    analogSignal[SIGNAL_KLUB_U_TIME] = TO_FLOAT(cur_time);
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
 
     analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->isKeyOn());

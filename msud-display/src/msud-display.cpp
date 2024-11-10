@@ -3,7 +3,7 @@
 #include    <QVBoxLayout>
 #include    <QLabel>
 #include    <QFontDatabase>
-#include    <QTime>
+//#include    <QTime>
 
 #include    "ep1m-signals.h"
 
@@ -297,13 +297,13 @@ void MsudDisplay::initDisplay_()
 
     createLab_(labCurTime_, QSize(135, fooH), "yellow", Qt::AlignLeft);
     labCurTime_->move(640, 560);
-
+/*
     connect(&timeTimer_, &QTimer::timeout, [&]()
     {
         labCurTime_->setText(QTime::currentTime().toString("hh.mm.ss"));
     });
     timeTimer_.start(1000);
-
+*/
 
 
     createConnectionTimer_(timerTC_, labKO_TC_);
@@ -560,7 +560,12 @@ void MsudDisplay::slotUpdateTimer()
         labFieldWeak3_->setStyleSheet("color: white; background: red;");
 
 
-
+    int seconds = static_cast<int>(input_signals[SIGNAL_MSUD_TIME]);
+    QString cur_time = QString("%1:%2:%3")
+                           .arg(seconds / 3600, 2, 10, QChar('0'))
+                           .arg(seconds / 60 % 60, 2, 10, QChar('0'))
+                           .arg(seconds % 60, 2, 10, QChar('0'));
+    labCurTime_->setText(cur_time);
 
 
 //    if (val1_ > 1600)
