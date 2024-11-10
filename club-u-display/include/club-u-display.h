@@ -26,19 +26,19 @@ public:
 
 private:
 
-    QTimer          *updateTimer;
+    QTimer          *updateTimer = nullptr;
 
-    ALSN            *alsn_;
-    TopBlock        *topBlock_;
-    MiddleBlock     *middleBlock_;
-    RightBlock      *rightBlock_;
-    BottomBlock     *bottomBlock_;
-
+    ALSN            *alsn_ = nullptr;
+    TopBlock        *topBlock_ = nullptr;
+    MiddleBlock     *middleBlock_ = nullptr;
+    RightBlock      *rightBlock_ = nullptr;
+    BottomBlock     *bottomBlock_ = nullptr;
+/*
     std::vector<QString>    stations;
     int stationsCount_;
 
-
     void loadStations();
+*/
     void initMainWindow();
     void initBlocks_();
 

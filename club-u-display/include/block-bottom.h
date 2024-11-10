@@ -18,12 +18,12 @@ public:
 
 
 private:
-    TextPaint   *txtPaintDistToTarget_;
-    TextPaint   *txtPaintTargetType_;
-    TextPaint   *txtPaintTargetName_;
+    TextPaint   *txtPaintDistToTarget_ = nullptr;
+//    TextPaint   *txtPaintTargetType_ = nullptr;
+    TextPaint   *txtPaintTargetName_ = nullptr;
 
-    int oldDistToTarget_;
-    QString oldTargetName_;
+    int oldDistToTarget_ = 0;
+    QString oldTargetName_ = "";
 
 };
 

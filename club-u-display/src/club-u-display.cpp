@@ -21,14 +21,6 @@
 //------------------------------------------------------------------------------
 ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     : AbstractDisplay(parent, f)
-    , updateTimer(Q_NULLPTR)
-    , alsn_(Q_NULLPTR)
-    , topBlock_(Q_NULLPTR)
-    , middleBlock_(Q_NULLPTR)
-    , rightBlock_(Q_NULLPTR)
-    , bottomBlock_(Q_NULLPTR)
-    , stations()
-    , stationsCount_(0)
 {
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(847, 895);
@@ -56,7 +48,7 @@ ClubUDisplay::~ClubUDisplay()
 //------------------------------------------------------------------------------
 void ClubUDisplay::init()
 {
-    loadStations();
+    //loadStations();
     initMainWindow();
     initBlocks_();
 
@@ -64,7 +56,7 @@ void ClubUDisplay::init()
 }
 
 
-
+/*
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -93,7 +85,7 @@ void ClubUDisplay::loadStations()
 
     stationsCount_ = stations.size();
 }
-
+*/
 
 
 //------------------------------------------------------------------------------
@@ -205,10 +197,23 @@ void ClubUDisplay::slotUpdateTimer()
     topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
     topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
     topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
+    topBlock_->setIndStraight(static_cast<bool>(input_signals[SIGNAL_KLUB_U_STRAIGHT]));
+    topBlock_->setIndSide(static_cast<bool>(input_signals[SIGNAL_KLUB_U_SIDE]));
     topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
-    int stationNum = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_NUM]);
-    if ( (stationsCount_ > 0) && (stationNum < stationsCount_) && (stationNum >= 0) )
-        topBlock_->setStationName(stations[stationNum]);
+
+    int seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_SHEDULE_TIME]);
+    topBlock_->setSheduleTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
+
+    seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_TIME]);
+    topBlock_->setCurTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
+
+    QString text = "";
+    for (size_t i = 0; i < 8; ++i)
+    {
+        int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_SYMB1 + i]);
+        text.push_back((c > 0) ? QChar(c) : QChar(' '));
+    }
+    topBlock_->setStationName(text);
 
     middleBlock_->setSpeedLimitVisible(true);
     middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
@@ -223,7 +228,13 @@ void ClubUDisplay::slotUpdateTimer()
     rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
 
     bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
-
+    text = "";
+    for (size_t i = 0; i < 24; ++i)
+    {
+        int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STRING_SYMB1 + i]);
+        text.push_back((c > 0) ? QChar(c) : QChar(' '));
+    }
+    bottomBlock_->setTargetName(text);
 
     if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_EPK]))
     {

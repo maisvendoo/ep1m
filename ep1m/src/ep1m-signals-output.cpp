@@ -1,4 +1,5 @@
 #include    "ep1m.h"
+#include    <QTime>
 
 //------------------------------------------------------------------------------
 //
@@ -55,6 +56,27 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_WHEEL6] = TO_FLOAT(wheel_rotation_angle[5] / 2.0 / Physics::PI);
 
     analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
+
+    QString text = klub_BEL->getStationText();
+    for (size_t i = 0; i < text.size(); ++i)
+    {
+        analogSignal[SIGNAL_KLUB_U_STATION_SYMB1 + i] = TO_FLOAT(text[i].unicode());
+    }
+
+    text = klub_BEL->getInfoText();
+    for (size_t i = 0; i < text.size(); ++i)
+    {
+        analogSignal[SIGNAL_KLUB_U_STRING_SYMB1 + i] = TO_FLOAT(text[i].unicode());
+    }
+
+
+    int cur_time = QTime::currentTime().hour() * 3600 +
+                   QTime::currentTime().minute() * 60 +
+                   QTime::currentTime().second();
+    analogSignal[SIGNAL_KLUB_U_SHEDULE_TIME] = 0.0f;
+    analogSignal[SIGNAL_KLUB_U_TIME] = TO_FLOAT(cur_time);
+    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
+
     analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->isKeyOn());
     analogSignal[SIGNAL_KLUB_U_REVERSOR] = TO_FLOAT(km->getReversHandlePos());
     analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = TO_FLOAT(brakepipe->getPressure());
@@ -62,11 +84,12 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
     analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
-    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
-    analogSignal[SIGNAL_KLUB_U_STATION_NUM] = TO_FLOAT(klub_BEL->getStationIndex());
-    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
     analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(klub_BEL->getLampNum());
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1.0f;
+    analogSignal[SIGNAL_KLUB_U_STRAIGHT] = 0.0f;
+    analogSignal[SIGNAL_KLUB_U_SIDE] = 0.0f;
+    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
+    analogSignal[SIGNAL_KLUB_U_M] = 0.0f;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());

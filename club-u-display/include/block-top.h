@@ -48,26 +48,41 @@ public:
     void setCassete(bool flag);
     void setCoordinate(double coordinate);
     void setStationName(QString stationName);
+    void setCurTime(int h, int m, int s);
+    void setSheduleTime(int h, int m, int s);
+    void setIndStraight(bool flag);
+    void setIndSide(bool flag);
 
 
 private:
-    ImageWidget *indicationBditelnosti_;
-    ImageWidget *indicationCassette_;
-    ImageWidget *indicationM_;
-    ImageWidget *indicationP_;
+    ImageWidget *indicationBditelnosti_ = nullptr;
+    ImageWidget *indicationCassette_ = nullptr;
+    ImageWidget *indicationM_ = nullptr;
+    ImageWidget *indicationP_ = nullptr;
+    ImageWidget *indicationStraight_ = nullptr;
+    ImageWidget *indicationSide_ = nullptr;
 
-    TextPaint   *txtPaintCoordinate1_;
-    TextPaint   *txtPaintCoordinate2_;
-    TextPaint   *txtPaintStation_;
-    TextPaint   *txtPaintCurTimeH_;
-    TextPaint   *txtPaintCurTimeM_;
-    TextPaint   *txtPaintCurTimeS_;
+    TextPaint   *txtPaintCoordinate1_ = nullptr;
+    TextPaint   *txtPaintCoordinate2_ = nullptr;
+    TextPaint   *txtPaintStation_ = nullptr;
+    TextPaint   *txtPaintCurTimeH_ = nullptr;
+    TextPaint   *txtPaintCurTimeM_ = nullptr;
+    TextPaint   *txtPaintCurTimeS_ = nullptr;
+    TextPaint   *txtPaintSheduleTimeH_ = nullptr;
+    TextPaint   *txtPaintSheduleTimeM_ = nullptr;
+    TextPaint   *txtPaintSheduleTimeS_ = nullptr;
 
-    double oldCoordinate_;
-    QString oldStation_;
-
+    double oldCoordinate_ = 0.0;
+    QString oldStation_ = "";
+    int oldCurH_ = 0;
+    int oldCurM_ = 0;
+    int oldCurS_ = 0;
+    int oldSheduleH_ = 0;
+    int oldSheduleM_ = 0;
+    int oldSheduleS_ = 0;
+/*
     QTimer timeTimer_;
-
+*/
 
 };
 

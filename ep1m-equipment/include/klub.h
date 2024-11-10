@@ -132,13 +132,19 @@ public:
             speedmap->setDirection(dir);
     }
 
-   double getLimitDistance() const { return limit_dist; }
+   double getTargetDistance() const { return target_dist; }
 
    double getRailCoord() const { return rail_coord / 1000.0; }
 
    int getStationIndex() const { return station_idx; }
 
    bool isTractionAllowed() const { return is_trac_allowed; }
+
+    /// Текст в табло "станция"
+    QString getStationText() const;
+
+    /// Текст в табло информационной строки
+    QString getInfoText() const;
 
    enum
    {
@@ -213,8 +219,8 @@ private:
    /// Направление
    int dir = 1;
 
-   /// Дистанция до ограничения
-   double limit_dist = 0.0;
+   /// Дистанция до следующей цели
+   double target_dist = 0.0;
 
    /// Индекс станции из ЭК
    int station_idx = -1;
@@ -239,6 +245,18 @@ private:
 
     std::array<float, NUM_LAMPS> lamps = {0.0f, 0.0f, 0.0f, 0.0f,
                                           0.0f, 0.0f, 0.0f, 0.0f};
+
+    enum
+    {
+        STATION_MAX_SYMBOLS = 8,
+        INFO_MAX_SYMBOLS = 24,
+    };
+
+    /// Текст в табло "станция"
+    QString station_text = QString("");
+
+    /// Текст в табло информационной строки
+    QString info_text = QString("");
 
    Trigger epk_state;
 

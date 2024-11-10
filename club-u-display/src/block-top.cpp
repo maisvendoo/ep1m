@@ -11,18 +11,6 @@
 //-----------------------------------------------------------------------------
 TopBlock::TopBlock(QSize size, QWidget *parent)
     : QLabel(parent)
-    , indicationBditelnosti_(Q_NULLPTR)
-    , indicationCassette_(Q_NULLPTR)
-    , indicationM_(Q_NULLPTR)
-    , indicationP_(Q_NULLPTR)
-    , txtPaintCoordinate1_(Q_NULLPTR)
-    , txtPaintCoordinate2_(Q_NULLPTR)
-    , txtPaintStation_(Q_NULLPTR)
-    , txtPaintCurTimeH_(Q_NULLPTR)
-    , txtPaintCurTimeM_(Q_NULLPTR)
-    , txtPaintCurTimeS_(Q_NULLPTR)
-    , oldCoordinate_(-1.0)
-    , oldStation_("")
 {
     this->resize(size);
     //this->setStyleSheet("border: 1px solid red");
@@ -48,6 +36,16 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     indicationP_->move(316, 31);
     indicationP_->setVisible(false);
 
+    // Индикация из АЛС-ЕН "прямо"
+    indicationStraight_ = new ImageWidget("rcc", "ind_straight", QSize(45,17), this);
+    indicationStraight_->move(10, 77);
+    indicationStraight_->setVisible(false);
+
+    // Индикация из АЛС-ЕН "отклонение"
+    indicationSide_ = new ImageWidget("rcc", "ind_side", QSize(45,17), this);
+    indicationSide_->move(10, 112);
+    indicationSide_->setVisible(false);
+
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
     txtPaintCoordinate1_->move(78, 100);
@@ -71,19 +69,42 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCurTimeH_->move(411, 100);
     txtPaintCurTimeH_->setFonts(13, Qt::green, 87);
     txtPaintCurTimeH_->setParams(2, 19);
+    txtPaintCurTimeH_->setText(QString::number(0));
 
     txtPaintCurTimeM_ = new TextPaint(QSize(58, 20), this);
     txtPaintCurTimeM_->move(447, 100);
     txtPaintCurTimeM_->setFonts(13, Qt::green, 87);
     txtPaintCurTimeM_->setParams(2, 19);
     txtPaintCurTimeM_->setPointForDigit(6, 16);
+    txtPaintCurTimeM_->setText(QString::number(0));
 
     txtPaintCurTimeS_ = new TextPaint(QSize(58, 20), this);
     txtPaintCurTimeS_->move(504, 100);
     txtPaintCurTimeS_->setFonts(13, Qt::green, 87);
     txtPaintCurTimeS_->setParams(2, 19);
     txtPaintCurTimeS_->setPointForDigit(6, 16);
+    txtPaintCurTimeS_->setText(QString::number(0));
 
+    txtPaintSheduleTimeH_ = new TextPaint(QSize(38, 20), this);
+    txtPaintSheduleTimeH_->move(411, 30);
+    txtPaintSheduleTimeH_->setFonts(13, Qt::green, 87);
+    txtPaintSheduleTimeH_->setParams(2, 19);
+    txtPaintSheduleTimeH_->setText(QString::number(0));
+
+    txtPaintSheduleTimeM_ = new TextPaint(QSize(58, 20), this);
+    txtPaintSheduleTimeM_->move(447, 30);
+    txtPaintSheduleTimeM_->setFonts(13, Qt::green, 87);
+    txtPaintSheduleTimeM_->setParams(2, 19);
+    txtPaintSheduleTimeM_->setPointForDigit(6, 16);
+    txtPaintSheduleTimeM_->setText(QString::number(0));
+
+    txtPaintSheduleTimeS_ = new TextPaint(QSize(58, 20), this);
+    txtPaintSheduleTimeS_->move(504, 30);
+    txtPaintSheduleTimeS_->setFonts(13, Qt::green, 87);
+    txtPaintSheduleTimeS_->setParams(2, 19);
+    txtPaintSheduleTimeS_->setPointForDigit(6, 16);
+    txtPaintSheduleTimeS_->setText(QString::number(0));
+/*
     connect(&timeTimer_, &QTimer::timeout, [&]()
     {
         txtPaintCurTimeH_->setText(QString::number(QTime::currentTime().hour()));
@@ -91,7 +112,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
         txtPaintCurTimeS_->setText(QString::number(QTime::currentTime().second()));
     });
     timeTimer_.start(1000);
-
+*/
 }
 
 
@@ -161,6 +182,32 @@ void TopBlock::setCassete(bool flag)
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
+void TopBlock::setIndStraight(bool flag)
+{
+    if (indicationStraight_->isVisible() == flag)
+        return;
+
+    indicationStraight_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setIndSide(bool flag)
+{
+    if (indicationSide_->isVisible() == flag)
+        return;
+
+    indicationSide_->setVisible(flag);
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 void TopBlock::setCoordinate(double coordinate)
 {
     if ((coordinate < 0.0) || (coordinate > 9999.999))
@@ -191,6 +238,53 @@ void TopBlock::setStationName(QString stationName)
 }
 
 
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setCurTime(int h, int m, int s)
+{
+    if (oldCurH_ != h)
+    {
+        txtPaintCurTimeH_->setText(QString::number(h));
+        oldCurH_ = h;
+    }
+
+    if (oldCurM_ != m)
+    {
+        txtPaintCurTimeM_->setText(QString::number(m));
+        oldCurM_ = m;
+    }
+
+    if (oldCurS_ != s)
+    {
+        txtPaintCurTimeS_->setText(QString::number(s));
+        oldCurS_ = s;
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setSheduleTime(int h, int m, int s)
+{
+    if (oldSheduleH_ != h)
+    {
+        txtPaintSheduleTimeH_->setText(QString::number(h));
+        oldSheduleH_ = h;
+    }
+
+    if (oldSheduleM_ != m)
+    {
+        txtPaintSheduleTimeM_->setText(QString::number(m));
+        oldSheduleM_ = m;
+    }
+
+    if (oldSheduleS_ != s)
+    {
+        txtPaintSheduleTimeS_->setText(QString::number(s));
+        oldSheduleS_ = s;
+    }
+}
 
 
 

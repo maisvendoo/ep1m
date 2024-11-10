@@ -8,6 +8,8 @@
         <file alias="ind_M">img/ind_M.png</file>
         <file alias="ind_P">img/ind_P.png</file>
         <file alias="ind_zapret_otpuska">img/ind_zapret_otpuska.png</file>
+        <file alias="ind_straight">img/straight.png</file>
+        <file alias="ind_side">img/side.png</file>
 
         <file alias="alsn_green">leds/alsn_green.png</file>
         <file alias="alsn_yellow">leds/alsn_yellow.png</file>

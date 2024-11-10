@@ -66,6 +66,26 @@ void KLUB::loadStationsMap(QString path)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+QString KLUB::getStationText() const
+{
+    QString tmp = station_text;
+    tmp.resize(STATION_MAX_SYMBOLS);
+    return tmp;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+QString KLUB::getInfoText() const
+{
+    QString tmp = info_text;
+    tmp.resize(INFO_MAX_SYMBOLS);
+    return tmp;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void KLUB::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(Y);
@@ -80,11 +100,17 @@ void KLUB::preStep(state_vector_t &Y, double t)
         is_red.reset();
         is_dislplay_ON = false;
         is_trac_allowed = false;
+        station_text = "";
+        info_text = "";
         return;
     }
 
     is_dislplay_ON = true;
     is_trac_allowed = true;
+
+    stations_process();
+
+    info_text = "светофор  test литер нм1";
 
     speed_control();
 
@@ -160,8 +186,6 @@ void KLUB::preStep(state_vector_t &Y, double t)
     }
 
     check_vigilance = !epk_state.getState();
-
-    stations_process();
 
     sounds_process();
 }
@@ -343,8 +367,8 @@ void KLUB::calc_speed_limits()
     if (current_limit > next_limit)
     {
         double a = 0.7;
-        limit_dist = speedmap->getNextLimitDistance();
-        v_lim = sqrt( pow(next_limit / Physics::kmh, 2) + 2 * a * limit_dist) * Physics::kmh;
+        target_dist = speedmap->getNextLimitDistance();
+        v_lim = sqrt( pow(next_limit / Physics::kmh, 2) + 2 * a * target_dist) * Physics::kmh;
     }
 
     current_limit = min(v_lim, current_limit) + 1;
@@ -370,6 +394,10 @@ void KLUB::stations_process()
             station_idx = i;
         }
     }
+    if (station_idx >= 0)
+        station_text = stations[station_idx].name;
+    else
+        station_text = "";
 }
 
 //------------------------------------------------------------------------------
