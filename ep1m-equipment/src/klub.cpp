@@ -110,8 +110,9 @@ void KLUB::preStep(state_vector_t &Y, double t)
 
     stations_process();
 
-    // ТЕСТОВАЯ ЗАГЛУШКА
-    info_text = "светофор-(test)литер нм1";
+    calc_speed_limits_by_speedmap();
+
+    calc_speed_limits_by_next_signal();
 
     speed_control();
 
@@ -327,33 +328,10 @@ void KLUB::calc_acceleration(double t, double dt)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void KLUB::speed_control()
+void KLUB::calc_speed_limits_by_speedmap()
 {
-    calc_speed_limits();
+    target_dist = 5000.0;
 
-    int V_kmh = qRound(v_kmh);
-
-    if (V_kmh <= current_limit - 3)
-    {
-        beepTimer->stop();
-    }
-    else
-    {
-        if (!beepTimer->isStarted())
-            beepTimer->start();
-    }
-
-    if (V_kmh > current_limit)
-    {
-        epk_state.reset();
-    }
-}
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void KLUB::calc_speed_limits()
-{
     if (!key_epk)
     {
         current_limit = v_max;
@@ -374,6 +352,95 @@ void KLUB::calc_speed_limits()
 
     current_limit = min(v_lim, current_limit) + 1;
     next_limit = min(v_max, next_limit) + 1;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void KLUB::calc_speed_limits_by_next_signal()
+{
+    double distance = coilALSN->getNextSignalDistance();
+
+    // Если сигнал АЛСН жёлтый,
+    // рассчитываем кривую торможения к светофору до 60 км/ч
+    if (code_alsn == ALSN::YELLOW)
+    {
+        double a = 0.7;
+        double yellow_limit = 60.0;
+        double v_lim = sqrt( pow(yellow_limit / Physics::kmh, 2) + 2 * a * distance) * Physics::kmh;
+        current_limit = min(v_lim, current_limit - 1) + 1;
+    }
+
+    // Если сигнал АЛСН красный с жёлтым (светофор закрыт),
+    // рассчитываем кривую торможения до 0 км/ч
+    if (code_alsn == ALSN::RED_YELLOW)
+    {
+        double a = 0.7;
+        double red_yellow_limit = 0.0;
+        double v_lim = sqrt( pow(red_yellow_limit / Physics::kmh, 2) + 2 * a * distance) * Physics::kmh;
+        current_limit = min(v_lim, current_limit - 1) + 1;
+    }
+
+    // Если сигнал АЛСН отсутствует, устанавливаем ограничение 40 км/ч
+    if (code_alsn == ALSN::NO_CODE)
+    {
+        current_limit = min(40.0, current_limit - 1) + 1;
+    }
+
+    QString liter = coilALSN->getNextSignalLiter();
+    if (liter.isEmpty() || (distance > target_dist))
+    {
+        // Если следующего светофора нет
+        // или он дальше чем ближайшее ограничение в карте скоростей,
+        // то выводим информацию об ограничении скорости
+        if (current_limit > next_limit)
+        {
+            info_text = "ОПАСНОЕ МЕСТО";
+            liter = QString::number(next_limit, 'f', 0) + " КМ/Ч";
+
+            size_t fill_size = INFO_MAX_SYMBOLS - info_text.size() - liter.size();
+            info_text += QString(fill_size, QChar(' '));
+            info_text += liter;
+            return;
+        }
+
+        // Если и следующего ограничения скорости нет, ничего не выводим
+        target_dist = 0.0;
+        info_text = "";
+    }
+    else
+    {
+        // Выводим информацию о следующем светофоре
+        target_dist = distance;
+        info_text = "СВЕТОФОР";
+
+        size_t fill_size = INFO_MAX_SYMBOLS - info_text.size() - liter.size();
+        info_text += QString(fill_size, QChar(' '));
+        info_text += liter;
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void KLUB::speed_control()
+{
+    int V_kmh = qRound(v_kmh);
+
+    if (V_kmh <= current_limit - 3)
+    {
+        beepTimer->stop();
+    }
+    else
+    {
+        if (!beepTimer->isStarted())
+            beepTimer->start();
+    }
+
+    if (V_kmh > current_limit)
+    {
+        epk_state.reset();
+    }
 }
 
 //------------------------------------------------------------------------------

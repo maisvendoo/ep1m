@@ -36,6 +36,7 @@ void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_c
     klub_BEL = new KLUB();
     klub_BEL->setMaxVelocity(140.0);
     klub_BEL->setSpeedMapModule(speedmap_fwd);
+    klub_BEL->setCoilALSNModule(coil_ALSN_fwd);
     klub_BEL->setDirection(dir * orient);
     klub_BEL->setTrainLength(length);
 

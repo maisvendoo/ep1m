@@ -17,6 +17,7 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     txtPaintDistToTarget_->move(16, 2);
     txtPaintDistToTarget_->setFonts(13, Qt::green, 87);
     txtPaintDistToTarget_->setParams(4, 22);
+    txtPaintDistToTarget_->setText(QString::number(0));
 /*
     //
     txtPaintTargetType_ = new TextPaint(QSize(200, 20), this);

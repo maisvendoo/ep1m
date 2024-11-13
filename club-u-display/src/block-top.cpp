@@ -51,18 +51,21 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCoordinate1_->move(78, 100);
     txtPaintCoordinate1_->setFonts(13, Qt::green, 87);
     txtPaintCoordinate1_->setParams(4, 19);
+    txtPaintCoordinate1_->setText(QString::number(0));
 
     txtPaintCoordinate2_ = new TextPaint(QSize(77, 20), this);
     txtPaintCoordinate2_->move(153, 100);
     txtPaintCoordinate2_->setFonts(13, Qt::green, 87);
     txtPaintCoordinate2_->setParams(3, 19);
     txtPaintCoordinate2_->setPointForDigit(6, 16);
+    txtPaintCoordinate2_->setText(QString::number(0.0, 'f', 3));
 
     //
     txtPaintStation_ = new TextPaint(QSize(155, 20), this);
     txtPaintStation_->move(242, 100);
     txtPaintStation_->setFonts(13, Qt::yellow);
     txtPaintStation_->setParams(8, 19, true);
+    txtPaintStation_->setText("");
 
     //
     txtPaintCurTimeH_ = new TextPaint(QSize(38, 20), this);

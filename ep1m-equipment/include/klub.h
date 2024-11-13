@@ -4,6 +4,8 @@
 #include    "device.h"
 #include    "klub-stations.h"
 #include    "ALSN-struct.h"
+#include    "ALSN-coil.h"
+#include    "ALSN-decoder.h"
 #include    "speedmap.h"
 
 //------------------------------------------------------------------------------
@@ -41,6 +43,12 @@ public:
         old_code_alsn = this->code_alsn;
         this->code_alsn = code_alsn;
     };
+
+    /// Модуль приёма сигналов АЛС с путевой топологии
+    void setCoilALSNModule(CoilALSN *device)
+    {
+        coilALSN = device;
+    }
 
     /// Модуль работы с ограничениями скорости на путевой топологии
     void setSpeedMapModule(SpeedMap *device)
@@ -228,6 +236,9 @@ private:
    /// Признак разрешения тяги
    bool is_trac_allowed = false;
 
+    /// Модуль приёма сигналов АЛС с путевой топологии
+    CoilALSN *coilALSN = nullptr;
+
     /// Модуль работы с ограничениями скорости на путевой топологии
     SpeedMap *speedmap = nullptr;
 
@@ -288,11 +299,14 @@ private:
    /// Вычисление ускорения
    void calc_acceleration(double t, double dt);
 
+   /// Расчет ограничений скорости путевой инфраструктуры
+   void calc_speed_limits_by_speedmap();
+
+   /// Расчет ограничений скорости от сигнала следующего светофора
+   void calc_speed_limits_by_next_signal();
+
    /// Работа с ограничениями скорости
    void speed_control();
-
-   /// Расчет ограничений
-   void calc_speed_limits();
 
    /// Определение текущей станции
    void stations_process();
