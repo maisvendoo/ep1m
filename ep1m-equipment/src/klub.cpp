@@ -336,19 +336,25 @@ void KLUB::calc_speed_limits_by_speedmap()
         return;
     }
 
+    // Ограничения скорости в топологии маршрута
     current_limit = speedmap->getCurrentLimit();
     next_limit = speedmap->getNextLimit();
 
     double v_lim = v_max;
     if ((current_limit - 1) > next_limit)
     {
-        double a = 0.7;
+        // Если следующее ограничение меньше текущего,
+        // запоминаем растояние до него как до следующей цели
         target_dist = speedmap->getNextLimitDistance();
-        v_lim = sqrt( pow(next_limit / Physics::kmh, 2) + 2 * a * target_dist) * Physics::kmh;
+
+        // И рассчитываем кривую торможения
+        double a = 0.7;
+        double v_next = next_limit / Physics::kmh;
+        v_lim = min(v_lim, sqrt(v_next * v_next + 2 * a * target_dist) * Physics::kmh);
     }
 
     current_limit = min(v_lim, current_limit) + 1;
-    next_limit = min(v_max, next_limit) + 1;
+    next_limit = min(v_max, next_limit);
 }
 
 //------------------------------------------------------------------------------
@@ -356,6 +362,7 @@ void KLUB::calc_speed_limits_by_speedmap()
 //------------------------------------------------------------------------------
 void KLUB::calc_speed_limits_by_next_signal()
 {
+    // Расстояние до следующего светофора в топологии маршрута
     double distance = coilALSN->getNextSignalDistance();
 
     // Если сигнал АЛСН жёлтый,
@@ -363,8 +370,8 @@ void KLUB::calc_speed_limits_by_next_signal()
     if (code_alsn == ALSN::YELLOW)
     {
         double a = 0.7;
-        double yellow_limit = 61.0;
-        double v_lim = sqrt( pow(yellow_limit / Physics::kmh, 2) + 2 * a * distance) * Physics::kmh;
+        double yellow_limit = 61.0 / Physics::kmh;
+        double v_lim = sqrt(yellow_limit * yellow_limit + 2 * a * distance) * Physics::kmh;
         current_limit = min(v_lim, current_limit);
     }
 
@@ -374,8 +381,9 @@ void KLUB::calc_speed_limits_by_next_signal()
     if (code_alsn == ALSN::RED_YELLOW)
     {
         double a = 0.7;
-        double red_yellow_limit = 61.0;
         double v_lim = sqrt(2 * a * distance) * Physics::kmh;
+
+        double red_yellow_limit = 61.0;
         v_lim = min(v_lim, red_yellow_limit);
         current_limit = min(v_lim, current_limit);
     }
