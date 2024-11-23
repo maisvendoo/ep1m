@@ -413,7 +413,9 @@ void KLUB::calc_speed_limits_by_next_signal()
     }
 
     QString liter = coilALSN->getNextSignalLiter();
-    if ( (current_limit > next_limit) && (liter.isEmpty() || (distance > target_dist)) )
+    if ((current_limit > next_limit) &&
+        (target_dist < 5000.0) &&
+        (liter.isEmpty() || (distance > target_dist)))
     {
         // Если впереди ограничение скорости,
         // а следующего светофора нет или он дальше чем ограничение,
@@ -427,7 +429,7 @@ void KLUB::calc_speed_limits_by_next_signal()
         return;
     }
 
-    if (liter.isEmpty())
+    if (liter.isEmpty() || (distance > 5000.0))
     {
         // Если следующего светофора нет, ничего не выводим
         target_dist = 0.0;
