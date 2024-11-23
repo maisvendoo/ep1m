@@ -4,21 +4,6 @@
 //
 //------------------------------------------------------------------------------
 TracController::TracController(QObject *parent) : Device(parent)
-  , mode_pos(0)
-  , mode_pos_old(0)
-  , fwd_key_state(false)
-  , old_fwd_key_state(false)
-  , bwd_key_state(false)
-  , old_bwd_key_state(false)
-  , revers_pos(0)
-  , old_traction_key(false)
-  , old_brake_key(false)
-  , trac_level(0)
-  , brake_level(0)
-  , dir(0)
-  , ref_speed_level(0)
-  , ref_speed_step(0.5)
-  , ref_speed_dir(0)
 {
     tracTimer.setTimeout(0.1);
     connect(&tracTimer, &Timer::process,
@@ -29,9 +14,9 @@ TracController::TracController(QObject *parent) : Device(parent)
             this, &TracController::slotBrakeLevelProcess);
 
     speedTimer.setTimeout(0.1);
-    //connect(&speedTimer, &Timer::process,
-      //      this, &TracController::slotSpeedLevelProcess);
-    //speedTimer.start();
+    connect(&speedTimer, &Timer::process,
+            this, &TracController::slotSpeedLevelProcess);
+    speedTimer.start();
 }
 
 //------------------------------------------------------------------------------
@@ -47,7 +32,7 @@ TracController::~TracController()
 //------------------------------------------------------------------------------
 float TracController::getHandlePosition() const
 {
-    float handle_pos = mode_pos * 0.2f + trac_level / 125.0f - brake_level / 125.f;
+    float handle_pos = mode_pos * 0.2f + trac_level / 125.0f - brake_level / 125.0f;
 
     return handle_pos;
 }
@@ -86,17 +71,35 @@ void TracController::load_config(CfgReader &cfg)
 {
     QString secName = "Device";
 
-    double timeout = 0.0;
-    cfg.getDouble(secName, "KM_main_Timeout", timeout);
+    double timeout = 0.1;
+    cfg.getDouble(secName, "handle_motion_time", timeout);
+    if (timeout > Physics::ZERO)
+    {
+        brakeTimer.setTimeout(timeout);
+        tracTimer.setTimeout(timeout);
+    }
 
-    tracTimer.setTimeout(timeout);
-    brakeTimer.setTimeout(timeout);
+    int coeff = 1;
+    cfg.getInt(secName, "handle_high_speed_coeff", coeff);
+    if ((coeff > 1) && (coeff < 100))
+    {
+        handle_high_speed_coeff = coeff;
+    }
 
-    cfg.getDouble(secName, "Ref_Speed_Timeout", timeout);
-    speedTimer.setTimeout(timeout);
-    connect(&speedTimer, &Timer::process,
-            this, &TracController::slotSpeedLevelProcess);
+    timeout = 0.1;
+    cfg.getDouble(secName, "refV_motion_time", timeout);
+    if (timeout > Physics::ZERO)
+    {
+        speedTimer.setTimeout(timeout);
+    }
     speedTimer.start();
+
+    coeff = 1;
+    cfg.getInt(secName, "refV_high_speed_coeff", coeff);
+    if ((coeff > 1) && (coeff < 100))
+    {
+        refV_high_speed_coeff = static_cast<double>(coeff);
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -104,15 +107,40 @@ void TracController::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void TracController::stepKeysControl(double t, double dt)
 {
-    processDiscretePositions(getKeyState(KEY_A), old_traction_key, 1);
-    processDiscretePositions(getKeyState(KEY_D), old_brake_key, -1);
+    // Управление реверсивной рукояткой
+    if (fwd_key_state && !old_fwd_key_state && isZero() && (revers_pos < 1))
+    {
+        revers_pos++;
+
+        sound_states[REVERS_HANDLE].play();
+    }
+
+    if (bwd_key_state && !old_bwd_key_state && isZero() && (revers_pos > -1))
+    {
+        revers_pos--;
+
+        sound_states[REVERS_HANDLE].play();
+    }
+
+    old_fwd_key_state = fwd_key_state;
+    old_bwd_key_state = bwd_key_state;
+
+    // Управление контроллером
+    if ((revers_pos != 0) && (mode_pos == 0))
+    {
+        trac_level = brake_level = 0;
+        traction.reset();
+        brake.reset();
+        processDiscretePositions(getKeyState(KEY_A), old_traction_key, 1);
+        processDiscretePositions(getKeyState(KEY_D), old_brake_key, -1);
+    }
 
     // Тут реализуем процесс перемещения главной рукоятки!!!
 
     if (mode_pos == -1)
     {
         traction.reset();
-        dir = 0;
+        handle_motion_speed = 0;
 
         if (!brakeTimer.isStarted())
             brakeTimer.start();
@@ -127,14 +155,22 @@ void TracController::stepKeysControl(double t, double dt)
             }
             else
             {
-                dir = 1;
+                if (isShift())
+                    handle_motion_speed = handle_high_speed_coeff;
+                else
+                    handle_motion_speed = 1;
             }
         }
 
         if (getKeyState(KEY_D))
         {
             if (brake.getState())
-                dir = -1;
+            {
+                if (isShift())
+                    handle_motion_speed = -handle_high_speed_coeff;
+                else
+                    handle_motion_speed = -1;
+            }
 
             if (isControl())
             {
@@ -154,7 +190,7 @@ void TracController::stepKeysControl(double t, double dt)
     if (mode_pos == 1)
     {
         brake.reset();
-        dir = 0;
+        handle_motion_speed = 0;
 
         if (!tracTimer.isStarted())
             tracTimer.start();
@@ -169,14 +205,22 @@ void TracController::stepKeysControl(double t, double dt)
             }
             else
             {
-                dir = -1;
+                if (isShift())
+                    handle_motion_speed = -handle_high_speed_coeff;
+                else
+                    handle_motion_speed = -1;
             }
         }
 
         if (getKeyState(KEY_A))
         {
             if (traction.getState())
-                dir = 1;
+            {
+                if (isShift())
+                    handle_motion_speed = handle_high_speed_coeff;
+                else
+                    handle_motion_speed = 1;
+            }
         }
         else
         {
@@ -189,42 +233,29 @@ void TracController::stepKeysControl(double t, double dt)
     old_traction_key = getKeyState(KEY_A);
     old_brake_key = getKeyState(KEY_D);
 
-    if (fwd_key_state && !old_fwd_key_state && isZero())
-    {
-        revers_pos++;
-
-        if (revers_pos <= 1)
-            sound_states[REVERS_HANDLE].play(true);
-    }
-
-    if (bwd_key_state && !old_bwd_key_state && isZero())
-    {
-        revers_pos--;
-
-        if (revers_pos >= -1)
-            sound_states[REVERS_HANDLE].play(true);
-    }
-
-    revers_pos = cut(revers_pos, -1, 1);
-
-    old_fwd_key_state = fwd_key_state;
-    old_bwd_key_state = bwd_key_state;
-
-    ref_speed_dir = 0;
+    refV_motion_speed = 0.0;
 
     if (getKeyState(KEY_Q))
     {
-        ref_speed_dir = 1;
+        if (isShift())
+            refV_motion_speed = refV_high_speed_coeff;
+        else
+            refV_motion_speed = 1.0;
     }
 
     if (getKeyState(KEY_E))
     {
-        ref_speed_dir = -1;
-
         if (isControl())
         {
-            ref_speed_dir = 0;
-            ref_speed_level = 0;
+            refV_motion_speed = 0.0;
+            refV_level = 0.0;
+        }
+        else
+        {
+            if (isShift())
+                refV_motion_speed = -refV_high_speed_coeff;
+            else
+                refV_motion_speed = -1.0;
         }
     }
 
@@ -238,16 +269,6 @@ void TracController::processDiscretePositions(bool key_state,
                                               bool old_key_state,
                                               int dir)
 {
-    if (revers_pos == 0)
-        return;
-
-    if (mode_pos != 0)
-        return;
-
-    trac_level = brake_level = 0;
-    traction.reset();
-    brake.reset();
-
     if (key_state && !old_key_state)
     {
         mode_pos += dir;
@@ -260,7 +281,7 @@ void TracController::processDiscretePositions(bool key_state,
 //------------------------------------------------------------------------------
 void TracController::slotTracLevelProcess()
 {
-    trac_level += dir * mode_pos;
+    trac_level += handle_motion_speed * mode_pos;
 
     trac_level = cut(trac_level, 0, 100);
 }
@@ -270,7 +291,7 @@ void TracController::slotTracLevelProcess()
 //------------------------------------------------------------------------------
 void TracController::slotBrakeLevelProcess()
 {
-    brake_level += dir * mode_pos;
+    brake_level += handle_motion_speed * mode_pos;
 
     brake_level = cut(brake_level, 0, 100);
 }
@@ -280,7 +301,7 @@ void TracController::slotBrakeLevelProcess()
 //------------------------------------------------------------------------------
 void TracController::slotSpeedLevelProcess()
 {
-    ref_speed_level += ref_speed_dir * ref_speed_step;
+    refV_level += refV_motion_speed * refV_step;
 
-    ref_speed_level = cut(ref_speed_level, 0.0, 100.0);
+    refV_level = cut(refV_level, 0.0, 100.0);
 }

@@ -81,7 +81,7 @@ public:
 
     double getBrakeLevel() const { return static_cast<double>(brake_level) / 100.0; }
 
-    double getRefSpeedLevel() const { return static_cast<double>(ref_speed_level) / 100.0; }
+    double getRefSpeedLevel() const { return static_cast<double>(refV_level) / 100.0; }
 
     enum
     {
@@ -98,36 +98,42 @@ private:
 
     /// Позиция, определяющая состояние схемы
     /// (0 - схема разобрана, 1 - подготовка тяги, 2 - подготовка рекуперации)
-    int mode_pos;
-    int mode_pos_old;
+    int mode_pos = 0;
+    int mode_pos_old = 0;
 
-    bool fwd_key_state;
-    bool old_fwd_key_state;
+    bool fwd_key_state = false;
+    bool old_fwd_key_state = false;
 
-    bool bwd_key_state;
-    bool old_bwd_key_state;
+    bool bwd_key_state = false;
+    bool old_bwd_key_state = false;
 
-    int revers_pos;
+    int revers_pos = 0;
 
-    //QString reversSoundName;
+    bool old_traction_key = false;
 
-    //QString mainHandleSoundName;
+    bool old_brake_key = false;
 
-    bool old_traction_key;
+    int trac_level = 0;
 
-    bool old_brake_key;
+    int brake_level = 0;
 
-    int trac_level;
+    /// Вращение контроллера по сигналу таймера
+    int handle_motion_speed = 0;
 
-    int brake_level;
+    /// Коэффициент ускорения контроллера с нажатым Shift
+    int handle_high_speed_coeff = 8;
 
-    int dir;
+    /// Положение регулятора скорости
+    double refV_level = 0.0;
 
-    double ref_speed_level;
+    /// Шаг вращения регулятора скорости
+    double refV_step = 100.0 / 160.0; // 0.625;
 
-    double ref_speed_step;
+    /// Вращение регулятора скорости по сигналу таймера
+    double refV_motion_speed = 0.0;
 
-    int ref_speed_dir;
+    /// Коэффициент ускорения регулятора скорости с нажатым Shift
+    double refV_high_speed_coeff = 8.0;
 
     Timer tracTimer;
 
