@@ -20,6 +20,7 @@ public:
 
     void init() override;
 
+    void update(double t, double dt) override;
 
 private:
     QString familyFont_;
@@ -60,10 +61,6 @@ private:
     QLabel* labCurrentEPT_;
     QLabel* labVoltageEPT_;
 
-
-//    ManometerArrow* manArrV_;
-//    ManometerArrow* manArrI_;
-
     Manometer* man11_;
     Manometer* man12_;
     Manometer* man21_;
@@ -71,13 +68,6 @@ private:
 
 
     QLabel* labCurTime_;
-
-//    int val1_ = 0;
-//    int val2_ = 0;
-
-
-    QTimer updateTimer_;
-//    QTimer timeTimer_;
 
     QTimer timerTC_;
     QTimer timerDB_;
@@ -88,6 +78,9 @@ private:
     QTimer timerKZ_;
     QTimer timerOV_;
 
+    double upd_time = 0.0;
+    double upd_interval = 0.2;
+    int  upd_block = 0;
 
     void initDisplay_();
 
@@ -101,12 +94,6 @@ private:
 
     // Отображение лейбла/скрытие/стар "моргания"
     void setStateLabKO_(QLabel* &lab, int signalEnum, QTimer &timer);
-
-
-private slots:
-    void slotUpdateTimer();
-
-
 };
 
 #endif // MSUD_DISPLAY_H

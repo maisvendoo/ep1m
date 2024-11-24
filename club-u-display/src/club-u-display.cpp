@@ -48,44 +48,12 @@ ClubUDisplay::~ClubUDisplay()
 //------------------------------------------------------------------------------
 void ClubUDisplay::init()
 {
-    //loadStations();
     initMainWindow();
     initBlocks_();
 
     AbstractDisplay::init();
 }
 
-
-/*
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void ClubUDisplay::loadStations()
-{
-    QString path = QDir::toNativeSeparators(route_dir);
-    path += QDir::separator() + QString("topology");
-    path += QDir::separator() + QString("stations.conf");
-
-    QFile stations_file(path);
-
-    if (!stations_file.open(QIODevice::ReadOnly))
-    {
-        return;
-    }
-
-    QTextStream stream(&stations_file);
-
-    while (!stream.atEnd())
-    {
-        QString line = stream.readLine();
-        QStringList tokens = line.split('\t');
-
-        stations.push_back(tokens[0]);
-    }
-
-    stationsCount_ = stations.size();
-}
-*/
 
 
 //------------------------------------------------------------------------------
@@ -115,15 +83,6 @@ void ClubUDisplay::initMainWindow()
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
     this->setPalette(QPalette(QColor(0, 0, 0)));
-
-
-
-    //
-    updateTimer = new QTimer;
-    connect(updateTimer, &QTimer::timeout,
-            this, &ClubUDisplay::slotUpdateTimer, Qt::QueuedConnection);
-    updateTimer->setInterval(timeInterval);
-    updateTimer->start();
 }
 
 
@@ -176,9 +135,18 @@ void ClubUDisplay::initBlocks_()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void ClubUDisplay::slotUpdateTimer()
+void ClubUDisplay::update(double t, double dt)
 {
-    if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_POWER_SUPPLAY]))
+    (void) t;
+
+    // Интервал обновления
+    upd_time += dt;
+    if (upd_time < upd_interval)
+        return;
+
+    upd_time = 0.0;
+
+    if (input_signals[SIGNAL_KLUB_U_POWER_SUPPLAY] == 0.0f)
     {
         alsn_->setVisible(false);
         topBlock_->setVisible(false);
@@ -189,73 +157,108 @@ void ClubUDisplay::slotUpdateTimer()
         return;
     }
 
+    alsn_->setVisible(true);
+    topBlock_->setVisible(true);
+    middleBlock_->setVisible(true);
+    rightBlock_->setVisible(true);
+    bottomBlock_->setVisible(true);
 
-    alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
-                     static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
-
-    topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
-    topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
-    topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
-    topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
-    topBlock_->setIndStraight(static_cast<bool>(input_signals[SIGNAL_KLUB_U_STRAIGHT]));
-    topBlock_->setIndSide(static_cast<bool>(input_signals[SIGNAL_KLUB_U_SIDE]));
-    topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
-
-    int seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_SHEDULE_TIME]);
-    topBlock_->setSheduleTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
-
-    seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_TIME]);
+    int seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_TIME]);
     topBlock_->setCurTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
 
-    QString text = "";
-    for (size_t i = 0; i < 8; ++i)
+    // Обновляем блоки экрана по очереди
+    ++upd_block;
+
+    // Блок обновлений №1
+    if (upd_block == 1)
     {
-        int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_SYMB1 + i]);
-        text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
+        if (input_signals[SIGNAL_KLUB_U_EPK] == 0.0f)
+        {
+            topBlock_->setBditelnost(false);
+            topBlock_->setCassete(false);
+            topBlock_->setIndM(false);
+            topBlock_->setIndP(false);
+            topBlock_->setIndStraight(false);
+            topBlock_->setIndSide(false);
+        }
+        else
+        {
+            topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
+            topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
+            topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
+            topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
+            topBlock_->setIndStraight(static_cast<bool>(input_signals[SIGNAL_KLUB_U_STRAIGHT]));
+            topBlock_->setIndSide(static_cast<bool>(input_signals[SIGNAL_KLUB_U_SIDE]));
+        }
+
+        seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_SHEDULE_TIME]);
+        topBlock_->setSheduleTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
+
+        topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
+
+        bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
+        return;
     }
-    topBlock_->setStationName(text);
 
-    middleBlock_->setSpeedLimitVisible(true);
-    middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
-    middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
-    middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
-    middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
-    middleBlock_->blinkingSpeed(false);
-
-    rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
-    rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
-    rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
-    rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
-
-    bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
-    text = "";
-    for (size_t i = 0; i < 24; ++i)
+    // Блок обновлений №2
+    if (upd_block == 2)
     {
-        int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STRING_SYMB1 + i]);
-        text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
+        rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
+        rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
+        rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
+        rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
+        return;
     }
-    bottomBlock_->setTargetName(text);
 
-    if (!static_cast<bool>(input_signals[SIGNAL_KLUB_U_EPK]))
+    // Блок обновлений №3
+    if (upd_block == 3)
     {
-        alsn_->setVisible(true);
-        alsn_->setSignal(ALSN_COLORS::GREEN, 0);
+        QString text = "";
+        for (size_t i = 0; i < 8; ++i)
+        {
+            int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_SYMB1 + i]);
+            text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
+        }
+        topBlock_->setStationName(text);
 
-        topBlock_->setVisible(true);
-        topBlock_->setIndM(false);
-        topBlock_->setCassete(false);
-        topBlock_->setBditelnost(false);
+        text = "";
+        for (size_t i = 0; i < 24; ++i)
+        {
+            int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STRING_SYMB1 + i]);
+            text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
+        }
+        bottomBlock_->setTargetName(text);
+        return;
+    }
 
-        middleBlock_->setVisible(true);
-        middleBlock_->setSpeedLimitVisible(false);
-        middleBlock_->setCurSpeedLimit(-5);
-        middleBlock_->setNextSpeedLimit(-5);
-        middleBlock_->blinkingSpeed(true);
+    // Блок обновлений №4
+    if (upd_block >= 4)
+    {
+        if (input_signals[SIGNAL_KLUB_U_EPK] == 0.0f)
+        {
+            alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
-        rightBlock_->setVisible(true);
+            middleBlock_->setSpeedLimitVisible(false);
+            middleBlock_->setCurSpeedLimit(-5);
+            middleBlock_->setNextSpeedLimit(-5);
+            middleBlock_->blinkingSpeed(true);
+            middleBlock_->setReverse(0);
+        }
+        else
+        {
+            alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
+                             static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
 
-        bottomBlock_->setVisible(true);
+            middleBlock_->setSpeedLimitVisible(true);
+            middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
+            middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
+            middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
+            middleBlock_->blinkingSpeed(false);
+            middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
+        }
 
+        // Сбрасываем счётчик
+        upd_block = 0;
         return;
     }
 }

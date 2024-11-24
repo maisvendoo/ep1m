@@ -1,8 +1,6 @@
 #ifndef CLUB_U_DISPLAY_H
 #define CLUB_U_DISPLAY_H
 
-#include    <QTimer>
-
 #include    "display.h"
 
 class ALSN;
@@ -23,31 +21,22 @@ public:
 
     void init();
 
+    void update(double t, double dt);
 
 private:
-
-    QTimer          *updateTimer = nullptr;
 
     ALSN            *alsn_ = nullptr;
     TopBlock        *topBlock_ = nullptr;
     MiddleBlock     *middleBlock_ = nullptr;
     RightBlock      *rightBlock_ = nullptr;
     BottomBlock     *bottomBlock_ = nullptr;
-/*
-    std::vector<QString>    stations;
-    int stationsCount_;
 
-    void loadStations();
-*/
+    double upd_time = 0.0;
+    double upd_interval = 0.2;
+    int  upd_block = 0;
+
     void initMainWindow();
     void initBlocks_();
-
-
-
-private slots:
-
-    void slotUpdateTimer();
-
 };
 
 #endif // CLUB_U_DISPLAY_H
