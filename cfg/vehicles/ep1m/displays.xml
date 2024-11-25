@@ -6,6 +6,7 @@
 		<ModuleDir>ep1m</ModuleDir>
 		<Module>club-u-display</Module>
 		<SurfaceName>Display_KLUB</SurfaceName>
+		<UpdateInterval>0.6</UpdateInterval>
 		
 		<Corner1>0.0 1.0</Corner1>
 		<Corner2>0.0 0.0</Corner2>
@@ -19,6 +20,7 @@
 		<ModuleDir>ep1m</ModuleDir>
 		<Module>msud-display</Module>
 		<SurfaceName>Display_MSUD</SurfaceName>
+		<UpdateInterval>0.6</UpdateInterval>
 
 		<Corner1>0.0 0.0</Corner1>
 		<Corner2>1.0 0.0</Corner2>
