@@ -53,7 +53,7 @@ void EP1m::stepBrakesControl(double t, double dt)
     // ЭПК
     epk->setFLpressure(main_reservoir->getPressure());
     epk->setBPpressure(brakepipe->getPressure());
-    epk->setPowered(klub_BEL->getEPKstate());
+    epk->setPowered(KLUB_BEL->getEPKPowerState());
 //    epk->setControl(keys);
     epk->setKeyOn(tumblers[EPK_KEY].getState());
     epk->step(t, dt);

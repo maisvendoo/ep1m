@@ -133,8 +133,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_K1] = k1->getSoundSignal(Relay::CHANGE_SOUND);
 
     // КЛУБ
-    analogSignal[SOUND_KLUB_ON] = klub_BEL->getSoundSignal(KLUB::ON_SOUND);
-    analogSignal[SOUND_KLUB_BUTTONS] = klub_BEL->getSoundSignal(KLUB::BUTTON_SOUND);
+    analogSignal[SOUND_KLUB_ON] = KLUB_BEL->getSoundSignal(SafetyDevice::ON_SOUND);
+    analogSignal[SOUND_KLUB_BUTTONS] = KLUB_BEL->getSoundSignal(SafetyDevice::BUTTON_SOUND);
 
     // Перестуки
     double Vkmh = abs(velocity) * Physics::kmh;

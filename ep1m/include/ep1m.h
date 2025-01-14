@@ -230,7 +230,7 @@ private:
     EPBControl          *epb_control = Q_NULLPTR;
 
     /// Блок электронный локомотивный (БЭЛ)
-    KLUB    *klub_BEL = Q_NULLPTR;
+    SafetyDevice *KLUB_BEL;
 
     /// Реле подачи питания на МСУД
     Relay   *km43 = Q_NULLPTR;
@@ -362,6 +362,10 @@ private:
 
     /// Дешифратор сигнала АЛСН
     DecoderALSN *alsn_decoder = Q_NULLPTR;
+
+    double      v_max = 140.0;
+
+    QString     plugin_safety_device = "";
 
     void initialization() override;
 

@@ -4,6 +4,8 @@
 		<EmptyMass>132000</EmptyMass>
 		<PayloadMass>1000</PayloadMass>
 		<Length>22.532</Length>
+		<MaxVelocity>140.0</MaxVelocity>
+		<PluginSafetyDevice>KLUB</PluginSafetyDevice>
 		<WheelDiameter>1.25</WheelDiameter>
 		<MainResist>loco-resist</MainResist>
 		<WheelRailFriction>loco-AC</WheelRailFriction>

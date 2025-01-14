@@ -57,17 +57,19 @@ void EP1m::signalsOutput()
 
     analogSignal[SIGNAL_KLUB_U_POWER_SUPPLAY] = TO_FLOAT(Ucc >= 49);
 
-    QString text = klub_BEL->getStationText();
+    QString text = KLUB_BEL->getCurStation();
     for (size_t i = 0; i < text.size(); ++i)
     {
         analogSignal[SIGNAL_KLUB_U_STATION_SYMB1 + i] = TO_FLOAT(text[i].unicode());
     }
 
-    text = klub_BEL->getInfoText();
-    for (size_t i = 0; i < text.size(); ++i)
-    {
-        analogSignal[SIGNAL_KLUB_U_STRING_SYMB1 + i] = TO_FLOAT(text[i].unicode());
-    }
+    // OLD KLUB!!!!!!!!!
+
+    // text = klub_BEL->getInfoText();
+    // for (size_t i = 0; i < text.size(); ++i)
+    // {
+    //     analogSignal[SIGNAL_KLUB_U_STRING_SYMB1 + i] = TO_FLOAT(text[i].unicode());
+    // }
 
     analogSignal[SIGNAL_KLUB_U_SHEDULE_TIME] = 0.0f;
 
@@ -76,26 +78,26 @@ void EP1m::signalsOutput()
                    QTime::currentTime().second();
     analogSignal[SIGNAL_KLUB_U_TIME] = analogSignal[SIGNAL_MSUD_TIME] = TO_FLOAT(cur_time);
 
-    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
+    analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(KLUB_BEL->getRailCoord());
 
     analogSignal[SIGNAL_KLUB_U_EPK] = TO_FLOAT(epk->isKeyOn());
-    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
-    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
-    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
-    analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(klub_BEL->getLampNum());
+    analogSignal[SIGNAL_KLUB_U_SPEED] = TO_FLOAT(KLUB_BEL->getVelocityKmh());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT] = TO_FLOAT(KLUB_BEL->getCurrentSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(KLUB_BEL->getNextSpeedLimit());
+    analogSignal[SIGNAL_KLUB_U_ALSN] = TO_FLOAT(KLUB_BEL->getLampNum());
     analogSignal[SIGNAL_KLUB_U_ALSN_FB] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_STRAIGHT] = 0.0f;
     analogSignal[SIGNAL_KLUB_U_SIDE] = 0.0f;
-    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
+    analogSignal[SIGNAL_KLUB_U_BDITELNOST] = TO_FLOAT(KLUB_BEL->getStateVigilanseCheck());
     analogSignal[SIGNAL_KLUB_U_M] = 0.0f;
     analogSignal[SIGNAL_KLUB_U_P] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_CASSETE] = 1.0f;
     analogSignal[SIGNAL_KLUB_U_REVERSOR] = TO_FLOAT(km->getReversHandlePos());
-    analogSignal[SIGNAL_KLUB_U_TARGET_DIST] = TO_FLOAT(klub_BEL->getTargetDistance());
+    analogSignal[SIGNAL_KLUB_U_TARGET_DIST] = TO_FLOAT(KLUB_BEL->getLimitDistance());
     analogSignal[SIGNAL_KLUB_U_PRESSURE_TM] = TO_FLOAT(brakepipe->getPressure());
     analogSignal[SIGNAL_KLUB_U_PRESSURE_UR] = TO_FLOAT(brake_crane->getERpressure());
     analogSignal[SIGNAL_KLUB_U_TRACK_NUM] = 1.0f;
-    analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
+    analogSignal[SIGNAL_KLUB_U_ACCELERATION] = TO_FLOAT(KLUB_BEL->getAcceleration());
 
     analogSignal[LAMP_EPT_O] = TO_FLOAT(epb_control->stateReleaseLamp());
     analogSignal[LAMP_EPT_P] = TO_FLOAT(epb_control->stateHoldLamp());
