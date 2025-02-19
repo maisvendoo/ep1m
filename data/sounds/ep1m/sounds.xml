@@ -2090,5 +2090,16 @@
 		<PlayOnStart>0</PlayOnStart>
 		<LocalPosition>0.0 -8.3 0.0</LocalPosition>
 	</Sound>
+	
+	<Sound>
+		<SignalID>384</SignalID>
+		<Filename>EPK_airflow.wav</Filename>
+		<InitVolume>1.0</InitVolume>
+		<MaxVolume>1.0</MaxVolume>
+		<InitPitch>1.0</InitPitch>
+		<Loop>1</Loop>
+		<PlayOnStart>0</PlayOnStart>
+		<LocalPosition>1.23 9.02 2.5</LocalPosition>
+	</Sound>
 
 </Config>

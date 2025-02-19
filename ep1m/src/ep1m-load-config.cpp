@@ -14,6 +14,8 @@ void EP1m::loadConfig(QString path)
         cfg.getDouble(secName, "MainResLeak", main_res_leak);
         cfg.getDouble(secName, "ReductorCoeff", ip);
         cfg.getBool(secName, "isRegistratorOn", is_Registrator_on);
+        cfg.getDouble(secName, "MaxVelocity", v_max);
+        cfg.getString(secName, "PluginSafetyDevice", plugin_safety_device);
     }
 }
 

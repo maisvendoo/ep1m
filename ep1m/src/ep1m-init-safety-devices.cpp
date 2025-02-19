@@ -7,7 +7,6 @@
 //------------------------------------------------------------------------------
 void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir)
 {
-    (void) modules_dir;
     (void) custom_cfg_dir;
 
     // Карта ограничений скорости
@@ -32,13 +31,26 @@ void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_c
     alsn_decoder = new DecoderALSN();
     alsn_decoder->read_config("ALSN-decoder");
 
+    //КЛУБ
+    KLUB_BEL = loadSafetyDevice(modules_dir + QDir::separator() + plugin_safety_device);
+
+    if(KLUB_BEL == nullptr)
+        return;
+
+    KLUB_BEL->init();
+    KLUB_BEL->setMaxVelocity(v_max);
+    KLUB_BEL->setWheelDiameter(wheel_diameter[0]);
+    KLUB_BEL->setTrainLength(length);
+    KLUB_BEL->setSpeedMapModule(speedmap_fwd);
+    KLUB_BEL->setTrainDirection(dir * orient);
+
     // КЛУБ
-    klub_BEL = new KLUB();
-    klub_BEL->setMaxVelocity(140.0);
-    klub_BEL->setSpeedMapModule(speedmap_fwd);
-    klub_BEL->setCoilALSNModule(coil_ALSN_fwd);
-    klub_BEL->setDirection(dir * orient);
-    klub_BEL->setTrainLength(length);
+    // klub_BEL = new KLUB();
+    // klub_BEL->setMaxVelocity(140.0);
+    // klub_BEL->setSpeedMapModule(speedmap_fwd);
+    // klub_BEL->setCoilALSNModule(coil_ALSN_fwd);
+    // klub_BEL->setDirection(dir * orient);
+    // klub_BEL->setTrainLength(length);
 
     // Загрузка станций в КЛУБ
     FileSystem &fs = FileSystem::getInstance();
@@ -46,5 +58,6 @@ void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_c
     path += QDir::separator() + route_dir;
     path += QDir::separator() + QString("topology");
     path += QDir::separator() + QString("stations.conf");
-    klub_BEL->loadStationsMap(path);
+    // klub_BEL->loadStationsMap(path);
+    KLUB_BEL->loadStationsMap(path);
 }

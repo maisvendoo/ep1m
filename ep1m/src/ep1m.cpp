@@ -64,8 +64,11 @@ void EP1m::initialization()
     // Инициализация вспомогательных машин
     initAuxMachines(modules_dir, custom_cfg_dir);
 
-    // Инициализация приборов безопасности
+    // Инициализация прибора безопасности
     initSafetyDevices(modules_dir, custom_cfg_dir);
+
+    // Инициализация блока КОН
+    initBlockKON(modules_dir, custom_cfg_dir);
 
     // Инициализация прочих устройств
     initOtherEquipment(modules_dir, custom_cfg_dir);
@@ -123,6 +126,9 @@ void EP1m::step(double t, double dt)
 
     // Работа приборов безопасности
     stepSafetyDevices(t, dt);
+
+    // Работа блока КОН
+    stepBlockKON(t, dt);
 
     // Работа прочих устройств
     stepOtherEquipment(t, dt);

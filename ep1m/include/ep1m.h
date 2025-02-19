@@ -230,7 +230,10 @@ private:
     EPBControl          *epb_control = Q_NULLPTR;
 
     /// Блок электронный локомотивный (БЭЛ)
-    KLUB    *klub_BEL = Q_NULLPTR;
+    SafetyDevice *KLUB_BEL;
+
+    /// Блок КОН
+    AbstractBlockKON *block_KON;
 
     /// Реле подачи питания на МСУД
     Relay   *km43 = Q_NULLPTR;
@@ -363,6 +366,10 @@ private:
     /// Дешифратор сигнала АЛСН
     DecoderALSN *alsn_decoder = Q_NULLPTR;
 
+    double      v_max = 140.0;
+
+    QString     plugin_safety_device = "";
+
     void initialization() override;
 
     /// Инициализация сцепных устройств
@@ -401,8 +408,11 @@ private:
     /// Инициализация вспомогательных машин
     void initAuxMachines(const QString &modules_dir, const QString &custom_cfg_dir);
 
-    /// Инициализация устройств безопасности
+    /// Инициализация устройства безопасности
     void initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir);
+
+    /// Инициализация блока КОН
+    void initBlockKON(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация прочих устройств
     void initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
@@ -458,6 +468,8 @@ private:
     void stepAuxMachines(double t, double dt);
 
     void stepSafetyDevices(double t, double dt);
+
+    void stepBlockKON(double t, double dt);
 
     void stepOtherEquipment(double t, double dt);
 

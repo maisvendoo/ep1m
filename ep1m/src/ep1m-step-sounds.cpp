@@ -133,8 +133,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_K1] = k1->getSoundSignal(Relay::CHANGE_SOUND);
 
     // КЛУБ
-    analogSignal[SOUND_KLUB_ON] = klub_BEL->getSoundSignal(KLUB::ON_SOUND);
-    analogSignal[SOUND_KLUB_BUTTONS] = klub_BEL->getSoundSignal(KLUB::BUTTON_SOUND);
+    analogSignal[SOUND_KLUB_ON] = KLUB_BEL->getSoundSignal(SafetyDevice::ON_SOUND);
+    analogSignal[SOUND_KLUB_BUTTONS] = KLUB_BEL->getSoundSignal(SafetyDevice::BUTTON_SOUND);
 
     // Перестуки
     double Vkmh = abs(velocity) * Physics::kmh;
@@ -232,7 +232,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && is_motors_On);
 
     // Свисток ЭПК
-    analogSignal[SOUND_EPK] = epk->getSoundSignal();
+    analogSignal[SOUND_EPK_WHISTLE] = epk->getSoundSignal(AutoTrainStop::EPK_WHISTLE_SOUND);
+    analogSignal[SOUND_EPK_AIRFLOW] = epk->getSoundSignal(AutoTrainStop::EPK_AIRFLOW_SOUND);
 
     // Песочница
     analogSignal[SOUND_SAND_DELIVERY] = sand_system->getSoundSignal();
