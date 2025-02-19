@@ -33,6 +33,10 @@ void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_c
 
     //КЛУБ
     KLUB_BEL = loadSafetyDevice(modules_dir + QDir::separator() + plugin_safety_device);
+
+    if(KLUB_BEL == nullptr)
+        return;
+
     KLUB_BEL->init();
     KLUB_BEL->setMaxVelocity(v_max);
     KLUB_BEL->setWheelDiameter(wheel_diameter[0]);

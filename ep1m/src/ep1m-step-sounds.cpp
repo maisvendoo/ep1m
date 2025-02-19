@@ -232,7 +232,8 @@ void EP1m::stepSoundSignals(double t, double dt)
     analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && is_motors_On);
 
     // Свисток ЭПК
-    analogSignal[SOUND_EPK] = epk->getSoundSignal();
+    analogSignal[SOUND_EPK_WHISTLE] = epk->getSoundSignal(AutoTrainStop::EPK_WHISTLE_SOUND);
+    analogSignal[SOUND_EPK_AIRFLOW] = epk->getSoundSignal(AutoTrainStop::EPK_AIRFLOW_SOUND);
 
     // Песочница
     analogSignal[SOUND_SAND_DELIVERY] = sand_system->getSoundSignal();

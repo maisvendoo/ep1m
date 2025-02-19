@@ -232,6 +232,9 @@ private:
     /// Блок электронный локомотивный (БЭЛ)
     SafetyDevice *KLUB_BEL;
 
+    /// Блок КОН
+    AbstractBlockKON *block_KON;
+
     /// Реле подачи питания на МСУД
     Relay   *km43 = Q_NULLPTR;
 
@@ -405,8 +408,11 @@ private:
     /// Инициализация вспомогательных машин
     void initAuxMachines(const QString &modules_dir, const QString &custom_cfg_dir);
 
-    /// Инициализация устройств безопасности
+    /// Инициализация устройства безопасности
     void initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir);
+
+    /// Инициализация блока КОН
+    void initBlockKON(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация прочих устройств
     void initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
@@ -462,6 +468,8 @@ private:
     void stepAuxMachines(double t, double dt);
 
     void stepSafetyDevices(double t, double dt);
+
+    void stepBlockKON(double t, double dt);
 
     void stepOtherEquipment(double t, double dt);
 

@@ -17,6 +17,7 @@
 #include    <freq-phase-converter.h>
 #include    <motor-fan.h>
 #include    <safety-device.h>
+#include    <abstract-block-KON.h>
 #include    <trac-motor.h>
 #include    <vip-5600.h>
 #include    <reversor.h>

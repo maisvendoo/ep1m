@@ -56,6 +56,7 @@ void EP1m::stepBrakesControl(double t, double dt)
     epk->setPowered(KLUB_BEL->getEPKPowerState());
 //    epk->setControl(keys);
     epk->setKeyOn(tumblers[EPK_KEY].getState());
+    epk->setValveElectricalSupply(block_KON->getValveElectricalSupply());
     epk->step(t, dt);
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4
