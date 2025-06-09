@@ -82,6 +82,9 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
 
     BUTTON_BRAKE_RELEASE = 70, // Кнопка "Отпуск тормозов"
+    BUTTON_SANDDOX = 71, // Кнопка песок
+
+    GV = 72, // Нож ГВ
 
     STRELKA_I_TED = 97, // Ток якоря тяговых двигателей
     STRELKA_U_KS = 98, // Напряжение КС
