@@ -107,4 +107,14 @@ void EP1m::keyProcess()
         tumblers[BRAKE_RELEASE_BUTTON].set();
     else
         tumblers[BRAKE_RELEASE_BUTTON].reset();
+
+    // Кнопка "Песок"
+    if (getKeyState(KEY_Delete))
+    {
+        button_sandbox.set();
+    }
+    else
+    {
+        button_sandbox.reset();
+    }
 }

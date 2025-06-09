@@ -215,4 +215,6 @@ void EP1m::signalsOutput()
     analogSignal[BUTTON_BRAKE_RELEASE] = TO_FLOAT(tumblers[BRAKE_RELEASE_BUTTON].getState());
 
     analogSignal[GV] = TO_FLOAT(main_switch->getState());
+
+    analogSignal[BUTTON_SANDBOX] = TO_FLOAT(button_sandbox.getState());
 }

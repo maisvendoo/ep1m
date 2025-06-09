@@ -11,6 +11,7 @@ void EP1m::stepOtherEquipment(double t, double dt)
 
     // Система подачи песка
     sand_system->setFLpressure(main_reservoir->getPressure());
+    //sand_system->setSandDeliveryOn(button_sandbox.getState());
     sand_system->setControl(keys);
     sand_system->step(t, dt);
     for (size_t i = 0; i < num_axis; ++i)

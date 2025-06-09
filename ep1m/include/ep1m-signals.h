@@ -82,7 +82,7 @@ enum
     SIGNAL_TUMBLER_MOTOR_FAN3 = 69, // Вентилятор 3
 
     BUTTON_BRAKE_RELEASE = 70, // Кнопка "Отпуск тормозов"
-    BUTTON_SANDDOX = 71, // Кнопка песок
+    BUTTON_SANDBOX = 71, // Кнопка песок
 
     GV = 72, // Нож ГВ
 

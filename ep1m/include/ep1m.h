@@ -363,6 +363,9 @@ private:
     /// Дешифратор сигнала АЛСН
     DecoderALSN *alsn_decoder = Q_NULLPTR;
 
+    /// Кнопка "Песок"
+    Trigger button_sandbox;
+
     void initialization() override;
 
     /// Инициализация сцепных устройств
