@@ -29,6 +29,7 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
 
     this->setLayout(new QVBoxLayout);
     this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    this->layout()->setContentsMargins(0, 0, 0, 0);
     // Временно
     config_dir = QString("D:\\git\\ep1m_my\\ep1m\\cfg\\vehicles\\ep1m");
 }
@@ -106,24 +107,24 @@ void ClubUDisplay::initBlocks_()
     this->layout()->addWidget(fon);
 
     // Локомотивный светофор
-    alsn_ = new ALSN(QSize(98,350), fon);
-    alsn_->move(70, 242);
+    alsn_ = new ALSN(QSize(108,461), fon);
+    alsn_->move(43, 252);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(670, 135), fon);
-    topBlock_->move(90, 60);
+    topBlock_ = new TopBlock(QSize(738, 140), fon);
+    topBlock_->move(76, 42);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(330, 330), cfg_path, fon);
-    middleBlock_->move(225, 240);
+    middleBlock_ = new MiddleBlock(QSize(443, 406), cfg_path, fon);
+    middleBlock_->move(246, 246);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(155, 372), fon);
-    rightBlock_->move(622, 215);
+    rightBlock_ = new RightBlock(QSize(201, 496), fon);
+    rightBlock_->move(781, 215);
 
     // Нижний блок
-    bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
-    bottomBlock_->move(133, 622);
+    bottomBlock_ = new BottomBlock(QSize(742, 30), fon);
+    bottomBlock_->move(145, 761);
 }
 
 
