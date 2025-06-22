@@ -11,10 +11,6 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     , reverseInd_(Q_NULLPTR)
     , txtCurSpeed_(Q_NULLPTR)
     , txtCurSpeedLimit_(Q_NULLPTR)
-    , oldSpeed_(-1)
-    , oldSpeedLimit_(-1)
-    , oldNextSpeedLimit_(-1)
-    , forceBlinking_(false)
 {
     this->resize(_size);
     this->setStyleSheet("border: 1px solid red");

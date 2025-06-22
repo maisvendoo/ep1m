@@ -20,13 +20,13 @@ private:
     std::vector<QPoint> speed_coordsOutScale;
     std::vector<QPoint> speed_coordsInsideScale;
 
-    int num_speed_;
-    int num_speedLimit_;
-    int num_speedNextLimit_;
+    int num_speed_ = 0;
+    int num_speedLimit_ = 0;
+    int num_speedNextLimit_ = 0;
 
-    int old_num_speed_;
-    int old_num_speedLimit_;
-    int old_num_speedNextLimit_;
+    int old_num_speed_ = -1;
+    int old_num_speedLimit_ = -1;
+    int old_num_speedNextLimit_ = -1;
 
 
     void drawArc_(int num_speed, int num_speedLimit, int num_speedNextLimit);

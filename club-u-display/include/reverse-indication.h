@@ -15,7 +15,7 @@ public:
 
 
 private:
-    int oldVal_;
+    int oldVal_ = -2;
 
     void drawReverse_(int val);
 

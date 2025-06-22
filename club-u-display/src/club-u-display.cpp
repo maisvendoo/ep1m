@@ -111,7 +111,7 @@ void ClubUDisplay::initBlocks_()
     alsn_->move(43, 252);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(738, 140), fon);
+    topBlock_ = new TopBlock(QSize(737, 140), fon);
     topBlock_->move(76, 42);
 
     // Центральный блок
@@ -119,12 +119,12 @@ void ClubUDisplay::initBlocks_()
     middleBlock_->move(246, 246);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(201, 496), fon);
-    rightBlock_->move(781, 215);
+    rightBlock_ = new RightBlock(QSize(199, 494), fon);
+    rightBlock_->move(781, 217);
 
     // Нижний блок
-    bottomBlock_ = new BottomBlock(QSize(742, 30), fon);
-    bottomBlock_->move(145, 761);
+    bottomBlock_ = new BottomBlock(QSize(743, 30), fon);
+    bottomBlock_->move(145, 762);
 }
 
 

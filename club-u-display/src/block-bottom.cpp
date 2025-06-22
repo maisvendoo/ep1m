@@ -9,14 +9,14 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     : QLabel(parent)
 {
     this->resize(size);
-    this->setStyleSheet("border: 1px solid red");
+    //this->setStyleSheet("border: 1px solid red");
 
 
     //
-    txtPaintDistToTarget_ = new TextPaint(QSize(90, 20), this);
-    txtPaintDistToTarget_->move(16, 2);
-    txtPaintDistToTarget_->setFonts(13, Qt::green, 87);
-    txtPaintDistToTarget_->setParams(4, 22);
+    txtPaintDistToTarget_ = new TextPaint(QSize(118, 30), this);
+    txtPaintDistToTarget_->move(0, 0);
+    txtPaintDistToTarget_->setFonts(20, Qt::green, 87);
+    txtPaintDistToTarget_->setParams(4, 29);
     txtPaintDistToTarget_->setText(QString::number(0));
 /*
     //
@@ -31,10 +31,10 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     txtPaintTargetName_->setFonts(13, Qt::green, 87);
     txtPaintTargetName_->setParams(4, 18, true);
 */
-    txtPaintTargetName_ = new TextPaint(QSize(457, 20), this);
-    txtPaintTargetName_->move(120, 2);
-    txtPaintTargetName_->setFonts(13, Qt::green, 87);
-    txtPaintTargetName_->setParams(24, 19, true);
+    txtPaintTargetName_ = new TextPaint(QSize(600, 30), this);
+    txtPaintTargetName_->move(143, 0);
+    txtPaintTargetName_->setFonts(20, Qt::green, 87);
+    txtPaintTargetName_->setParams(24, 25, true);
     txtPaintTargetName_->setText(QString("ABCDEFGHIJKLMNOPQRSTUVWX"));
 }
 

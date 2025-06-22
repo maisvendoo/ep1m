@@ -12,13 +12,6 @@
 
 Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
     : QLabel(parent)
-    , num_speed_(0)
-    , num_speedLimit_(0)
-    , num_speedNextLimit_(0)
-    , old_num_speed_(0)
-    , old_num_speedLimit_(0)
-    , old_num_speedNextLimit_(0)
-
 {
     this->resize(size);
    // this->setStyleSheet("border: 1px solid red;");

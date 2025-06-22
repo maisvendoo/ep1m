@@ -32,10 +32,10 @@ private:
 
     ImageWidget *indicationZapretOtpuska_;
 
-    double oldPressureTM_;
-    double oldPressureUR_;
-    QString oldTrackNum_;
-    double oldAcceleration_;
+    double oldPressureTM_ = -1.0;
+    double oldPressureUR_ = -1.0;
+    QString oldTrackNum_ = QString("1ПР");
+    double oldAcceleration_ = -1.0;
 
 
 };

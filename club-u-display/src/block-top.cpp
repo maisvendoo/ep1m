@@ -13,7 +13,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     : QLabel(parent)
 {
     this->resize(size);
-    this->setStyleSheet("border: 1px solid red");
+    //this->setStyleSheet("border: 1px solid red");
 
 
     // Индикация бдительности (красный треугольник)
@@ -47,65 +47,65 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     indicationSide_->setVisible(true);
 
     //
-    txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
-    txtPaintCoordinate1_->move(78, 100);
-    txtPaintCoordinate1_->setFonts(13, Qt::green, 87);
-    txtPaintCoordinate1_->setParams(4, 19);
+    txtPaintCoordinate1_ = new TextPaint(QSize(99, 30), this);
+    txtPaintCoordinate1_->move(95, 98);
+    txtPaintCoordinate1_->setFonts(20, Qt::green, 87);
+    txtPaintCoordinate1_->setParams(4, 25);
     txtPaintCoordinate1_->setText(QString::number(0));
 
-    txtPaintCoordinate2_ = new TextPaint(QSize(77, 20), this);
-    txtPaintCoordinate2_->move(153, 100);
-    txtPaintCoordinate2_->setFonts(13, Qt::green, 87);
-    txtPaintCoordinate2_->setParams(3, 19);
-    txtPaintCoordinate2_->setPointForDigit(6, 16);
+    txtPaintCoordinate2_ = new TextPaint(QSize(99, 30), this);
+    txtPaintCoordinate2_->move(196, 98);
+    txtPaintCoordinate2_->setFonts(20, Qt::green, 87);
+    txtPaintCoordinate2_->setParams(3, 25);
+    txtPaintCoordinate2_->setPointForDigit(10, 25);
     txtPaintCoordinate2_->setText(QString::number(0.0, 'f', 3));
 
     //
-    txtPaintStation_ = new TextPaint(QSize(155, 20), this);
-    txtPaintStation_->move(242, 100);
-    txtPaintStation_->setFonts(13, Qt::yellow);
-    txtPaintStation_->setParams(8, 19, true);
+    txtPaintStation_ = new TextPaint(QSize(200, 30), this);
+    txtPaintStation_->move(318, 98);
+    txtPaintStation_->setFonts(20, Qt::yellow);
+    txtPaintStation_->setParams(8, 25, true);
     txtPaintStation_->setText("STATION1");
 
     //
-    txtPaintCurTimeH_ = new TextPaint(QSize(38, 20), this);
-    txtPaintCurTimeH_->move(411, 100);
-    txtPaintCurTimeH_->setFonts(13, Qt::green, 87);
-    txtPaintCurTimeH_->setParams(2, 19);
+    txtPaintCurTimeH_ = new TextPaint(QSize(54, 30), this);
+    txtPaintCurTimeH_->move(538, 98);
+    txtPaintCurTimeH_->setFonts(20, Qt::green, 87);
+    txtPaintCurTimeH_->setParams(2, 26);
     txtPaintCurTimeH_->setText(QString::number(0));
 
-    txtPaintCurTimeM_ = new TextPaint(QSize(58, 20), this);
-    txtPaintCurTimeM_->move(447, 100);
-    txtPaintCurTimeM_->setFonts(13, Qt::green, 87);
-    txtPaintCurTimeM_->setParams(2, 19);
-    txtPaintCurTimeM_->setPointForDigit(6, 16);
+    txtPaintCurTimeM_ = new TextPaint(QSize(72, 30), this);
+    txtPaintCurTimeM_->move(592, 98);
+    txtPaintCurTimeM_->setFonts(20, Qt::green, 87);
+    txtPaintCurTimeM_->setParams(2, 26);
+    txtPaintCurTimeM_->setPointForDigit(8, 25);
     txtPaintCurTimeM_->setText(QString::number(0));
 
-    txtPaintCurTimeS_ = new TextPaint(QSize(58, 20), this);
-    txtPaintCurTimeS_->move(504, 100);
-    txtPaintCurTimeS_->setFonts(13, Qt::green, 87);
-    txtPaintCurTimeS_->setParams(2, 19);
-    txtPaintCurTimeS_->setPointForDigit(6, 16);
+    txtPaintCurTimeS_ = new TextPaint(QSize(72, 30), this);
+    txtPaintCurTimeS_->move(665, 98);
+    txtPaintCurTimeS_->setFonts(20, Qt::green, 87);
+    txtPaintCurTimeS_->setParams(2, 26);
+    txtPaintCurTimeS_->setPointForDigit(8, 25);
     txtPaintCurTimeS_->setText(QString::number(0));
 
-    txtPaintSheduleTimeH_ = new TextPaint(QSize(38, 20), this);
-    txtPaintSheduleTimeH_->move(411, 30);
-    txtPaintSheduleTimeH_->setFonts(13, Qt::green, 87);
-    txtPaintSheduleTimeH_->setParams(2, 19);
+    txtPaintSheduleTimeH_ = new TextPaint(QSize(54, 30), this);
+    txtPaintSheduleTimeH_->move(538, 4);
+    txtPaintSheduleTimeH_->setFonts(20, Qt::green, 87);
+    txtPaintSheduleTimeH_->setParams(2, 26);
     txtPaintSheduleTimeH_->setText(QString::number(0));
 
-    txtPaintSheduleTimeM_ = new TextPaint(QSize(58, 20), this);
-    txtPaintSheduleTimeM_->move(447, 30);
-    txtPaintSheduleTimeM_->setFonts(13, Qt::green, 87);
-    txtPaintSheduleTimeM_->setParams(2, 19);
-    txtPaintSheduleTimeM_->setPointForDigit(6, 16);
+    txtPaintSheduleTimeM_ = new TextPaint(QSize(72, 30), this);
+    txtPaintSheduleTimeM_->move(592, 4);
+    txtPaintSheduleTimeM_->setFonts(20, Qt::green, 87);
+    txtPaintSheduleTimeM_->setParams(2, 26);
+    txtPaintSheduleTimeM_->setPointForDigit(8, 25);
     txtPaintSheduleTimeM_->setText(QString::number(0));
 
-    txtPaintSheduleTimeS_ = new TextPaint(QSize(58, 20), this);
-    txtPaintSheduleTimeS_->move(504, 30);
-    txtPaintSheduleTimeS_->setFonts(13, Qt::green, 87);
-    txtPaintSheduleTimeS_->setParams(2, 19);
-    txtPaintSheduleTimeS_->setPointForDigit(6, 16);
+    txtPaintSheduleTimeS_ = new TextPaint(QSize(72, 30), this);
+    txtPaintSheduleTimeS_->move(665, 4);
+    txtPaintSheduleTimeS_->setFonts(20, Qt::green, 87);
+    txtPaintSheduleTimeS_->setParams(2, 26);
+    txtPaintSheduleTimeS_->setPointForDigit(8, 25);
     txtPaintSheduleTimeS_->setText(QString::number(0));
 }
 
