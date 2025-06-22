@@ -404,7 +404,7 @@ void MsudDisplay::update(double t, double dt)
     {
         if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 1)
         {
-            if (man21_->isVisible())
+            //if (man21_->isVisible())
             {
                 labMode_->setText(MODE_AUTO_REG);
 
@@ -427,7 +427,7 @@ void MsudDisplay::update(double t, double dt)
         else if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 2)
         {
 
-            if (man11_->isVisible())
+            //if (man11_->isVisible())
             {
                 labMode_->setText(MODE_HAND_REG);
 
