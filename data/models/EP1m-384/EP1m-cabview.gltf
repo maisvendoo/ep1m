@@ -1189,10 +1189,23 @@
 			}
 		},
 		{
+			"emissiveTexture":{
+				"index":14
+			},
+			"name":"Material_KLUB_Triangle_lamp",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":15
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.4500536322593689
+			}
+		},
+		{
 			"name":"Material_KLUB",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":14
+					"index":16
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.4500536322593689
@@ -2442,7 +2455,7 @@
 						"COLOR_1":350
 					},
 					"indices":351,
-					"material":9
+					"material":10
 				}
 			]
 		}
@@ -2503,6 +2516,14 @@
 		{
 			"sampler":0,
 			"source":7
+		},
+		{
+			"sampler":0,
+			"source":8
+		},
+		{
+			"sampler":0,
+			"source":8
 		},
 		{
 			"sampler":0,
@@ -5454,14 +5475,14 @@
 			"componentType":5126,
 			"count":9,
 			"max":[
-				0.09084268659353256,
-				0.10543122887611389,
-				0.008027181029319763
+				0.09004193544387817,
+				0.10547204315662384,
+				0.008055657148361206
 			],
 			"min":[
-				0.06807950884103775,
-				0.08219058811664581,
-				0.005803733132779598
+				0.06727875769138336,
+				0.08223140239715576,
+				0.005832208786159754
 			],
 			"type":"VEC3"
 		},
@@ -5500,7 +5521,7 @@
 		{
 			"bufferView":346,
 			"componentType":5126,
-			"count":243,
+			"count":234,
 			"max":[
 				0.1166415736079216,
 				0.13073119521141052,
@@ -5516,33 +5537,33 @@
 		{
 			"bufferView":347,
 			"componentType":5126,
-			"count":243,
+			"count":234,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":348,
 			"componentType":5126,
-			"count":243,
+			"count":234,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":349,
 			"componentType":5121,
-			"count":243,
+			"count":234,
 			"normalized":true,
 			"type":"VEC4"
 		},
 		{
 			"bufferView":350,
 			"componentType":5123,
-			"count":243,
+			"count":234,
 			"normalized":true,
 			"type":"VEC4"
 		},
 		{
 			"bufferView":351,
 			"componentType":5123,
-			"count":537,
+			"count":528,
 			"type":"SCALAR"
 		}
 	],
@@ -7625,38 +7646,38 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":2916,
+			"byteLength":2808,
 			"byteOffset":1187896,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2916,
-			"byteOffset":1190812,
+			"byteLength":2808,
+			"byteOffset":1190704,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1944,
-			"byteOffset":1193728,
+			"byteLength":1872,
+			"byteOffset":1193512,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":972,
-			"byteOffset":1195672,
+			"byteLength":936,
+			"byteOffset":1195384,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1944,
-			"byteOffset":1196644,
+			"byteLength":1872,
+			"byteOffset":1196320,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1074,
-			"byteOffset":1198588,
+			"byteLength":1056,
+			"byteOffset":1198192,
 			"target":34963
 		}
 	],
@@ -7668,7 +7689,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":1199664,
+			"byteLength":1199248,
 			"uri":"EP1m-cabview.bin"
 		}
 	]
