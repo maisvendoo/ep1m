@@ -851,7 +851,7 @@
 	"materials":[
 		{
 			"alphaMode":"BLEND",
-			"name":"01 - Default.001",
+			"name":"Material_kuzov",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -861,7 +861,7 @@
 			}
 		},
 		{
-			"name":"02 - Default.001",
+			"name":"Material_windows",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":1
@@ -871,7 +871,7 @@
 			}
 		},
 		{
-			"name":"03 - Default.001",
+			"name":"Material_wheels",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
@@ -1455,9 +1455,9 @@
 			"uri":"textures/windows.png"
 		},
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"KP_VL",
-			"uri":"textures/KP_VL.jpg"
+			"uri":"textures/KP_VL.png"
 		}
 	],
 	"skins":[
