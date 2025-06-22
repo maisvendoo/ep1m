@@ -14,7 +14,19 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red;");
 
-    img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
+    QPixmap pix = QPixmap(this->size());
+    pix.fill(Qt::transparent);
+    QPainter paint(&pix);
+    paint.setRenderHint(QPainter::Antialiasing, true);
+    paint.setPen(QPen( QColor(Qt::green),
+                      9,
+                      Qt::SolidLine,
+                      Qt::RoundCap ));
+
+    paint.drawPoint(15,16);
+    paint.drawPoint(15,38);
+    paint.end();
+    this->setPixmap(pix);
 }
 
 
@@ -27,6 +39,8 @@ void ReverseInd::setRevese(int val)
     if (val == oldVal_)
         return;
 
+    oldVal_ = val;
+
     if (val == 0)
     {
         this->setPixmap(QPixmap());
@@ -34,8 +48,6 @@ void ReverseInd::setRevese(int val)
     }
 
     drawReverse_(val);
-
-    oldVal_ = val;
 }
 
 
@@ -45,12 +57,10 @@ void ReverseInd::setRevese(int val)
 //------------------------------------------------------------------------------
 void ReverseInd::drawReverse_(int val)
 {
-    img_.fill(Qt::transparent);
-    QPixmap pix = QPixmap::fromImage(img_);
+    QPixmap pix = QPixmap(this->size());
+    pix.fill(Qt::transparent);
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
-
-    //
     paint.setPen(QPen( QColor(Qt::green),
                        9,
                        Qt::SolidLine,

@@ -17,10 +17,8 @@ public:
 
 
 private:
-    QImage img_;
-
-    QVector<QPoint> speed_coordsOutScale;
-    QVector<QPoint> speed_coordsInsideScale;
+    std::vector<QPoint> speed_coordsOutScale;
+    std::vector<QPoint> speed_coordsInsideScale;
 
     int num_speed_;
     int num_speedLimit_;
@@ -33,7 +31,7 @@ private:
 
     void drawArc_(int num_speed, int num_speedLimit, int num_speedNextLimit);
 
-    void loadScalePontsCoolrds_(QString txt_path, QVector<QPoint> &vec);
+    void loadScalePontsCoolrds_(QString txt_path, std::vector<QPoint> &vec);
 
 
 };

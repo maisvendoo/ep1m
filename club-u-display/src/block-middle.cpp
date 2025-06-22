@@ -17,6 +17,7 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     , forceBlinking_(false)
 {
     this->resize(_size);
+    this->setStyleSheet("border: 1px solid red");
 
     // Спидометр
     speedometer_ = new Speedometer(_size, cfg_path, this);

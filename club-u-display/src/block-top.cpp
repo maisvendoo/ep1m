@@ -13,7 +13,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     : QLabel(parent)
 {
     this->resize(size);
-    //this->setStyleSheet("border: 1px solid red");
+    this->setStyleSheet("border: 1px solid red");
 
 
     // Индикация бдительности (красный треугольник)

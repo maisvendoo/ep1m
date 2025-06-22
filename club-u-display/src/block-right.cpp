@@ -23,7 +23,7 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     , oldAcceleration_(-1.0)
 {
     this->resize(size);
-    //this->setStyleSheet("border: 1px solid red");
+    this->setStyleSheet("border: 1px solid red");
 
 
     //

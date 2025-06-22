@@ -11,15 +11,9 @@ ALSN::ALSN(QSize _size, QWidget *parent)
     , oldFreeBlocks_(0)
 {
     this->resize(_size);
-    //this->setStyleSheet("border: 1px solid red;");
+    this->setStyleSheet("border: 1px solid red;");
 
     loadLedImages_();
-
-    for (int i = 0; i < 8; ++i)
-    {
-        ledWidgets_[i]->setVisible(false);
-    }
-
 }
 
 

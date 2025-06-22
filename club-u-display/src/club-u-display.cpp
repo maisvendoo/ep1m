@@ -29,6 +29,8 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
 
     this->setLayout(new QVBoxLayout);
     this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    // Временно
+    config_dir = QString("D:\\git\\ep1m_my\\ep1m\\cfg\\vehicles\\ep1m");
 }
 
 
