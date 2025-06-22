@@ -33,8 +33,6 @@ public:
 
 private:
 
-    QLabel *ledGreen_;
-
     QVector<ImageWidget*> ledWidgets_;
 
     int oldColor_;

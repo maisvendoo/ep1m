@@ -23,9 +23,9 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     : AbstractDisplay(parent, f)
 {
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
-    this->resize(847, 895);
+    this->resize(1024, 799);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));
+    this->setPalette(QPalette(Qt::transparent));
 
     this->setLayout(new QVBoxLayout);
     this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
@@ -63,8 +63,8 @@ void ClubUDisplay::initMainWindow()
 {
     CfgReader cfg;
 
-    int     sizeWindow_X = 847;
-    int     sizeWindow_Y = 895;
+    int     sizeWindow_X = 1024;
+    int     sizeWindow_Y = 799;
     bool    hideCursor = false;
     int     timeInterval = 100;
 
@@ -73,16 +73,12 @@ void ClubUDisplay::initMainWindow()
         QString sectionName = "Main";
         cfg.getInt(sectionName, "sizeWindow_X", sizeWindow_X);
         cfg.getInt(sectionName, "sizeWindow_Y", sizeWindow_Y);
-        cfg.getBool(sectionName, "hideCursor", hideCursor);
-        cfg.getInt(sectionName, "timeInterval", timeInterval);        
     }
-
-    this->setCursor( hideCursor ? Qt::BlankCursor : Qt::ArrowCursor);
 
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(QColor(0, 0, 0)));
+    this->setPalette(QPalette(Qt::transparent));
 }
 
 
@@ -99,7 +95,7 @@ void ClubUDisplay::initBlocks_()
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
     QPixmap pic;
-    if (!pic.load(":/rcc/club-u-fon")) { return; }
+    if (!pic.load(":/rcc/klub_bil2_display")) { return; }
     fon->setFixedSize(pic.size());
     //fon->setGeometry(0,0, pic.size().width(), pic.size().height());
     fon->setPixmap(pic);
@@ -122,12 +118,10 @@ void ClubUDisplay::initBlocks_()
     // Правый блок
     rightBlock_ = new RightBlock(QSize(155, 372), fon);
     rightBlock_->move(622, 215);
-    rightBlock_->setNumTrack("1пр");
 
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(585, 30), fon);
     bottomBlock_->move(133, 622);
-    bottomBlock_->setTargetName("н1а");
 }
 
 
@@ -183,7 +177,8 @@ void ClubUDisplay::update(double t, double dt)
         }
         else
         {
-            topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
+            topBlock_->setBditelnost(false);
+//            topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
             topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
             topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
             topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
@@ -239,6 +234,7 @@ void ClubUDisplay::update(double t, double dt)
             alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
             middleBlock_->setSpeedLimitVisible(false);
+            middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
             middleBlock_->setCurSpeedLimit(-5);
             middleBlock_->setNextSpeedLimit(-5);
             middleBlock_->blinkingSpeed(true);

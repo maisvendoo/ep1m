@@ -35,6 +35,7 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
     txtPaintTargetName_->move(120, 2);
     txtPaintTargetName_->setFonts(13, Qt::green, 87);
     txtPaintTargetName_->setParams(24, 19, true);
+    txtPaintTargetName_->setText(QString("ABCDEFGHIJKLMNOPQRSTUVWX"));
 }
 
 

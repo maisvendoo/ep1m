@@ -24,27 +24,27 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     // Индикация кассеты
     indicationCassette_ = new ImageWidget("rcc", "ind_cassette", QSize(26,23), this);
     indicationCassette_->move(353, 29);
-    indicationCassette_->setVisible(false);
+    indicationCassette_->setVisible(true);
 
     // Индикация М
     indicationM_ = new ImageWidget("rcc", "ind_M", QSize(16,18), this);
     indicationM_->move(270, 31);
-    indicationM_->setVisible(false);
+    indicationM_->setVisible(true);
 
     // Индикация П
     indicationP_ = new ImageWidget("rcc", "ind_P", QSize(12,18), this);
     indicationP_->move(316, 31);
-    indicationP_->setVisible(false);
+    indicationP_->setVisible(true);
 
     // Индикация из АЛС-ЕН "прямо"
     indicationStraight_ = new ImageWidget("rcc", "ind_straight", QSize(45,17), this);
     indicationStraight_->move(10, 77);
-    indicationStraight_->setVisible(false);
+    indicationStraight_->setVisible(true);
 
     // Индикация из АЛС-ЕН "отклонение"
     indicationSide_ = new ImageWidget("rcc", "ind_side", QSize(45,17), this);
     indicationSide_->move(10, 112);
-    indicationSide_->setVisible(false);
+    indicationSide_->setVisible(true);
 
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(76, 20), this);
@@ -65,7 +65,7 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintStation_->move(242, 100);
     txtPaintStation_->setFonts(13, Qt::yellow);
     txtPaintStation_->setParams(8, 19, true);
-    txtPaintStation_->setText("");
+    txtPaintStation_->setText("STATION1");
 
     //
     txtPaintCurTimeH_ = new TextPaint(QSize(38, 20), this);
@@ -107,15 +107,6 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintSheduleTimeS_->setParams(2, 19);
     txtPaintSheduleTimeS_->setPointForDigit(6, 16);
     txtPaintSheduleTimeS_->setText(QString::number(0));
-/*
-    connect(&timeTimer_, &QTimer::timeout, [&]()
-    {
-        txtPaintCurTimeH_->setText(QString::number(QTime::currentTime().hour()));
-        txtPaintCurTimeM_->setText(QString::number(QTime::currentTime().minute()));
-        txtPaintCurTimeS_->setText(QString::number(QTime::currentTime().second()));
-    });
-    timeTimer_.start(1000);
-*/
 }
 
 

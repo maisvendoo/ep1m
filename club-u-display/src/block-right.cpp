@@ -31,24 +31,28 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     txtPaintPressureTM1_->move(3, 50);
     txtPaintPressureTM1_->setFonts(13, Qt::green, 87);
     txtPaintPressureTM1_->setParams(1, 15);
+    txtPaintPressureTM1_->setText(QString("0"));
 
     txtPaintPressureTM2_ = new TextPaint(QSize(50, 20), this);
     txtPaintPressureTM2_->move(22, 50);
     txtPaintPressureTM2_->setFonts(13, Qt::green, 87);
     txtPaintPressureTM2_->setParams(2, 17);
     txtPaintPressureTM2_->setPointForDigit(4, 17);
+    txtPaintPressureTM2_->setText(QString("00"));
 
     //
     txtPaintPressureUR1_ = new TextPaint(QSize(15, 20), this);
     txtPaintPressureUR1_->move(3, 122);
     txtPaintPressureUR1_->setFonts(13, Qt::green, 87);
     txtPaintPressureUR1_->setParams(1, 15);
+    txtPaintPressureUR1_->setText(QString("0"));
 
     txtPaintPressureUR2_ = new TextPaint(QSize(50, 20), this);
     txtPaintPressureUR2_->move(22, 122);
     txtPaintPressureUR2_->setFonts(13, Qt::green, 87);
     txtPaintPressureUR2_->setParams(2, 17);
     txtPaintPressureUR2_->setPointForDigit(4, 17);
+    txtPaintPressureUR2_->setText(QString("00"));
 
     //
     TextPaint *txtPaintALS = new TextPaint(QSize(35, 20), this);
@@ -62,24 +66,27 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     txtPaintNumTrack_->move(3, 198);
     txtPaintNumTrack_->setFonts(13, Qt::green, 87);
     txtPaintNumTrack_->setParams(4, 18, true);
+    txtPaintNumTrack_->setText(QString("1ПР"));
 
     //
     txtPaintAcceleration1_ = new TextPaint(QSize(15, 20), this);
     txtPaintAcceleration1_->move(95, 198);
     txtPaintAcceleration1_->setFonts(13, Qt::green, 87);
     txtPaintAcceleration1_->setParams(1, 15);
+    txtPaintAcceleration1_->setText(QString("0"));
 
     txtPaintAcceleration2_ = new TextPaint(QSize(32, 20), this);
     txtPaintAcceleration2_->move(111, 198);
     txtPaintAcceleration2_->setFonts(13, Qt::green, 87);
     txtPaintAcceleration2_->setParams(1, 15);
     txtPaintAcceleration2_->setPointForDigit(5, 15);
+    txtPaintAcceleration2_->setText(QString("0"));
 
 
     // Индикация "Запрет отпуска"
     indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(71,36), this);
     indicationZapretOtpuska_->move(41, 325);
-    indicationZapretOtpuska_->setVisible(false);
+    indicationZapretOtpuska_->setVisible(true);
 
 }
 
