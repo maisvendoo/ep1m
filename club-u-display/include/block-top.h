@@ -42,7 +42,6 @@ public:
     /// Деструктор
     ~TopBlock();
 
-    void setBditelnost(bool flag);
     void setIndM(bool flag);
     void setIndP(bool flag);
     void setCassete(bool flag);
@@ -55,7 +54,6 @@ public:
 
 
 private:
-    ImageWidget *indicationBditelnosti_ = nullptr;
     ImageWidget *indicationCassette_ = nullptr;
     ImageWidget *indicationM_ = nullptr;
     ImageWidget *indicationP_ = nullptr;

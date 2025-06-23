@@ -25,7 +25,7 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(1024, 799);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(Qt::transparent));
+    this->setPalette(QPalette(Qt::black));
 
     this->setLayout(new QVBoxLayout);
     this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
@@ -81,7 +81,7 @@ void ClubUDisplay::initMainWindow()
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
     this->resize(sizeWindow_X, sizeWindow_Y);
     this->setAutoFillBackground(true);
-    this->setPalette(QPalette(Qt::transparent));
+    this->setPalette(QPalette(Qt::black));
 }
 
 
@@ -93,7 +93,7 @@ void ClubUDisplay::initBlocks_()
 {
     // пусть к конфигам
     QString cfg_path = config_dir + getConfigPath("");
-
+/*
     // Фоновый виджет
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
@@ -105,26 +105,26 @@ void ClubUDisplay::initBlocks_()
     fon->move(0, 0);
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
-
+*/
     // Локомотивный светофор
-    alsn_ = new ALSN(QSize(108,461), fon);
+    alsn_ = new ALSN(QSize(108,461), this);
     alsn_->move(43, 252);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(737, 140), fon);
-    topBlock_->move(76, 42);
+    topBlock_ = new TopBlock(QSize(737, 140), this);
+    topBlock_->move(76, 41);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(443, 406), cfg_path, fon);
+    middleBlock_ = new MiddleBlock(QSize(443, 406), cfg_path, this);
     middleBlock_->move(246, 246);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(199, 494), fon);
-    rightBlock_->move(781, 217);
+    rightBlock_ = new RightBlock(QSize(199, 494), this);
+    rightBlock_->move(781, 216);
 
     // Нижний блок
-    bottomBlock_ = new BottomBlock(QSize(743, 30), fon);
-    bottomBlock_->move(145, 762);
+    bottomBlock_ = new BottomBlock(QSize(743, 30), this);
+    bottomBlock_->move(145, 761);
 }
 
 
@@ -171,7 +171,6 @@ void ClubUDisplay::update(double t, double dt)
     {
         if (input_signals[SIGNAL_KLUB_U_EPK] == 0.0f)
         {
-            topBlock_->setBditelnost(false);
             topBlock_->setCassete(false);
             topBlock_->setIndM(false);
             topBlock_->setIndP(false);
@@ -180,8 +179,6 @@ void ClubUDisplay::update(double t, double dt)
         }
         else
         {
-            topBlock_->setBditelnost(false);
-//            topBlock_->setBditelnost(static_cast<bool>(input_signals[SIGNAL_KLUB_U_BDITELNOST]));
             topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
             topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
             topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));

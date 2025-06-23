@@ -52,13 +52,13 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
 
     //
     TextPaint *txtPaintALS = new TextPaint(QSize(60, 30), this);
-    txtPaintALS->move(134, 162);
+    txtPaintALS->move(135, 162);
     txtPaintALS->setFonts(20, Qt::green, 87);
     txtPaintALS->setParams(2, 26);
     txtPaintALS->setText("25");
 
     //
-    txtPaintNumTrack_ = new TextPaint(QSize(72, 30), this);
+    txtPaintNumTrack_ = new TextPaint(QSize(75, 30), this);
     txtPaintNumTrack_->move(0, 261);
     txtPaintNumTrack_->setFonts(20, Qt::green, 87);
     txtPaintNumTrack_->setParams(4, 25, true);
@@ -72,7 +72,7 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
     txtPaintAcceleration1_->setText(QString("0"));
 
     txtPaintAcceleration2_ = new TextPaint(QSize(40, 30), this);
-    txtPaintAcceleration2_->move(155, 261);
+    txtPaintAcceleration2_->move(154, 261);
     txtPaintAcceleration2_->setFonts(20, Qt::green, 87);
     txtPaintAcceleration2_->setParams(1, 25);
     txtPaintAcceleration2_->setPointForDigit(4, 25);

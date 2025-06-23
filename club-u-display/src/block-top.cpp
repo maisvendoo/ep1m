@@ -16,11 +16,6 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     //this->setStyleSheet("border: 1px solid red");
 
 
-    // Индикация бдительности (красный треугольник)
-    indicationBditelnosti_ = new ImageWidget("rcc", "ind_bdit", QSize(81,82), this);
-    indicationBditelnosti_->move(580, 25);
-    indicationBditelnosti_->setVisible(false);
-
     // Индикация кассеты
     indicationCassette_ = new ImageWidget("rcc", "ind_cassette", QSize(26,23), this);
     indicationCassette_->move(353, 29);
@@ -117,19 +112,6 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 TopBlock::~TopBlock()
 {
 
-}
-
-
-
-//-----------------------------------------------------------------------------
-//
-//-----------------------------------------------------------------------------
-void TopBlock::setBditelnost(bool flag)
-{
-    if (indicationBditelnosti_->isVisible() == flag)
-        return;
-
-    indicationBditelnosti_->setVisible(flag);
 }
 
 
