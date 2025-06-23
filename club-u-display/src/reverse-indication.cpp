@@ -19,12 +19,12 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
     paint.setPen(QPen( QColor(Qt::green),
-                      9,
+                      13,
                       Qt::SolidLine,
                       Qt::RoundCap ));
 
-    paint.drawPoint(15,16);
-    paint.drawPoint(15,38);
+    paint.drawPoint(7,8);
+    paint.drawPoint(7,37);
     paint.end();
     this->setPixmap(pix);
 }
@@ -62,16 +62,16 @@ void ReverseInd::drawReverse_(int val)
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
     paint.setPen(QPen( QColor(Qt::green),
-                       9,
+                       13,
                        Qt::SolidLine,
                        Qt::RoundCap ));
 
 
     if (val == 1)
-        paint.drawPoint(15,16);
+        paint.drawPoint(7,8);
 
     if (val == -1)
-        paint.drawPoint(15,38);
+        paint.drawPoint(7,37);
 
 
     paint.end();

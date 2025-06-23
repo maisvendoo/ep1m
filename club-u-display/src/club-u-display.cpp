@@ -93,7 +93,7 @@ void ClubUDisplay::initBlocks_()
 {
     // пусть к конфигам
     QString cfg_path = config_dir + getConfigPath("");
-/*
+
     // Фоновый виджет
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
@@ -105,7 +105,7 @@ void ClubUDisplay::initBlocks_()
     fon->move(0, 0);
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
-*/
+
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(108,461), this);
     alsn_->move(43, 252);
@@ -115,7 +115,7 @@ void ClubUDisplay::initBlocks_()
     topBlock_->move(76, 41);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(443, 406), cfg_path, this);
+    middleBlock_ = new MiddleBlock(QSize(443, 407), cfg_path, this);
     middleBlock_->move(246, 246);
 
     // Правый блок

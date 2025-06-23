@@ -26,14 +26,14 @@ Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
 
 
     // ограничение скорости
-    paint.setPen(QPen( QColor(Qt::red), 9, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::red), 13, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0; i < speed_coordsOutScale.size(); ++i)
     {
         paint.drawPoint(speed_coordsOutScale[i]);
     }
 
     // скорость
-    paint.setPen(QPen( QColor(Qt::green), 9, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::green), 13, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0; i < speed_coordsInsideScale.size(); ++i)
     {
         paint.drawPoint(speed_coordsInsideScale[i]);
@@ -111,16 +111,16 @@ void Speedometer::drawArc_(int num_speed, int num_speedLimit, int num_speedNextL
     if ((num_speedLimit_ >= 0) && (num_speedNextLimit >= 0))
     {
         // ограничение скорости
-        paint.setPen(QPen( QColor(Qt::red), 9, Qt::SolidLine, Qt::RoundCap ));
+        paint.setPen(QPen( QColor(Qt::red), 13, Qt::SolidLine, Qt::RoundCap ));
         paint.drawPoint(speed_coordsOutScale[num_speedLimit]);
 
         // следующее ограничение скорости
-        paint.setPen(QPen( QColor(Qt::yellow), 9, Qt::SolidLine, Qt::RoundCap ));
+        paint.setPen(QPen( QColor(Qt::yellow), 13, Qt::SolidLine, Qt::RoundCap ));
         paint.drawPoint(speed_coordsOutScale[num_speedNextLimit]);
     }
 
     // скорость
-    paint.setPen(QPen( QColor(Qt::green), 9, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::green), 13, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0, n = num_speed + 1; i < n; ++i)
     {
         paint.drawPoint(speed_coordsInsideScale[i]);

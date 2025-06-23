@@ -19,8 +19,8 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     speedometer_ = new Speedometer(_size, cfg_path, this);
 
     // Индикация реверсора
-    reverseInd_ = new ReverseInd(QSize(30,50), this);
-    reverseInd_->move(150, 260);
+    reverseInd_ = new ReverseInd(QSize(16,44), this);
+    reverseInd_->move(214, 363);
 
     // Числовая индикация скорости
     txtCurSpeed_ = new TextPaint(QSize(100,50), this);
