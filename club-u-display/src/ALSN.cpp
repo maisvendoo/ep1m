@@ -11,7 +11,7 @@ ALSN::ALSN(QSize _size, QWidget *parent)
     , oldFreeBlocks_(0)
 {
     this->resize(_size);
-    this->setStyleSheet("border: 1px solid red;");
+    //this->setStyleSheet("border: 1px solid red;");
 
     loadLedImages_();
 }
@@ -60,11 +60,11 @@ void ALSN::loadLedImages_()
 {
     ledWidgets_.reserve(8);
 
-    int ledW = 81;
-    int ledH = 35;
-    int ledX = 3;
-    int ledY = 3;
-    int dY = ledH + 8;
+    int ledW = 106;
+    int ledH = 46;
+    int ledX = 0;
+    int ledY = 4;
+    int dY = ledH + 11;
 
 
     ImageWidget* imgWidget;
