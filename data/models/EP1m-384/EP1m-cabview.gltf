@@ -1183,9 +1183,7 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":13
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.4500536322593689
+				}
 			}
 		},
 		{
@@ -1206,9 +1204,7 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":16
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.4500536322593689
+				}
 			}
 		}
 	],
