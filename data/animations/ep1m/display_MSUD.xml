@@ -3,7 +3,7 @@
 	<Display>
 		<SignalID>169</SignalID>
 		<Duration>10.0</Duration>
-		<EmissionColor>1.0 1.0 1.0</EmissionColor>
+		<EmissionColor>0.0 0.0 0.0</EmissionColor>
 		<Color>1.0 1.0 1.0</Color>
 		<RepaintColor>1</RepaintColor>
 		<RepaintEmissive>1</RepaintEmissive>
