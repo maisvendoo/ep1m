@@ -1093,9 +1093,6 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":1
-				},
-				"metallicRoughnessTexture":{
-					"index":2
 				}
 			}
 		},
@@ -1103,7 +1100,7 @@
 			"name":"Material_cab",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":3
+					"index":2
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.4500536322593689
@@ -1114,7 +1111,7 @@
 			"name":"Material_window",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":4
+					"index":3
 				},
 				"metallicFactor":0
 			}
@@ -1123,7 +1120,7 @@
 			"name":"Material_kran395",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":5
+					"index":4
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.4500536322593689
@@ -1133,7 +1130,7 @@
 			"name":"Material_pult",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":6
+					"index":5
 				}
 			}
 		},
@@ -1141,7 +1138,7 @@
 			"name":"Material_kran215",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":7
+					"index":6
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.4500536322593689
@@ -1151,12 +1148,12 @@
 			"alphaMode":"BLEND",
 			"doubleSided":true,
 			"emissiveTexture":{
-				"index":8
+				"index":7
 			},
 			"name":"EPT_lamp",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":9
+					"index":8
 				}
 			}
 		},
@@ -1164,12 +1161,12 @@
 			"alphaMode":"BLEND",
 			"doubleSided":true,
 			"emissiveTexture":{
-				"index":10
+				"index":9
 			},
 			"name":"BS_lamps",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":11
+					"index":10
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -1177,23 +1174,23 @@
 		},
 		{
 			"emissiveTexture":{
-				"index":12
+				"index":11
 			},
 			"name":"Material_KLUB_Display",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":13
+					"index":12
 				}
 			}
 		},
 		{
 			"emissiveTexture":{
-				"index":14
+				"index":13
 			},
 			"name":"Material_KLUB_Triangle_lamp",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":15
+					"index":14
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.4500536322593689
@@ -1203,7 +1200,7 @@
 			"name":"Material_KLUB",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":16
+					"index":15
 				}
 			}
 		}
@@ -2487,23 +2484,27 @@
 		},
 		{
 			"sampler":0,
+			"source":4
+		},
+		{
+			"sampler":0,
+			"source":4
+		},
+		{
+			"sampler":0,
+			"source":4
+		},
+		{
+			"sampler":0,
+			"source":4
+		},
+		{
+			"sampler":0,
 			"source":6
 		},
 		{
 			"sampler":0,
-			"source":5
-		},
-		{
-			"sampler":0,
-			"source":5
-		},
-		{
-			"sampler":0,
-			"source":5
-		},
-		{
-			"sampler":0,
-			"source":5
+			"source":6
 		},
 		{
 			"sampler":0,
@@ -2515,15 +2516,7 @@
 		},
 		{
 			"sampler":0,
-			"source":8
-		},
-		{
-			"sampler":0,
-			"source":8
-		},
-		{
-			"sampler":0,
-			"source":8
+			"source":7
 		}
 	],
 	"images":[
@@ -2531,11 +2524,6 @@
 			"mimeType":"image/png",
 			"name":"display_RGBA",
 			"uri":"textures/display_RGBA.png"
-		},
-		{
-			"mimeType":"image/jpeg",
-			"name":"display_ORM",
-			"uri":"textures/display_ORM.jpg"
 		},
 		{
 			"mimeType":"image/png",
