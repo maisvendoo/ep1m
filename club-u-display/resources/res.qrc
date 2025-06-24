@@ -2,8 +2,8 @@
     <qresource prefix="/rcc">
         <file alias="club-u-ttf">KLUBU.ttf</file>
 
+        <file alias="klub_bil2_display">img/klub_bil2_display.png</file>
         <file alias="club-u-fon">img/fon.png</file>
-        <file alias="ind_bdit">img/ind_bdit.png</file>
         <file alias="ind_cassette">img/cassette.png</file>
         <file alias="ind_M">img/ind_M.png</file>
         <file alias="ind_P">img/ind_P.png</file>

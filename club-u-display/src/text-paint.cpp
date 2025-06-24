@@ -127,7 +127,8 @@ void TextPaint::drawText_(QString txt)
     //
     if (flagSetPoint_)
     {
-        paint.setPen(QPen(QColor(color_), 5));
+        paint.setPen(QPen(QColor(color_), 6));
+        paint.setRenderHint(QPainter::Antialiasing, true);
         paint.drawPoint(pointX_, pointY_);
     }
 

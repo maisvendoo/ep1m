@@ -32,12 +32,12 @@ private:
     TextPaint   *txtCurSpeed_;
     TextPaint   *txtCurSpeedLimit_;
 
-    int oldSpeed_;
-    int oldSpeedLimit_;
-    int oldNextSpeedLimit_;
+    int oldSpeed_ = -1;
+    int oldSpeedLimit_ = -1;
+    int oldNextSpeedLimit_ = -1;
 
     QTimer timerForBlink;
-    bool forceBlinking_;
+    bool forceBlinking_ = true;
 
 
 };

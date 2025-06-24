@@ -11,15 +11,9 @@ ALSN::ALSN(QSize _size, QWidget *parent)
     , oldFreeBlocks_(0)
 {
     this->resize(_size);
-    //this->setStyleSheet("border: 1px solid red;");
+    this->setStyleSheet("border: 1px solid red;");
 
     loadLedImages_();
-
-    for (int i = 0; i < 8; ++i)
-    {
-        ledWidgets_[i]->setVisible(false);
-    }
-
 }
 
 
@@ -64,16 +58,6 @@ void ALSN::setSignal(int color, int freeBlocs)
 //-----------------------------------------------------------------------------
 void ALSN::loadLedImages_()
 {
-//    ledGreen_ = new QLabel(this);
-//    ledGreen_->setFrameShape(QLabel::NoFrame);
-//    QPixmap pic;
-//    if (!pic.load(":/rcc/alsn_green")) { return; }
-//    ledGreen_->setFixedSize(pic.size());
-//    ledGreen_->setPixmap(pic);
-//    ledGreen_->move(5, 4);
-
-    //ledGreen_->setStyleSheet("background-color: rgba(255, 255, 255, 50);");
-
     ledWidgets_.reserve(8);
 
     int ledW = 81;
@@ -114,5 +98,9 @@ void ALSN::loadLedImages_()
     imgWidget->move(ledX, ledY);
     ledWidgets_.append(imgWidget);
 
+    for (int i = 0; i < 8; ++i)
+    {
+        ledWidgets_[i]->setVisible(true);
+    }
 }
 

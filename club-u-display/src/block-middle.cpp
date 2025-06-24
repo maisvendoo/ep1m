@@ -11,31 +11,30 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
     , reverseInd_(Q_NULLPTR)
     , txtCurSpeed_(Q_NULLPTR)
     , txtCurSpeedLimit_(Q_NULLPTR)
-    , oldSpeed_(-1)
-    , oldSpeedLimit_(-1)
-    , oldNextSpeedLimit_(-1)
-    , forceBlinking_(false)
 {
     this->resize(_size);
+    //this->setStyleSheet("border: 1px solid red");
 
     // Спидометр
     speedometer_ = new Speedometer(_size, cfg_path, this);
 
     // Индикация реверсора
-    reverseInd_ = new ReverseInd(QSize(30,50), this);
-    reverseInd_->move(150, 260);
+    reverseInd_ = new ReverseInd(QSize(16,44), this);
+    reverseInd_->move(214, 363);
 
     // Числовая индикация скорости
-    txtCurSpeed_ = new TextPaint(QSize(100,50), this);
-    txtCurSpeed_->setFonts(33, Qt::green);
-    txtCurSpeed_->move(135, 84);
-    txtCurSpeed_->setParams(3, 33);
+    txtCurSpeed_ = new TextPaint(QSize(132,59), this);
+    txtCurSpeed_->setFonts(39, Qt::green);
+    txtCurSpeed_->move(177, 126);
+    txtCurSpeed_->setParams(3, 44);
+    txtCurSpeed_->setText(QString("000"));
 
     // Числовая индикация ограничения скорости
-    txtCurSpeedLimit_ = new TextPaint(QSize(100,50), this);
-    txtCurSpeedLimit_->setFonts(33, Qt::red);
-    txtCurSpeedLimit_->move(135, 159);
-    txtCurSpeedLimit_->setParams(3, 33);
+    txtCurSpeedLimit_ = new TextPaint(QSize(132,59), this);
+    txtCurSpeedLimit_->setFonts(39, Qt::red);
+    txtCurSpeedLimit_->move(177, 226);
+    txtCurSpeedLimit_->setParams(3, 44);
+    txtCurSpeedLimit_->setText(QString("000"));
 
 
     // Моргание скорости, если подходим к ограничению скорости

@@ -4,4 +4,5 @@ project (ep1m)
 
 add_subdirectory (ep1m)
 add_subdirectory (msud-display)
-#add_subdirectory (club-u-display)
+add_subdirectory (club-u-display)
+

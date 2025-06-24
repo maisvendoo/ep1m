@@ -23,7 +23,7 @@ private:
     TextPaint   *txtPaintTargetName_ = nullptr;
 
     int oldDistToTarget_ = 0;
-    QString oldTargetName_ = "";
+    QString oldTargetName_ = "ABCDEFGHIJKLMNOPQRSTUVWX";
 
 };
 

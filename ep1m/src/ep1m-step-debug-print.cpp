@@ -36,7 +36,8 @@ void EP1m::stepDebugPrint(double t, double dt)
                     .arg(km->getRefSpeedLevel() * 140.0, 4, 'f', 0)
                     .arg(trac_motor[TRAC_MOTOR1]->getAncorCurrent(), 6, 'f', 0);
 
-    DebugMsg += traction_reg;
+
+    DebugMsg += traction_reg + QString("|Реж. МСУД:%1").arg(static_cast<int>(msud_input.is_automatic_mode), 2);;
 
     DebugMsg += QString("\n");
     DebugMsg += QString("%1%2%3-%4-couplings-%5-%6%7%8")
