@@ -17,29 +17,29 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
 
 
     // Индикация кассеты
-    indicationCassette_ = new ImageWidget("rcc", "ind_cassette", QSize(26,23), this);
-    indicationCassette_->move(353, 29);
+    indicationCassette_ = new ImageWidget("rcc", "ind_cassette", QSize(34,30), this);
+    indicationCassette_->move(465, 3);
     indicationCassette_->setVisible(true);
 
     // Индикация М
-    indicationM_ = new ImageWidget("rcc", "ind_M", QSize(16,18), this);
-    indicationM_->move(270, 31);
-    indicationM_->setVisible(true);
+    indicationM_ = new ImageWidget("rcc", "ind_M", QSize(21,23), this);
+    indicationM_->move(352, 7);
+    indicationM_->setVisible(false);
 
     // Индикация П
-    indicationP_ = new ImageWidget("rcc", "ind_P", QSize(12,18), this);
-    indicationP_->move(316, 31);
+    indicationP_ = new ImageWidget("rcc", "ind_P", QSize(16,23), this);
+    indicationP_->move(413, 7);
     indicationP_->setVisible(true);
 
     // Индикация из АЛС-ЕН "прямо"
-    indicationStraight_ = new ImageWidget("rcc", "ind_straight", QSize(45,17), this);
-    indicationStraight_->move(10, 77);
-    indicationStraight_->setVisible(true);
+    indicationStraight_ = new ImageWidget("rcc", "ind_straight", QSize(59,22), this);
+    indicationStraight_->move(5, 68);
+    indicationStraight_->setVisible(false);
 
     // Индикация из АЛС-ЕН "отклонение"
-    indicationSide_ = new ImageWidget("rcc", "ind_side", QSize(45,17), this);
-    indicationSide_->move(10, 112);
-    indicationSide_->setVisible(true);
+    indicationSide_ = new ImageWidget("rcc", "ind_side", QSize(59,22), this);
+    indicationSide_->move(5, 115);
+    indicationSide_->setVisible(false);
 
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(99, 30), this);

@@ -62,7 +62,7 @@ void ALSN::loadLedImages_()
 
     int ledW = 106;
     int ledH = 46;
-    int ledX = 0;
+    int ledX = 3;
     int ledY = 4;
     int dY = ledH + 11;
 

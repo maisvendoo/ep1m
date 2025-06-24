@@ -80,8 +80,8 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
 
 
     // Индикация "Запрет отпуска"
-    indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(71,36), this);
-    indicationZapretOtpuska_->move(55, 434);
+    indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(94,48), this);
+    indicationZapretOtpuska_->move(53, 432);
     indicationZapretOtpuska_->setVisible(true);
 
 }

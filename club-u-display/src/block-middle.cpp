@@ -24,14 +24,14 @@ MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
 
     // Числовая индикация скорости
     txtCurSpeed_ = new TextPaint(QSize(132,59), this);
-    txtCurSpeed_->setFonts(39, Qt::green);
+    txtCurSpeed_->setFonts(48, Qt::green);
     txtCurSpeed_->move(177, 126);
     txtCurSpeed_->setParams(3, 44);
     txtCurSpeed_->setText(QString("000"));
 
     // Числовая индикация ограничения скорости
     txtCurSpeedLimit_ = new TextPaint(QSize(132,59), this);
-    txtCurSpeedLimit_->setFonts(39, Qt::red);
+    txtCurSpeedLimit_->setFonts(48, Qt::red);
     txtCurSpeedLimit_->move(177, 226);
     txtCurSpeedLimit_->setParams(3, 44);
     txtCurSpeedLimit_->setText(QString("000"));
