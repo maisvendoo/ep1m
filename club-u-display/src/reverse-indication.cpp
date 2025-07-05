@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     : QLabel(parent)
-    , oldVal_(0)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red;");
