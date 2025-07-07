@@ -30,8 +30,6 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     this->setLayout(new QVBoxLayout);
     this->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     this->layout()->setContentsMargins(0, 0, 0, 0);
-    // Временно
-    config_dir = QString("D:\\git\\ep1m_my\\ep1m\\cfg\\vehicles\\ep1m");
 }
 
 
@@ -91,10 +89,11 @@ void ClubUDisplay::initMainWindow()
 //------------------------------------------------------------------------------
 void ClubUDisplay::initBlocks_()
 {
-    // пусть к конфигам
+    // путь к конфигам
     QString cfg_path = config_dir + getConfigPath("");
 
-    // Фоновый виджет
+/*
+    // Текстура корпуса в фоновый виджет для отладки в display-player
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
     QPixmap pic;
@@ -105,6 +104,7 @@ void ClubUDisplay::initBlocks_()
     fon->move(0, 0);
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
+*/
 
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(108,461), this);
