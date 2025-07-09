@@ -1,9 +1,7 @@
 * text=auto
 
-*.osgt binary
-*.osg binary
-*.osgb binary
-*.dmd binary
+*.gltf binary
+*.bin binary
 
 *.png binary
 *.bmp binary
