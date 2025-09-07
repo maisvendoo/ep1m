@@ -18,7 +18,7 @@ double EP1m::calcTracForce()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepRegistration(double t, double dt)
+void EP1m::stepRegistration(const double& t, const double& dt)
 {
     QString line = QString("%1 %2 %3 %4 %5 %6 %7 %8 %9")
             .arg(t, 10, 'f', 1) // Текущее время симуляции

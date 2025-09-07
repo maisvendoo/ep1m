@@ -4,8 +4,10 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::signalsOutput()
+void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
 {
+    (void) dt;
+
     analogSignal[SIGNAL_UNLOCK_KEY] = TO_FLOAT(tumblers_panel->getUnlockKeyState());
 
     analogSignal[SIGNAL_TUMBLER_MSUD] = TO_FLOAT(tumblers_panel->getTumblerState(TUMBLER_MSUD));
@@ -71,9 +73,9 @@ void EP1m::signalsOutput()
 
     analogSignal[SIGNAL_KLUB_U_SHEDULE_TIME] = 0.0f;
 
-    int cur_time = QTime::currentTime().hour() * 3600 +
-                   QTime::currentTime().minute() * 60 +
-                   QTime::currentTime().second();
+    int cur_time = t.time.hour() * 3600 +
+                   t.time.minute() * 60 +
+                   t.time.sec();
     analogSignal[SIGNAL_KLUB_U_TIME] = analogSignal[SIGNAL_MSUD_TIME] = TO_FLOAT(cur_time);
 
     analogSignal[SIGNAL_KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());

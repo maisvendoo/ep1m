@@ -10,13 +10,23 @@ class EP1m : public Vehicle
 {
 public:
 
-     /// Конструктор класса
-     EP1m(QObject *parent = Q_NULLPTR);
+    /// Конструктор класса
+    EP1m(QObject* parent = nullptr);
 
-     /// Деструктор класс
-     ~EP1m() override;
+    /// Деструктор класса
+    ~EP1m() override;
+
+    /// Инициализация тормозных приборов
+    void initBrakeDevices(double p0, double pBP, double PFL) override;
 
 private:
+
+    enum
+    {
+        CABS_NUM = 2,
+        CAB1 = 0,
+        CAB2 = 1
+    };
 
     /// Имя модуля сцепного устройства
     QString coupling_module_name = "sa3";
@@ -24,84 +34,84 @@ private:
     QString coupling_config_name = "sa3";
 
     /// Сцепка спереди
-    Coupling *coupling_fwd = Q_NULLPTR;
+    Coupling* coupling_fwd = nullptr;
     /// Сцепка сзади
-    Coupling *coupling_bwd = Q_NULLPTR;
+    Coupling* coupling_bwd = nullptr;
 
     /// Расцепной рычаг спереди
-    OperatingRod *oper_rod_fwd = Q_NULLPTR;
+    OperatingRod* oper_rod_fwd = nullptr;
     /// Расцепной рычаг сзади
-    OperatingRod *oper_rod_bwd = Q_NULLPTR;
+    OperatingRod* oper_rod_bwd = nullptr;
 
     /// Панель тумблеров
-    EP1MTumblersPanel   *tumblers_panel = Q_NULLPTR;
+    EP1MTumblersPanel*   tumblers_panel = nullptr;
 
     /// МСУД
-    MSUD    *msud = Q_NULLPTR;
+    MSUD*    msud = nullptr;
 
     /// Напряжение питания цепей управления
     double  Ucc = 0.0;
 
     /// Аккумуляторная батарея 21KL-125P
-    Battery *battery = Q_NULLPTR;
+    Battery* battery = nullptr;
 
     /// Шкаф питания ШП-21
-    PowerSupply *power_supply = Q_NULLPTR;
+    PowerSupply* power_supply = nullptr;
 
     /// Ток, потребляемый цепями управления
     double Icc = 0.0;
 
     /// Тяговый трансформатор
-    TractionTransformer *trac_trans = Q_NULLPTR;
+    TractionTransformer* trac_trans = nullptr;
 
     /// Главный выключатель
-    ProtectiveDevice *main_switch = Q_NULLPTR;
+    ProtectiveDevice* main_switch = nullptr;
 
     /// Напряжение на крышевой шине
     double Ukr = 0.0;
 
     /// Контактор КМ5 включения ШП-21
-    Relay   *km5 = Q_NULLPTR;
+    Relay*  km5 = nullptr;
 
     /// Вентиль защиты ВЗ-6
-    ElectroValve    *safety_valve = Q_NULLPTR;
+    ElectroValve*   safety_valve = nullptr;
 
     /// Промежуточное реле KV44
-    Relay           *kv44 = Q_NULLPTR;
+    Relay*  kv44 = nullptr;
 
     /// Промежуточное реле KV39
-    Relay           *kv39 = Q_NULLPTR;
+    Relay*  kv39 = nullptr;
 
-    Relay   *kv21 = Q_NULLPTR;
+    Relay*  kv21 = nullptr;
 
-    Relay   *kv22 = Q_NULLPTR;
+    Relay*  kv22 = nullptr;
 
-    Relay   *kv23 = Q_NULLPTR;
+    Relay*  kv23 = nullptr;
 
-    Relay   *kv41 = Q_NULLPTR;
+    Relay*  kv41 = nullptr;
 
-    Relay   *km7 = Q_NULLPTR;
+    Relay*  km7 = nullptr;
 
-    Relay   *km8 = Q_NULLPTR;
+    Relay*  km8 = nullptr;
 
-    Relay   *km9 = Q_NULLPTR;
+    Relay*  km9 = nullptr;
 
-    Relay   *km11 = Q_NULLPTR;
+    Relay*  km11 = nullptr;
 
-    Relay   *km12 = Q_NULLPTR;
+    Relay*  km12 = nullptr;
 
-    Relay   *km13 = Q_NULLPTR;
+    Relay*  km13 = nullptr;
 
     /// Контроллер машиниста
-    TracController  *km = Q_NULLPTR;
+    TracController* km = nullptr;
 
     /// Блок сигнализации БС-002
-    SignalizationModule *signals_module = Q_NULLPTR;
+    SignalizationModule* signals_module = nullptr;
 
     bool return_GV = false;
 
     /// Преобразователь частоты и числа фаз (ПЧФ)
-    FreqPhaseConverter *freq_phase_conv  = Q_NULLPTR;
+    FreqPhaseConverter* freq_phase_conv  = nullptr;
 
     /// Передаточное число тягового редуктора
     double ip = 1.0;
@@ -125,88 +135,88 @@ private:
     bool is_N53_on = false;
 
     /// Реверсор
-    Reversor *reversor = Q_NULLPTR;
+    Reversor* reversor = nullptr;
 
     /// Темп утечки из главного резервуара
     double main_res_leak = 1e-6;
 
     /// Мотор-компрессор
-    ACMotorCompressor   *motor_compressor  = Q_NULLPTR;
+    ACMotorCompressor*  motor_compressor  = nullptr;
 
     /// Регулятор давления в ГР
-    PressureRegulator   *press_reg = Q_NULLPTR;
+    PressureRegulator*  press_reg = nullptr;
 
     /// Главный резервуар
-    Reservoir           *main_reservoir = Q_NULLPTR;
+    Reservoir*          main_reservoir = nullptr;
 
     /// Концевой кран питательной магистрали спереди
-    PneumoAngleCock     *anglecock_fl_fwd = Q_NULLPTR;
+    PneumoAngleCock*    anglecock_fl_fwd = nullptr;
 
     /// Концевой кран питательной магистрали сзади
-    PneumoAngleCock     *anglecock_fl_bwd = Q_NULLPTR;
+    PneumoAngleCock*    anglecock_fl_bwd = nullptr;
 
     /// Рукав питательной  магистрали спереди
-    PneumoHose          *hose_fl_fwd = Q_NULLPTR;
+    PneumoHose*         hose_fl_fwd = nullptr;
 
     /// Рукав питательной  магистрали сзади
-    PneumoHose          *hose_fl_bwd = Q_NULLPTR;
+    PneumoHose*         hose_fl_bwd = nullptr;
 
     double  charge_press = 0.5;
 
     /// Сигнализатор давления в ТМ
-    HysteresisRelay *sp4 = Q_NULLPTR;
+    HysteresisRelay*    sp4 = nullptr;
 
     /// Блокировочное устройство УБТ усл.№367м
-    BrakeLock           *brake_lock = Q_NULLPTR;
+    BrakeLock*          brake_lock = nullptr;
 
     /// Поездной кран машиниста усл.№395
-    BrakeCrane          *brake_crane = Q_NULLPTR;
+    BrakeCrane*         brake_crane = nullptr;
 
     /// Кран впомогательного тормоза усл.№254
-    LocoCrane           *loco_crane = Q_NULLPTR;
+    LocoCrane*          loco_crane = nullptr;
 
     /// ЭПК автостопа
-    AutoTrainStop       *epk = Q_NULLPTR;
+    AutoTrainStop*      epk = nullptr;
 
     /// Тормозная магистраль
-    Reservoir           *brakepipe = Q_NULLPTR;
+    Reservoir*          brakepipe = nullptr;
 
     /// Воздухораспределитель
-    AirDistributor      *air_dist = Q_NULLPTR;
+    AirDistributor*     air_dist = nullptr;
 
     /// Электровоздухораспределитель
-    ElectroAirDistributor  *electro_air_dist = Q_NULLPTR;
+    ElectroAirDistributor*  electro_air_dist = nullptr;
 
     /// Запасный резервуар
-    Reservoir           *supply_reservoir = Q_NULLPTR;
+    Reservoir*          supply_reservoir = nullptr;
 
     /// Концевой кран тормозной магистрали спереди
-    PneumoAngleCock     *anglecock_bp_fwd = Q_NULLPTR;
+    PneumoAngleCock*    anglecock_bp_fwd = nullptr;
 
     /// Концевой кран тормозной магистрали сзади
-    PneumoAngleCock     *anglecock_bp_bwd = Q_NULLPTR;
+    PneumoAngleCock*    anglecock_bp_bwd = nullptr;
 
     /// Рукав тормозной магистрали спереди
-    PneumoHoseEPB       *hose_bp_fwd = Q_NULLPTR;
+    PneumoHoseEPB*      hose_bp_fwd = nullptr;
 
     /// Рукав тормозной магистрали сзади
-    PneumoHoseEPB       *hose_bp_bwd = Q_NULLPTR;
+    PneumoHoseEPB*      hose_bp_bwd = nullptr;
 
     /// Повторительное пневмореле для давления от воздухораспределителя РД4
-    PneumoRelay         *rd4 = Q_NULLPTR;
+    PneumoRelay*        rd4 = nullptr;
 
     /// Переключательный клапан КП1
-    SwitchingValve      *kp1 = Q_NULLPTR;
+    SwitchingValve*     kp1 = nullptr;
 
     /// Переключательный клапан КП2
-    SwitchingValve      *kp2 = Q_NULLPTR;
+    SwitchingValve*     kp2 = nullptr;
 
     /// Переключательный клапан КП5
-    SwitchingValve      *kp5 = Q_NULLPTR;
+    SwitchingValve*     kp5 = nullptr;
 
     /// Тройники для распределения воздуха от переключательного клапана
     /// к тележкам
-    std::array<PneumoSplitter *, 2> bc_splitter;
+    std::array<PneumoSplitter*, 2> bc_splitter;
 
     enum
     {
@@ -218,100 +228,100 @@ private:
     };
 
     /// Повторительное реле давления тележек
-    std::array<PneumoRelay *, NUM_TROLLEYS> bc_pressure_relay;
+    std::array<PneumoRelay*, NUM_TROLLEYS> bc_pressure_relay;
 
     /// Тормозные механизмы тележек
-    std::array<BrakeMech *, NUM_TROLLEYS> brake_mech;
+    std::array<BrakeMech*, NUM_TROLLEYS> brake_mech;
 
     /// Источник питания ЭПТ
-    EPBConverter        *epb_converter = Q_NULLPTR;
+    EPBConverter*       epb_converter = nullptr;
 
     /// Блок управления двухпроводного ЭПТ
-    EPBControl          *epb_control = Q_NULLPTR;
+    EPBControl*         epb_control = nullptr;
 
     /// Блок электронный локомотивный (БЭЛ)
-    KLUB    *klub_BEL = Q_NULLPTR;
+    KLUB*   klub_BEL = nullptr;
 
     /// Реле подачи питания на МСУД
-    Relay   *km43 = Q_NULLPTR;
+    Relay*  km43 = nullptr;
 
     /// Промежуточное реле KV11
-    Relay   *kv11 = Q_NULLPTR;
+    Relay*  kv11 = nullptr;
 
     /// Промежуточное реле KV12
-    Relay   *kv12 = Q_NULLPTR;
+    Relay*  kv12 = nullptr;
 
     /// Промежуточное реле KV13
-    Relay   *kv13 = Q_NULLPTR;
+    Relay*  kv13 = nullptr;
 
     /// Промежуточное реле KV14
-    Relay   *kv14 = Q_NULLPTR;
+    Relay*  kv14 = nullptr;
 
     /// Промежуточное реле KV15
-    Relay   *kv15 = Q_NULLPTR;
+    Relay*  kv15 = nullptr;
 
     /// Реле КЛУБ
-    Relay   *kv84 = Q_NULLPTR;
+    Relay*  kv84 = nullptr;
 
     /// Реле выдержки времени КТ10
-    TimeRelay   *kt10 = Q_NULLPTR;
+    TimeRelay*  kt10 = nullptr;
 
     /// Реле выдержки времени КТ1
-    TimeRelay   *kt1 = Q_NULLPTR;
+    TimeRelay*  kt1 = nullptr;
 
     /// Тормозной переключатель
-    BrakeSwitcher *qt1 = Q_NULLPTR;
+    BrakeSwitcher* qt1 = nullptr;
 
     /// Контактор KM41
-    Relay       *km41 = Q_NULLPTR;
+    Relay*  km41 = nullptr;
 
     /// Контактор KM42
-    Relay       *km42 = Q_NULLPTR;
+    Relay*  km42 = nullptr;
 
     /// Реле выдержки времени КТ4
-    TimeRelay   *kt4 = Q_NULLPTR;
+    TimeRelay*  kt4 = nullptr;
 
     /// Реле выдержки времени КТ5
-    TimeRelay   *kt5 = Q_NULLPTR;
+    TimeRelay*  kt5 = nullptr;
 
     /// Контактор мотор-вентилятора ББР
-    Relay       *km14 = Q_NULLPTR;
+    Relay*  km14 = nullptr;
 
     /// Контактор К1
-    Relay       *k1 = Q_NULLPTR;
+    Relay*  k1 = nullptr;
 
     /// Вентиль отпуска У3
-    ElectroPneumoValve *Y3 = Q_NULLPTR;
+    ElectroPneumoValve* Y3 = nullptr;
 
     /// Вентиль замещения ЭДТ У4
-    ElectroPneumoValve *Y4 = Q_NULLPTR;
+    ElectroPneumoValve* Y4 = nullptr;
 
     /// Вентиль усиления торможения У5
-    ElectroPneumoValve *Y5 = Q_NULLPTR;
+    ElectroPneumoValve* Y5 = nullptr;
 
     /// Панель пневматических редукторов
-    PneumoReducerPanel *pneumo_red_panel = Q_NULLPTR;
+    PneumoReducerPanel* pneumo_red_panel = nullptr;
 
     /// Датчик давления магистрали передней тележки (ТЦ1 и ТЦ2)
-    PressureSensor *sp3 = Q_NULLPTR;
+    PressureSensor* sp3 = nullptr;
 
     /// Датчик аварийного давления в ТМ SP6
-    PressureSensor  *sp6 = Q_NULLPTR;
+    PressureSensor* sp6 = nullptr;
 
     /// Регистратор параметров движения (для отладки и испытаний)
-    Registrator *registrator = Q_NULLPTR;
+    Registrator* registrator = nullptr;
 
     /// Свисток и тифон
-    TrainHorn *horn = Q_NULLPTR;
+    TrainHorn* horn = nullptr;
 
     /// Система подачи песка
-    SandingSystem *sand_system = Q_NULLPTR;
+    SandingSystem* sand_system = nullptr;
 
     /// Шунты ослабления возбуждения ТЭД
-    ShuntsModule *shunts = Q_NULLPTR;
+    ShuntsModule* shunts = nullptr;
 
     /// Выпрямительна установка возбуждения ВУВ-118
-    FieldRect *field_rect = Q_NULLPTR;
+    FieldRect* field_rect = nullptr;
 
     enum
     {
@@ -324,7 +334,7 @@ private:
     msud_input_t msud_input = msud_input_t();
 
     /// Токоприемники
-    std::array<Pantograph *, PANT_NUMBER> pant;
+    std::array<Pantograph*, PANT_NUMBER> pant;
 
     /// Автоматические защитные выключатели
     std::array<Trigger, AZV_NUMBER> azv;
@@ -333,12 +343,12 @@ private:
     std::array<Trigger, TUMBLERS_COUNT> tumblers;
 
     /// Мотор-вентиляторы М11 - М13
-    std::array<MotorFan *, MOTOR_FANS_NUM> motor_fan;
+    std::array<MotorFan*, MOTOR_FANS_NUM> motor_fan;
 
-    std::array<TractionMotor *, TRAC_MOTORS_NUM> trac_motor;
+    std::array<TractionMotor*, TRAC_MOTORS_NUM> trac_motor;
 
     /// Быстродействующие выключатели ТЭД
-    std::array<FastSwitch *, TRAC_MOTORS_NUM> fast_switch;
+    std::array<FastSwitch*, TRAC_MOTORS_NUM> fast_switch;
 
     /// Выпрямительно инверторные преобразователи
     enum
@@ -348,140 +358,154 @@ private:
         VIP2 = 1
     };
 
-    std::array<RectInvertConverter *, RECT_INV_CONV_NUM> vip;
+    std::array<RectInvertConverter*, RECT_INV_CONV_NUM> vip;
 
     /// Ограничения скорости на путевой инфраструктуре для кабины А
-    SpeedMap    *speedmap_fwd = Q_NULLPTR;
+    SpeedMap*   speedmap_fwd = nullptr;
     /// Ограничения скорости на путевой инфраструктуре для кабины Б
-    SpeedMap    *speedmap_bwd = Q_NULLPTR;
+    SpeedMap*   speedmap_bwd = nullptr;
 
     /// Приёмная катушка АЛСН для кабины А
-    CoilALSN    *coil_ALSN_fwd = Q_NULLPTR;
+    CoilALSN*   coil_ALSN_fwd = nullptr;
     /// Приёмная катушка АЛСН для кабины Б
-    CoilALSN    *coil_ALSN_bwd = Q_NULLPTR;
+    CoilALSN*   coil_ALSN_bwd = nullptr;
 
     /// Дешифратор сигнала АЛСН
-    DecoderALSN *alsn_decoder = Q_NULLPTR;
+    DecoderALSN* alsn_decoder = nullptr;
 
     /// Кнопка "Песок"
     Trigger button_sandbox;
 
+
+    /// Чтение конфигурационного файла
+    void loadConfig(QString cfg_path) override;
+
+
+    /// Общая инициализация локомотива
     void initialization() override;
 
+    /// Инициализация управления тумблерами
+    void initTumblers(const QString& modules_dir, const QString& custom_cfg_dir);
+
     /// Инициализация сцепных устройств
-    void initCouplings(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initCouplings(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация подсистемы питания цепей управления
-    void initControlPower(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initControlPower(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация цепей управления
-    void initControlCircuit(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initControlCircuit(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация АЗВ
-    void initAZV(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initAZV(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация пульта управления в кабине
-    void initPanel(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initPanel(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация МСУД
-    void initMSUD(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initMSUD(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация силовой схемы
-    void initPowerCircuit(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initPowerCircuit(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация питательной магистрали
-    void initPneumoSupply(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initPneumoSupply(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация приборов управления тормозами
-    void initBrakesControl(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initBrakesControl(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация тормозного оборудования
-    void initBrakesEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initBrakesEquipment(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация ЭПТ
-    void initEPB(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initEPB(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация вспомогательных машин
-    void initAuxMachines(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initAuxMachines(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация устройств безопасности
-    void initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initSafetyDevices(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация прочих устройств
-    void initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initOtherEquipment(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация регистратора параметров движения
-    void initRegistartor(const QString &modules_dir, const QString &custom_cfg_dir);
+    void initRegistartor(const QString& modules_dir, const QString& custom_cfg_dir);
+
+
+    /// Процесс симуляции
+    void process(const simulator_time_t& t, const double& dt) override;
+
+    /// Управление
+    void keyProcess(const simulator_time_t& t, const double& dt);
+
+    /// Отладочная строка
+    void debugPrint(const simulator_time_t& t, const double& dt);
+
+    /// Сигналы для анимации
+    void signalsOutput(const simulator_time_t& t, const double& dt);
+
+    /// Сигналы для озвучки
+    void soundsOutput(const simulator_time_t& t, const double& dt);
+
 
     /// Предварительные расчёты перед симуляцией
-    void preStep(double t) override;
+    void preStep(const double& t) override;
 
     /// Предварительный расчёт координат сцепных устройств
-    void preStepCouplings(double t);
+    void preStepCouplings(const double& t);
+
 
     /// Шаг симуляции всех систем электровоза
-    void step(double t, double dt) override;
+    void step(const double& t, const double& dt) override;
 
     /// Моделирование сцепных устройств
-    void stepCouplings(double t, double dt);
+    void stepCouplings(const double& t, const double& dt);
 
-    void stepControlPower(double t, double dt);
+    void stepControlPower(const double& t, const double& dt);
 
-    void stepControlCircuit(double t, double dt);
+    void stepControlCircuit(const double& t, const double& dt);
 
     bool getHoldingCoilState();
 
     /// Управление схемой тяги
-    void stepTractionControl(double t, double dt);
+    void stepTractionControl(const double& t, const double& dt);
 
     /// Управление схемой рекуперации
-    void stepRecuperationControl(double t, double dt);
+    void stepRecuperationControl(const double& t, const double& dt);
 
-
-    void stepPanel(double t, double dt);
+    void stepPanel(const double& t, const double& dt);
 
     void setSignalsModuleInputs();
 
-    void stepMSUD(double t, double dt);
+    void stepMSUD(const double& t, const double& dt);
 
-    void stepPowerCircuit(double t, double dt);
+    void stepPowerCircuit(const double& t, const double& dt);
 
     /// Шаг моделирования питательной магистрали
-    void stepPneumoSupply(double t, double dt);
+    void stepPneumoSupply(const double& t, const double& dt);
 
     /// Шаг моделирования приборов управления тормозами
-    void stepBrakesControl(double t, double dt);
+    void stepBrakesControl(const double& t, const double& dt);
 
     /// Шаг моделирования тормозного оборудования
-    void stepBrakesEquipment(double t, double dt);
+    void stepBrakesEquipment(const double& t, const double& dt);
 
     /// Шаг моделирования ЭПТ
-    void stepEPB(double t, double dt);
+    void stepEPB(const double& t, const double& dt);
 
-    void stepAuxMachines(double t, double dt);
+    void stepAuxMachines(const double& t, const double& dt);
 
-    void stepSafetyDevices(double t, double dt);
+    void stepSafetyDevices(const double& t, const double& dt);
 
-    void stepOtherEquipment(double t, double dt);
+    void stepOtherEquipment(const double& t, const double& dt);
 
-    void signalsOutput();
+    void stepRegistration(const double& t, const double& dt);
 
-    void stepSoundSignals(double t, double dt);
-
-    /// Отладочная печать по F1
-    void stepDebugPrint(double t, double dt);
-
-    void keyProcess() override;
-
-    void loadConfig(QString path) override;
-
-    void initBrakeDevices(double p0, double pBP, double PFL) override;
 
     void load_brakes_config(QString path);
 
     double calcTracForce();
-
-    void stepRegistration(double t, double dt);
 };
 
 #endif // EP1M_H

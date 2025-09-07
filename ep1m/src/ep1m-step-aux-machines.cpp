@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepAuxMachines(double t, double dt)
+void EP1m::stepAuxMachines(const double& t, const double& dt)
 {
     // Обрабатываем ПЧФ
     bool is_freq_conv_On = tumblers_panel->getTumblerState(TUMBLER_AUX_MACHINES);

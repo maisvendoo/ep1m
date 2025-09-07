@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepControlCircuit(double t, double dt)
+void EP1m::stepControlCircuit(const double& t, const double& dt)
 {
     // Цепь питания промежуточного реле KV44
     bool is_kv44_on = tumblers_panel->getTumblerState(TUMBLER_MSUD);
@@ -88,7 +88,7 @@ bool EP1m::getHoldingCoilState()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepTractionControl(double t, double dt)
+void EP1m::stepTractionControl(const double& t, const double& dt)
 {
     bool is_KV11_KV12_on = km->isContacts5_6() &&
             epk->getEmergencyBrakeContact();
@@ -231,7 +231,7 @@ void EP1m::stepTractionControl(double t, double dt)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepRecuperationControl(double t, double dt)
+void EP1m::stepRecuperationControl(const double& t, const double& dt)
 {
     is_N45_on = km->isContacts11_12();
 

@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::stepEPB(double t, double dt)
+void EP1m::stepEPB(const double& t, const double& dt)
 {
     // Потребляемый ток в рабочей линии ЭПТ
     double evr_current = electro_air_dist->getCurrent(0);

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::initAuxMachines(const QString &modules_dir, const QString &custom_cfg_dir)
+void EP1m::initAuxMachines(const QString& modules_dir, const QString& custom_cfg_dir)
 {
     (void) modules_dir;
 

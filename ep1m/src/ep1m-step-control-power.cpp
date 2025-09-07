@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepControlPower(double t, double dt)
+void EP1m::stepControlPower(const double& t, const double& dt)
 {
     Icc = km5->getCurrent() +
           safety_valve->getCurrent();

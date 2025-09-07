@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::stepBrakesControl(double t, double dt)
+void EP1m::stepBrakesControl(const double& t, const double& dt)
 {
     // Блокировочное устройство
     brake_lock->setFLpressure(main_reservoir->getPressure());
@@ -12,49 +12,23 @@ void EP1m::stepBrakesControl(double t, double dt)
     brake_lock->setCraneFLflow(brake_crane->getFLflow() + loco_crane->getFLflow());
     brake_lock->setCraneBPflow(brake_crane->getBPflow());
     brake_lock->setCraneBCflow(loco_crane->getBCflow());
-    brake_lock->setControl(keys);
     brake_lock->step(t, dt);
 
     // Поездной кран машиниста
     brake_crane->setFLpressure(brake_lock->getCraneFLpressure());
     brake_crane->setBPpressure(brake_lock->getCraneBPpressure());
-
-    // Управляем краном, учитывая возможное наличие внешнего пульта
-    if (control_signals.analogSignal[CS_BRAKE_CRANE].is_active)
-    {
-        int brake_crane_pos = static_cast<int>(control_signals.analogSignal[CS_BRAKE_CRANE].cur_value);
-        brake_crane->setHandlePosition(brake_crane_pos);
-    }
-    else
-    {
-        brake_crane->setControl(keys);
-    }
-
     brake_crane->step(t, dt);
 
     // Кран вспомогательного тормоза
     loco_crane->setFLpressure(brake_lock->getCraneFLpressure());
     loco_crane->setBCpressure(brake_lock->getCraneBCpressure());
     loco_crane->setILpressure(0.0);
-
-    // Управляем, с учетом возможного наличия пульта
-    if (control_signals.analogSignal[CS_LOCO_CRANE].is_active)
-    {
-        double pos = control_signals.analogSignal[CS_LOCO_CRANE].cur_value;
-        loco_crane->setHandlePosition(pos);
-    }
-    else
-    {
-        loco_crane->setControl(keys);
-    }
-
     loco_crane->step(t, dt);
 
     // ЭПК
     epk->setFLpressure(main_reservoir->getPressure());
     epk->setBPpressure(brakepipe->getPressure());
     epk->setPowered(klub_BEL->getEPKstate());
-//    epk->setControl(keys);
     epk->setKeyOn(tumblers[EPK_KEY].getState());
     epk->step(t, dt);
 

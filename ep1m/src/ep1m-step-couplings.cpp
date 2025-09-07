@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::preStepCouplings(double t)
+void EP1m::preStepCouplings(const double& t)
 {
     (void) t;
 
@@ -19,11 +19,10 @@ void EP1m::preStepCouplings(double t)
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::stepCouplings(double t, double dt)
+void EP1m::stepCouplings(const double& t, const double& dt)
 {
     // Управление передним сцепным устройством
     oper_rod_fwd->setCouplingForce(coupling_fwd->getCurrentForce());
-    oper_rod_fwd->setControl(keys);
     oper_rod_fwd->step(t, dt);
     coupling_fwd->setCouplingOperatingState(oper_rod_fwd->getOperatingState());
     coupling_fwd->step(t, dt);
@@ -32,7 +31,6 @@ void EP1m::stepCouplings(double t, double dt)
 
     // Управление задним сцепным устройством
     oper_rod_bwd->setCouplingForce(coupling_bwd->getCurrentForce());
-    oper_rod_bwd->setControl(keys);
     oper_rod_bwd->step(t, dt);
     coupling_bwd->setCouplingOperatingState(oper_rod_bwd->getOperatingState());
     coupling_bwd->step(t, dt);

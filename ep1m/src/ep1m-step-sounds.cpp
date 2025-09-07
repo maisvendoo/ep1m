@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepSoundSignals(double t, double dt)
+void EP1m::soundsOutput(const simulator_time_t& t, const double& dt)
 {
     (void) t;
     (void) dt;

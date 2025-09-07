@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepDebugPrint(double t, double dt)
+void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
 {
     (void) t;
     (void) dt;

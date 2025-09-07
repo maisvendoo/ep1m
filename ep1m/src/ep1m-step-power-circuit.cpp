@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepPowerCircuit(double t, double dt)
+void EP1m::stepPowerCircuit(const double& t, const double& dt)
 {
     pant[PANT1]->setState(safety_valve->getState() &&
                           tumblers_panel->getTumblerState(TUMBLER_PANT1) &&

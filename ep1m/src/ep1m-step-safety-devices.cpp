@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::stepSafetyDevices(double t, double dt)
+void EP1m::stepSafetyDevices(const double& t, const double& dt)
 {
     // Приёмные катушки АЛСН
     coil_ALSN_fwd->step(t, dt);
