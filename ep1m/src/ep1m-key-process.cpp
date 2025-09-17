@@ -5,22 +5,6 @@
 //------------------------------------------------------------------------------
 void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
 {
-    // Сцепные устройства
-    oper_rod_fwd->setControl(&pressed_keys);
-    oper_rod_bwd->setControl(&pressed_keys);
-
-    // Концевые краны и рукава тормозной магистрали
-    anglecock_bp_fwd->setControl(&pressed_keys);
-    anglecock_bp_bwd->setControl(&pressed_keys);
-    hose_bp_fwd->setControl(&pressed_keys);
-    hose_bp_bwd->setControl(&pressed_keys);
-
-    // Концевые краны и рукава питательной магистрали
-    anglecock_fl_fwd->setControl(&pressed_keys);
-    anglecock_fl_bwd->setControl(&pressed_keys);
-    hose_fl_fwd->setControl(&pressed_keys);
-    hose_fl_bwd->setControl(&pressed_keys);
-
     // Песочница
     sand_system->setControl(&pressed_keys);
     // Тифон и свисток

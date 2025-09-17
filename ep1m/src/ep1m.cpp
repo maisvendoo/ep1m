@@ -31,9 +31,6 @@ void EP1m::initialization()
     QString custom_cfg_dir(fs.getVehiclesDir().c_str());
     custom_cfg_dir += fs.separator() + config_dir;
 
-    // Инициализация управления тумблерами
-    initTumblers(modules_dir, custom_cfg_dir);
-
     // Инициализация сцепных устройств
     initCouplings(modules_dir, custom_cfg_dir);
 
@@ -75,6 +72,9 @@ void EP1m::initialization()
 
     // Инициализация прочих устройств
     initOtherEquipment(modules_dir, custom_cfg_dir);
+
+    // Инициализация управления
+    initControl(modules_dir, custom_cfg_dir);
 
     // Инициализация регистратора
     if (is_Registrator_on)
