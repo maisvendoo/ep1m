@@ -75,7 +75,7 @@ void EP1m::load_brakes_config(QString path)
 
         if (cfg.getInt(secName, "BrakeLockDevice", brake_lock_state))
         {
-            brake_lock->setState(brake_lock_state);
+            brake_lock->setStateOn(brake_lock_state);
         }
     }
 }

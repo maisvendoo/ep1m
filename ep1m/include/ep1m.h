@@ -167,7 +167,7 @@ private:
     HysteresisRelay*    sp4 = nullptr;
 
     /// Блокировочное устройство УБТ усл.№367м
-    BrakeLock*          brake_lock = nullptr;
+    PneumoBrakeLock*    brake_lock = nullptr;
 
     /// Поездной кран машиниста усл.№395
     BrakeCrane*         brake_crane = nullptr;

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------
 void EP1m::stepEPB(const double& t, const double& dt)
 {
-    // Потребляемый ток в рабочей линии ЭПТ
+    // Потребляемый ток электровоздухораспределителя
     double evr_current = electro_air_dist->getCurrent(0);
 
     // Потребляемый ток в рабочей линии ЭПТ
@@ -20,20 +20,21 @@ void EP1m::stepEPB(const double& t, const double& dt)
     epb_converter->step(t, dt);
 
     // Контроллер двухпроводного ЭПТ
+    bool cab1_on = brake_lock->isStateOn() && tumblers_panel->getTumblerState(TUMBLER_EPT);
     epb_control->setInputVoltage(epb_converter->getOutputVoltage()
-        * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_EPT)) );
-    epb_control->setHoldState(brake_crane->isHold());
-    epb_control->setBrakeState(brake_crane->isBrake());
+                                 * static_cast<double>(cab1_on) );
+    epb_control->setHoldState(cab1_on && brake_crane->isHold());
+    epb_control->setBrakeState(cab1_on && brake_crane->isBrake());
     epb_control->setControlVoltage(  hose_bp_fwd->getVoltage(1)
                                    + hose_bp_bwd->getVoltage(1) );
     epb_control->step(t, dt);
     double epb_work_U = epb_control->getWorkVoltage();
     double epb_work_f = epb_control->getWorkFrequency();
 
-    // Управление электровоздухораспределителем
+    // Управление электровоздухораспределителем: отключается кнопкой "Отпуск тормозов",
+    // а иначе задаём управляющий сигнал из контроллера или рабочей линии ЭПТ
     double evr_U = 0.0;
     double evr_f = 0.0;
-    // Если не нажата кнопка "Отпуск тормозов" - управление от линий ЭПТ
     if (!tumblers[BRAKE_RELEASE_BUTTON].getState())
     {
         evr_U = epb_work_U + hose_bp_fwd->getVoltage(0) + hose_bp_bwd->getVoltage(0);

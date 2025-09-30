@@ -8,7 +8,7 @@
 void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_cfg_dir)
 {
     // Блокировочное устройство
-    brake_lock = new BrakeLock();
+    brake_lock = new PneumoBrakeLock();
     brake_lock->read_config("ubt367m");
 
     // Поездной кран машиниста
