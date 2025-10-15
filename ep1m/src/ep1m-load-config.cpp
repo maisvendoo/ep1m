@@ -77,5 +77,8 @@ void EP1m::load_brakes_config(QString path)
         {
             brake_lock->setStateOn(brake_lock_state);
         }
+
+        epk->allowKey(true);
+        epk->insertKey(true);
     }
 }

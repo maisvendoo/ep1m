@@ -66,4 +66,7 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
     hose_bp_bwd->setKeySymbolDisconnect(KEY_F4);
     hose_bp_bwd->setKeyModifierDisconnect(MODIFIER_OnlyControl);
     hose_bp_bwd->setControl(&pressed_keys);
+
+    // Электропневматический клапан автостопа
+    epk->setControl(&pressed_keys);
 }

@@ -107,6 +107,13 @@ void TracController::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void TracController::stepKeysControl(double t, double dt)
 {
+    bool key_traction = getKeyState(pressed_keys, KEY_A);
+    bool key_v_ref_inc = getKeyState(pressed_keys, KEY_Q);
+    bool key_brakes = getKeyState(pressed_keys, KEY_D);
+    bool key_v_ref_dec = getKeyState(pressed_keys, KEY_E);
+    bool isShift = isModifier(pressed_keys, MODIFIER_OnlyShift);
+    bool isControl = isModifier(pressed_keys, MODIFIER_OnlyControl);
+
     // Управление реверсивной рукояткой
     if (fwd_key_state && !old_fwd_key_state && isZero() && (revers_pos < 1))
     {
@@ -131,8 +138,8 @@ void TracController::stepKeysControl(double t, double dt)
         trac_level = brake_level = 0;
         traction.reset();
         brake.reset();
-        processDiscretePositions(getKeyState(KEY_A), old_traction_key, 1);
-        processDiscretePositions(getKeyState(KEY_D), old_brake_key, -1);
+        processDiscretePositions(key_traction, old_traction_key, 1);
+        processDiscretePositions(key_brakes, old_brake_key, -1);
     }
 
     // Тут реализуем процесс перемещения главной рукоятки!!!
@@ -145,7 +152,7 @@ void TracController::stepKeysControl(double t, double dt)
         if (!brakeTimer.isStarted())
             brakeTimer.start();
 
-        if (getKeyState(KEY_A))
+        if (key_traction)
         {
             if (brake_level == 0)
             {
@@ -155,24 +162,24 @@ void TracController::stepKeysControl(double t, double dt)
             }
             else
             {
-                if (isShift())
+                if (isShift)
                     handle_motion_speed = handle_high_speed_coeff;
                 else
                     handle_motion_speed = 1;
             }
         }
 
-        if (getKeyState(KEY_D))
+        if (key_traction)
         {
             if (brake.getState())
             {
-                if (isShift())
+                if (isShift)
                     handle_motion_speed = -handle_high_speed_coeff;
                 else
                     handle_motion_speed = -1;
             }
 
-            if (isControl())
+            if (isControl)
             {
                 mode_pos = 0;
                 brakeTimer.stop();
@@ -195,9 +202,9 @@ void TracController::stepKeysControl(double t, double dt)
         if (!tracTimer.isStarted())
             tracTimer.start();
 
-        if (getKeyState(KEY_D))
+        if (key_brakes)
         {
-            if ( (trac_level == 0) || isControl() )
+            if ( (trac_level == 0) || isControl )
             {
                 mode_pos = 0;
                 tracTimer.stop();
@@ -205,18 +212,18 @@ void TracController::stepKeysControl(double t, double dt)
             }
             else
             {
-                if (isShift())
+                if (isShift)
                     handle_motion_speed = -handle_high_speed_coeff;
                 else
                     handle_motion_speed = -1;
             }
         }
 
-        if (getKeyState(KEY_A))
+        if (key_traction)
         {
             if (traction.getState())
             {
-                if (isShift())
+                if (isShift)
                     handle_motion_speed = handle_high_speed_coeff;
                 else
                     handle_motion_speed = 1;
@@ -230,29 +237,29 @@ void TracController::stepKeysControl(double t, double dt)
 
     tracTimer.step(t, dt);
 
-    old_traction_key = getKeyState(KEY_A);
-    old_brake_key = getKeyState(KEY_D);
+    old_traction_key = key_traction;
+    old_brake_key = key_brakes;
 
     refV_motion_speed = 0.0;
 
-    if (getKeyState(KEY_Q))
+    if (key_v_ref_inc)
     {
-        if (isShift())
+        if (isShift)
             refV_motion_speed = refV_high_speed_coeff;
         else
             refV_motion_speed = 1.0;
     }
 
-    if (getKeyState(KEY_E))
+    if (key_v_ref_dec)
     {
-        if (isControl())
+        if (isControl)
         {
             refV_motion_speed = 0.0;
             refV_level = 0.0;
         }
         else
         {
-            if (isShift())
+            if (isShift)
                 refV_motion_speed = -refV_high_speed_coeff;
             else
                 refV_motion_speed = -1.0;

@@ -98,8 +98,8 @@ void EP1m::soundsOutput(const simulator_time_t& t, const double& dt)
     analogSignal[SOUND_MAIN_SWITCH_OFF] = main_switch->getSoundSignal(ProtectiveDevice::OFF_SOUND);
 
     // Ключ ЭПК
-    analogSignal[SOUND_EPK_KEY_ON] = tumblers[EPK_KEY].getSoundSignal(Trigger::ON_SOUND);
-    analogSignal[SOUND_EPK_KEY_OFF] = tumblers[EPK_KEY].getSoundSignal(Trigger::OFF_SOUND);
+    analogSignal[SOUND_EPK_KEY_ON] = epk->getSoundSignal(AutoTrainStop::KEY_STATE_ON);
+    analogSignal[SOUND_EPK_KEY_OFF] = epk->getSoundSignal(AutoTrainStop::KEY_STATE_OFF);
 
     // Реле и контакторы
     analogSignal[SOUND_KM5] = km5->getSoundSignal(Relay::CHANGE_SOUND);
@@ -232,7 +232,7 @@ void EP1m::soundsOutput(const simulator_time_t& t, const double& dt)
     analogSignal[SOUND_TED_138_140] = sound_state_t::createSoundSignal((Vkmh > 138) && is_motors_On);
 
     // Свисток ЭПК
-    analogSignal[SOUND_EPK] = epk->getSoundSignal();
+    analogSignal[SOUND_EPK] = epk->getSoundSignal(AutoTrainStop::AUTOSTOP_WHISTLE);
 
     // Песочница
     analogSignal[SOUND_SAND_DELIVERY] = sand_system->getSoundSignal();

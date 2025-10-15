@@ -22,8 +22,7 @@ enum
 
     BUTTON_RB = 5,
     BUTTON_RBS = 6,
-
-    EPK_KEY = 7,
+    BUTTON_RBP = 7,
 
     TUMBLER_MPK = 8,
     TUMBLER_AUTO_MODE = 9,

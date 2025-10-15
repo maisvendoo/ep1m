@@ -29,7 +29,6 @@ void EP1m::stepBrakesControl(const double& t, const double& dt)
     epk->setFLpressure(main_reservoir->getPressure());
     epk->setBPpressure(brakepipe->getPressure());
     epk->setPowered(klub_BEL->getEPKstate());
-    epk->setKeyOn(tumblers[EPK_KEY].getState());
     epk->step(t, dt);
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4

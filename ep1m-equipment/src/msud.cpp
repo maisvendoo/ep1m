@@ -184,10 +184,10 @@ void MSUD::stepKeysControl(double t, double dt)
     Q_UNUSED(dt)
 
     old_key_state_plus = key_state_plus;
-    key_state_plus = getKeyState(KEY_Equals);
+    key_state_plus = getKeyState(pressed_keys, KEY_Equals);
 
     old_key_state_minus = key_state_minus;
-    key_state_minus = getKeyState(KEY_Minus);
+    key_state_minus = getKeyState(pressed_keys, KEY_Minus);
 }
 
 //------------------------------------------------------------------------------

@@ -118,15 +118,6 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
             tumblers[BUTTON_RBS].reset();
     }
 
-    // ЭПК
-    if (getKeyState(KEY_N))
-    {
-        if (isShift())
-            tumblers[EPK_KEY].set();
-        else
-            tumblers[EPK_KEY].reset();
-    }
-
     // Выбор МПК
     if (getKeyState(KEY_1) && !isAlt())
     {
