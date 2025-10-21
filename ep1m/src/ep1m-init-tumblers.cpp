@@ -109,9 +109,9 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         tumblers[TUMBLER_SAND_ON_EMERGENCY][cab_idx].setInitState(false);
 
         // Тумблер "Выбор комплекта: МПК-1 или МПК-2"
-        tumblers[TUMBLER_MPK][cab_idx].setKeySymbolOn(KEY_5);
+        tumblers[TUMBLER_MPK][cab_idx].setKeySymbolOn(KEY_6);
         tumblers[TUMBLER_MPK][cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
-        tumblers[TUMBLER_MPK][cab_idx].setKeySymbolOff(KEY_5);
+        tumblers[TUMBLER_MPK][cab_idx].setKeySymbolOff(KEY_6);
         tumblers[TUMBLER_MPK][cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
         tumblers[TUMBLER_MPK][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
@@ -233,9 +233,9 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         switchers[SWITCHER_DEVICES_BRIGHTNESS][cab_idx].setInitPosition(1);
 
         // Тумблер "Напряжение батареи или напряжение СПН ЭПТ"
-        tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeySymbolOn(KEY_6);
+        tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeySymbolOn(KEY_5);
         tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
-        tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeySymbolOff(KEY_6);
+        tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeySymbolOff(KEY_5);
         tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
         tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
         tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].setInitState(true);
