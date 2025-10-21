@@ -7,6 +7,8 @@
 //------------------------------------------------------------------------------
 EP1m::EP1m(QObject *parent) : Vehicle (parent)  
 {
+    analogSignal.resize(SIGNALS_NUM_TOTAL);
+
     pressed_keys_by_cabine.resize(CABS_NUM);
     pressed_keys_by_cabine.shrink_to_fit();
 

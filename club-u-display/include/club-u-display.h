@@ -31,6 +31,7 @@ private:
     RightBlock      *rightBlock_ = nullptr;
     BottomBlock     *bottomBlock_ = nullptr;
 
+    double upd_interval = 0.1;
     double upd_time = 0.0;
     int  upd_block = 0;
 

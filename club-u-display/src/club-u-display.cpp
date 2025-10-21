@@ -138,12 +138,17 @@ void ClubUDisplay::update(double t, double dt)
 
     // Интервал обновления
     upd_time += dt;
-    if (upd_time < upd_interval)
+    if ((upd_time < upd_interval) || (signal_id < 0))
+    {
+        need_repaint = false;
         return;
+    }
 
+    input_signals.resize(KLUB_U_ACCELERATION + 1, 0.0f);
+    need_repaint = true;
     upd_time = 0.0;
 
-    if (input_signals[KLUB_U_CAB1_POWER] == 0.0f)
+    if (input_signals[signal_id] == 0.0f)
     {
         alsn_->setVisible(false);
         topBlock_->setVisible(false);

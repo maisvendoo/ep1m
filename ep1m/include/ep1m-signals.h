@@ -196,8 +196,9 @@ enum
     CAB1_SIGLIGHT_FAST_SWITCH_ENGINE_1_OFF = 141,
     // 142-143 резерв
 
-    MSUD_CAB1_POWER      = 144, // питание дисплея МСУД в кабине 1
-    KLUB_U_CAB1_POWER    = 145, // питание дисплея КЛУБ-У в кабине 1
+    KLUB_U_CAB1_POWER    = 144, // питание дисплея КЛУБ-У в кабине 1
+    KLUB_U_CAB2_POWER    = 145, // питание дисплея КЛУБ-У в кабине 2
+
     // КЛУБ-У
     // Символы табло "Станция"
     KLUB_U_STATION_SYMB1 = 146,
@@ -417,8 +418,8 @@ enum
     CAB2_SIGLIGHT_FAST_SWITCH_ENGINE_1_OFF = 341,
     // 342-343 резерв
 
-    MSUD_CAB2_POWER      = 344, // питание дисплея МСУД в кабине 2
-    KLUB_U_CAB2_POWER    = 345, // питание дисплея КЛУБ-У в кабине 2
+    MSUD_CAB1_POWER      = 344, // питание дисплея МСУД в кабине 1
+    MSUD_CAB2_POWER      = 345, // питание дисплея МСУД в кабине 2
 
     // МСУД
     MSUD_MODE            = 346, // авторегулирование/ручное
@@ -796,8 +797,9 @@ enum
     SOUND_TED_136_138 = 680,
     SOUND_TED_138_140 = 681,
 
-    SOUND_SAND_DELIVERY = 682
+    SOUND_SAND_DELIVERY = 682,
 
+    SIGNALS_NUM_TOTAL
 
 
 /*

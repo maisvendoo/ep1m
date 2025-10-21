@@ -78,6 +78,7 @@ private:
     QTimer timerKZ_;
     QTimer timerOV_;
 
+    double upd_interval = 0.1;
     double upd_time = 0.0;
     int  upd_block = 0;
 
