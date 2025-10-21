@@ -7,21 +7,27 @@
 //------------------------------------------------------------------------
 void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_cfg_dir)
 {
-    // Блокировочное устройство
-    brake_lock = new PneumoBrakeLock();
-    brake_lock->read_config("ubt367m");
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        // Блокировочное устройство
+        brake_lock[cab_idx] = new PneumoBrakeLock();
+        brake_lock[cab_idx]->read_config("ubt367m");
 
-    // Поездной кран машиниста
-    brake_crane = loadBrakeCrane(modules_dir + QDir::separator() + "krm395");
-    brake_crane->read_config("krm395");
+        // Поездной кран машиниста
+        brake_crane[cab_idx] = loadBrakeCrane(
+            modules_dir + QDir::separator() + "krm395");
+        brake_crane[cab_idx]->read_config("krm395");
 
-    // Кран вспомогательного тормоза
-    loco_crane = loadLocoCrane(modules_dir + QDir::separator() + "kvt254");
-    loco_crane->read_config("kvt215", custom_cfg_dir);
+        // Кран вспомогательного тормоза
+        loco_crane[cab_idx] = loadLocoCrane(
+            modules_dir + QDir::separator() + "kvt254");
+        loco_crane[cab_idx]->read_config("kvt254");
 
-    // ЭПК
-    epk = loadAutoTrainStop(modules_dir + QDir::separator() + "epk150");
-    epk->read_config("epk150");
+        // ЭПК автостопа
+        epk[cab_idx] = loadAutoTrainStop(
+            modules_dir + QDir::separator() + "epk150");
+        epk[cab_idx]->read_config("epk150");
+    }
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4
     rd4 = new PneumoRelay();

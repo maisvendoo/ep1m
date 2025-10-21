@@ -44,7 +44,7 @@ private:
     OperatingRod* oper_rod_bwd = nullptr;
 
     /// Панель тумблеров
-    EP1MTumblersPanel*   tumblers_panel = nullptr;
+    EP1MTumblersPanel*   tumblers_panel[CABS_NUM] = {nullptr, nullptr};
 
     /// МСУД
     MSUD*    msud = nullptr;
@@ -103,7 +103,7 @@ private:
     Relay*  km13 = nullptr;
 
     /// Контроллер машиниста
-    TracController* km = nullptr;
+    TracController* km[CABS_NUM] = {nullptr, nullptr};
 
     /// Блок сигнализации БС-002
     SignalizationModule* signals_module = nullptr;
@@ -167,16 +167,16 @@ private:
     HysteresisRelay*    sp4 = nullptr;
 
     /// Блокировочное устройство УБТ усл.№367м
-    PneumoBrakeLock*    brake_lock = nullptr;
+    PneumoBrakeLock*    brake_lock[CABS_NUM] = {nullptr, nullptr};
 
     /// Поездной кран машиниста усл.№395
-    BrakeCrane*         brake_crane = nullptr;
+    BrakeCrane*         brake_crane[CABS_NUM] = {nullptr, nullptr};
 
-    /// Кран впомогательного тормоза усл.№254
-    LocoCrane*          loco_crane = nullptr;
+    /// Кран впомогательного тормоза усл.№215
+    LocoCrane*          loco_crane[CABS_NUM] = {nullptr, nullptr};
 
     /// ЭПК автостопа
-    AutoTrainStop*      epk = nullptr;
+    AutoTrainStop*      epk[CABS_NUM] = {nullptr, nullptr};
 
     /// Тормозная магистраль
     Reservoir*          brakepipe = nullptr;
@@ -291,13 +291,13 @@ private:
     Relay*  k1 = nullptr;
 
     /// Вентиль отпуска У3
-    ElectroPneumoValve* Y3 = nullptr;
+    PneumoElectroValve* Y3 = nullptr;
 
     /// Вентиль замещения ЭДТ У4
-    ElectroPneumoValve* Y4 = nullptr;
+    PneumoElectroValve* Y4 = nullptr;
 
     /// Вентиль усиления торможения У5
-    ElectroPneumoValve* Y5 = nullptr;
+    PneumoElectroValve* Y5 = nullptr;
 
     /// Панель пневматических редукторов
     PneumoReducerPanel* pneumo_red_panel = nullptr;
@@ -336,11 +336,10 @@ private:
     /// Токоприемники
     std::array<Pantograph*, PANT_NUMBER> pant;
 
-    /// Автоматические защитные выключатели
-    std::array<Trigger, AZV_NUMBER> azv;
-
     /// Тумблеры и кнопки вне блокируемой панели
-    std::array<Trigger, TUMBLERS_COUNT> tumblers;
+    TriggerControl tumblers[TUMBLERS_COUNT][CABS_NUM];
+    SwitcherControl switchers[SWITCHERS_COUNT][CABS_NUM];
+    TriggerControl tumbler_power_supply;
 
     /// Мотор-вентиляторы М11 - М13
     std::array<MotorFan*, MOTOR_FANS_NUM> motor_fan;
@@ -373,9 +372,6 @@ private:
     /// Дешифратор сигнала АЛСН
     DecoderALSN* alsn_decoder = nullptr;
 
-    /// Кнопка "Песок"
-    Trigger button_sandbox;
-
 
     /// Чтение конфигурационного файла
     void loadConfig(QString cfg_path) override;
@@ -392,9 +388,6 @@ private:
 
     /// Инициализация цепей управления
     void initControlCircuit(const QString& modules_dir, const QString& custom_cfg_dir);
-
-    /// Инициализация АЗВ
-    void initAZV(const QString& modules_dir, const QString& custom_cfg_dir);
 
     /// Инициализация пульта управления в кабине
     void initPanel(const QString& modules_dir, const QString& custom_cfg_dir);

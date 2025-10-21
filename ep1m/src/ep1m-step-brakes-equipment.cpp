@@ -8,8 +8,10 @@ void EP1m::stepBrakesEquipment(const double& t, const double& dt)
     // Тормозная магистраль
     double BP_flow = 0.0;
     BP_flow += air_dist->getBPflow();
-    BP_flow += brake_lock->getBPflow();
-    BP_flow += epk->getBPflow();
+    BP_flow += brake_lock[CAB1]->getBPflow();
+    BP_flow += brake_lock[CAB2]->getBPflow();
+    BP_flow += epk[CAB1]->getBPflow();
+    BP_flow += epk[CAB2]->getBPflow();
 
     anglecock_bp_fwd->setHoseFlow(hose_bp_fwd->getFlow());
     BP_flow += anglecock_bp_fwd->getFlowToPipe();

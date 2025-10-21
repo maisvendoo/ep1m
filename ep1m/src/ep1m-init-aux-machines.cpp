@@ -45,7 +45,4 @@ void EP1m::initAuxMachines(const QString& modules_dir, const QString& custom_cfg
     {
         motor_fan[i] = new MotorFan(i + 1);
     }
-
-    // Тумблер "ПЧФ" включен по-умолчанию
-    tumblers[TUMBLER_PCHF].set();
 }

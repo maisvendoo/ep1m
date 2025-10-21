@@ -40,9 +40,6 @@ void EP1m::initialization()
     // Инициализация цепей управления
     initControlCircuit(modules_dir, custom_cfg_dir);
 
-    // Инициализация АЗВ
-    initAZV(modules_dir, custom_cfg_dir);
-
     // Инициализация пульта управления в кабине
     initPanel(modules_dir, custom_cfg_dir);
 

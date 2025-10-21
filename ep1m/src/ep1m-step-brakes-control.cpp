@@ -5,31 +5,34 @@
 //------------------------------------------------------------------------
 void EP1m::stepBrakesControl(const double& t, const double& dt)
 {
-    // Блокировочное устройство
-    brake_lock->setFLpressure(main_reservoir->getPressure());
-    brake_lock->setBPpressure(brakepipe->getPressure());
-    brake_lock->setBCpressure(kp5->getPressure1());
-    brake_lock->setCraneFLflow(brake_crane->getFLflow() + loco_crane->getFLflow());
-    brake_lock->setCraneBPflow(brake_crane->getBPflow());
-    brake_lock->setCraneBCflow(loco_crane->getBCflow());
-    brake_lock->step(t, dt);
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        // Блокировочное устройство
+        brake_lock[cab_idx]->setFLpressure(main_reservoir->getPressure());
+        brake_lock[cab_idx]->setBPpressure(brakepipe->getPressure());
+        brake_lock[cab_idx]->setBCpressure(kp5->getPressure1());
+        brake_lock[cab_idx]->setCraneFLflow(brake_crane[cab_idx]->getFLflow() + loco_crane[cab_idx]->getFLflow());
+        brake_lock[cab_idx]->setCraneBPflow(brake_crane[cab_idx]->getBPflow());
+        brake_lock[cab_idx]->setCraneBCflow(loco_crane[cab_idx]->getBCflow());
+        brake_lock[cab_idx]->step(t, dt);
 
-    // Поездной кран машиниста
-    brake_crane->setFLpressure(brake_lock->getCraneFLpressure());
-    brake_crane->setBPpressure(brake_lock->getCraneBPpressure());
-    brake_crane->step(t, dt);
+        // Поездной кран машиниста
+        brake_crane[cab_idx]->setFLpressure(brake_lock[cab_idx]->getCraneFLpressure());
+        brake_crane[cab_idx]->setBPpressure(brake_lock[cab_idx]->getCraneBPpressure());
+        brake_crane[cab_idx]->step(t, dt);
 
-    // Кран вспомогательного тормоза
-    loco_crane->setFLpressure(brake_lock->getCraneFLpressure());
-    loco_crane->setBCpressure(brake_lock->getCraneBCpressure());
-    loco_crane->setILpressure(0.0);
-    loco_crane->step(t, dt);
+        // Кран вспомогательного тормоза
+        loco_crane[cab_idx]->setFLpressure(brake_lock[cab_idx]->getCraneFLpressure());
+        loco_crane[cab_idx]->setBCpressure(brake_lock[cab_idx]->getCraneBCpressure());
+        loco_crane[cab_idx]->setILpressure(0.0);
+        loco_crane[cab_idx]->step(t, dt);
 
-    // ЭПК
-    epk->setFLpressure(main_reservoir->getPressure());
-    epk->setBPpressure(brakepipe->getPressure());
-    epk->setPowered(klub_BEL->getEPKstate());
-    epk->step(t, dt);
+        // ЭПК
+        epk[cab_idx]->setFLpressure(main_reservoir->getPressure());
+        epk[cab_idx]->setBPpressure(brakepipe->getPressure());
+        epk[cab_idx]->setPowered(klub_BEL->getEPKstate());
+        epk[cab_idx]->step(t, dt);
+    }
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4
     // Управляющая камера моделирует импульсный резервуар (ложный ТЦ)
@@ -40,44 +43,44 @@ void EP1m::stepBrakesControl(const double& t, const double& dt)
 
     // Панель редукторов
     pneumo_red_panel->setFLpressure(main_reservoir->getPressure());
-    pneumo_red_panel->setPressure1(Y4->getInputPressure());
-    pneumo_red_panel->setPressure5(Y5->getInputPressure());
+    pneumo_red_panel->setPressure1(Y4->getPressureToDevice());
+    pneumo_red_panel->setPressure5(Y5->getPressureToDevice());
     pneumo_red_panel->step(t, dt);
 
     // Вентиль отпуска тормозов У1
-    Y3->setInputFlow(kp1->getOutputFlow());
-    Y3->setOutputPressure(kp2->getPressure1());
+    Y3->setDeviceFlow(kp1->getOutputFlow());
+    Y3->setPipePressure(kp2->getPressure1());
     Y3->step(t, dt);
 
     // Вентиль замещения ЭДТ У4
-    Y4->setInputFlow(pneumo_red_panel->getOutputFlow1());
-    Y4->setOutputPressure(kp2->getPressure2());
+    Y4->setDeviceFlow(pneumo_red_panel->getOutputFlow1());
+    Y4->setPipePressure(kp2->getPressure2());
     Y4->step(t, dt);
 
     // Вентиль усилителя торможения У5
     Y5->setVoltage(Ucc * static_cast<double>(msud->getOutputData().is_not_brake_boost));
-    Y5->setInputFlow(pneumo_red_panel->getOutputFlow5());
-    Y5->setOutputPressure(kp1->getPressure1());
+    Y5->setDeviceFlow(pneumo_red_panel->getOutputFlow5());
+    Y5->setPipePressure(kp1->getPressure1());
     Y5->step(t, dt);
 
     // Переключательный клапан КП1
     // Входы от усилителя торможения У5 и повторителя давления от воздухораспределителя
-    kp1->setInputFlow1(Y5->getOutputFlow());
+    kp1->setInputFlow1(Y5->getFlowToPipe());
     kp1->setInputFlow2(rd4->getPipeFlow());
-    kp1->setOutputPressure(Y3->getInputPressure());
+    kp1->setOutputPressure(Y3->getPressureToDevice());
     kp1->step(t, dt);
 
     // Переключательный клапан КП2
     // Входы от отпускного вентиля У3 и от вентиля замещения У4
-    kp2->setInputFlow1(Y3->getOutputFlow());
-    kp2->setInputFlow2(Y4->getOutputFlow());
+    kp2->setInputFlow1(Y3->getFlowToPipe());
+    kp2->setInputFlow2(Y4->getFlowToPipe());
     kp2->setOutputPressure(kp5->getPressure2());
     kp2->step(t, dt);
 
     // Переключательный клапан КП5
     // Входы от крана локомотивного тормоза через УБТ и от клапана КП2
     // Выход клапана подключен через тройники к повторителям давления тележек
-    kp5->setInputFlow1(brake_lock->getBCflow());
+    kp5->setInputFlow1(brake_lock[CAB1]->getBCflow() + brake_lock[CAB2]->getBCflow());
     kp5->setInputFlow2(kp2->getOutputFlow());
     kp5->setOutputPressure(bc_splitter[0]->getInputPressure());
     kp5->step(t, dt);

@@ -143,7 +143,7 @@ void ClubUDisplay::update(double t, double dt)
 
     upd_time = 0.0;
 
-    if (input_signals[SIGNAL_KLUB_U_POWER_SUPPLAY] == 0.0f)
+    if (input_signals[KLUB_U_CAB1_POWER] == 0.0f)
     {
         alsn_->setVisible(false);
         topBlock_->setVisible(false);
@@ -160,7 +160,7 @@ void ClubUDisplay::update(double t, double dt)
     rightBlock_->setVisible(true);
     bottomBlock_->setVisible(true);
 
-    int seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_TIME]);
+    int seconds = static_cast<int>(input_signals[SIGNAL_TIME]);
     topBlock_->setCurTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
 
     // Обновляем блоки экрана по очереди
@@ -169,7 +169,7 @@ void ClubUDisplay::update(double t, double dt)
     // Блок обновлений №1
     if (upd_block == 1)
     {
-        if (input_signals[SIGNAL_KLUB_U_EPK] == 0.0f)
+        if (input_signals[KLUB_U_EPK] == 0.0f)
         {
             topBlock_->setCassete(false);
             topBlock_->setIndM(false);
@@ -179,29 +179,29 @@ void ClubUDisplay::update(double t, double dt)
         }
         else
         {
-            topBlock_->setCassete(static_cast<bool>(input_signals[SIGNAL_KLUB_U_CASSETE]));
-            topBlock_->setIndM(static_cast<bool>(input_signals[SIGNAL_KLUB_U_M]));
-            topBlock_->setIndP(static_cast<bool>(input_signals[SIGNAL_KLUB_U_P]));
-            topBlock_->setIndStraight(static_cast<bool>(input_signals[SIGNAL_KLUB_U_STRAIGHT]));
-            topBlock_->setIndSide(static_cast<bool>(input_signals[SIGNAL_KLUB_U_SIDE]));
+            topBlock_->setCassete(static_cast<bool>(input_signals[KLUB_U_CASSETE]));
+            topBlock_->setIndM(static_cast<bool>(input_signals[KLUB_U_M]));
+            topBlock_->setIndP(static_cast<bool>(input_signals[KLUB_U_P]));
+            topBlock_->setIndStraight(static_cast<bool>(input_signals[KLUB_U_STRAIGHT]));
+            topBlock_->setIndSide(static_cast<bool>(input_signals[KLUB_U_SIDE]));
         }
 
-        seconds = static_cast<int>(input_signals[SIGNAL_KLUB_U_SHEDULE_TIME]);
+        seconds = static_cast<int>(input_signals[KLUB_U_SHEDULE_TIME]);
         topBlock_->setSheduleTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
 
-        topBlock_->setCoordinate(static_cast<double>(input_signals[SIGNAL_KLUB_U_COORDINATE]));
+        topBlock_->setCoordinate(static_cast<double>(input_signals[KLUB_U_COORDINATE]));
 
-        bottomBlock_->setDistToTarget(static_cast<int>(input_signals[SIGNAL_KLUB_U_TARGET_DIST]));
+        bottomBlock_->setDistToTarget(static_cast<int>(input_signals[KLUB_U_TARGET_DIST]));
         return;
     }
 
     // Блок обновлений №2
     if (upd_block == 2)
     {
-        rightBlock_->setPressureTM(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_TM]));
-        rightBlock_->setPressureUR(static_cast<double>(input_signals[SIGNAL_KLUB_U_PRESSURE_UR]));
-        rightBlock_->setAcceleration(static_cast<double>(input_signals[SIGNAL_KLUB_U_ACCELERATION]));
-        rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[SIGNAL_KLUB_U_ZAPRET_OTPUSKA]));
+        rightBlock_->setPressureTM(static_cast<double>(input_signals[KLUB_U_PRESSURE_TM]));
+        rightBlock_->setPressureUR(static_cast<double>(input_signals[KLUB_U_PRESSURE_UR]));
+        rightBlock_->setAcceleration(static_cast<double>(input_signals[KLUB_U_ACCELERATION]));
+        rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[KLUB_U_ZAPRET_OTPUSKA]));
         return;
     }
 
@@ -211,7 +211,7 @@ void ClubUDisplay::update(double t, double dt)
         QString text = "";
         for (size_t i = 0; i < 8; ++i)
         {
-            int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STATION_SYMB1 + i]);
+            int c = static_cast<int>(input_signals[KLUB_U_STATION_SYMB1 + i]);
             text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
         }
         topBlock_->setStationName(text);
@@ -219,7 +219,7 @@ void ClubUDisplay::update(double t, double dt)
         text = "";
         for (size_t i = 0; i < 24; ++i)
         {
-            int c = static_cast<int>(input_signals[SIGNAL_KLUB_U_STRING_SYMB1 + i]);
+            int c = static_cast<int>(input_signals[KLUB_U_STRING_SYMB1 + i]);
             text.push_back(((c > 0) && (c < 65536)) ? QChar(c) : QChar(' '));
         }
         bottomBlock_->setTargetName(text);
@@ -229,12 +229,12 @@ void ClubUDisplay::update(double t, double dt)
     // Блок обновлений №4
     if (upd_block >= 4)
     {
-        if (input_signals[SIGNAL_KLUB_U_EPK] == 0.0f)
+        if (input_signals[KLUB_U_EPK] == 0.0f)
         {
             alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
             middleBlock_->setSpeedLimitVisible(false);
-            middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
+            middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
             middleBlock_->setCurSpeedLimit(-5);
             middleBlock_->setNextSpeedLimit(-5);
             middleBlock_->blinkingSpeed(true);
@@ -242,15 +242,15 @@ void ClubUDisplay::update(double t, double dt)
         }
         else
         {
-            alsn_->setSignal(static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN]),
-                             static_cast<int>(input_signals[SIGNAL_KLUB_U_ALSN_FB]));
+            alsn_->setSignal(static_cast<int>(input_signals[KLUB_U_ALSN]),
+                             static_cast<int>(input_signals[KLUB_U_ALSN_FB]));
 
             middleBlock_->setSpeedLimitVisible(true);
-            middleBlock_->setCurSpeed(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED]));
-            middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT]));
-            middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[SIGNAL_KLUB_U_SPEED_LIMIT_2]));
+            middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
+            middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]));
+            middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
             middleBlock_->blinkingSpeed(false);
-            middleBlock_->setReverse(static_cast<int>(input_signals[SIGNAL_KLUB_U_REVERSOR]));
+            middleBlock_->setReverse(static_cast<int>(input_signals[KLUB_U_REVERSOR]));
         }
 
         // Сбрасываем счётчик

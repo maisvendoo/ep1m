@@ -30,11 +30,51 @@ TracController::~TracController()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+void TracController::insertReversHandle(bool insert)
+{
+    if (insert)
+    {
+        // Вставляем реверсивную рукоятку
+        is_revers_handle.set();
+        return;
+    }
+
+    // Извлечение реверсивной рукоятки только в нулевом положении
+    if (revers_pos == 0)
+    {
+        is_revers_handle.reset();
+    }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+bool TracController::isReversHandle() const
+{
+    return is_revers_handle.getState();
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 float TracController::getHandlePosition() const
 {
     float handle_pos = mode_pos * 0.2f + trac_level / 125.0f - brake_level / 125.0f;
 
     return handle_pos;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+float TracController::getSoundSignal(size_t state_idx) const
+{
+    if (state_idx < NUM_SOUNDS)
+    {
+        return sound_states[state_idx].createSoundSignal();
+    }
+
+    return is_revers_handle.getSoundSignal(state_idx - NUM_SOUNDS);
 }
 
 //------------------------------------------------------------------------------
@@ -47,7 +87,7 @@ void TracController::preStep(state_vector_t &Y, double t)
 
     if (mode_pos != mode_pos_old)
     {
-        sound_states[MAIN_HANDLE].play(true);
+        sound_states[MAIN_CHANGE_POS_SOUND].play(true);
         mode_pos_old = mode_pos;
     }
 }
@@ -107,6 +147,8 @@ void TracController::load_config(CfgReader &cfg)
 //------------------------------------------------------------------------------
 void TracController::stepKeysControl(double t, double dt)
 {
+    bool key_fwd = getKeyState(pressed_keys, KEY_W);
+    bool key_bwd = getKeyState(pressed_keys, KEY_S);
     bool key_traction = getKeyState(pressed_keys, KEY_A);
     bool key_v_ref_inc = getKeyState(pressed_keys, KEY_Q);
     bool key_brakes = getKeyState(pressed_keys, KEY_D);
@@ -115,22 +157,60 @@ void TracController::stepKeysControl(double t, double dt)
     bool isControl = isModifier(pressed_keys, MODIFIER_OnlyControl);
 
     // Управление реверсивной рукояткой
-    if (fwd_key_state && !old_fwd_key_state && isZero() && (revers_pos < 1))
+    if (key_fwd)
     {
-        revers_pos++;
+        if (isShift)
+        {
+            // Shift - вставляем реверсивку
+            insertReversHandle(true);
+        }
+        else
+        {
+            if (isControl)
+            {
+                // Ctrl - извлекаем реверсивку
+                insertReversHandle(false);
+            }
+            else
+            {
+                if  (!old_fwd_key_state && isZero() && (revers_pos < 1))
+                {
+                    // Тянем реверсивку от себя
+                    revers_pos++;
 
-        sound_states[REVERS_HANDLE].play();
+                    sound_states[REVERS_CHANGE_POS_SOUND].play();
+                }
+            }
+        }
     }
 
-    if (bwd_key_state && !old_bwd_key_state && isZero() && (revers_pos > -1))
+    if (key_bwd)
     {
-        revers_pos--;
+        if (isControl)
+        {
+            if (!old_bwd_key_state && isZero() && (revers_pos != 0))
+            {
+                // Ctrl - быстрый возврат в нулевую позицию
+                revers_pos = 0;
 
-        sound_states[REVERS_HANDLE].play();
+                sound_states[REVERS_CHANGE_POS_SOUND].play();
+            }
+        }
+        else
+        {
+            if (!old_bwd_key_state && isZero() && (revers_pos > -1))
+            {
+                // Тянем реверсивку на себя
+                revers_pos--;
+
+                sound_states[REVERS_CHANGE_POS_SOUND].play();
+            }
+        }
+
     }
 
-    old_fwd_key_state = fwd_key_state;
-    old_bwd_key_state = bwd_key_state;
+    old_fwd_key_state = key_fwd;
+    old_bwd_key_state = key_bwd;
 
     // Управление контроллером
     if ((revers_pos != 0) && (mode_pos == 0))

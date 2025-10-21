@@ -20,11 +20,16 @@ void EP1m::stepEPB(const double& t, const double& dt)
     epb_converter->step(t, dt);
 
     // Контроллер двухпроводного ЭПТ
-    bool cab1_on = brake_lock->isStateOn() && tumblers_panel->getTumblerState(TUMBLER_EPT);
+    bool cab1_on = brake_lock[CAB1]->isStateOn() &&
+                   tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_EPT);
+    bool cab2_on = brake_lock[CAB2]->isStateOn() &&
+                   tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_EPT);
     epb_control->setInputVoltage(epb_converter->getOutputVoltage()
-                                 * static_cast<double>(cab1_on) );
-    epb_control->setHoldState(cab1_on && brake_crane->isHold());
-    epb_control->setBrakeState(cab1_on && brake_crane->isBrake());
+                                 * static_cast<double>(cab1_on || cab2_on) );
+    epb_control->setHoldState((cab1_on && brake_crane[CAB1]->isHold()) ||
+                              (cab2_on && brake_crane[CAB2]->isHold()));
+    epb_control->setBrakeState((cab1_on && brake_crane[CAB1]->isBrake()) ||
+                               (cab2_on && brake_crane[CAB2]->isBrake()));
     epb_control->setControlVoltage(  hose_bp_fwd->getVoltage(1)
                                    + hose_bp_bwd->getVoltage(1) );
     epb_control->step(t, dt);
@@ -35,7 +40,7 @@ void EP1m::stepEPB(const double& t, const double& dt)
     // а иначе задаём управляющий сигнал из контроллера или рабочей линии ЭПТ
     double evr_U = 0.0;
     double evr_f = 0.0;
-    if (!tumblers[BRAKE_RELEASE_BUTTON].getState())
+    if (!tumblers[BUTTON_RELEASE_BRAKES][CAB1].getState() || tumblers[BUTTON_RELEASE_BRAKES][CAB2].getState())
     {
         evr_U = epb_work_U + hose_bp_fwd->getVoltage(0) + hose_bp_bwd->getVoltage(0);
         evr_f = epb_work_f + hose_bp_fwd->getFrequency(0) + hose_bp_bwd->getFrequency(0);

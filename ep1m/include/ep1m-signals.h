@@ -5,7 +5,7 @@
 //
 //------------------------------------------------------------------------------
 enum
-{/*
+{
     // Сигналы 0-6 и 200-206 - анимации кузова,
     // 7-141 - анимации первой кабины, 144-198 дисплей КЛУБ-У,
     // 207-341 - аналогичные второй кабины, 344-370 дисплей МСУД
@@ -52,7 +52,7 @@ enum
     CAB1_PRESSURE_FL = 16,
     CAB1_PRESSURE_BC = 17,
     CAB1_ENGINE_CURRENT = 18,
-    CAB1_ENGINE_VOLTAGE = 19,
+    CAB1_WIRE_VOLTAGE = 19,
     CAB1_EPB_CURRENT = 20,
     CAB1_EPB_VOLTAGE = 21,
 
@@ -701,10 +701,10 @@ enum
     SOUND_FAN3_HIGH = 498,
     SOUND_FAN4 = 499,
 
-    SOUND_PANT2_UP = 592,
-    SOUND_PANT2_DOWN = 593,
-    SOUND_PANT1_UP = 594,
-    SOUND_PANT1_DOWN = 595,
+    SOUND_PANT1_UP = 592,
+    SOUND_PANT1_DOWN = 593,
+    SOUND_PANT2_UP = 594,
+    SOUND_PANT2_DOWN = 595,
 
     SOUND_MAIN_SWITCH_ON = 596,
     SOUND_MAIN_SWITCH_OFF = 597,
@@ -797,10 +797,10 @@ enum
     SOUND_TED_138_140 = 681,
 
     SOUND_SAND_DELIVERY = 682
-*/
 
 
 
+/*
     SIGNAL_UNLOCK_KEY = 0, // Ключ блокировки тумблеров
 
     // Тумблеры блока выключателей
@@ -1184,7 +1184,7 @@ enum
     SOUND_TED_138_140 = 381,
 
     SOUND_EPK = 382,
-    SOUND_SAND_DELIVERY = 383
+    SOUND_SAND_DELIVERY = 383*/
 };
 
 #endif // EP1M_SIGNALS_H

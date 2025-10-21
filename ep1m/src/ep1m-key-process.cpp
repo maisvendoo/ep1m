@@ -5,31 +5,30 @@
 //------------------------------------------------------------------------------
 void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
 {
-    // Песочница
-    sand_system->setControl(&pressed_keys);
-    // Тифон и свисток
-    horn->setControl(&pressed_keys);
+    // Не допускаем двух рукояток в устройствах блокировки тормозов
+    brake_lock[CAB2]->allowLockHandle(!(brake_lock[CAB1]->isLockHandle()));
+    brake_lock[CAB1]->allowLockHandle(!(brake_lock[CAB2]->isLockHandle()));
 
-    // Управление ослаблением поля через МСУД
-    msud->setControl(&pressed_keys);
+    // Не допускаем двух ключей в электропневматических клапанах автостопа
+    epk[CAB2]->allowKey(!(epk[CAB1]->isKey()));
+    epk[CAB1]->allowKey(!(epk[CAB2]->isKey()));
 
-    tumblers_panel->setControl(&pressed_keys);
-    km->setControl(&pressed_keys);
+    tumbler_power_supply.step(t.simulation_seconds, dt);
 
-    // Управляем блокировкой тормозов
-        brake_lock->setControl(&pressed_keys);
-
+    // Управление оборудованием в кабинах
+    for (auto cab_idx : {CAB1, CAB2})
+    {
         // Управляем краном, учитывая возможное наличие внешнего пульта
         // TODO // перенести freejoy во вьювер, его команды передавать по сети,
         // TODO // и также указывая индекс кабины
         if (control_signals.analogSignal[CS_BRAKE_CRANE].is_active)
         {
             int brake_crane_pos = static_cast<int>(control_signals.analogSignal[CS_BRAKE_CRANE].cur_value);
-            brake_crane->setHandlePosition(brake_crane_pos);
+            brake_crane[cab_idx]->setHandlePosition(brake_crane_pos);
         }
         else
         {
-            brake_crane->setControl(&pressed_keys);
+            brake_crane[cab_idx]->setControl(&pressed_keys_by_cabine[cab_idx]);
         }
 
         // Управляем краном, учитывая возможное наличие внешнего пульта
@@ -41,123 +40,44 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
 
             if (static_cast<bool>(control_signals.analogSignal[CS_RELEASE_VALVE].cur_value))
             {
-                loco_crane->release(true);
+                loco_crane[cab_idx]->release(true);
                 pos = -1.0;
             }
             else
             {
-                loco_crane->release(false);
+                loco_crane[cab_idx]->release(false);
                 pos = control_signals.analogSignal[CS_LOCO_CRANE].cur_value;
             }
 
-            loco_crane->setHandlePosition(pos);
+            loco_crane[cab_idx]->setHandlePosition(pos);
         }
         else
         {
-            loco_crane->setControl(&pressed_keys);
+            loco_crane[cab_idx]->setControl(&pressed_keys_by_cabine[cab_idx]);
         }
 
-    // Включение/выключение шкафа питания ШП-21
-    if (getKeyState(KEY_H))
-    {
-        if (isShift())
-            tumblers[TUMBLER_POWER_SUPPLY_ON].set();
-        else
-            tumblers[TUMBLER_POWER_SUPPLY_ON].reset();
-    }
+        // Тумблеры в кабинах
+        tumblers_panel[cab_idx]->step(t.simulation_seconds, dt);
 
-    // Перевод реверсивной рукоятки
-    if (getKeyState(KEY_W))
-    {
-        tumblers[SWITCH_REVERS_FWD].set();
-    }
-    else
-    {
-        tumblers[SWITCH_REVERS_FWD].reset();
-    }
+        for (size_t i = 0; i < TUMBLERS_COUNT; ++i)
+        {
+            if ((i == BUTTON_RBS) && control_signals.analogSignal[CS_RBS].is_active)
+            {
+                // реагируем на состояние РБС на внешнем пульте
+                if (static_cast<bool>(control_signals.analogSignal[CS_RBS].cur_value))
+                    tumblers[BUTTON_RBS][cab_idx].set();
+                else
+                    tumblers[BUTTON_RBS][cab_idx].reset();
+            }
+            else
+            {
+                tumblers[i][cab_idx].step(t.simulation_seconds, dt);
+            }
+        }
 
-    if (getKeyState(KEY_S))
-    {
-        tumblers[SWITCH_REVERS_BWD].set();
-    }
-    else
-    {
-        tumblers[SWITCH_REVERS_BWD].reset();
-    }
-
-    // Включение блока сигнализации
-    if (getKeyState(KEY_8) && !isAlt())
-    {
-        if (isShift())
-            tumblers[TUMBLER_BS_002].set();
-        else
-            tumblers[TUMBLER_BS_002].reset();
-    }
-
-    // РБ
-    if (getKeyState(KEY_Z))
-        tumblers[BUTTON_RB].set();
-    else
-        tumblers[BUTTON_RB].reset();    
-
-    // Если активна РБС на внешнем пульте
-    if (control_signals.analogSignal[CS_RBS].is_active)
-    {
-        // реагируем на состояние РБС на внешнем пульте
-        if (static_cast<bool>(control_signals.analogSignal[CS_RBS].cur_value))
-            tumblers[BUTTON_RBS].set();
-        else
-            tumblers[BUTTON_RBS].reset();
-    }
-    else // иначе
-    {
-        // обрабатываем клавиши
-        if (getKeyState(KEY_M))
-            tumblers[BUTTON_RBS].set();
-        else
-            tumblers[BUTTON_RBS].reset();
-    }
-
-    // Выбор МПК
-    if (getKeyState(KEY_1) && !isAlt())
-    {
-        if (isShift())
-            tumblers[TUMBLER_MPK].set();
-        else
-            tumblers[TUMBLER_MPK].reset();
-    }
-
-    // Вкл/Выкл "АВТОРЕГУЛИРОВАНИЕ"
-    if (getKeyState(KEY_F))
-    {
-        if (isShift())
-            tumblers[TUMBLER_AUTO_MODE].reset();
-        else
-            tumblers[TUMBLER_AUTO_MODE].set();
-    }
-
-    // Отключение ПЧФ
-    if (getKeyState(KEY_2) && !isAlt())
-    {
-        if (isShift())
-            tumblers[TUMBLER_PCHF].set();
-        else
-            tumblers[TUMBLER_PCHF].reset();
-    }
-
-    // Отпуск тормозов
-    if (getKeyState(KEY_R))
-        tumblers[BRAKE_RELEASE_BUTTON].set();
-    else
-        tumblers[BRAKE_RELEASE_BUTTON].reset();
-
-    // Кнопка "Песок"
-    if (getKeyState(KEY_Delete))
-    {
-        button_sandbox.set();
-    }
-    else
-    {
-        button_sandbox.reset();
+        for (size_t i = 0; i < SWITCHERS_COUNT; ++i)
+        {
+            switchers[i][cab_idx].step(t.simulation_seconds, dt);
+        }
     }
 }

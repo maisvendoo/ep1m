@@ -381,7 +381,7 @@ void MsudDisplay::update(double t, double dt)
 
     upd_time = 0.0;
 
-    if (input_signals[SIGNAL_MSUD_POWER_SUPPLAY] == 0.0f)
+    if (input_signals[MSUD_CAB1_POWER] == 0.0f)
     {
         fon_->setVisible(false);
         return;
@@ -389,7 +389,7 @@ void MsudDisplay::update(double t, double dt)
 
     fon_->setVisible(true);
 
-    int seconds = static_cast<int>(input_signals[SIGNAL_MSUD_TIME]);
+    int seconds = static_cast<int>(input_signals[SIGNAL_TIME]);
     QString cur_time = QString("%1:%2:%3")
                            .arg(seconds / 3600, 2, 10, QChar('0'))
                            .arg(seconds / 60 % 60, 2, 10, QChar('0'))
@@ -402,7 +402,7 @@ void MsudDisplay::update(double t, double dt)
     // Блок обновлений №1 и №3
     if ((upd_block == 1) || (upd_block == 3))
     {
-        if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 1)
+        if (static_cast<int>(input_signals[MSUD_MODE]) == 1)
         {
             //if (man21_->isVisible())
             {
@@ -416,15 +416,15 @@ void MsudDisplay::update(double t, double dt)
             }
 
             //
-            man11_->setVal_Line(qAbs(input_signals[SIGNAL_MSUD_SPEED2]));
-            man11_->setVal_Arrow(qAbs(input_signals[SIGNAL_MSUD_SPEED1]));
+            man11_->setVal_Line(qAbs(input_signals[MSUD_SPEED2]));
+            man11_->setVal_Arrow(qAbs(input_signals[MSUD_SPEED1]));
 
             //
-            man12_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR2]);
-            man12_->setVal_Arrow(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]);
+            man12_->setVal_Line(input_signals[MSUD_CURRENT_ANHCOR2]);
+            man12_->setVal_Arrow(input_signals[MSUD_CURRENT_ANHCOR1]);
 
         }
-        else if (static_cast<int>(input_signals[SIGNAL_MSUD_MODE]) == 2)
+        else if (static_cast<int>(input_signals[MSUD_MODE]) == 2)
         {
 
             //if (man11_->isVisible())
@@ -439,29 +439,29 @@ void MsudDisplay::update(double t, double dt)
             }
 
             //
-            man21_->setVal_zonaVIP(input_signals[SIGNAL_MSUD_VIP_ZONE]);
+            man21_->setVal_zonaVIP(input_signals[MSUD_VIP_ZONE]);
 
             //
-            man22_->setVal_Line(input_signals[SIGNAL_MSUD_CURRENT_ANHCOR1]);
+            man22_->setVal_Line(input_signals[MSUD_CURRENT_ANHCOR1]);
         }
         else
         {
             labMode_->setText("");
         }
 
-        int tyagaVal = sbTyaga_->setVal(static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION]));
+        int tyagaVal = sbTyaga_->setVal(static_cast<int>(input_signals[MSUD_TRACTION]));
         if (tyagaVal != -1)
             labTyaga_->setText(QString::number(tyagaVal));
 
-        int currentVal = sbCurrent_->setVal(static_cast<int>(input_signals[SIGNAL_MSUD_CURCUIT_VOZB]));
+        int currentVal = sbCurrent_->setVal(static_cast<int>(input_signals[MSUD_CURCUIT_VOZB]));
         if (currentVal != -1)
             labCurrent_->setText(QString::number(currentVal));
 
-        double currentEptVal = sbCurrentEPT_->setVal(static_cast<double>(input_signals[SIGNAL_MSUD_CURRENT_EPT]));
+        double currentEptVal = sbCurrentEPT_->setVal(static_cast<double>(input_signals[MSUD_CURRENT_EPT]));
         if (currentEptVal != -1)
             labCurrentEPT_->setText(QString::number(currentEptVal, 'f', 1));
 
-        double voltageEptVal = sbVoltageEPT_->setVal(static_cast<double>(input_signals[SIGNAL_MSUD_VOLTAGE_EPT]));
+        double voltageEptVal = sbVoltageEPT_->setVal(static_cast<double>(input_signals[MSUD_VOLTAGE_EPT]));
         if (voltageEptVal != -1)
             labVoltageEPT_->setText(QString::number(voltageEptVal, 'f', 1));
 
@@ -471,41 +471,41 @@ void MsudDisplay::update(double t, double dt)
     // Блок обновлений №2
     if (upd_block == 2)
     {
-        setStateLabKO_(labKO_TC_, SIGNAL_MSUD_TC, timerTC_);
-        setStateLabKO_(labKO_DB_, SIGNAL_MSUD_DB, timerDB_);
-        setStateLabKO_(labKO_MK_, SIGNAL_MSUD_MK, timerMK_);
-        setStateLabKO_(labKO_DM_, SIGNAL_MSUD_DM, timerDM_);
-        setStateLabKO_(labKO_NC_, SIGNAL_MSUD_NC, timerNC_);
-        setStateLabKO_(labKO_OB_, SIGNAL_MSUD_OB, timerOB_);
-        setStateLabKO_(labKO_KZ_, SIGNAL_MSUD_KZ, timerKZ_);
-        setStateLabKO_(labKO_OV_, SIGNAL_MSUD_OV, timerOV_);
+        setStateLabKO_(labKO_TC_, MSUD_TC, timerTC_);
+        setStateLabKO_(labKO_DB_, MSUD_DB, timerDB_);
+        setStateLabKO_(labKO_MK_, MSUD_MK, timerMK_);
+        setStateLabKO_(labKO_DM_, MSUD_DM, timerDM_);
+        setStateLabKO_(labKO_NC_, MSUD_NC, timerNC_);
+        setStateLabKO_(labKO_OB_, MSUD_OB, timerOB_);
+        setStateLabKO_(labKO_KZ_, MSUD_KZ, timerKZ_);
+        setStateLabKO_(labKO_OV_, MSUD_OV, timerOV_);
         return;
     }
 
     // Блок обновлений №4
     if (upd_block >= 4)
     {
-        if (static_cast<int>(input_signals[SIGNAL_MSUD_MPK]) == 1)
+        if (static_cast<int>(input_signals[MSUD_MPK]) == 1)
             labKO_MPK_->setText(KO_MPK1);
-        else if (static_cast<int>(input_signals[SIGNAL_MSUD_MPK]) == 2)
+        else if (static_cast<int>(input_signals[MSUD_MPK]) == 2)
             labKO_MPK_->setText(KO_MPK2);
         else
             labKO_MPK_->setText("");
 
 
-        if (static_cast<int>(input_signals[SIGNAL_MSUD_REVERSOR]) == 1)
+        if (static_cast<int>(input_signals[MSUD_REVERSOR]) == 1)
             labPC1_->setText(REVERSOR_FWD);
-        else if (static_cast<int>(input_signals[SIGNAL_MSUD_REVERSOR]) == 2)
+        else if (static_cast<int>(input_signals[MSUD_REVERSOR]) == 2)
             labPC1_->setText(REVERSOR_BWD);
         else
             labPC1_->setText(REVERSOR_FWD);
 
-        if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_TYPE]) == 1)
+        if (static_cast<int>(input_signals[MSUD_TRACTION_TYPE]) == 1)
         {
             labPC2_->setText(POWER_CIRCUIT_TRACTION);
             labPC2_->setStyleSheet("color: yellow;");
         }
-        else if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_TYPE]) == 2)
+        else if (static_cast<int>(input_signals[MSUD_TRACTION_TYPE]) == 2)
         {
             labPC2_->setText(POWER_CIRCUIT_RECUPERATION);
             labPC2_->setStyleSheet("color: yellow;");
@@ -513,12 +513,12 @@ void MsudDisplay::update(double t, double dt)
         else
             labPC2_->setText("");
 
-        if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_STATE]) == 1)
+        if (static_cast<int>(input_signals[MSUD_TRACTION_STATE]) == 1)
         {
             labPC3_->setText(POWER_CIRCUIT_STATE_1);
             labPC3_->setStyleSheet("color: yellow;");
         }
-        else if (static_cast<int>(input_signals[SIGNAL_MSUD_TRACTION_STATE]) == 2)
+        else if (static_cast<int>(input_signals[MSUD_TRACTION_STATE]) == 2)
         {
             labPC3_->setText(POWER_CIRCUIT_STATE_0);
             labPC3_->setStyleSheet("color: red;");
@@ -528,17 +528,17 @@ void MsudDisplay::update(double t, double dt)
 
 
 
-        if (static_cast<bool>(input_signals[SIGNAL_MSUD_OSLAB_POLE1]))
+        if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE1]))
             labFieldWeak1_->setStyleSheet("color: white; background: none;");
         else
             labFieldWeak1_->setStyleSheet("color: white; background: red;");
 
-        if (static_cast<bool>(input_signals[SIGNAL_MSUD_OSLAB_POLE2]))
+        if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE2]))
             labFieldWeak2_->setStyleSheet("color: white; background: none;");
         else
             labFieldWeak2_->setStyleSheet("color: white; background: red;");
 
-        if (static_cast<bool>(input_signals[SIGNAL_MSUD_OSLAB_POLE3]))
+        if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE3]))
             labFieldWeak3_->setStyleSheet("color: white; background: none;");
         else
             labFieldWeak3_->setStyleSheet("color: white; background: red;");

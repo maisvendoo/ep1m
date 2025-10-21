@@ -14,6 +14,12 @@ public:
 
     ~TracController();
 
+    /// Вставить/извлечь реверсивную рукоятку
+    void insertReversHandle(bool insert);
+
+    /// Признак вставленной реверсивной рукоятки
+    bool isReversHandle() const;
+
     bool isZero() const
     {
         return mode_pos == 0;
@@ -54,12 +60,12 @@ public:
         return mode_pos == -1;
     }
 
-    bool isContscts3_4() const
+    bool isContacts3_4() const
     {
         return revers_pos == -1;
     }
 
-    bool isContscts1_2() const
+    bool isContacts1_2() const
     {
         return revers_pos == 1;
     }
@@ -68,10 +74,6 @@ public:
     {
         return (mode_pos == 1) || (mode_pos == -1);
     }
-
-    void setFwdKeyState(bool key_state) { fwd_key_state = key_state; }
-
-    void setBwdKeyState(bool key_state) { bwd_key_state = key_state; }
 
     float getReversHandlePos() const { return static_cast<float>(revers_pos); }
 
@@ -83,16 +85,15 @@ public:
 
     double getRefSpeedLevel() const { return static_cast<double>(refV_level) / 100.0; }
 
-    enum
-    {
-        MAIN_HANDLE = 0,
-        REVERS_HANDLE = 1
+    enum {
+        NUM_SOUNDS = 2,
+        REVERS_CHANGE_POS_SOUND = 0,    ///< Звук переключения реверсора
+        MAIN_CHANGE_POS_SOUND = 1,      ///< Звук переключения контроллера
+        HANDLE_CHANGE_SOUND = NUM_SOUNDS + Trigger::CHANGE_SOUND,
+        HANDLE_INSERTED_SOUND = NUM_SOUNDS + Trigger::ON_SOUND,
+        HANDLE_REMOVED_SOUND = NUM_SOUNDS + Trigger::OFF_SOUND,
     };
-
-    float getSoundSignal(size_t state_idx) const override
-    {
-        return sound_states[state_idx].createSoundSignal();
-    }
+    float getSoundSignal(size_t state_idx) const override;
 
 private:
 
@@ -101,10 +102,8 @@ private:
     int mode_pos = 0;
     int mode_pos_old = 0;
 
-    bool fwd_key_state = false;
     bool old_fwd_key_state = false;
 
-    bool bwd_key_state = false;
     bool old_bwd_key_state = false;
 
     int revers_pos = 0;
@@ -141,11 +140,14 @@ private:
 
     Timer speedTimer;
 
+    /// Признак реверсивной рукоятки
+    Trigger is_revers_handle;
+
     Trigger traction;
 
     Trigger brake;
 
-    std::array<sound_state_t, 2> sound_states;
+    std::array<sound_state_t, NUM_SOUNDS> sound_states;
 
     void preStep(state_vector_t &Y, double t) override;
 

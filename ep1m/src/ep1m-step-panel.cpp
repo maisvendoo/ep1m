@@ -5,14 +5,14 @@
 //------------------------------------------------------------------------------
 void EP1m::stepPanel(const double& t, const double& dt)
 {
-    tumblers_panel->step(t, dt);
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        km[cab_idx]->step(t, dt);
+    }
 
-    km->setFwdKeyState(tumblers[SWITCH_REVERS_FWD].getState());
-    km->setBwdKeyState(tumblers[SWITCH_REVERS_BWD].getState());
-    km->step(t, dt);
-
-    signals_module->setVoltage(
-                Ucc * static_cast<double>(tumblers[TUMBLER_BS_002].getState()));
+    bool tumbler_sig = tumblers[TUMBLER_SIGNAL_PANEL_BS_002][CAB1].getState() ||
+                       tumblers[TUMBLER_SIGNAL_PANEL_BS_002][CAB2].getState();
+    signals_module->setVoltage(Ucc * static_cast<double>(tumbler_sig));
 
     setSignalsModuleInputs();
     signals_module->step(t, dt);
@@ -55,6 +55,8 @@ void EP1m::setSignalsModuleInputs()
 
     // Состояние маслянного насоса тягового трансформатора
     // Так как эти насосы не моделируются - тупо по статусу тумблера "ВПОМ. МАШИНЫ"
-    signals_module->setLampInputSignal(SM_DM1, !tumblers_panel->getTumblerState(TUMBLER_AUX_MACHINES));
-    signals_module->setLampInputSignal(SM_DM2, !tumblers_panel->getTumblerState(TUMBLER_AUX_MACHINES));
+    bool tumbler_aux = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_AUX_MACHINES) ||
+                       tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_AUX_MACHINES);
+    signals_module->setLampInputSignal(SM_DM1, !tumbler_aux);
+    signals_module->setLampInputSignal(SM_DM2, !tumbler_aux);
 }

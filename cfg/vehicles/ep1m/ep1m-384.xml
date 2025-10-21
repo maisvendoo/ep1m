@@ -22,7 +22,7 @@
 		<CabineModel>EP1m-384/EP1m-cabview.gltf</CabineModel>
 		<CabineShift>0.0 0.0 0.3</CabineShift>
 
-		<isRegistratorOn>0</isRegistartorOn>
+		<isRegistratorOn>0</isRegistratorOn>
 
 	</Vehicle>
 
@@ -30,10 +30,10 @@
 		<DriverPos>0.635 9.291 3.5</DriverPos>
 		<DriverDir>0.0</DriverDir>
 	</Cabine>
-<!--
+
 	<Cabine>
 		<DriverPos>-0.635 -9.291 3.5</DriverPos>
 		<DriverDir>180.0</DriverDir>
 	</Cabine>
--->
+
 </Config>

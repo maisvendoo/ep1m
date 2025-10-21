@@ -10,8 +10,12 @@ void EP1m::stepPneumoSupply(const double& t, const double& dt)
     press_reg->step(t, dt);
 
     // Цепь включения главного компрессора
-    double is_mk_On = static_cast<double>( press_reg->getState()
-                    && tumblers_panel->getTumblerState(TUMBLER_COMPRESSOR) );
+    bool button_compr = tumblers[BUTTON_COMPRESSOR][CAB1].getState() ||
+                        tumblers[BUTTON_COMPRESSOR][CAB2].getState();
+    bool tumbler_compr = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_COMPRESSOR) ||
+                         tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_COMPRESSOR);
+    double is_mk_On = static_cast<double>(button_compr ||
+                                          press_reg->getState() && tumbler_compr);
     double U_power = is_mk_On * freq_phase_conv->getOutputVoltage();
 
     // Мотор-компрессор
@@ -24,8 +28,10 @@ void EP1m::stepPneumoSupply(const double& t, const double& dt)
     FL_flow += motor_compressor->getFLflow();
     FL_flow += horn->getFLflow();
     FL_flow += sand_system->getFLflow();
-    FL_flow += brake_lock->getFLflow();
-    FL_flow += epk->getFLflow();
+    FL_flow += brake_lock[CAB1]->getFLflow();
+    FL_flow += brake_lock[CAB2]->getFLflow();
+    FL_flow += epk[CAB1]->getFLflow();
+    FL_flow += epk[CAB2]->getFLflow();
     FL_flow += pneumo_red_panel->getFLflow();
     FL_flow += bc_pressure_relay[TROLLEY_FWD]->getFLflow();
     FL_flow += bc_pressure_relay[TROLLEY_MID]->getFLflow();

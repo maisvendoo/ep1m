@@ -162,18 +162,18 @@ void EP1m::initControlCircuit(const QString& modules_dir, const QString& custom_
     k1->setInitContactState(1, false);
     k1->setInitContactState(2, true);
 
-    Y3 = new ElectroPneumoValve();
+    Y3 = new PneumoElectroValve();
     Y3->read_config("epv", custom_cfg_dir);
 
     sp6 = new PressureSensor();
     sp6->read_config("sp6", custom_cfg_dir);
 
-    Y4 = new ElectroPneumoValve();
+    Y4 = new PneumoElectroValve();
     Y4->read_config("epv", custom_cfg_dir);
 
     sp3 = new PressureSensor();
     sp3->read_config("sp3", custom_cfg_dir);
 
-    Y5 = new ElectroPneumoValve();
+    Y5 = new PneumoElectroValve();
     Y5->read_config("epv", custom_cfg_dir);
 }

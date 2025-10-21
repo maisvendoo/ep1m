@@ -1,3 +1,4 @@
+/*
 #include    "ep1m.h"
 
 //------------------------------------------------------------------------------
@@ -13,3 +14,4 @@ void EP1m::initAZV(const QString& modules_dir, const QString& custom_cfg_dir)
         azv[i].set();
     }
 }
+*/

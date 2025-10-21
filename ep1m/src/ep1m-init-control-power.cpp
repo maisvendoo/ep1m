@@ -14,8 +14,6 @@ void EP1m::initControlPower(const QString& modules_dir, const QString& custom_cf
 
     power_supply = new PowerSupply();    
 
-    tumblers[BUTTON_MAIN_SWITCH_OFF].set();
-
     km5 = new Relay(1);
     km5->read_config("mk-69", custom_cfg_dir);
     km5->setInitContactState(0, false);

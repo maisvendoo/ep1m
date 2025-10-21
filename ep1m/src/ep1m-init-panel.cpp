@@ -9,13 +9,13 @@ void EP1m::initPanel(const QString& modules_dir, const QString& custom_cfg_dir)
 {
     (void) modules_dir;
 
-    tumblers_panel = new EP1MTumblersPanel();
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        tumblers_panel[cab_idx] = new EP1MTumblersPanel();
 
-    km = new TracController();
-    km->read_config("km-35-01", custom_cfg_dir);
+        km[cab_idx] = new TracController();
+        km[cab_idx]->read_config("km-35-01", custom_cfg_dir);
+    }
 
     signals_module = new SignalizationModule();
-
-    tumblers[BUTTON_EMERGENCY_BRAKE].set();
-    //tumblers[TUMBLER_AUTO_MODE].set();
 }

@@ -7,21 +7,25 @@
 //------------------------------------------------------------------------
 void EP1m::initBrakeDevices(double p0, double pBP, double pFL)
 {
+    // Загрузка состояния тормозного оборудования из собственного конфига
     FileSystem &fs = FileSystem::getInstance();
     QString custom_cfg_dir(fs.getVehiclesDir().c_str());
     custom_cfg_dir += QDir::separator() + config_dir;
     load_brakes_config(custom_cfg_dir + QDir::separator() + "brakes-init.xml");
 
+    // Инициализация давления в приборах управления тормозами
     charge_press = p0;
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        brake_lock[cab_idx]->init(pBP, pFL);
 
-    brake_lock->init(pBP, pFL);
+        brake_crane[cab_idx]->init(pBP, pFL);
+        brake_crane[cab_idx]->setChargePressure(charge_press);
 
-    brake_crane->init(pBP, pFL);
-    brake_crane->setChargePressure(charge_press);
+        loco_crane[cab_idx]->init(pBP, pFL);
 
-    loco_crane->init(pBP, pFL);
-
-    epk->init(pBP, pFL);
+        epk[cab_idx]->init(pBP, pFL);
+    }
 
     // Инициализация давления в питательной магистрали
     main_reservoir->setY(0, pFL);

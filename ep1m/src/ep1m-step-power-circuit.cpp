@@ -5,12 +5,17 @@
 //------------------------------------------------------------------------------
 void EP1m::stepPowerCircuit(const double& t, const double& dt)
 {
+    bool tumbler_pant1 = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_PANT1) ||
+                         tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_PANT2);
+    bool tumbler_pant2 = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_PANT2) ||
+                         tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_PANT1);
+
     pant[PANT1]->setState(safety_valve->getState() &&
-                          tumblers_panel->getTumblerState(TUMBLER_PANT1) &&
+                          tumbler_pant1 &&
                           kv44->getContactState(1));
 
     pant[PANT2]->setState(safety_valve->getState() &&
-                          tumblers_panel->getTumblerState(TUMBLER_PANT2) &&
+                          tumbler_pant2 &&
                           kv44->getContactState(2));
 
     for (size_t i = 0; i < pant.size(); ++i)
@@ -21,15 +26,19 @@ void EP1m::stepPowerCircuit(const double& t, const double& dt)
 
     Ukr = max(pant[PANT1]->getUout(), pant[PANT2]->getUout());
 
+    bool tumbler_m_s = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH) ||
+                       tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH);
     main_switch->setU_in(Ukr);
-    main_switch->setState(tumblers_panel->getTumblerState(TUMBLER_MAIN_SWITCH));
+    main_switch->setState(tumbler_m_s);
     main_switch->setHoldingCoilState(getHoldingCoilState());
     main_switch->step(t, dt);
 
     trac_trans->setInputVoltage(main_switch->getU_out());
     trac_trans->step(t, dt);
 
-    safety_valve->setVoltage(Ucc * static_cast<double>(tumblers_panel->getTumblerState(TUMBLER_LOCK_VVK)));
+    bool tumbler_vvk = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_LOCK_VVK) ||
+                       tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_LOCK_VVK);
+    safety_valve->setVoltage(Ucc * static_cast<double>(tumbler_vvk));
     safety_valve->step(t, dt);
 
     // Задаем напряжения на якорях ТЭД
@@ -104,16 +113,18 @@ void EP1m::stepPowerCircuit(const double& t, const double& dt)
     vip[VIP2]->step(t, dt);
 
     // Работа реверсивного переключателя
-    reversor->setForwardValveState(km->getReversHandlePos() == 1);
-    reversor->setBackwardValveState(km->getReversHandlePos() == -1);
+    reversor->setForwardValveState((km[CAB1]->getReversHandlePos() == 1) || (km[CAB2]->getReversHandlePos() == -1));
+    reversor->setBackwardValveState((km[CAB1]->getReversHandlePos() == -1) || (km[CAB2]->getReversHandlePos() == 1));
     reversor->step(t, dt);
 
     // Работа тормозного переключателя
     qt1->setPressure(0.55 * main_reservoir->getPressure());
 
     // Сигнал на проводе Н36
-    is_H36 = km->isContacts9_10() &&
-             epk->isKeyOn() &&
+    bool km_9_10 = (km[CAB1]->isContacts9_10() || km[CAB2]->isContacts9_10());
+    bool epk_on = (epk[CAB1]->isKeyOn() || epk[CAB2]->isKeyOn());
+    is_H36 = km_9_10 &&
+             epk_on &&
              sp4->getState() &&
              kv84->getContactState(0) &&
              kv12->getContactState(0) &&
