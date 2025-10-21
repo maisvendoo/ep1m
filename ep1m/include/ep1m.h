@@ -137,9 +137,6 @@ private:
     /// Реверсор
     Reversor* reversor = nullptr;
 
-    /// Темп утечки из главного резервуара
-    double main_res_leak = 1e-6;
-
     /// Мотор-компрессор
     ACMotorCompressor*  motor_compressor  = nullptr;
 

@@ -13,6 +13,14 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
     epk[CAB2]->allowKey(!(epk[CAB1]->isKey()));
     epk[CAB1]->allowKey(!(epk[CAB2]->isKey()));
 
+    // Не допускаем двух ключей в панелях тумблеров
+    tumblers_panel[CAB2]->allowKey(!(tumblers_panel[CAB1]->isKey()));
+    tumblers_panel[CAB1]->allowKey(!(tumblers_panel[CAB2]->isKey()));
+
+    // Не допускаем двух реверсивных рукояток в контроллерах машиниста
+    km[CAB2]->allowReversHandle(!(km[CAB1]->isReversHandle()));
+    km[CAB1]->allowReversHandle(!(km[CAB2]->isReversHandle()));
+
     tumbler_power_supply.step(t.simulation_seconds, dt);
 
     // Управление оборудованием в кабинах

@@ -30,8 +30,26 @@ TracController::~TracController()
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+void TracController::allowReversHandle(bool allow)
+{
+    is_reverse_handle_allowed = allow;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+bool TracController::isReversHandleAllowed() const
+{
+    return is_reverse_handle_allowed;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void TracController::insertReversHandle(bool insert)
 {
+    insert = insert && is_reverse_handle_allowed;
+
     if (insert)
     {
         // Вставляем реверсивную рукоятку
@@ -175,7 +193,7 @@ void TracController::stepKeysControl(double t, double dt)
             {
                 if (isReversHandle())
                 {
-                    if  (!old_fwd_key_state && isZero() && (revers_pos < 1))
+                    if (!old_fwd_key_state && isZero() && (revers_pos < 1))
                     {
                         // Тянем реверсивку от себя
                         revers_pos++;
@@ -372,7 +390,7 @@ void TracController::processDiscretePositions(bool key_state,
     if (key_state && !old_key_state)
     {
         mode_pos += dir;
-        mode_pos = cut(mode_pos, -1, 1);
+        mode_pos = cut(mode_pos, std::int8_t(-1), std::int8_t(1));
     }
 }
 
@@ -403,5 +421,5 @@ void TracController::slotSpeedLevelProcess()
 {
     refV_level += refV_motion_speed * refV_step;
 
-    refV_level = cut(refV_level, 0.0, 100.0);
+    refV_level = cut(refV_level, 0.0, 1.0);
 }

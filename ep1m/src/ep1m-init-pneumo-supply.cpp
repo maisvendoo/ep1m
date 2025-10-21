@@ -18,7 +18,6 @@ void EP1m::initPneumoSupply(const QString& modules_dir, const QString& custom_cf
     // Главный резервуар объемом 1020 литров
     double volume_main = 1.02;
     main_reservoir = new Reservoir(volume_main);
-    main_reservoir->setLeakCoeff(main_res_leak);
 
     // Концевые краны питательной магистрали
     anglecock_fl_fwd = new PneumoAngleCock();

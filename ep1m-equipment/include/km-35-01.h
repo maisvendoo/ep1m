@@ -14,6 +14,12 @@ public:
 
     ~TracController();
 
+    /// Разрешить установить реверсивку (для реализации одной рукоятки на несколько кабин)
+    void allowReversHandle(bool allow);
+
+    /// Разрешение установить реверсивку (для реализации одной рукоятки на несколько кабин)
+    bool isReversHandleAllowed() const;
+
     /// Вставить/извлечь реверсивную рукоятку
     void insertReversHandle(bool insert);
 
@@ -83,7 +89,7 @@ public:
 
     double getBrakeLevel() const { return static_cast<double>(brake_level) / 100.0; }
 
-    double getRefSpeedLevel() const { return static_cast<double>(refV_level) / 100.0; }
+    double getRefSpeedLevel() const { return refV_level; }
 
     enum {
         NUM_SOUNDS = 2,
@@ -97,16 +103,19 @@ public:
 
 private:
 
+    /// Разрешение установить реверсивку (для реализации одной рукоятки на несколько кабин)
+    bool is_reverse_handle_allowed = false;
+
     /// Позиция, определяющая состояние схемы
     /// (0 - схема разобрана, 1 - подготовка тяги, 2 - подготовка рекуперации)
-    int mode_pos = 0;
-    int mode_pos_old = 0;
+    std::int8_t mode_pos = 0;
+    std::int8_t mode_pos_old = 0;
+
+    std::int8_t revers_pos = 0;
 
     bool old_fwd_key_state = false;
 
     bool old_bwd_key_state = false;
-
-    int revers_pos = 0;
 
     bool old_traction_key = false;
 
@@ -126,7 +135,7 @@ private:
     double refV_level = 0.0;
 
     /// Шаг вращения регулятора скорости
-    double refV_step = 100.0 / 160.0; // 0.625;
+    double refV_step = 1.0 / 140.0;
 
     /// Вращение регулятора скорости по сигналу таймера
     double refV_motion_speed = 0.0;

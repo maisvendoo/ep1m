@@ -31,5 +31,15 @@
 		<EPKCab1>1</EPKCab1>
 		<EPKCab2>0</EPKCab2>
 
+		<!-- Ключ панели тумблеров
+		( 0 - извлечён, 1 - вставлен, панель заблокирована, 2 - вставлен, панель разблокирована -->
+		<PanelCab1>1</PanelCab1>
+		<PanelCab2>0</PanelCab2>
+
+		<!-- Реверсивная рукотка
+		( 0 - извлечена, 1 - вставлена -->
+		<ReversHandleCab1>1</ReversHandleCab1>
+		<ReversHandleCab2>0</ReversHandleCab2>
+
 	</BrakesState>
 </Config>

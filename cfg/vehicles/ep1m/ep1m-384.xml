@@ -14,8 +14,6 @@
 
 		<ReductorCoeff>3.38</ReductorCoeff>
 
-		<MainResLeak>1e-6</MainResLeak>
-
 		<ExtModelName>EP1m-384/EP1m.gltf</ExtModelName>
 		<ModelShift>0.0 0.0 0.3</ModelShift>
 
