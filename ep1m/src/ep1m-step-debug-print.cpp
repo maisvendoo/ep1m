@@ -8,7 +8,7 @@ void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
     (void) t;
     (void) dt;
 
-
+    DebugMsg = "";
     DebugMsg += QString("CABINE 1|");
     if (brake_lock[CAB1]->isStateOn())
     {
@@ -27,7 +27,7 @@ void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
     if (km[CAB1]->isReversHandle())
     {
         DebugMsg += QString("R:%1|T:%2%|")
-                        .arg(km[CAB1]->getReversHandlePos() * 4.0, 2, 'f', 0)
+                        .arg(km[CAB1]->getReversHandlePos(), 2, 'f', 0)
                         .arg(100.0 * km[CAB1]->getHandlePosition(), 4, 'f', 0);
         if (tumblers[TUMBLER_AUTO_MODE][CAB1].getState())
         {
@@ -43,6 +43,22 @@ void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
     else
     {
         DebugMsg += QString(" NO REVERS HANDLE |");
+    }
+
+    if (tumblers_panel[CAB1]->isKey())
+    {
+        if (tumblers_panel[CAB1]->isKeyOn())
+        {
+            DebugMsg += QString("Tumblers:UNLOCK|");
+        }
+        else
+        {
+            DebugMsg += QString("Tumblers:LOCKED|");
+        }
+    }
+    else
+    {
+        DebugMsg += QString("Tumblers:NO KEY|");
     }
 
     if (epk[CAB1]->isKeyOn())
@@ -141,7 +157,7 @@ void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
     if (km[CAB2]->isReversHandle())
     {
         DebugMsg += QString("R:%1|T:%2%|")
-                        .arg(km[CAB2]->getReversHandlePos() * 4.0, 2, 'f', 0)
+                        .arg(km[CAB2]->getReversHandlePos(), 2, 'f', 0)
                         .arg(100.0 * km[CAB2]->getHandlePosition(), 4, 'f', 0);
         if (tumblers[TUMBLER_AUTO_MODE][CAB2].getState())
         {
@@ -157,6 +173,22 @@ void EP1m::debugPrint(const simulator_time_t& t, const double& dt)
     else
     {
         DebugMsg += QString(" NO REVERS HANDLE |");
+    }
+
+    if (tumblers_panel[CAB2]->isKey())
+    {
+        if (tumblers_panel[CAB2]->isKeyOn())
+        {
+            DebugMsg += QString("Tumblers:UNLOCK|");
+        }
+        else
+        {
+            DebugMsg += QString("Tumblers:LOCKED|");
+        }
+    }
+    else
+    {
+        DebugMsg += QString("Tumblers:NO KEY|");
     }
 
     if (epk[CAB2]->isKeyOn())

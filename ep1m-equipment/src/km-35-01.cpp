@@ -173,12 +173,19 @@ void TracController::stepKeysControl(double t, double dt)
             }
             else
             {
-                if  (!old_fwd_key_state && isZero() && (revers_pos < 1))
+                if (isReversHandle())
                 {
-                    // Тянем реверсивку от себя
-                    revers_pos++;
+                    if  (!old_fwd_key_state && isZero() && (revers_pos < 1))
+                    {
+                        // Тянем реверсивку от себя
+                        revers_pos++;
 
-                    sound_states[REVERS_CHANGE_POS_SOUND].play();
+                        sound_states[REVERS_CHANGE_POS_SOUND].play();
+                    }
+                }
+                else
+                {
+                    revers_pos = 0;
                 }
             }
         }
@@ -198,15 +205,21 @@ void TracController::stepKeysControl(double t, double dt)
         }
         else
         {
-            if (!old_bwd_key_state && isZero() && (revers_pos > -1))
+            if (isReversHandle())
             {
-                // Тянем реверсивку на себя
-                revers_pos--;
+                if (!old_bwd_key_state && isZero() && (revers_pos > -1))
+                {
+                    // Тянем реверсивку на себя
+                    revers_pos--;
 
-                sound_states[REVERS_CHANGE_POS_SOUND].play();
+                    sound_states[REVERS_CHANGE_POS_SOUND].play();
+                }
+            }
+            else
+            {
+                revers_pos = 0;
             }
         }
-
     }
 
     old_fwd_key_state = key_fwd;
@@ -249,7 +262,7 @@ void TracController::stepKeysControl(double t, double dt)
             }
         }
 
-        if (key_traction)
+        if (key_brakes)
         {
             if (brake.getState())
             {

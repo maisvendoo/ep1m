@@ -51,9 +51,9 @@ void EP1m::stepControlCircuit(const double& t, const double& dt)
                        tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH);
     bool tumbler_r_p = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_RETURN_PROTECTION) ||
                        tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_RETURN_PROTECTION);
-    bool tumbler_off = tumblers[BUTTON_MAIN_SWITCH_OFF][CAB1].getState() ||
-                       tumblers[BUTTON_MAIN_SWITCH_OFF][CAB2].getState();
-    is_N211_on = tumbler_m_s && tumbler_r_p && !tumbler_off;
+    bool button_off = tumblers[BUTTON_MAIN_SWITCH_OFF][CAB1].getState() ||
+                      tumblers[BUTTON_MAIN_SWITCH_OFF][CAB2].getState();
+    is_N211_on = tumbler_m_s && tumbler_r_p && !button_off;
 
     is_N212_on = is_N211_on && kv21->getContactState(0);
 
@@ -85,9 +85,9 @@ bool EP1m::getHoldingCoilState()
 {
     bool tumbler_m_s = tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH) ||
                        tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH);
-    bool tumbler_off = tumblers[BUTTON_MAIN_SWITCH_OFF][CAB1].getState() ||
+    bool button_off = tumblers[BUTTON_MAIN_SWITCH_OFF][CAB1].getState() ||
                        tumblers[BUTTON_MAIN_SWITCH_OFF][CAB2].getState();
-    bool is_holding_coil_on = tumbler_m_s && !tumbler_off &&
+    bool is_holding_coil_on = tumbler_m_s && !button_off &&
                               kv44->getContactState(0) &&
                               kv39->getContactState(0) &&
                               safety_valve->getState();
@@ -114,13 +114,14 @@ void EP1m::stepTractionControl(const double& t, const double& dt)
     sp4->setValue(brakepipe->getPressure());
 
     // Контакт экстренного торможения на кране машиниста
+    bool button_emerg = tumblers[BUTTON_EMERGENCY_BRAKE][CAB1].getState() ||
+                        tumblers[BUTTON_EMERGENCY_BRAKE][CAB2].getState();
     bool is_SQ3 = (brake_crane[CAB1]->getPositionName() == "VI") ||
                   (brake_crane[CAB2]->getPositionName() == "VI");
 
-    bool is_KV13_on = (km[CAB1]->isContacts5_6() || km[CAB2]->isContacts5_6()) &&
+    bool is_KV13_on = km_5_6 &&
                       (!is_SQ3) &&
-                      (!tumblers[BUTTON_EMERGENCY_BRAKE][CAB1].getState()) &&
-                      (!tumblers[BUTTON_EMERGENCY_BRAKE][CAB2].getState());
+                      (!button_emerg);
 
     kv13->setVoltage(Ucc * static_cast<double>(is_KV13_on));
     kv13->step(t, dt);

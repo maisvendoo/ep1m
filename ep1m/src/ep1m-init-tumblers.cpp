@@ -75,9 +75,9 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
 
 
     // Выключатель шкафа питания ШП-21
-    tumbler_power_supply.setKeySymbolOn(KEY_0);
+    tumbler_power_supply.setKeySymbolOn(KEY_U);
     tumbler_power_supply.setKeyModifierOn(MODIFIER_OnlyShift);
-    tumbler_power_supply.setKeySymbolOff(KEY_0);
+    tumbler_power_supply.setKeySymbolOff(KEY_U);
     tumbler_power_supply.setKeyModifierOff(MODIFIER_OnlyControl);
     tumbler_power_supply.setControl(&pressed_keys);
 
@@ -298,15 +298,19 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
 
         // Пульт помощника
         // Кнопка "Экстренное торможение"
+        // Реализована только проверка в схеме
         tumblers[BUTTON_EMERGENCY_BRAKE][cab_idx].setInitState(false);
 
         // Кнопка "Аварийное отключение главного выключателя"
+        // Реализована только проверка в схеме
         tumblers[BUTTON_MAIN_SWITCH_OFF][cab_idx].setInitState(false);
 
         // Кнопка "Тифон"
+        // У помощника не реализовано
         tumblers[BUTTON_P_TYPHON][cab_idx].setInitState(false);
 
         // Кнопка "Свисток"
+        // У помощника не реализовано
         tumblers[BUTTON_P_WHISTLE][cab_idx].setInitState(false);
     }
 }

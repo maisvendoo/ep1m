@@ -216,16 +216,16 @@ void EP1MTumblersPanel::step(double t, double dt)
 //------------------------------------------------------------------------------
 void EP1MTumblersPanel::initControl()
 {
-    key_symbol = KEY_9;
+    key_symbol = KEY_Y;
 
-    tumblers[TUMBLER_MSUD].setKeySymbolOn(KEY_Y);
+    tumblers[TUMBLER_MSUD].setKeySymbolOn(KEY_9);
     tumblers[TUMBLER_MSUD].setKeyModifierOn(MODIFIER_OnlyShift);
-    tumblers[TUMBLER_MSUD].setKeySymbolOff(KEY_Y);
+    tumblers[TUMBLER_MSUD].setKeySymbolOff(KEY_9);
     tumblers[TUMBLER_MSUD].setKeyModifierOff(MODIFIER_OnlyControl);
 
-    tumblers[TUMBLER_LOCK_VVK].setKeySymbolOn(KEY_U);
+    tumblers[TUMBLER_LOCK_VVK].setKeySymbolOn(KEY_0);
     tumblers[TUMBLER_LOCK_VVK].setKeyModifierOn(MODIFIER_OnlyShift);
-    tumblers[TUMBLER_LOCK_VVK].setKeySymbolOff(KEY_U);
+    tumblers[TUMBLER_LOCK_VVK].setKeySymbolOff(KEY_0);
     tumblers[TUMBLER_LOCK_VVK].setKeyModifierOff(MODIFIER_OnlyControl);
 
     tumblers[TUMBLER_PANT1].setKeySymbolOn(KEY_I);
