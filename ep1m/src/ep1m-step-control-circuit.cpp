@@ -113,11 +113,12 @@ void EP1m::stepTractionControl(const double& t, const double& dt)
     // Контроль давления в тормозной магистрали
     sp4->setValue(brakepipe->getPressure());
 
-    // Контакт экстренного торможения на кране машиниста
+    // Кнопка "Экстренное торможение" на пульте помощника
     bool button_emerg = tumblers[BUTTON_EMERGENCY_BRAKE][CAB1].getState() ||
                         tumblers[BUTTON_EMERGENCY_BRAKE][CAB2].getState();
-    bool is_SQ3 = (brake_crane[CAB1]->getPositionName() == "VI") ||
-                  (brake_crane[CAB2]->getPositionName() == "VI");
+    // Контакт экстренного торможения на кране машиниста
+    bool is_SQ3 = (brake_lock[CAB1]->isStateOn() && (brake_crane[CAB1]->getPositionName() == "VI")) ||
+                  (brake_lock[CAB2]->isStateOn() && (brake_crane[CAB2]->getPositionName() == "VI"));
 
     bool is_KV13_on = km_5_6 &&
                       (!is_SQ3) &&
