@@ -323,7 +323,7 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
 
     analogSignal[MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
     analogSignal[MSUD_MPK] = TO_FLOAT(static_cast<int>(msud_input.tumbler_MPK) + 1);
-    analogSignal[MSUD_MODE] = TO_FLOAT(static_cast<int>(msud_input.is_automatic_mode) + 1);
+    analogSignal[MSUD_MODE] = TO_FLOAT(static_cast<int>(msud_input.is_auto_reg) + 1);
 
     bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getChargeCurrent() <= 0.0;
     analogSignal[MSUD_OB] = TO_FLOAT(is_MSUD_OB);

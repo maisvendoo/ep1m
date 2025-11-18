@@ -20,7 +20,7 @@ enum
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-enum msud_state_t
+enum msud_state_t : std::uint8_t
 {
     MSUD_OFF = 0,
     MSUD_RESET = 1,
@@ -59,68 +59,46 @@ enum
 struct msud_input_t
 {
     /// Положение тумблера (МПК1/МПК2)
-    bool tumbler_MPK;
-
-    /// Признак включения режима "АВТОРЕГУЛИРОВАНИЕ"
-    bool is_automatic_mode;
+    bool tumbler_MPK = false;
 
     /// Признак включения ПЧФ
-    bool is_PCHF_On;
+    bool is_PCHF_On = false;
 
     /// Режим управления (Авторегулирование/Ручной)
-    bool is_auto_reg;
-
-    /// Положение главного вала КМ в тяге
-    double km_trac_level;
-
-    /// Положение главного вала КМ в рекуперации
-    double km_brake_level;
-
-    /// Положение задатчика скорости
-    double km_ref_velocity_level;
-
-    /// Текущая скорость электровоза, км/ч
-    double V_cur;
+    bool is_auto_reg = false;
 
     /// Признак сбора тяги
-    bool is_traction;
+    bool is_traction = false;
 
     /// Признак сбора рекуперации
-    bool is_brake;
+    bool is_brake = false;
 
     /// Признак экстренного торможения
-    bool is_emergency_brake;
+    bool is_emergency_brake = false;
+
+    /// Положение главного вала КМ в тяге
+    double km_trac_level = 0.0;
+
+    /// Положение главного вала КМ в рекуперации
+    double km_brake_level = 0.0;
+
+    /// Положение задатчика скорости
+    double km_ref_velocity_level = 0.0;
+
+    /// Текущая скорость электровоза, км/ч
+    double V_cur = 0.0;
 
     /// Токи якоря тяговых двигателей
-    std::array<double, TRAC_MOTORS_NUM> Ia;
+    std::array<double, TRAC_MOTORS_NUM> Ia = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
     /// Токи возбуждения тяговых двигателей
-    std::array<double, TRAC_MOTORS_NUM> If;
+    std::array<double, TRAC_MOTORS_NUM> If = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
     /// Состояние мотор-вентиляторов
-    std::array<bool, MOTOR_FANS_NUM> mv_state;
+    std::array<bool, MOTOR_FANS_NUM> mv_state = {false, false, false, false};
 
     /// Давление в ТЦ тележек
-    std::array<double, TRAC_MOTORS_NUM / 2> TC_press;
-
-    msud_input_t()
-        : tumbler_MPK(false)
-        , is_automatic_mode(false)
-        , is_PCHF_On(false)
-        , is_auto_reg(false)
-        , km_trac_level(0.0)
-        , km_brake_level(0.0)
-        , km_ref_velocity_level(0.0)
-        , V_cur(0.0)
-        , is_traction(false)
-        , is_brake(false)
-        , is_emergency_brake(false)
-    {
-        std::fill(Ia.begin(), Ia.end(), 0.0);
-        std::fill(If.begin(), If.end(), 0.0);
-        std::fill(mv_state.begin(), mv_state.end(), false);
-        std::fill(TC_press.begin(), TC_press.end(), 0.0);
-    }
+    std::array<double, TRAC_MOTORS_NUM / 2> TC_press = {0.0, 0.0, 0.0};
 };
 
 
@@ -129,84 +107,62 @@ struct msud_input_t
 //------------------------------------------------------------------------------
 struct msud_output_t
 {
-    msud_state_t state;
+    msud_state_t state = MSUD_OFF;
 
     /// Подача питания на реле КМ23
-    bool kv23_On;
+    bool kv23_On = false;
 
     /// Сигнал включения реле KV14
-    bool kv14_On;
+    bool kv14_On = false;
 
     /// Работа МВ на низкой частоте
-    bool is_MV_low_freq;
+    bool is_MV_low_freq = false;
 
-    double TC_min_press;
+    /// Сигнал отсутствия усиления торможения от вентиля Y5
+    bool is_not_brake_boost = true;
 
-    int TC_status;
-
-    /// Уровень напряжение на выходе ВИП (от 0.0 до 4.0) отображаемый на БИ
-    double vip_voltage_level;
+    /// Индикация наличия давления в тормозных цилиндрах
+    std::uint8_t TC_status = 0;
 
     /// Номер зоны ВИП
-    size_t zone_num;
-
-    /// Угол открытия тиристоров
-    double alpha;
+    std::uint8_t zone_num = 1;
 
     /// Ступень ослабления возбуждения
-    size_t field_weak_step;
+    std::uint8_t field_weak_step = 0;
+
+    /// Минимальное давление в тормозных цилиндрах
+    double TC_min_press = 0.11;
+
+    /// Уровень напряжение на выходе ВИП (от 0.0 до 4.0) отображаемый на БИ
+    double vip_voltage_level = 0.0;
+
+    /// Угол открытия тиристоров
+    double alpha = Physics::PI / 2.0;
 
     /// Уровень тока возбуждения от ВУВ
-    double field_level;
+    double field_level = 0.0;
 
     /// Ограничение тока ББР
-    double Ib_max;
+    double Ib_max = 950.0;
 
     /// Ограниение тока возбуждения
-    double If_max;
+    double If_max = 845.0;
 
     /// Ограничение тока якоря
-    double Ia_max;
+    double Ia_max = 1300.0;
 
     /// Максимальная задаваемая скорость
-    double Vmax;
-
-    /// Сигнал отсутствия усиление торможения от вентиля Y5
-    bool is_not_brake_boost;
+    double Vmax = 140.0;
 
     /// Включение МВ на низкой частоте
-    std::array<bool, MOTOR_FANS_NUM> mv_freq_low;
+    std::array<bool, MOTOR_FANS_NUM> mv_freq_low = {true, true, true, true};
     /// Включение МВ на нормальной частоте
-    std::array<bool, MOTOR_FANS_NUM> mv_freq_norm;
+    std::array<bool, MOTOR_FANS_NUM> mv_freq_norm = {false, false, false, false};
     /// Наполнение ТЦ тележек
-    std::array<bool, TRAC_MOTORS_NUM / 2> TC_full;
+    std::array<bool, TRAC_MOTORS_NUM / 2> TC_full = {false, false, false};
 
-    /// Сгнализация супеней ОП
-    std::array<bool, NUM_STEPS> op;
-
-    msud_output_t()
-        : state(MSUD_OFF)
-        , kv23_On(false)
-        , kv14_On(false)
-        , is_MV_low_freq(false)
-        , TC_min_press(0.11)
-        , TC_status(0)
-        , vip_voltage_level(0.0)
-        , zone_num(1)
-        , alpha(Physics::PI / 2.0)
-        , field_weak_step(0)
-        , field_level(0.0)
-        , Ib_max(950.0)
-        , If_max(845.0)
-        , Ia_max(1300.0)
-        , Vmax(140.0)
-        , is_not_brake_boost(true)
-    {
-        std::fill(mv_freq_low.begin(), mv_freq_low.end(), true);
-        std::fill(mv_freq_norm.begin(), mv_freq_norm.end(), false);
-        std::fill(TC_full.begin(), TC_full.end(), false);
-        std::fill(op.begin(), op.end(), true);
-    }
+    /// Сигнализация супеней ОП
+    std::array<bool, NUM_STEPS> op = {false, false, false};
 };
 
 #endif // MSUD_DATA_H

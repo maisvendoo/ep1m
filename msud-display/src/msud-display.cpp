@@ -409,6 +409,25 @@ void MsudDisplay::update(double t, double dt)
     {
         if (static_cast<int>(input_signals[MSUD_MODE]) == 1)
         {
+            //if (man11_->isVisible())
+            {
+                labMode_->setText(MODE_HAND_REG);
+
+                man11_->setVisible(false);
+                man12_->setVisible(false);
+
+                man21_->setVisible(true);
+                man22_->setVisible(true);
+            }
+
+            //
+            man21_->setVal_zonaVIP(input_signals[MSUD_VIP_ZONE]);
+
+            //
+            man22_->setVal_Line(input_signals[MSUD_CURRENT_ANHCOR1]);
+        }
+        else if (static_cast<int>(input_signals[MSUD_MODE]) == 2)
+        {
             //if (man21_->isVisible())
             {
                 labMode_->setText(MODE_AUTO_REG);
@@ -427,27 +446,6 @@ void MsudDisplay::update(double t, double dt)
             //
             man12_->setVal_Line(input_signals[MSUD_CURRENT_ANHCOR2]);
             man12_->setVal_Arrow(input_signals[MSUD_CURRENT_ANHCOR1]);
-
-        }
-        else if (static_cast<int>(input_signals[MSUD_MODE]) == 2)
-        {
-
-            //if (man11_->isVisible())
-            {
-                labMode_->setText(MODE_HAND_REG);
-
-                man11_->setVisible(false);
-                man12_->setVisible(false);
-
-                man21_->setVisible(true);
-                man22_->setVisible(true);
-            }
-
-            //
-            man21_->setVal_zonaVIP(input_signals[MSUD_VIP_ZONE]);
-
-            //
-            man22_->setVal_Line(input_signals[MSUD_CURRENT_ANHCOR1]);
         }
         else
         {
@@ -534,19 +532,19 @@ void MsudDisplay::update(double t, double dt)
 
 
         if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE1]))
-            labFieldWeak1_->setStyleSheet("color: white; background: none;");
-        else
             labFieldWeak1_->setStyleSheet("color: white; background: red;");
+        else
+            labFieldWeak1_->setStyleSheet("color: white; background: none;");
 
         if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE2]))
-            labFieldWeak2_->setStyleSheet("color: white; background: none;");
-        else
             labFieldWeak2_->setStyleSheet("color: white; background: red;");
+        else
+            labFieldWeak2_->setStyleSheet("color: white; background: none;");
 
         if (static_cast<bool>(input_signals[MSUD_OSLAB_POLE3]))
-            labFieldWeak3_->setStyleSheet("color: white; background: none;");
-        else
             labFieldWeak3_->setStyleSheet("color: white; background: red;");
+        else
+            labFieldWeak3_->setStyleSheet("color: white; background: none;");
 
         // Сбрасываем счётчик
         upd_block = 0;

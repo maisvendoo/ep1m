@@ -102,10 +102,10 @@ void MSUD::preStep(state_vector_t &Y, double t)
 {
     Q_UNUSED(t)
 
-    Y[0] = cut(Y[0], -1.0, 1.0);
-    Y[1] = cut(Y[1], -1.0, 1.0);
-    Y[2] = cut(Y[2], -1.0, 1.0);
-    Y[3] = cut(Y[3], -Ib_max, Ib_max);
+    Y[0] = std::clamp(Y[0], -1.0, 1.0);
+    Y[1] = std::clamp(Y[1], -1.0, 1.0);
+    Y[2] = std::clamp(Y[2], -1.0, 1.0);
+    Y[3] = std::clamp(Y[3], -Ib_max, Ib_max);
 }
 
 //------------------------------------------------------------------------------
@@ -434,7 +434,7 @@ void MSUD::auto_traction_control(double t, double dt)
     double Ia_ref = Ktv * dV + getY(1);
 
     // Ограничиваем ток величиной, заданной с главного вала КМ
-    Ia_ref = cut(Ia_ref, 0.0, Ia_ref_max);
+    Ia_ref = std::clamp(Ia_ref, 0.0, Ia_ref_max);
 
     // Расчет ошибки по току
     dIa = Ia_ref - msud_input.Ia[TRAC_MOTOR1];
@@ -445,7 +445,7 @@ void MSUD::auto_traction_control(double t, double dt)
     // Расчитываем относительную величину напряжения ВИТ
     double u = Ktp * dIa + getY(0);
 
-    u = cut(u, 0.0, 1.0);
+    u = std::clamp(u, 0.0, 1.0);
 
     // Рассчитываем абсолютную величину напряжения ВИП
     double Ud = U_max * u;
@@ -462,7 +462,7 @@ void MSUD::reset_traction_control()
     msud_output.zone_num = ZONE1 + 1;
     msud_output.vip_voltage_level = 0.0;
     msud_output.field_weak_step = STEP0;
-    std::fill(msud_output.op.begin(), msud_output.op.end(), true);
+    std::fill(msud_output.op.begin(), msud_output.op.end(), false);
 }
 
 //------------------------------------------------------------------------------
@@ -498,9 +498,9 @@ void MSUD::vip_control(double Ud)
 {
     size_t zone_idx = select_traction_VIP_Zone(Ud);
     msud_output.zone_num = zone_idx + 1;
-    msud_output.zone_num = cut(msud_output.zone_num,
-                               static_cast<size_t>(1),
-                               static_cast<size_t>(4));
+    msud_output.zone_num = std::clamp(msud_output.zone_num,
+                                      static_cast<std::uint8_t>(1),
+                                      static_cast<std::uint8_t>(4));
 
     double Umin = vip_zone[zone_idx].Umin;
     double Umax = vip_zone[zone_idx].Umax;
@@ -522,7 +522,7 @@ void MSUD::field_weak_control(double t, double dt)
     // Работа только при полностью открытой 4-й зоне ВИП
     if (static_cast<int>(msud_output.vip_voltage_level) != ZONE4 + 1)
     {
-        std::fill(msud_output.op.begin(), msud_output.op.end(), true);
+        std::fill(msud_output.op.begin(), msud_output.op.end(), false);
         msud_output.field_weak_step = STEP0;
         return;
     }
@@ -537,18 +537,16 @@ void MSUD::field_weak_control(double t, double dt)
         msud_output.field_weak_step--;
     }
 
-    msud_output.field_weak_step = cut(msud_output.field_weak_step,
-                                      static_cast<size_t>(STEP0),
-                                      static_cast<size_t>(STEP3));
-
-    std::fill(msud_output.op.begin(), msud_output.op.end(), true);
+    msud_output.field_weak_step = std::clamp(msud_output.field_weak_step,
+                                             static_cast<std::uint8_t>(STEP0),
+                                             static_cast<std::uint8_t>(STEP3));
 
     for (size_t i = 0; i < msud_output.op.size(); ++i)
     {
         if (i <= msud_output.field_weak_step)
-            msud_output.op[i] = false;
-        else
             msud_output.op[i] = true;
+        else
+            msud_output.op[i] = false;
     }
 }
 
@@ -590,7 +588,7 @@ void MSUD::auto_recuperation_control(double t, double dt)
 
     double I_ref = Krv * dV + getY(3);
 
-    I_ref = cut(I_ref, - msud_output.Ib_max * msud_input.km_brake_level, 0.0);
+    I_ref = std::clamp(I_ref, - msud_output.Ib_max * msud_input.km_brake_level, 0.0);
 
     brake_current_regulator(I_ref);
 }
@@ -616,7 +614,7 @@ void MSUD::manual_recuperation_control(double t, double dt)
 
     double u = Krp * dIa + getY(2);
 
-    u = cut(u, -1.0, 0.0);
+    u = std::clamp(u, -1.0, 0.0);
 
     double Ud = U_max * (1 + u) * hs_n(Ia);
 
@@ -651,7 +649,7 @@ void MSUD::brake_current_regulator(double Ia_ref)
 
     double u = Krp * dIa + getY(2);
 
-    u = cut(u, -1.0, 0.0);
+    u = std::clamp(u, -1.0, 0.0);
 
     double Ud = U_max * (1 + u) * hs_n(Ia);
 
