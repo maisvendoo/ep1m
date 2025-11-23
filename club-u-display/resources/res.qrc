@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/rcc">
-        <file alias="club-u-ttf">KLUBU.ttf</file>
+        <file alias="led-6x8-dots">KLUBU.ttf</file>
+        <file alias="led-7seg-italic">DSEG7ClassicMini-Italic.ttf</file>
+
+        <file alias="klub_bil_saut_display">img/ep1m_9_RGBA.png</file>
 
         <file alias="ind_cassette">img/cassette.png</file>
         <file alias="ind_M">img/ind_M.png</file>
@@ -15,5 +18,8 @@
         <file alias="alsn_red">leds/alsn_red.png</file>
         <file alias="alsn_white">leds/alsn_white.png</file>
 
+        <file alias="SAUT_on">img/SAUT_on.png</file>
+        <file alias="SAUT_off">img/SAUT_off.png</file>
+        <file alias="SAUT_zapret_otpuska">img/SAUT_zapret_otpuska.png</file>
     </qresource>
 </RCC>

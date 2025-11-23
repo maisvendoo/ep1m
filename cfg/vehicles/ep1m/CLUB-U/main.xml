@@ -3,6 +3,6 @@
 	<Main>
 		<!-- Размеры окна -->
 		<sizeWindow_X>1024</sizeWindow_X>
-		<sizeWindow_Y>799</sizeWindow_Y>
+		<sizeWindow_Y>1024</sizeWindow_Y>
 	</Main>
 </Config>

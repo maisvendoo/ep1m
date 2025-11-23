@@ -13,7 +13,7 @@
 #include    "block-middle.h"
 #include    "block-right.h"
 #include    "block-bottom.h"
-
+#include    "block-SAUT.h"
 
 
 //------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ ClubUDisplay::ClubUDisplay(QWidget *parent, Qt::WindowFlags f)
     : AbstractDisplay(parent, f)
 {
     this->setWindowFlag(Qt::WindowType::FramelessWindowHint);
-    this->resize(1024, 799);
+    this->resize(1024, 1024);
     this->setAutoFillBackground(true);
     this->setPalette(QPalette(Qt::black));
 
@@ -65,7 +65,7 @@ void ClubUDisplay::initMainWindow()
     CfgReader cfg;
 
     int     sizeWindow_X = 1024;
-    int     sizeWindow_Y = 799;
+    int     sizeWindow_Y = 1024;
     bool    hideCursor = false;
     int     timeInterval = 100;
 
@@ -97,34 +97,39 @@ void ClubUDisplay::initBlocks_()
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
     QPixmap pic;
-    if (!pic.load(":/rcc/klub_bil2_display")) { return; }
+    if (!pic.load(":/rcc/klub_bil_saut_display")) { return; }
     fon->setFixedSize(pic.size());
     //fon->setGeometry(0,0, pic.size().width(), pic.size().height());
     fon->setPixmap(pic);
     fon->move(0, 0);
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
+    //this->setStyleSheet("border: 1px solid red");
 */
 
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(108,461), this);
-    alsn_->move(43, 252);
+    alsn_->move(555, 536);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(737, 140), this);
-    topBlock_->move(76, 41);
+    topBlock_ = new TopBlock(QSize(424, 90), this);
+    topBlock_->move(23, 129);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(443, 407), cfg_path, this);
-    middleBlock_->move(246, 246);
+    middleBlock_ = new MiddleBlock(QSize(208, 407), cfg_path, this);
+    middleBlock_->move(208, 668);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(199, 494), this);
-    rightBlock_->move(781, 216);
+    rightBlock_ = new RightBlock(QSize(1, 1), this);
+    rightBlock_->move(552, 534);
 
     // Нижний блок
-    bottomBlock_ = new BottomBlock(QSize(743, 30), this);
-    bottomBlock_->move(145, 761);
+    bottomBlock_ = new BottomBlock(QSize(454, 20), this);
+    bottomBlock_->move(16, 66);
+
+    // Дисплей САУТ
+    SAUTBlock_ = new SAUTBlock(QSize(290, 85), this);
+    SAUTBlock_->move(631, 285);
 }
 
 
@@ -155,6 +160,7 @@ void ClubUDisplay::update(double t, double dt)
         middleBlock_->setVisible(false);
         rightBlock_->setVisible(false);
         bottomBlock_->setVisible(false);
+        SAUTBlock_->setVisible(false);
 
         return;
     }
@@ -164,6 +170,7 @@ void ClubUDisplay::update(double t, double dt)
     middleBlock_->setVisible(true);
     rightBlock_->setVisible(true);
     bottomBlock_->setVisible(true);
+    SAUTBlock_->setVisible(true);
 
     int seconds = static_cast<int>(input_signals[SIGNAL_TIME]);
     topBlock_->setCurTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
@@ -195,7 +202,8 @@ void ClubUDisplay::update(double t, double dt)
         topBlock_->setSheduleTime(seconds / 3600, seconds / 60 % 60, seconds % 60);
 
         topBlock_->setCoordinate(static_cast<double>(input_signals[KLUB_U_COORDINATE]));
-
+        SAUTBlock_->setCoordinate(static_cast<double>(input_signals[KLUB_U_COORDINATE]));
+        SAUTBlock_->setDistToTarget(static_cast<int>(input_signals[KLUB_U_TARGET_DIST]));
         bottomBlock_->setDistToTarget(static_cast<int>(input_signals[KLUB_U_TARGET_DIST]));
         return;
     }
@@ -207,6 +215,8 @@ void ClubUDisplay::update(double t, double dt)
         rightBlock_->setPressureUR(static_cast<double>(input_signals[KLUB_U_PRESSURE_UR]));
         rightBlock_->setAcceleration(static_cast<double>(input_signals[KLUB_U_ACCELERATION]));
         rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[KLUB_U_ZAPRET_OTPUSKA]));
+
+        SAUTBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[KLUB_U_ZAPRET_OTPUSKA]));
         return;
     }
 
@@ -240,10 +250,14 @@ void ClubUDisplay::update(double t, double dt)
 
             middleBlock_->setSpeedLimitVisible(false);
             middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
-            middleBlock_->setCurSpeedLimit(-5);
-            middleBlock_->setNextSpeedLimit(-5);
+            middleBlock_->setCurSpeedLimit(0);
+            middleBlock_->setNextSpeedLimit(0);
             middleBlock_->blinkingSpeed(true);
             middleBlock_->setReverse(0);
+
+            SAUTBlock_->setIndikatorOn(false);
+            SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
+            SAUTBlock_->setCurSpeedLimit(0);
         }
         else
         {
@@ -256,6 +270,10 @@ void ClubUDisplay::update(double t, double dt)
             middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
             middleBlock_->blinkingSpeed(false);
             middleBlock_->setReverse(static_cast<int>(input_signals[KLUB_U_REVERSOR]));
+
+            SAUTBlock_->setIndikatorOn(true);
+            SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
+            SAUTBlock_->setCurSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]));
         }
 
         // Сбрасываем счётчик

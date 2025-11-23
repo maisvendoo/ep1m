@@ -13,28 +13,28 @@ BottomBlock::BottomBlock(QSize size, QWidget *parent)
 
 
     //
-    txtPaintDistToTarget_ = new TextPaint(QSize(118, 30), this);
+    txtPaintDistToTarget_ = new TextPaint(QSize(60, 20), this);
     txtPaintDistToTarget_->move(0, 0);
-    txtPaintDistToTarget_->setFonts(20, Qt::green, 87);
-    txtPaintDistToTarget_->setParams(4, 29);
+    txtPaintDistToTarget_->setFonts(16, Qt::green);
+    txtPaintDistToTarget_->setParams(4, 15);
     txtPaintDistToTarget_->setText(QString::number(0));
 /*
     //
     txtPaintTargetType_ = new TextPaint(QSize(200, 20), this);
     txtPaintTargetType_->move(123, 2);
-    txtPaintTargetType_->setFonts(13, Qt::green, 87);
+    txtPaintTargetType_->setFonts(13, Qt::green);
     txtPaintTargetType_->setParams(10, 19, false, false);
     txtPaintTargetType_->setText("СВЕТОФОР");
     //
     txtPaintTargetName_ = new TextPaint(QSize(77, 20), this);
     txtPaintTargetName_->move(this->width()-90, 2);
-    txtPaintTargetName_->setFonts(13, Qt::green, 87);
+    txtPaintTargetName_->setFonts(13, Qt::green);
     txtPaintTargetName_->setParams(4, 18, true);
 */
-    txtPaintTargetName_ = new TextPaint(QSize(600, 30), this);
-    txtPaintTargetName_->move(143, 0);
-    txtPaintTargetName_->setFonts(20, Qt::green, 87);
-    txtPaintTargetName_->setParams(24, 25, true);
+    txtPaintTargetName_ = new TextPaint(QSize(384, 20), this);
+    txtPaintTargetName_->move(70, 0);
+    txtPaintTargetName_->setFonts(16, Qt::green);
+    txtPaintTargetName_->setParams(24, 16, true);
     txtPaintTargetName_->setText(QString("ABCDEFGHIJKLMNOPQRSTUVWX"));
 }
 

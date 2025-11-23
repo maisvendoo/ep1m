@@ -5,15 +5,23 @@
 #include <QLabel>
 
 
-
 class TextPaint : public QLabel
 {
 
 public:
     TextPaint(QSize _size, QWidget *parent = Q_NULLPTR);
 
-    void setFonts(int fontSize, Qt::GlobalColor color, int txtWeight = 50);
-    void setParams(int countCell, int deltaX, bool symbolIsNull = false, bool rightleftText = true);
+    enum DisplayType
+    {
+        LED_6X8_DOTS,
+        LED_7SEGMENT
+    };
+
+    void setFonts(int fontSize, Qt::GlobalColor color, DisplayType type = LED_6X8_DOTS, int txtWeight = 50);
+    // Параметры символьных индикаторов: количество ячеек в строке, смещение по горизонтали,
+    // заполнение пробелами (false) или нулями (true, по умолчанию),
+    // заполнять текст от левого края (false) или от правого (true, по умолчанию)
+    void setParams(int countCell, int deltaX, bool symbolIsZero = true, bool rightleftText = true);
     // Установить точку-разделитель числа
     void setPointForDigit(int x, int y);
 
@@ -22,30 +30,25 @@ public:
 
 
 private:
-    QString familyFont_;
-
     QImage img_;
-
-    int fontSize_;
-    Qt::GlobalColor color_;
-    int txtWeight_; // жирность текста
-    QString txt_;
-    int countCell_;     // количество ячеек под текст
-    int deltaX_;        // дельта X для символов в ячейках
-    bool symbolIsNull_; // null или 0 на дисплее
-    bool rightleftText_; // текст справа налево (по умолчанию)
 
     QFont font_;
 
+    int fontSize_ = 20;
+    Qt::GlobalColor color_ = Qt::green;
+    int txtWeight_ = 50;    // жирность текста
+    int countCell_ = 1;     // количество ячеек под текст
+    int deltaX_ = 12;       // дельта X для символов в ячейках
+    bool symbolIsZero_ = true;  // null или 0 на дисплее
+    bool rightleftText_ = true; // текст справа налево
+
     // точка-разделитель числа
-    bool flagSetPoint_;
-    int pointX_;
-    int pointY_;
+    bool flagSetPoint_ = false;
+    int pointX_ = -1;
+    int pointY_ = -1;
 
 
     void drawText_(QString txt);
-
-
 };
 
 #endif // TEXTPAINT_H

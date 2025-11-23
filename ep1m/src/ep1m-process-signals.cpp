@@ -263,6 +263,7 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
 
     analogSignal[KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
 
+    analogSignal[KLUB_U_ZAPRET_OTPUSKA] = 0.0f;
     analogSignal[KLUB_U_EPK] = TO_FLOAT(epk[CAB1]->isKeyOn());
     analogSignal[KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
     analogSignal[KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());

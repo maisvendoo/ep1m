@@ -5,31 +5,20 @@
 
 #include <QFontDatabase>
 
+const std::map<TextPaint::DisplayType, QString> displayFonts = {
+    {TextPaint::LED_6X8_DOTS, ":/rcc/led-6x8-dots"},
+    {TextPaint::LED_7SEGMENT, ":/rcc/led-7seg-italic"}
+};
+
 
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-TextPaint::TextPaint(QSize _size, QWidget *parent)
-    : QLabel(parent)
-    , fontSize_(13)
-    , color_(Qt::green)
-    , txtWeight_(50)
-    , txt_("")
-    , countCell_(1)
-    , deltaX_(10)
-    , symbolIsNull_(false)
-    , rightleftText_(true)
-    , flagSetPoint_(false)
-    , pointX_(-1)
-    , pointY_(-1)
+TextPaint::TextPaint(QSize _size, QWidget *parent) : QLabel(parent)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red;");
-
-    int id = QFontDatabase::addApplicationFont(":/rcc/club-u-ttf"); //путь к шрифту
-    familyFont_ = QFontDatabase::applicationFontFamilies(id).at(0); //имя шрифта
-
 
     img_ = QImage(this->size(), QImage::Format_ARGB32_Premultiplied);
 
@@ -40,13 +29,14 @@ TextPaint::TextPaint(QSize _size, QWidget *parent)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void TextPaint::setFonts(int fontSize, Qt::GlobalColor color, int txtWeight)
+void TextPaint::setFonts(int fontSize, Qt::GlobalColor color, DisplayType type, int txtWeight)
 {
     fontSize_ = fontSize;
     color_ = color;
     txtWeight_ = txtWeight;
 
-    font_ = QFont(familyFont_, fontSize_, txtWeight_);
+    int id = QFontDatabase::addApplicationFont(displayFonts.at(type)); //путь к шрифту
+    font_ = QFont(QFontDatabase::applicationFontFamilies(id).at(0), fontSize_, txtWeight_);
 }
 
 
@@ -58,7 +48,7 @@ void TextPaint::setParams(int countCell, int deltaX, bool symbolIsNull, bool rig
 {
     countCell_ = countCell;
     deltaX_ = deltaX;
-    symbolIsNull_ = symbolIsNull;
+    symbolIsZero_ = symbolIsNull;
     rightleftText_ = rightleftText;
 }
 
@@ -98,36 +88,46 @@ void TextPaint::drawText_(QString txt)
     paint.setFont(font_);
     paint.setPen(color_);
 
-    //
+    int txt_size = static_cast<int>(txt.size());
+    int symbols = std::min(countCell_, txt_size);
     if (rightleftText_)
     {
-        for (int i = 0; i < countCell_; ++i)
+        int i = 1;
+
+        while (i <= symbols)
         {
-            int posX = this->width() - (i + 1)*deltaX_;
-            int k = txt.length() - 1 - i;
+            int posX = this->width() - i * deltaX_;
+            int k = txt_size - i;
 
-            if (i < txt.length())
-                paint.drawText(posX, this->height(), QString(txt[k]));
-            else
+            paint.drawText(posX, this->height(), QString(txt[k]));
+            ++i;
+        }
+
+        if (symbolIsZero_)
+        {
+            while (i <= countCell_)
             {
-                if (!symbolIsNull_)
-                    paint.drawText(posX, this->height(), "0");
-            }
+                int posX = this->width() - i * deltaX_;
 
+                paint.drawText(posX, this->height(), "0");
+                ++i;
+            }
         }
     }
     else
     {
-        for (int i = 0; i < txt.length(); ++i)
+        for (int i = 0; i < symbols; ++i)
         {
-            paint.drawText(i*deltaX_,this->height(), QString(txt[i]));
+            int posX = i * deltaX_;
+
+            paint.drawText(posX, this->height(), QString(txt[i]));
         }
     }
 
     //
     if (flagSetPoint_)
     {
-        paint.setPen(QPen(QColor(color_), 6));
+        paint.setPen(QPen(QColor(color_), 4));
         paint.setRenderHint(QPainter::Antialiasing, true);
         paint.drawPoint(pointX_, pointY_);
     }

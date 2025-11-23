@@ -8,13 +8,13 @@ class TopBlock;
 class MiddleBlock;
 class RightBlock;
 class BottomBlock;
-
+class SAUTBlock;
 
 
 class ClubUDisplay : public AbstractDisplay
 {
 public:
-    ClubUDisplay(QWidget *parent = Q_NULLPTR,
+    ClubUDisplay(QWidget* parent = Q_NULLPTR,
                   Qt::WindowFlags f = Qt::WindowFlags());
 
     ~ClubUDisplay();
@@ -25,13 +25,14 @@ public:
 
 private:
 
-    ALSN            *alsn_ = nullptr;
-    TopBlock        *topBlock_ = nullptr;
-    MiddleBlock     *middleBlock_ = nullptr;
-    RightBlock      *rightBlock_ = nullptr;
-    BottomBlock     *bottomBlock_ = nullptr;
+    ALSN*           alsn_ = nullptr;
+    TopBlock*       topBlock_ = nullptr;
+    MiddleBlock*    middleBlock_ = nullptr;
+    RightBlock*     rightBlock_ = nullptr;
+    BottomBlock*    bottomBlock_ = nullptr;
+    SAUTBlock*      SAUTBlock_ = nullptr;
 
-    double upd_interval = 0.1;
+    double upd_interval = 0.15;
     double upd_time = 0.0;
     int  upd_block = 0;
 
