@@ -4,7 +4,7 @@
 #include <QVector>
 #include <QFile>
 
-const int     indSize = 8;
+const int     indSize = 7;
 
 //------------------------------------------------------------------------------
 //
@@ -112,7 +112,7 @@ void Speedometer::drawArc_(int num_speed, int num_speedLimit, int num_speedNextL
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void Speedometer::loadScalePontsCoolrds_(QString txt_path, std::vector<QPoint> &vec)
+void Speedometer::loadScalePontsCoolrds_(QString txt_path, std::vector<QPointF> &vec)
 {
     QFile fileTxt(txt_path);
 
@@ -126,9 +126,9 @@ void Speedometer::loadScalePontsCoolrds_(QString txt_path, std::vector<QPoint> &
         {
             QString str = fileTxt.readLine();
             QStringList strList = str.split(" ");
-            int x = strList[0].toInt();
-            int y = strList[1].toInt();
-            vec.push_back(QPoint(x, y));
+            double x = strList[0].toDouble();
+            double y = strList[1].toDouble();
+            vec.push_back(QPointF(x, y));
         }
         fileTxt.close();
     }

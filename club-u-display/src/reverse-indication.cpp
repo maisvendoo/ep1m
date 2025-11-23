@@ -4,7 +4,7 @@
 
 const QPointF indForward = {4.5, 4.5};
 const QPointF indBackward = {20.5, 4.5};
-const int     indSize = 8;
+const int     indSize = 7;
 
 //------------------------------------------------------------------------------
 //
