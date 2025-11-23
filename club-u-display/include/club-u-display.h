@@ -4,6 +4,8 @@
 #include    "display.h"
 
 class ALSN;
+class Speedometer;
+class ReverseInd;
 class TopBlock;
 class MiddleBlock;
 class RightBlock;
@@ -26,6 +28,8 @@ public:
 private:
 
     ALSN*           alsn_ = nullptr;
+    Speedometer*    speedometer_ = nullptr;
+    ReverseInd*     reverseInd_ = nullptr;
     TopBlock*       topBlock_ = nullptr;
     MiddleBlock*    middleBlock_ = nullptr;
     RightBlock*     rightBlock_ = nullptr;

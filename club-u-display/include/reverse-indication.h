@@ -11,7 +11,7 @@ class ReverseInd : public QLabel
 
 public:
     ReverseInd(QSize _size, QWidget *parent = Q_NULLPTR);
-    void setRevese(int val);
+    void setReverse(int val);
 
 
 private:

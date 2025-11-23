@@ -11,9 +11,7 @@ class Speedometer : public QLabel
 public:
     Speedometer(QSize size, QString cfg_path, QWidget *parent = Q_NULLPTR);
 
-    void setSpeed(int speed);
-    void setSpeedLimit(int speedLimit);
-    void setSpeedNextLimit(int speedNextLimit);
+    void setSpeeds(int speed, int speedLimit, int speedNextLimit);
 
 
 private:

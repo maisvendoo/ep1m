@@ -5,8 +5,6 @@
 #include <QTimer>
 
 
-#include    "speedometer.h"
-#include    "reverse-indication.h"
 #include    "text-paint.h"
 
 
@@ -14,12 +12,10 @@
 class MiddleBlock : public QLabel
 {
 public:
-    MiddleBlock(QSize _size, QString cfg_path, QWidget* parent = Q_NULLPTR);
+    MiddleBlock(QSize _size, QWidget* parent = Q_NULLPTR);
 
     void setCurSpeed(int curSpeed);
     void setCurSpeedLimit(int curSpeedLimit);
-    void setNextSpeedLimit(int nextSpeedLimit);
-    void setReverse(int reverse);
 
     void setSpeedLimitVisible(bool flag);
 
@@ -27,14 +23,11 @@ public:
 
 
 private:
-    Speedometer *speedometer_;
-    ReverseInd  *reverseInd_;
-    TextPaint   *txtCurSpeed_;
-    TextPaint   *txtCurSpeedLimit_;
+    TextPaint*   txtCurSpeed_ = nullptr;
+    TextPaint*   txtCurSpeedLimit_ = nullptr;
 
     int oldSpeed_ = -1;
     int oldSpeedLimit_ = -1;
-    int oldNextSpeedLimit_ = -1;
 
     QTimer timerForBlink;
     bool forceBlinking_ = true;

@@ -9,6 +9,8 @@
 #include    "ep1m-signals.h"
 
 #include    "ALSN.h"
+#include    "speedometer.h"
+#include    "reverse-indication.h"
 #include    "block-top.h"
 #include    "block-middle.h"
 #include    "block-right.h"
@@ -92,7 +94,7 @@ void ClubUDisplay::initBlocks_()
     // путь к конфигам
     QString cfg_path = config_dir + getConfigPath("");
 
-/*
+
     // Текстура корпуса в фоновый виджет для отладки в display-player
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
@@ -105,19 +107,27 @@ void ClubUDisplay::initBlocks_()
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
     //this->setStyleSheet("border: 1px solid red");
-*/
+
 
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(108,461), this);
     alsn_->move(555, 536);
+
+    // Спидометр
+    speedometer_ = new Speedometer(QSize(223,236), cfg_path, this);
+    speedometer_->move(207, 667);
+
+    // Индикация реверсора
+    reverseInd_ = new ReverseInd(QSize(25,10), this);
+    reverseInd_->move(417, 779);
 
     // Верхний блок
     topBlock_ = new TopBlock(QSize(424, 90), this);
     topBlock_->move(23, 129);
 
     // Центральный блок
-    middleBlock_ = new MiddleBlock(QSize(208, 407), cfg_path, this);
-    middleBlock_->move(208, 668);
+    middleBlock_ = new MiddleBlock(QSize(112, 108), this);
+    middleBlock_->move(586, 113);
 
     // Правый блок
     rightBlock_ = new RightBlock(QSize(1, 1), this);
@@ -156,6 +166,8 @@ void ClubUDisplay::update(double t, double dt)
     if (input_signals[signal_id] == 0.0f)
     {
         alsn_->setVisible(false);
+        speedometer_->setVisible(false);
+        reverseInd_->setVisible(false);
         topBlock_->setVisible(false);
         middleBlock_->setVisible(false);
         rightBlock_->setVisible(false);
@@ -166,6 +178,8 @@ void ClubUDisplay::update(double t, double dt)
     }
 
     alsn_->setVisible(true);
+    speedometer_->setVisible(true);
+    reverseInd_->setVisible(true);
     topBlock_->setVisible(true);
     middleBlock_->setVisible(true);
     rightBlock_->setVisible(true);
@@ -248,12 +262,13 @@ void ClubUDisplay::update(double t, double dt)
         {
             alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
+            speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);
+            reverseInd_->setReverse(0);
+
             middleBlock_->setSpeedLimitVisible(false);
             middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
             middleBlock_->setCurSpeedLimit(0);
-            middleBlock_->setNextSpeedLimit(0);
             middleBlock_->blinkingSpeed(true);
-            middleBlock_->setReverse(0);
 
             SAUTBlock_->setIndikatorOn(false);
             SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
@@ -264,12 +279,15 @@ void ClubUDisplay::update(double t, double dt)
             alsn_->setSignal(static_cast<int>(input_signals[KLUB_U_ALSN]),
                              static_cast<int>(input_signals[KLUB_U_ALSN_FB]));
 
+            speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]),
+                                    static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]),
+                                    static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
+            reverseInd_->setReverse(static_cast<int>(input_signals[KLUB_U_REVERSOR]));
+
             middleBlock_->setSpeedLimitVisible(true);
             middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
             middleBlock_->setCurSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]));
-            middleBlock_->setNextSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
             middleBlock_->blinkingSpeed(false);
-            middleBlock_->setReverse(static_cast<int>(input_signals[KLUB_U_REVERSOR]));
 
             SAUTBlock_->setIndikatorOn(true);
             SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));

@@ -2,7 +2,9 @@
 
 #include <QPainter>
 
-
+const QPointF indForward = {4.5, 4.5};
+const QPointF indBackward = {20.5, 4.5};
+const int     indSize = 8;
 
 //------------------------------------------------------------------------------
 //
@@ -18,12 +20,12 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
     paint.setPen(QPen( QColor(Qt::green),
-                      13,
-                      Qt::SolidLine,
-                      Qt::RoundCap ));
+                       indSize,
+                       Qt::SolidLine,
+                       Qt::RoundCap ));
 
-    paint.drawPoint(7,8);
-    paint.drawPoint(7,37);
+    paint.drawPoint(indForward);
+    paint.drawPoint(indBackward);
     paint.end();
     this->setPixmap(pix);
 }
@@ -33,7 +35,7 @@ ReverseInd::ReverseInd(QSize _size, QWidget *parent)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void ReverseInd::setRevese(int val)
+void ReverseInd::setReverse(int val)
 {
     if (val == oldVal_)
         return;
@@ -61,16 +63,16 @@ void ReverseInd::drawReverse_(int val)
     QPainter paint(&pix);
     paint.setRenderHint(QPainter::Antialiasing, true);
     paint.setPen(QPen( QColor(Qt::green),
-                       13,
+                       indSize,
                        Qt::SolidLine,
                        Qt::RoundCap ));
 
 
     if (val == 1)
-        paint.drawPoint(7,8);
+        paint.drawPoint(indForward);
 
     if (val == -1)
-        paint.drawPoint(7,37);
+        paint.drawPoint(indBackward);
 
 
     paint.end();

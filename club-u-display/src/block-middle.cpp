@@ -5,35 +5,23 @@
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
-MiddleBlock::MiddleBlock(QSize _size, QString cfg_path, QWidget *parent)
-    : QLabel(parent)
-    , speedometer_(Q_NULLPTR)
-    , reverseInd_(Q_NULLPTR)
-    , txtCurSpeed_(Q_NULLPTR)
-    , txtCurSpeedLimit_(Q_NULLPTR)
+MiddleBlock::MiddleBlock(QSize _size, QWidget *parent) : QLabel(parent)
 {
     this->resize(_size);
     //this->setStyleSheet("border: 1px solid red");
 
-    // Спидометр
-    speedometer_ = new Speedometer(_size, cfg_path, this);
-
-    // Индикация реверсора
-    reverseInd_ = new ReverseInd(QSize(16,44), this);
-    reverseInd_->move(214, 363);
-
     // Числовая индикация скорости
-    txtCurSpeed_ = new TextPaint(QSize(132,59), this);
-    txtCurSpeed_->setFonts(48, Qt::green);
-    txtCurSpeed_->move(177, 126);
-    txtCurSpeed_->setParams(3, 44);
+    txtCurSpeed_ = new TextPaint(QSize(87,35), this);
+    txtCurSpeed_->setFonts(30, Qt::green);
+    txtCurSpeed_->move(0, 0);
+    txtCurSpeed_->setParams(3, 29);
     txtCurSpeed_->setText(QString("000"));
 
     // Числовая индикация ограничения скорости
-    txtCurSpeedLimit_ = new TextPaint(QSize(132,59), this);
-    txtCurSpeedLimit_->setFonts(48, Qt::red);
-    txtCurSpeedLimit_->move(177, 226);
-    txtCurSpeedLimit_->setParams(3, 44);
+    txtCurSpeedLimit_ = new TextPaint(QSize(87,35), this);
+    txtCurSpeedLimit_->setFonts(30, Qt::red);
+    txtCurSpeedLimit_->move(0, 68);
+    txtCurSpeedLimit_->setParams(3, 29);
     txtCurSpeedLimit_->setText(QString("000"));
 
 
@@ -58,7 +46,6 @@ void MiddleBlock::setCurSpeed(int curSpeed)
     if (oldSpeed_ == curSpeed)
         return;
 
-    speedometer_->setSpeed(curSpeed);
     txtCurSpeed_->setText(QString::number(curSpeed));
 
     oldSpeed_ = curSpeed;
@@ -74,36 +61,9 @@ void MiddleBlock::setCurSpeedLimit(int curSpeedLimit)
     if (oldSpeedLimit_ == curSpeedLimit)
         return;
 
-    speedometer_->setSpeedLimit(curSpeedLimit);
-
     txtCurSpeedLimit_->setText(QString::number(curSpeedLimit));
 
     oldSpeedLimit_ = curSpeedLimit;
-}
-
-
-
-//-----------------------------------------------------------------------------
-//
-//-----------------------------------------------------------------------------
-void MiddleBlock::setNextSpeedLimit(int nextSpeedLimit)
-{
-    if (oldNextSpeedLimit_ == nextSpeedLimit)
-        return;
-
-    speedometer_->setSpeedNextLimit(nextSpeedLimit);
-
-    oldNextSpeedLimit_ = nextSpeedLimit;
-}
-
-
-
-//-----------------------------------------------------------------------------
-//
-//-----------------------------------------------------------------------------
-void MiddleBlock::setReverse(int reverse)
-{
-    reverseInd_->setRevese(reverse);
 }
 
 
@@ -118,9 +78,11 @@ void MiddleBlock::setSpeedLimitVisible(bool flag)
 
 
 
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 void MiddleBlock::blinkingSpeed(bool flag)
 {
-    //txtCurSpeed_->setVisible(!txtCurSpeed_->isVisible());
     forceBlinking_ = flag;
 }
 

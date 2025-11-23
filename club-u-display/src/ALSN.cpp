@@ -64,7 +64,7 @@ void ALSN::loadLedImages_()
     int ledH = 46;
     int ledX = 3;
     int ledY = 4;
-    int dY = ledH + 11;
+    int dY = ledH + 10;
 
 
     ImageWidget* imgWidget;

@@ -4,7 +4,7 @@
 #include <QVector>
 #include <QFile>
 
-
+const int     indSize = 8;
 
 //------------------------------------------------------------------------------
 //
@@ -26,14 +26,14 @@ Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
 
 
     // ограничение скорости
-    paint.setPen(QPen( QColor(Qt::red), 13, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::red), indSize, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0; i < speed_coordsOutScale.size(); ++i)
     {
         paint.drawPoint(speed_coordsOutScale[i]);
     }
 
     // скорость
-    paint.setPen(QPen( QColor(Qt::green), 13, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::green), indSize, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0; i < speed_coordsInsideScale.size(); ++i)
     {
         paint.drawPoint(speed_coordsInsideScale[i]);
@@ -49,49 +49,23 @@ Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void Speedometer::setSpeed(int speed)
+void Speedometer::setSpeeds(int speed, int speedLimit, int speedNextLimit)
 {
-    num_speed_ = std::min(static_cast<size_t>(speed / 5), speed_coordsInsideScale.size() - 1);
+    num_speed_ = std::min(speed / 5, static_cast<int>(speed_coordsInsideScale.size()) - 1);
+    num_speedLimit_ = std::min(speedLimit / 5, static_cast<int>(speed_coordsOutScale.size()) - 1);
+    num_speedNextLimit_ = std::min(speedNextLimit / 5, static_cast<int>(speed_coordsOutScale.size()) - 1);
 
-    if (num_speed_ == old_num_speed_)
+    if ((num_speed_ == old_num_speed_) &&
+        (num_speedLimit_ == old_num_speedLimit_) &&
+        (num_speedNextLimit_ == old_num_speedNextLimit_))
+    {
         return;
+    }
 
     drawArc_(num_speed_, num_speedLimit_, num_speedNextLimit_);
 
     old_num_speed_ = num_speed_;
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void Speedometer::setSpeedLimit(int speedLimit)
-{
-    num_speedLimit_ = std::min(static_cast<size_t>(speedLimit / 5), speed_coordsOutScale.size() - 1);
-
-    if (num_speedLimit_ == old_num_speedLimit_)
-        return;
-
-    drawArc_(num_speed_, num_speedLimit_, num_speedNextLimit_);
-
     old_num_speedLimit_ = num_speedLimit_;
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void Speedometer::setSpeedNextLimit(int speedNextLimit)
-{
-    num_speedNextLimit_ = std::min(static_cast<size_t>(speedNextLimit / 5), speed_coordsOutScale.size() - 1);
-
-    if (num_speedNextLimit_ == old_num_speedNextLimit_)
-        return;
-
-    drawArc_(num_speed_, num_speedLimit_, num_speedNextLimit_);
-
     old_num_speedNextLimit_ = num_speedNextLimit_;
 }
 
@@ -108,19 +82,21 @@ void Speedometer::drawArc_(int num_speed, int num_speedLimit, int num_speedNextL
     paint.setRenderHint(QPainter::Antialiasing, true);
 
 
-    if ((num_speedLimit_ >= 0) && (num_speedNextLimit >= 0))
+    if (num_speedNextLimit >= 0)
+    {
+        // следующее ограничение скорости
+        paint.setPen(QPen( QColor(Qt::yellow), indSize, Qt::SolidLine, Qt::RoundCap ));
+        paint.drawPoint(speed_coordsOutScale[num_speedNextLimit]);
+    }
+    if (num_speedLimit >= 0)
     {
         // ограничение скорости
-        paint.setPen(QPen( QColor(Qt::red), 13, Qt::SolidLine, Qt::RoundCap ));
+        paint.setPen(QPen( QColor(Qt::red), indSize, Qt::SolidLine, Qt::RoundCap ));
         paint.drawPoint(speed_coordsOutScale[num_speedLimit]);
-
-        // следующее ограничение скорости
-        paint.setPen(QPen( QColor(Qt::yellow), 13, Qt::SolidLine, Qt::RoundCap ));
-        paint.drawPoint(speed_coordsOutScale[num_speedNextLimit]);
     }
 
     // скорость
-    paint.setPen(QPen( QColor(Qt::green), 13, Qt::SolidLine, Qt::RoundCap ));
+    paint.setPen(QPen( QColor(Qt::green), indSize, Qt::SolidLine, Qt::RoundCap ));
     for (int i = 0, n = num_speed + 1; i < n; ++i)
     {
         paint.drawPoint(speed_coordsInsideScale[i]);
@@ -145,6 +121,7 @@ void Speedometer::loadScalePontsCoolrds_(QString txt_path, std::vector<QPoint> &
 
     if (fileTxt.open(QIODevice::ReadOnly | QIODevice::Text))
     {
+        vec.clear();
         while (!fileTxt.atEnd())
         {
             QString str = fileTxt.readLine();
