@@ -2,6 +2,7 @@
 #define SPEEDOMETER_H
 
 #include <QLabel>
+#include    "image-widget.h"
 
 
 
@@ -11,12 +12,17 @@ class Speedometer : public QLabel
 public:
     Speedometer(QSize size, QString cfg_path, QWidget *parent = Q_NULLPTR);
 
-    void setSpeeds(int speed, int speedLimit, int speedNextLimit);
+    // UV-развёртка лампочки проверки бдительности внутри спидометра
+    void setVigilanceCheck(bool flag);
 
+    void setSpeeds(int speed, int speedLimit, int speedNextLimit);
 
 private:
     std::vector<QPointF> speed_coordsOutScale;
     std::vector<QPointF> speed_coordsInsideScale;
+
+    // UV-развёртка лампочки проверки бдительности внутри спидометра
+    ImageWidget* indVigilanceCheck_ = nullptr;
 
     int num_speed_ = 0;
     int num_speedLimit_ = 0;

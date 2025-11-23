@@ -24,17 +24,17 @@ SAUTBlock::SAUTBlock(QSize _size, QWidget *parent) : QLabel(parent)
     indicationZapretOtpuska_->setVisible(true);
 
     // Координата
-    txtPaintCoordinate1_ = new TextPaint(QSize(96,28), this);
+    txtPaintCoordinate1_ = new TextPaint(QSize(87,24), this);
     txtPaintCoordinate1_->setFonts(18, Qt::green, TextPaint::LED_7SEGMENT);
-    txtPaintCoordinate1_->move(0, 0);
-    txtPaintCoordinate1_->setParams(6, 24, false);
+    txtPaintCoordinate1_->move(3, 6);
+    txtPaintCoordinate1_->setParams(6, 22, false);
     txtPaintCoordinate1_->setText(QString::number(8888));
 
-    txtPaintCoordinate2_ = new TextPaint(QSize(32,28), this);
+    txtPaintCoordinate2_ = new TextPaint(QSize(29,24), this);
     txtPaintCoordinate2_->setFonts(18, Qt::green, TextPaint::LED_7SEGMENT);
-    txtPaintCoordinate2_->move(90, 0);
+    txtPaintCoordinate2_->move(85, 6);
     txtPaintCoordinate2_->setParams(1, 24);
-    txtPaintCoordinate2_->setPointForDigit(1, 26);
+    txtPaintCoordinate2_->setPointForDigit(1, 22);
     txtPaintCoordinate2_->setText(QString::number(0.8, 'f', 1));
 
     // Расстояние
@@ -88,7 +88,7 @@ void SAUTBlock::setCoordinate(double coordinate)
         return;
 
     txtPaintCoordinate1_->setText(QString::number(floor(coordinate)));
-    txtPaintCoordinate2_->setText(QString::number(coordinate, 'f', 3));
+    txtPaintCoordinate2_->setText(QString::number(coordinate, 'f', 1));
 
     oldCoordinate_ = coordinate;
 }

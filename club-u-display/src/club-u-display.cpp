@@ -94,7 +94,7 @@ void ClubUDisplay::initBlocks_()
     // путь к конфигам
     QString cfg_path = config_dir + getConfigPath("");
 
-
+/*
     // Текстура корпуса в фоновый виджет для отладки в display-player
     QLabel* fon = new QLabel(this);
     fon->setFrameShape(QLabel::NoFrame);
@@ -107,7 +107,7 @@ void ClubUDisplay::initBlocks_()
     //fon->setStyleSheet("border: 2px solid red");
     this->layout()->addWidget(fon);
     //this->setStyleSheet("border: 1px solid red");
-
+*/
 
     // Локомотивный светофор
     alsn_ = new ALSN(QSize(108,461), this);
@@ -262,6 +262,7 @@ void ClubUDisplay::update(double t, double dt)
         {
             alsn_->setSignal(ALSN_COLORS::GREEN, 0);
 
+            speedometer_->setVigilanceCheck(false);
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);
             reverseInd_->setReverse(0);
 
@@ -279,6 +280,7 @@ void ClubUDisplay::update(double t, double dt)
             alsn_->setSignal(static_cast<int>(input_signals[KLUB_U_ALSN]),
                              static_cast<int>(input_signals[KLUB_U_ALSN_FB]));
 
+            speedometer_->setVigilanceCheck(static_cast<bool>(input_signals[KLUB_U_BDITELNOST]));
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]),
                                     static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]),
                                     static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
