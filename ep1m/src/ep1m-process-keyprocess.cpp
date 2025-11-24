@@ -87,5 +87,7 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
         {
             switchers[i][cab_idx].step(t.simulation_seconds, dt);
         }
+
+        brake_lock_door[cab_idx].step(t.simulation_seconds, dt);
     }
 }

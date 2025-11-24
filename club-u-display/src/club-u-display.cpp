@@ -8,7 +8,6 @@
 #include    "club-u-funcs.h"
 #include    "ep1m-signals.h"
 
-#include    "ALSN.h"
 #include    "speedometer.h"
 #include    "reverse-indication.h"
 #include    "block-top.h"
@@ -110,8 +109,29 @@ void ClubUDisplay::initBlocks_()
 */
 
     // Локомотивный светофор
-    alsn_ = new ALSN(QSize(108,461), this);
-    alsn_->move(555, 536);
+    alsnG4_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
+    alsnG4_->move(690, 113);
+
+    alsnG3_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
+    alsnG3_->move(690, 171);
+
+    alsnG2_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
+    alsnG2_->move(800, 113);
+
+    alsnG1_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
+    alsnG1_->move(800, 171);
+
+    alsnY_ = new ImageWidget("rcc", "alsn_yellow", QSize(100, 50), this);
+    alsnY_->move(910, 113);
+
+    alsnRY_ = new ImageWidget("rcc", "alsn_yellow_red", QSize(100, 50), this);
+    alsnRY_->move(910, 171);
+
+    alsnR_ = new ImageWidget("rcc", "alsn_red", QSize(100, 50), this);
+    alsnR_->move(556, 880);
+
+    alsnW_ = new ImageWidget("rcc", "alsn_white", QSize(100, 50), this);
+    alsnW_->move(556, 935);
 
     // Спидометр
     speedometer_ = new Speedometer(QSize(223,236), cfg_path, this);
@@ -130,8 +150,8 @@ void ClubUDisplay::initBlocks_()
     middleBlock_->move(586, 113);
 
     // Правый блок
-    rightBlock_ = new RightBlock(QSize(1, 1), this);
-    rightBlock_->move(552, 534);
+    rightBlock_ = new RightBlock(QSize(112, 256), this);
+    rightBlock_->move(558, 586);
 
     // Нижний блок
     bottomBlock_ = new BottomBlock(QSize(454, 20), this);
@@ -167,7 +187,14 @@ void ClubUDisplay::update(double t, double dt)
     bool cab2 = (signal_id == KLUB_U_CAB2_POWER);
     if (!(cab1 || cab2) || input_signals[signal_id] == 0.0f)
     {
-        alsn_->setVisible(false);
+        alsnG4_->setVisible(false);
+        alsnG3_->setVisible(false);
+        alsnG2_->setVisible(false);
+        alsnG1_->setVisible(false);
+        alsnY_->setVisible(false);
+        alsnRY_->setVisible(false);
+        alsnR_->setVisible(false);
+        alsnW_->setVisible(false);
         speedometer_->setVisible(false);
         reverseInd_->setVisible(false);
         topBlock_->setVisible(false);
@@ -178,8 +205,16 @@ void ClubUDisplay::update(double t, double dt)
 
         return;
     }
-
-    alsn_->setVisible(true);
+/*
+    alsnG4_->setVisible(true);
+    alsnG3_->setVisible(true);
+    alsnG2_->setVisible(true);
+    alsnG1_->setVisible(true);
+    alsnY_->setVisible(true);
+    alsnRY_->setVisible(true);
+    alsnR_->setVisible(true);
+    alsnW_->setVisible(true);
+*/
     speedometer_->setVisible(true);
     reverseInd_->setVisible(true);
     topBlock_->setVisible(true);
@@ -266,8 +301,14 @@ void ClubUDisplay::update(double t, double dt)
         float epk_on = cab1 ? 1.0f : 2.0f;
         if (input_signals[KLUB_U_EPK] == epk_on)
         {
-            alsn_->setSignal(static_cast<int>(input_signals[KLUB_U_ALSN]),
-                             static_cast<int>(input_signals[KLUB_U_ALSN_FB]));
+            alsnG4_->setVisible((input_signals[KLUB_U_ALSN] == 4.0f) && (input_signals[KLUB_U_ALSN_FB] >= 4.0f));
+            alsnG3_->setVisible((input_signals[KLUB_U_ALSN] == 4.0f) && (input_signals[KLUB_U_ALSN_FB] >= 3.0f));
+            alsnG2_->setVisible((input_signals[KLUB_U_ALSN] == 4.0f) && (input_signals[KLUB_U_ALSN_FB] >= 2.0f));
+            alsnG1_->setVisible(input_signals[KLUB_U_ALSN] == 4.0f);
+            alsnY_->setVisible(input_signals[KLUB_U_ALSN] == 3.0f);
+            alsnRY_->setVisible(input_signals[KLUB_U_ALSN] == 2.0f);
+            alsnR_->setVisible(input_signals[KLUB_U_ALSN] == 1.0f);
+            alsnW_->setVisible(input_signals[KLUB_U_ALSN] == 0.0f);
 
             speedometer_->setVigilanceCheck(static_cast<bool>(input_signals[KLUB_U_BDITELNOST]));
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]),
@@ -286,7 +327,14 @@ void ClubUDisplay::update(double t, double dt)
         }
         else
         {
-            alsn_->setSignal(ALSN_COLORS::GREEN, 0);
+            alsnG4_->setVisible(false);
+            alsnG3_->setVisible(false);
+            alsnG2_->setVisible(false);
+            alsnG1_->setVisible(false);
+            alsnY_->setVisible(false);
+            alsnRY_->setVisible(false);
+            alsnR_->setVisible(false);
+            alsnW_->setVisible(false);
 
             speedometer_->setVigilanceCheck(false);
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);

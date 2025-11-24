@@ -3,7 +3,8 @@
 
 #include    "display.h"
 
-class ALSN;
+//class ALSN;
+class ImageWidget;
 class Speedometer;
 class ReverseInd;
 class TopBlock;
@@ -27,7 +28,14 @@ public:
 
 private:
 
-    ALSN*           alsn_ = nullptr;
+    ImageWidget*    alsnG4_ = nullptr;
+    ImageWidget*    alsnG3_ = nullptr;
+    ImageWidget*    alsnG2_ = nullptr;
+    ImageWidget*    alsnG1_ = nullptr;
+    ImageWidget*    alsnY_ = nullptr;
+    ImageWidget*    alsnRY_ = nullptr;
+    ImageWidget*    alsnR_ = nullptr;
+    ImageWidget*    alsnW_ = nullptr;
     Speedometer*    speedometer_ = nullptr;
     ReverseInd*     reverseInd_ = nullptr;
     TopBlock*       topBlock_ = nullptr;

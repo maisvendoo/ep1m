@@ -23,65 +23,65 @@ RightBlock::RightBlock(QSize size, QWidget *parent)
 
 
     //
-    txtPaintPressureTM1_ = new TextPaint(QSize(28, 30), this);
-    txtPaintPressureTM1_->move(0, 63);
-    txtPaintPressureTM1_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintPressureTM1_->setParams(1, 25);
+    txtPaintPressureTM1_ = new TextPaint(QSize(14, 20), this);
+    txtPaintPressureTM1_->move(0, 0);
+    txtPaintPressureTM1_->setFonts(16, Qt::green);
+    txtPaintPressureTM1_->setParams(1, 14);
     txtPaintPressureTM1_->setText(QString("0"));
 
-    txtPaintPressureTM2_ = new TextPaint(QSize(70, 30), this);
-    txtPaintPressureTM2_->move(29, 63);
-    txtPaintPressureTM2_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintPressureTM2_->setParams(2, 26);
-    txtPaintPressureTM2_->setPointForDigit(5, 25);
-    txtPaintPressureTM2_->setText(QString(".00"));
+    txtPaintPressureTM2_ = new TextPaint(QSize(36, 20), this);
+    txtPaintPressureTM2_->move(20, 0);
+    txtPaintPressureTM2_->setFonts(16, Qt::green);
+    txtPaintPressureTM2_->setParams(2, 14);
+    txtPaintPressureTM2_->setPointForDigit(1, 18);
+    txtPaintPressureTM2_->setText(QString("00"));
 
     //
-    txtPaintPressureUR1_ = new TextPaint(QSize(28, 30), this);
-    txtPaintPressureUR1_->move(0, 162);
-    txtPaintPressureUR1_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintPressureUR1_->setParams(1, 25);
+    txtPaintPressureUR1_ = new TextPaint(QSize(14, 20), this);
+    txtPaintPressureUR1_->move(0, 60);
+    txtPaintPressureUR1_->setFonts(16, Qt::green);
+    txtPaintPressureUR1_->setParams(1, 14);
     txtPaintPressureUR1_->setText(QString("0"));
 
-    txtPaintPressureUR2_ = new TextPaint(QSize(70, 30), this);
-    txtPaintPressureUR2_->move(29, 162);
-    txtPaintPressureUR2_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintPressureUR2_->setParams(2, 26);
-    txtPaintPressureUR2_->setPointForDigit(5, 25);
-    txtPaintPressureUR2_->setText(QString(".00"));
+    txtPaintPressureUR2_ = new TextPaint(QSize(36, 20), this);
+    txtPaintPressureUR2_->move(20, 60);
+    txtPaintPressureUR2_->setFonts(16, Qt::green);
+    txtPaintPressureUR2_->setParams(2, 14);
+    txtPaintPressureUR2_->setPointForDigit(1, 18);
+    txtPaintPressureUR2_->setText(QString("00"));
 
     //
-    TextPaint *txtPaintALS = new TextPaint(QSize(60, 30), this);
-    txtPaintALS->move(135, 162);
-    txtPaintALS->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintALS->setParams(2, 26);
+    TextPaint *txtPaintALS = new TextPaint(QSize(60, 20), this);
+    txtPaintALS->move(83, 60);
+    txtPaintALS->setFonts(16, Qt::green);
+    txtPaintALS->setParams(2, 14);
     txtPaintALS->setText("25");
 
     //
-    txtPaintNumTrack_ = new TextPaint(QSize(75, 30), this);
-    txtPaintNumTrack_->move(0, 261);
-    txtPaintNumTrack_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintNumTrack_->setParams(4, 25, true);
+    txtPaintNumTrack_ = new TextPaint(QSize(56, 20), this);
+    txtPaintNumTrack_->move(0, 122);
+    txtPaintNumTrack_->setFonts(16, Qt::green);
+    txtPaintNumTrack_->setParams(4, 14, false);
     txtPaintNumTrack_->setText(QString("1ПР"));
 
     //
-    txtPaintAcceleration1_ = new TextPaint(QSize(28, 30), this);
-    txtPaintAcceleration1_->move(124, 261);
-    txtPaintAcceleration1_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintAcceleration1_->setParams(1, 25);
+    txtPaintAcceleration1_ = new TextPaint(QSize(14, 20), this);
+    txtPaintAcceleration1_->move(71, 122);
+    txtPaintAcceleration1_->setFonts(16, Qt::green);
+    txtPaintAcceleration1_->setParams(1, 14);
     txtPaintAcceleration1_->setText(QString("0"));
 
-    txtPaintAcceleration2_ = new TextPaint(QSize(40, 30), this);
-    txtPaintAcceleration2_->move(154, 261);
-    txtPaintAcceleration2_->setFonts(20, Qt::green, TextPaint::LED_6X8_DOTS, 87);
-    txtPaintAcceleration2_->setParams(1, 25);
-    txtPaintAcceleration2_->setPointForDigit(4, 25);
+    txtPaintAcceleration2_ = new TextPaint(QSize(22, 20), this);
+    txtPaintAcceleration2_->move(91, 122);
+    txtPaintAcceleration2_->setFonts(16, Qt::green);
+    txtPaintAcceleration2_->setParams(1, 14);
+    txtPaintAcceleration2_->setPointForDigit(1, 18);
     txtPaintAcceleration2_->setText(QString("0"));
 
 
     // Индикация "Запрет отпуска"
-    indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(94,48), this);
-    indicationZapretOtpuska_->move(53, 432);
+    indicationZapretOtpuska_ = new ImageWidget("rcc", "ind_zapret_otpuska", QSize(53,29), this);
+    indicationZapretOtpuska_->move(30, 227);
     indicationZapretOtpuska_->setVisible(true);
 
 }
