@@ -87,6 +87,13 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
 
     for (auto cab_idx : {CAB1, CAB2})
     {
+        // Дверца тумбы с устройством блокировки тормозов
+        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeySymbolOn(KEY_Backslash);
+        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
+        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeySymbolOff(KEY_Backslash);
+        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
+        tumblers[TUMBLER_AUTO_MODE][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+
         // Устройство блокировки тормозов усл.№ 367
         brake_lock[cab_idx]->setControl(&pressed_keys_by_cabine[cab_idx]);
 
@@ -209,12 +216,8 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Регулятор "Яркость освещения пульта"
+        // Не реализовано
         switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setNumPositions(3);
-        switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setKeySymbolIncrease(KEY_Backslash);
-        switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setKeyModifierIncrease(MODIFIER_OnlyShift);
-        switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setKeySymbolDecrease(KEY_Backslash);
-        switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setKeyModifierDecrease(MODIFIER_OnlyControl);
-        switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
         // Автовозврат в среднее положение
         switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setSpringFirst();
         switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].setSpringLast();

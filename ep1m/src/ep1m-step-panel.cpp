@@ -5,10 +5,28 @@
 //------------------------------------------------------------------------------
 void EP1m::stepPanel(const double& t, const double& dt)
 {
+    // Регулировка яркости подсветки приборов
+    auto change_intensity = [](float& intencity, float delta)
+    {
+        intencity = std::clamp(intencity + delta, 0.25f, 1.0f);
+    };
+
     for (size_t cab_idx : {CAB1, CAB2})
     {
+        // Контроллер машиниста
         km[cab_idx]->step(t, dt);
+
+        // Регулировка яркости подсветки приборов
+        if (switchers[SWITCHER_DEVICES_BRIGHTNESS][cab_idx].isSwitched(0))
+        {
+            change_intensity(device_light_intensity[cab_idx], 0.25f * dt);
+        }
+        if (switchers[SWITCHER_DEVICES_BRIGHTNESS][cab_idx].isSwitched(2))
+        {
+            change_intensity(device_light_intensity[cab_idx], -0.25f * dt);
+        }
     }
+
 
     bool tumbler_sig = tumblers[TUMBLER_SIGNAL_PANEL_BS_002][CAB1].getState() ||
                        tumblers[TUMBLER_SIGNAL_PANEL_BS_002][CAB2].getState();

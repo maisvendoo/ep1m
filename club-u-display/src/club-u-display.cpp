@@ -163,7 +163,9 @@ void ClubUDisplay::update(double t, double dt)
     need_repaint = true;
     upd_time = 0.0;
 
-    if (input_signals[signal_id] == 0.0f)
+    bool cab1 = (signal_id == KLUB_U_CAB1_POWER);
+    bool cab2 = (signal_id == KLUB_U_CAB2_POWER);
+    if (!(cab1 || cab2) || input_signals[signal_id] == 0.0f)
     {
         alsn_->setVisible(false);
         speedometer_->setVisible(false);
@@ -195,21 +197,22 @@ void ClubUDisplay::update(double t, double dt)
     // Блок обновлений №1
     if (upd_block == 1)
     {
-        if (input_signals[KLUB_U_EPK] == 0.0f)
-        {
-            topBlock_->setCassete(false);
-            topBlock_->setIndM(false);
-            topBlock_->setIndP(false);
-            topBlock_->setIndStraight(false);
-            topBlock_->setIndSide(false);
-        }
-        else
+        float epk_on = cab1 ? 1.0f : 2.0f;
+        if (input_signals[KLUB_U_EPK] == epk_on)
         {
             topBlock_->setCassete(static_cast<bool>(input_signals[KLUB_U_CASSETE]));
             topBlock_->setIndM(static_cast<bool>(input_signals[KLUB_U_M]));
             topBlock_->setIndP(static_cast<bool>(input_signals[KLUB_U_P]));
             topBlock_->setIndStraight(static_cast<bool>(input_signals[KLUB_U_STRAIGHT]));
             topBlock_->setIndSide(static_cast<bool>(input_signals[KLUB_U_SIDE]));
+        }
+        else
+        {
+            topBlock_->setCassete(false);
+            topBlock_->setIndM(false);
+            topBlock_->setIndP(false);
+            topBlock_->setIndStraight(false);
+            topBlock_->setIndSide(false);
         }
 
         seconds = static_cast<int>(input_signals[KLUB_U_SHEDULE_TIME]);
@@ -225,8 +228,10 @@ void ClubUDisplay::update(double t, double dt)
     // Блок обновлений №2
     if (upd_block == 2)
     {
+        float pUR = static_cast<float>(cab1) * input_signals[KLUB_U_PRESSURE_UR1] +
+                    static_cast<float>(cab2) * input_signals[KLUB_U_PRESSURE_UR2];
         rightBlock_->setPressureTM(static_cast<double>(input_signals[KLUB_U_PRESSURE_TM]));
-        rightBlock_->setPressureUR(static_cast<double>(input_signals[KLUB_U_PRESSURE_UR]));
+        rightBlock_->setPressureUR(static_cast<double>(pUR));
         rightBlock_->setAcceleration(static_cast<double>(input_signals[KLUB_U_ACCELERATION]));
         rightBlock_->setIndZapretOtpuska(static_cast<bool>(input_signals[KLUB_U_ZAPRET_OTPUSKA]));
 
@@ -258,24 +263,8 @@ void ClubUDisplay::update(double t, double dt)
     // Блок обновлений №4
     if (upd_block >= 4)
     {
-        if (input_signals[KLUB_U_EPK] == 0.0f)
-        {
-            alsn_->setSignal(ALSN_COLORS::GREEN, 0);
-
-            speedometer_->setVigilanceCheck(false);
-            speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);
-            reverseInd_->setReverse(0);
-
-            middleBlock_->setSpeedLimitVisible(false);
-            middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
-            middleBlock_->setCurSpeedLimit(0);
-            middleBlock_->blinkingSpeed(true);
-
-            SAUTBlock_->setIndikatorOn(false);
-            SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
-            SAUTBlock_->setCurSpeedLimit(0);
-        }
-        else
+        float epk_on = cab1 ? 1.0f : 2.0f;
+        if (input_signals[KLUB_U_EPK] == epk_on)
         {
             alsn_->setSignal(static_cast<int>(input_signals[KLUB_U_ALSN]),
                              static_cast<int>(input_signals[KLUB_U_ALSN_FB]));
@@ -294,6 +283,23 @@ void ClubUDisplay::update(double t, double dt)
             SAUTBlock_->setIndikatorOn(true);
             SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
             SAUTBlock_->setCurSpeedLimit(static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]));
+        }
+        else
+        {
+            alsn_->setSignal(ALSN_COLORS::GREEN, 0);
+
+            speedometer_->setVigilanceCheck(false);
+            speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);
+            reverseInd_->setReverse(0);
+
+            middleBlock_->setSpeedLimitVisible(false);
+            middleBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
+            middleBlock_->setCurSpeedLimit(0);
+            middleBlock_->blinkingSpeed(true);
+
+            SAUTBlock_->setIndikatorOn(false);
+            SAUTBlock_->setCurSpeed(static_cast<int>(input_signals[KLUB_U_SPEED]));
+            SAUTBlock_->setCurSpeedLimit(0);
         }
 
         // Сбрасываем счётчик

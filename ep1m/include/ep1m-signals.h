@@ -57,7 +57,7 @@ enum
     CAB1_EPB_VOLTAGE = 21,
 
     // Приборы управления тормозами
-    // 22 - резерв, открыть дверцу тумбы с УБТ
+    CAB1_OPEN_BRAKELOCK_DOOR = 22,
     CAB1_UBT_IS_KEY_HANDLE = 23,
     CAB1_UBT_KEY_HANDLE_POS = 24,
     CAB1_UBT_COMBINE_CRANE_POS = 25,
@@ -238,7 +238,7 @@ enum
     KLUB_U_SHEDULE_TIME  = 178,
     KLUB_U_COORDINATE    = 179,
     KLUB_U_ZAPRET_OTPUSKA= 180,
-    KLUB_U_EPK           = 181, // ЭПК
+    KLUB_U_EPK           = 181, // ЭПК: 0.0f - выкл, 1.0f - вкл в кабине 1, 2.0f - вкл в кабине 2
     KLUB_U_ALSN          = 182, // код АЛСН
     KLUB_U_ALSN_FB       = 183, // кол-во свободных БУ
     KLUB_U_STRAIGHT      = 184,
@@ -253,10 +253,10 @@ enum
     KLUB_U_REVERSOR      = 193,
     KLUB_U_TARGET_DIST   = 194,
     KLUB_U_PRESSURE_TM   = 195,
-    KLUB_U_PRESSURE_UR   = 196,
-    KLUB_U_TRACK_NUM     = 197,
-    KLUB_U_ACCELERATION  = 198,
-    // 199 резерв
+    KLUB_U_PRESSURE_UR1  = 196,
+    KLUB_U_PRESSURE_UR2  = 197,
+    KLUB_U_TRACK_NUM     = 198,
+    KLUB_U_ACCELERATION  = 199,
 
     // Кабина 2
     // Освещение
@@ -279,7 +279,7 @@ enum
     CAB2_EPB_VOLTAGE = 221,
 
     // Приборы управления тормозами
-    // 222 - резерв, открыть дверцу тумбы с УБТ
+    CAB2_OPEN_BRAKELOCK_DOOR = 222,
     CAB2_UBT_IS_KEY_HANDLE = 223,
     CAB2_UBT_KEY_HANDLE_POS = 224,
     CAB2_UBT_COMBINE_CRANE_POS = 225,

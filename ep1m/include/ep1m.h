@@ -108,6 +108,9 @@ private:
     /// Блок сигнализации БС-002
     SignalizationModule* signals_module = nullptr;
 
+    /// Яркость подсветки приборов
+    float device_light_intensity[CABS_NUM] = {0.75f, 0.75f};
+
     bool return_GV = false;
 
     /// Преобразователь частоты и числа фаз (ПЧФ)
@@ -336,7 +339,10 @@ private:
     /// Тумблеры и кнопки вне блокируемой панели
     TriggerControl tumblers[TUMBLERS_COUNT][CABS_NUM];
     SwitcherControl switchers[SWITCHERS_COUNT][CABS_NUM];
+    /// Выключатель шкафа питания ШП-21
     TriggerControl tumbler_power_supply;
+    /// Дверца тумбы с устройством блокировки тормозов
+    TriggerControl brake_lock_door[CABS_NUM];
 
     /// Мотор-вентиляторы М11 - М13
     std::array<MotorFan*, MOTOR_FANS_NUM> motor_fan;

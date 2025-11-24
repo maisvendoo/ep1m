@@ -87,7 +87,14 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
             }
 
             // Подсветка приборов
-            analogSignal[CAB1_LIGHT_DEVICES + d] = static_cast<float>(tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].getState());
+            if (tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].getState())
+            {
+                analogSignal[CAB1_LIGHT_DEVICES + d] = device_light_intensity[cab_idx];
+            }
+            else
+            {
+                analogSignal[CAB1_LIGHT_DEVICES + d] = 0.0f;
+            }
         }
 
         // Циферблаты
@@ -102,6 +109,8 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
                              epb_converter->getOutputVoltage() : battery->getVoltage();
         analogSignal[CAB1_EPB_VOLTAGE + d] = TO_FLOAT(voltage / 150.0);
 
+        // Дверца тумбы с устройством блокировки тормозов
+        analogSignal[CAB1_OPEN_BRAKELOCK_DOOR + d] = static_cast<float>(brake_lock_door[cab_idx].getState());
         // Рукоятка УБТ, комбинированный кран, поездной кран, локомотивный кран
         analogSignal[CAB1_UBT_IS_KEY_HANDLE + d] = static_cast<float>(brake_lock[cab_idx]->isLockHandle());
         analogSignal[CAB1_UBT_KEY_HANDLE_POS + d] = static_cast<float>(brake_lock[cab_idx]->getLockHandlePosition());
@@ -246,6 +255,7 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
 
 
     analogSignal[KLUB_U_CAB1_POWER] = TO_FLOAT(Ucc >= 49);
+    analogSignal[KLUB_U_CAB2_POWER] = TO_FLOAT(Ucc >= 49);
 
     QString text = klub_BEL->getStationText();
     for (size_t i = 0; i < text.size(); ++i)
@@ -264,7 +274,8 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
     analogSignal[KLUB_U_COORDINATE] = TO_FLOAT(klub_BEL->getRailCoord());
 
     analogSignal[KLUB_U_ZAPRET_OTPUSKA] = 0.0f;
-    analogSignal[KLUB_U_EPK] = TO_FLOAT(epk[CAB1]->isKeyOn());
+    analogSignal[KLUB_U_EPK] = static_cast<float>(epk[CAB1]->isKeyOn()) +
+                        2.0f * static_cast<float>(epk[CAB2]->isKeyOn());
     analogSignal[KLUB_U_SPEED] = TO_FLOAT(klub_BEL->getVelocityKmh());
     analogSignal[KLUB_U_SPEED_LIMIT] = TO_FLOAT(klub_BEL->getCurrentSpeedLimit());
     analogSignal[KLUB_U_SPEED_LIMIT_2] = TO_FLOAT(klub_BEL->getNextSpeedLimit());
@@ -276,89 +287,118 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
     analogSignal[KLUB_U_M] = 0.0f;
     analogSignal[KLUB_U_P] = 1.0f;
     analogSignal[KLUB_U_CASSETE] = 1.0f;
-    analogSignal[KLUB_U_REVERSOR] = TO_FLOAT(km[CAB1]->getReversHandlePos());
+    analogSignal[KLUB_U_REVERSOR] = TO_FLOAT(epk[CAB1]->isKeyOn() * km[CAB1]->getReversHandlePos() +
+                                             epk[CAB2]->isKeyOn() * km[CAB2]->getReversHandlePos());
     analogSignal[KLUB_U_TARGET_DIST] = TO_FLOAT(klub_BEL->getTargetDistance());
     analogSignal[KLUB_U_PRESSURE_TM] = TO_FLOAT(brakepipe->getPressure());
-    analogSignal[KLUB_U_PRESSURE_UR] = TO_FLOAT(brake_crane[CAB1]->getERpressure());
+    analogSignal[KLUB_U_PRESSURE_UR1] = TO_FLOAT(brake_crane[CAB1]->getERpressure());
+    analogSignal[KLUB_U_PRESSURE_UR2] = TO_FLOAT(brake_crane[CAB2]->getERpressure());
     analogSignal[KLUB_U_TRACK_NUM] = 1.0f;
     analogSignal[KLUB_U_ACCELERATION] = TO_FLOAT(klub_BEL->getAcceleration());
 
-    bool is_visible = msud->getOutputData().state == MSUD_READY;
-    analogSignal[MSUD_CAB1_POWER] = TO_FLOAT(is_visible);
-    analogSignal[MSUD_SPEED2] = TO_FLOAT(km[CAB1]->getRefSpeedLevel() * msud->getOutputData().Vmax);
-    analogSignal[MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
-
-    double Ia_max = 0;
-    double trac_level = 0;
-
-    if (msud_input.is_traction)
+    bool is_visible = (msud->getOutputData().state == MSUD_READY);
+    if (is_visible)
     {
-        Ia_max = msud->getOutputData().Ia_max;
-        trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / Ia_max);
-    }
+        auto cab_idx = CAB1;
+        if (tumblers_panel[CAB1]->getTumblerState(EP1MTumblersPanel::TUMBLER_MSUD))
+        {
+            analogSignal[MSUD_CAB1_POWER] = 1.0f;
+        }
+        else
+        {
+            analogSignal[MSUD_CAB1_POWER] = 0.0f;
 
-    if (msud_input.is_brake)
+            if (tumblers_panel[CAB2]->getTumblerState(EP1MTumblersPanel::TUMBLER_MSUD))
+            {
+                analogSignal[MSUD_CAB2_POWER] = 1.0f;
+                cab_idx = CAB2;
+            }
+            else
+            {
+                analogSignal[MSUD_CAB2_POWER] = 0.0f;
+            }
+        }
+
+        analogSignal[MSUD_SPEED2] = TO_FLOAT(km[cab_idx]->getRefSpeedLevel() * msud->getOutputData().Vmax);
+        analogSignal[MSUD_SPEED1] = TO_FLOAT(velocity * Physics::kmh);
+
+        double Ia_max = 0;
+        double trac_level = 0;
+
+        if (msud_input.is_traction)
+        {
+            Ia_max = msud->getOutputData().Ia_max;
+            trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / Ia_max);
+        }
+
+        if (msud_input.is_brake)
+        {
+            Ia_max = msud->getOutputData().Ib_max;
+            trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / Ia_max);
+        }
+
+        analogSignal[MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km[cab_idx]->getTracLevel() +
+                                                       std::abs(km[cab_idx]->getBrakeLevel())) * Ia_max);
+
+        analogSignal[MSUD_CURRENT_ANHCOR1] = TO_FLOAT(std::abs(msud_input.Ia[TRAC_MOTOR1]));
+
+        trac_level = cut(trac_level, 0.0, 100.0);
+        analogSignal[MSUD_TRACTION] = TO_FLOAT(trac_level);
+
+        analogSignal[MSUD_MK] = TO_FLOAT(!motor_compressor->isPowered() && press_reg->getState());
+        analogSignal[MSUD_DM] = TO_FLOAT(!motor_compressor->isPowered());
+        analogSignal[MSUD_DB] = 0.0f;
+        analogSignal[MSUD_KZ] = 0.0f;
+        analogSignal[MSUD_OV] = 0.0f;
+
+        analogSignal[MSUD_CURCUIT_VOZB] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getFieldCurrent());
+
+        analogSignal[MSUD_CURRENT_EPT] = TO_FLOAT(std::abs(epb_converter->getOutputCurrent()));
+        analogSignal[MSUD_VOLTAGE_EPT] = TO_FLOAT(epb_converter->getOutputVoltage());
+
+        analogSignal[MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
+        analogSignal[MSUD_MPK] = TO_FLOAT(static_cast<int>(msud_input.tumbler_MPK) + 1);
+        analogSignal[MSUD_MODE] = TO_FLOAT(static_cast<int>(msud_input.is_auto_reg) + 1);
+
+        bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getChargeCurrent() <= 0.0;
+        analogSignal[MSUD_OB] = TO_FLOAT(is_MSUD_OB);
+
+        analogSignal[MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_status);
+
+        analogSignal[MSUD_VIP_ZONE] = TO_FLOAT(msud->getOutputData().vip_voltage_level);
+
+        if (reversor->getState() == 1)
+            analogSignal[MSUD_REVERSOR] = 1.0f;
+
+        if (reversor->getState() == -1)
+            analogSignal[MSUD_REVERSOR] = 2.0f;
+
+        if (qt1->getContactState(9))
+            analogSignal[MSUD_TRACTION_TYPE] = 1.0f;
+        else
+            analogSignal[MSUD_TRACTION_TYPE] = 2.0f;
+
+
+        if (msud_input.is_traction || msud_input.is_brake)
+            analogSignal[MSUD_TRACTION_STATE] = 1.0f;
+        else
+            analogSignal[MSUD_TRACTION_STATE] = 2.0f;
+
+        bool is_DM_low = signals_module->getLampState(SM_DM1) ||
+                         signals_module->getLampState(SM_DM2);
+
+        if (is_DM_low)
+            analogSignal[MSUD_DM] = 1.0f;
+        else
+            analogSignal[MSUD_DM] = 0.0f;
+
+        analogSignal[MSUD_OSLAB_POLE1] = TO_FLOAT(msud->getOutputData().op[STEP1]);
+        analogSignal[MSUD_OSLAB_POLE2] = TO_FLOAT(msud->getOutputData().op[STEP2]);
+        analogSignal[MSUD_OSLAB_POLE3] = TO_FLOAT(msud->getOutputData().op[STEP3]);
+    }
+    else
     {
-        Ia_max = msud->getOutputData().Ib_max;
-        trac_level = qAbs(msud_input.Ia[TRAC_MOTOR1] * 100.0 / Ia_max);
+        analogSignal[MSUD_CAB1_POWER] = 0.0f;
+        analogSignal[MSUD_CAB2_POWER] = 0.0f;
     }
-
-    analogSignal[MSUD_CURRENT_ANHCOR2] = TO_FLOAT( (km[CAB1]->getTracLevel() +
-                                                    abs(km[CAB1]->getBrakeLevel())) * Ia_max);
-
-    analogSignal[MSUD_CURRENT_ANHCOR1] = TO_FLOAT(qAbs(msud_input.Ia[TRAC_MOTOR1]));
-
-    trac_level = cut(trac_level, 0.0, 100.0);
-    analogSignal[MSUD_TRACTION] = TO_FLOAT(trac_level);
-
-    analogSignal[MSUD_MK] = TO_FLOAT(!motor_compressor->isPowered() && press_reg->getState());
-    analogSignal[MSUD_DM] = TO_FLOAT(!motor_compressor->isPowered());
-    analogSignal[MSUD_DB] = 0.0f;
-    analogSignal[MSUD_KZ] = 0.0f;
-    analogSignal[MSUD_OV] = 0.0f;
-
-    analogSignal[MSUD_CURCUIT_VOZB] = TO_FLOAT(trac_motor[TRAC_MOTOR1]->getFieldCurrent());
-
-    analogSignal[MSUD_CURRENT_EPT] = TO_FLOAT(abs(epb_converter->getOutputCurrent()));
-    analogSignal[MSUD_VOLTAGE_EPT] = TO_FLOAT(epb_converter->getOutputVoltage());
-
-    analogSignal[MSUD_NC] = TO_FLOAT(msud->getOutputData().is_MV_low_freq);
-    analogSignal[MSUD_MPK] = TO_FLOAT(static_cast<int>(msud_input.tumbler_MPK) + 1);
-    analogSignal[MSUD_MODE] = TO_FLOAT(static_cast<int>(msud_input.is_auto_reg) + 1);
-
-    bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getChargeCurrent() <= 0.0;
-    analogSignal[MSUD_OB] = TO_FLOAT(is_MSUD_OB);
-
-    analogSignal[MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_status);
-
-    analogSignal[MSUD_VIP_ZONE] = TO_FLOAT(msud->getOutputData().vip_voltage_level);
-
-    if (reversor->getState() == 1)
-        analogSignal[MSUD_REVERSOR] = 1.0f;
-
-    if (reversor->getState() == -1)
-        analogSignal[MSUD_REVERSOR] = 2.0f;
-
-    if (qt1->getContactState(9))
-        analogSignal[MSUD_TRACTION_TYPE] = 1.0f;
-    else
-        analogSignal[MSUD_TRACTION_TYPE] = 2.0f;
-
-
-    if (msud_input.is_traction || msud_input.is_brake)
-        analogSignal[MSUD_TRACTION_STATE] = 1.0f;
-    else
-        analogSignal[MSUD_TRACTION_STATE] = 2.0f;
-
-    bool is_DM_low = signals_module->getLampState(SM_DM1) ||
-                     signals_module->getLampState(SM_DM2);
-
-    if (is_DM_low)
-        analogSignal[MSUD_DM] = 1.0f;
-    else
-        analogSignal[MSUD_DM] = 0.0f;
-
-    analogSignal[MSUD_OSLAB_POLE1] = TO_FLOAT(msud->getOutputData().op[STEP1]);
-    analogSignal[MSUD_OSLAB_POLE2] = TO_FLOAT(msud->getOutputData().op[STEP2]);
-    analogSignal[MSUD_OSLAB_POLE3] = TO_FLOAT(msud->getOutputData().op[STEP3]);
 }

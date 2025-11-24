@@ -13,15 +13,31 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
     alsn_decoder->setCoilSignal(coil_ALSN_fwd->getCode());
     alsn_decoder->step(t, dt);
 
-    // КЛУБ // TODO для второй кабины
+    // КЛУБ
+    bool epk_on = false;
+    int direction = dir * orient;
+    auto cab_idx = CAB1;
+    auto wheel_idx = TRAC_MOTOR1;
+    if (epk[CAB1]->isKeyOn())
+    {
+        epk_on = true;
+    }
+    if (epk[CAB2]->isKeyOn())
+    {
+        epk_on = true;
+        direction *= -1;
+        cab_idx = CAB2;
+        wheel_idx = TRAC_MOTOR6;
+    }
+    klub_BEL->setDirection(direction);
     klub_BEL->setVoltage(Ucc);
     klub_BEL->setAlsnCode(alsn_decoder->getCode());
-    klub_BEL->setKeyEPK(epk[CAB1]->isKeyOn());
+    klub_BEL->setKeyEPK(epk_on);
     klub_BEL->setCoord(profile_point_data.position);
     klub_BEL->setRailCoord(profile_point_data.railway_coord);
-    klub_BEL->setVelocity(wheel_omega[0] * wheel_diameter[0] / 2.0);
+    klub_BEL->setVelocity(wheel_omega[wheel_idx] * wheel_diameter[wheel_idx] / 2.0);
     klub_BEL->setTrainLength(length);
-    klub_BEL->setRBstate(tumblers[BUTTON_RB][CAB1].getState());
-    klub_BEL->setRBSstate(tumblers[BUTTON_RBS][CAB1].getState());
+    klub_BEL->setRBstate(epk_on && tumblers[BUTTON_RB][cab_idx].getState());
+    klub_BEL->setRBSstate(epk_on && tumblers[BUTTON_RBS][cab_idx].getState());
     klub_BEL->step(t, dt);
 }
