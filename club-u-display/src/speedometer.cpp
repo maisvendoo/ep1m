@@ -10,16 +10,11 @@ const int     indSize = 7;
 //
 //------------------------------------------------------------------------------
 
-Speedometer::Speedometer(QSize size, QString cfg_path, QWidget *parent)
+Speedometer::Speedometer(QSize size, QString cfg_path, QWidget* parent)
     : QLabel(parent)
 {
     this->resize(size);
-   // this->setStyleSheet("border: 1px solid red;");
-
-    // Индикация "Проверка бдительности"
-    indVigilanceCheck_ = new ImageWidget("rcc", "ind_vigilance", QSize(100,100), this);
-    indVigilanceCheck_->move(68, 67);
-    indVigilanceCheck_->setVisible(true);
+    //this->setStyleSheet("border: 1px solid red;");
 
     loadScalePontsCoolrds_(cfg_path + "speed-coordinatesOutScale.txt", speed_coordsOutScale);
     loadScalePontsCoolrds_(cfg_path + "speed-coordinatesInsideScale.txt", speed_coordsInsideScale);
@@ -72,16 +67,6 @@ void Speedometer::setSpeeds(int speed, int speedLimit, int speedNextLimit)
     old_num_speed_ = num_speed_;
     old_num_speedLimit_ = num_speedLimit_;
     old_num_speedNextLimit_ = num_speedNextLimit_;
-}
-
-
-
-//------------------------------------------------------------------------------
-//
-//------------------------------------------------------------------------------
-void Speedometer::setVigilanceCheck(bool flag)
-{
-    indVigilanceCheck_->setVisible(flag);
 }
 
 

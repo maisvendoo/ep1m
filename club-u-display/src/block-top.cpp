@@ -41,6 +41,11 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     indicationSide_->move(0, 76);
     indicationSide_->setVisible(true);
 
+    // Индикация "Проверка бдительности"
+    indVigilanceCheck_ = new ImageWidget("rcc", "ind_vigilance", QSize(60,63), this);
+    indVigilanceCheck_->move(445, 9);
+    indVigilanceCheck_->setVisible(true);
+
     //
     txtPaintCoordinate1_ = new TextPaint(QSize(55, 20), this);
     txtPaintCoordinate1_->move(53, 61);
@@ -249,3 +254,10 @@ void TopBlock::setSheduleTime(int h, int m, int s)
 
 
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void TopBlock::setVigilanceCheck(bool flag)
+{
+    indVigilanceCheck_->setVisible(flag);
+}

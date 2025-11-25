@@ -109,29 +109,29 @@ void ClubUDisplay::initBlocks_()
 */
 
     // Локомотивный светофор
-    alsnG4_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
-    alsnG4_->move(690, 113);
+    alsnG4_ = new ImageWidget("rcc", "alsn_green", QSize(110, 54), this);
+    alsnG4_->move(682, 113);
 
-    alsnG3_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
-    alsnG3_->move(690, 171);
+    alsnG3_ = new ImageWidget("rcc", "alsn_green", QSize(110, 54), this);
+    alsnG3_->move(682, 169);
 
-    alsnG2_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
-    alsnG2_->move(800, 113);
+    alsnG2_ = new ImageWidget("rcc", "alsn_green", QSize(110, 54), this);
+    alsnG2_->move(793, 113);
 
-    alsnG1_ = new ImageWidget("rcc", "alsn_green", QSize(100, 50), this);
-    alsnG1_->move(800, 171);
+    alsnG1_ = new ImageWidget("rcc", "alsn_green", QSize(110, 54), this);
+    alsnG1_->move(793, 169);
 
-    alsnY_ = new ImageWidget("rcc", "alsn_yellow", QSize(100, 50), this);
-    alsnY_->move(910, 113);
+    alsnY_ = new ImageWidget("rcc", "alsn_yellow", QSize(110, 54), this);
+    alsnY_->move(904, 113);
 
-    alsnRY_ = new ImageWidget("rcc", "alsn_yellow_red", QSize(100, 50), this);
-    alsnRY_->move(910, 171);
+    alsnRY_ = new ImageWidget("rcc", "alsn_yellow_red", QSize(110, 54), this);
+    alsnRY_->move(904, 169);
 
-    alsnR_ = new ImageWidget("rcc", "alsn_red", QSize(100, 50), this);
-    alsnR_->move(556, 880);
+    alsnR_ = new ImageWidget("rcc", "alsn_red", QSize(110, 54), this);
+    alsnR_->move(556, 878);
 
-    alsnW_ = new ImageWidget("rcc", "alsn_white", QSize(100, 50), this);
-    alsnW_->move(556, 935);
+    alsnW_ = new ImageWidget("rcc", "alsn_white", QSize(110, 54), this);
+    alsnW_->move(556, 934);
 
     // Спидометр
     speedometer_ = new Speedometer(QSize(223,236), cfg_path, this);
@@ -142,7 +142,7 @@ void ClubUDisplay::initBlocks_()
     reverseInd_->move(417, 779);
 
     // Верхний блок
-    topBlock_ = new TopBlock(QSize(424, 90), this);
+    topBlock_ = new TopBlock(QSize(505, 90), this);
     topBlock_->move(23, 129);
 
     // Центральный блок
@@ -240,6 +240,7 @@ void ClubUDisplay::update(double t, double dt)
             topBlock_->setIndP(static_cast<bool>(input_signals[KLUB_U_P]));
             topBlock_->setIndStraight(static_cast<bool>(input_signals[KLUB_U_STRAIGHT]));
             topBlock_->setIndSide(static_cast<bool>(input_signals[KLUB_U_SIDE]));
+            topBlock_->setVigilanceCheck(static_cast<bool>(input_signals[KLUB_U_BDITELNOST]));
         }
         else
         {
@@ -248,6 +249,7 @@ void ClubUDisplay::update(double t, double dt)
             topBlock_->setIndP(false);
             topBlock_->setIndStraight(false);
             topBlock_->setIndSide(false);
+            topBlock_->setVigilanceCheck(false);
         }
 
         seconds = static_cast<int>(input_signals[KLUB_U_SHEDULE_TIME]);
@@ -310,7 +312,6 @@ void ClubUDisplay::update(double t, double dt)
             alsnR_->setVisible(input_signals[KLUB_U_ALSN] == 1.0f);
             alsnW_->setVisible(input_signals[KLUB_U_ALSN] == 0.0f);
 
-            speedometer_->setVigilanceCheck(static_cast<bool>(input_signals[KLUB_U_BDITELNOST]));
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]),
                                     static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT]),
                                     static_cast<int>(input_signals[KLUB_U_SPEED_LIMIT_2]));
@@ -336,7 +337,6 @@ void ClubUDisplay::update(double t, double dt)
             alsnR_->setVisible(false);
             alsnW_->setVisible(false);
 
-            speedometer_->setVigilanceCheck(false);
             speedometer_->setSpeeds(static_cast<int>(input_signals[KLUB_U_SPEED]), -5, -5);
             reverseInd_->setReverse(0);
 

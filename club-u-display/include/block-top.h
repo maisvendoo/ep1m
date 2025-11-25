@@ -51,24 +51,28 @@ public:
     void setSheduleTime(int h, int m, int s);
     void setIndStraight(bool flag);
     void setIndSide(bool flag);
+    void setVigilanceCheck(bool flag);
+
 
 
 private:
-    ImageWidget *indicationCassette_ = nullptr;
-    ImageWidget *indicationM_ = nullptr;
-    ImageWidget *indicationP_ = nullptr;
-    ImageWidget *indicationStraight_ = nullptr;
-    ImageWidget *indicationSide_ = nullptr;
+    ImageWidget* indicationCassette_ = nullptr;
+    ImageWidget* indicationM_ = nullptr;
+    ImageWidget* indicationP_ = nullptr;
+    ImageWidget* indicationStraight_ = nullptr;
+    ImageWidget* indicationSide_ = nullptr;
+    ImageWidget* indVigilanceCheck_ = nullptr;
 
-    TextPaint   *txtPaintCoordinate1_ = nullptr;
-    TextPaint   *txtPaintCoordinate2_ = nullptr;
-    TextPaint   *txtPaintStation_ = nullptr;
-    TextPaint   *txtPaintCurTimeH_ = nullptr;
-    TextPaint   *txtPaintCurTimeM_ = nullptr;
-    TextPaint   *txtPaintCurTimeS_ = nullptr;
-    TextPaint   *txtPaintSheduleTimeH_ = nullptr;
-    TextPaint   *txtPaintSheduleTimeM_ = nullptr;
-    TextPaint   *txtPaintSheduleTimeS_ = nullptr;
+
+    TextPaint*   txtPaintCoordinate1_ = nullptr;
+    TextPaint*   txtPaintCoordinate2_ = nullptr;
+    TextPaint*   txtPaintStation_ = nullptr;
+    TextPaint*   txtPaintCurTimeH_ = nullptr;
+    TextPaint*   txtPaintCurTimeM_ = nullptr;
+    TextPaint*   txtPaintCurTimeS_ = nullptr;
+    TextPaint*   txtPaintSheduleTimeH_ = nullptr;
+    TextPaint*   txtPaintSheduleTimeM_ = nullptr;
+    TextPaint*   txtPaintSheduleTimeS_ = nullptr;
 
     double oldCoordinate_ = 0.0;
     QString oldStation_ = "";
