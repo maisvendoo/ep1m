@@ -88,11 +88,11 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
     for (auto cab_idx : {CAB1, CAB2})
     {
         // Дверца тумбы с устройством блокировки тормозов
-        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeySymbolOn(KEY_Backslash);
-        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
-        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeySymbolOff(KEY_Backslash);
-        tumblers[TUMBLER_AUTO_MODE][cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
-        tumblers[TUMBLER_AUTO_MODE][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+        brake_lock_door[cab_idx].setKeySymbolOn(KEY_Backslash);
+        brake_lock_door[cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
+        brake_lock_door[cab_idx].setKeySymbolOff(KEY_Backslash);
+        brake_lock_door[cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
+        brake_lock_door[cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Устройство блокировки тормозов усл.№ 367
         brake_lock[cab_idx]->setControl(&pressed_keys_by_cabine[cab_idx]);
@@ -195,18 +195,18 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Тумблер "Освещение кабины ярко"
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeySymbolOn(KEY_K);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeySymbolOff(KEY_K);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeyModifierOff(MODIFIER_OnlyAlt);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+        tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].setKeySymbolOn(KEY_K);
+        tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
+        tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].setKeySymbolOff(KEY_K);
+        tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].setKeyModifierOff(MODIFIER_OnlyAlt);
+        tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Тумблер "Освещение кабины зелёный свет"
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeySymbolOn(KEY_Backslash);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeySymbolOff(KEY_Backslash);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setKeyModifierOff(MODIFIER_OnlyAlt);
-        tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+        tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].setKeySymbolOn(KEY_Backslash);
+        tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
+        tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].setKeySymbolOff(KEY_Backslash);
+        tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].setKeyModifierOff(MODIFIER_OnlyAlt);
+        tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Тумблер "Освещение приборов и пульта"
         tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].setKeySymbolOn(KEY_L);

@@ -43,7 +43,7 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
             // Прожектор
             if (tumblers[TUMBLER_SPOTLIGHT_LOW][cab_idx].getState())
             {
-                std::uint8_t intensity = 1 + tumblers[TUMBLER_SPOTLIGHT_HIGH][cab_idx].getState();
+                const std::uint8_t intensity = 1 + tumblers[TUMBLER_SPOTLIGHT_HIGH][cab_idx].getState();
                 analogSignal[SPOTLIGHT_FWD + d] = static_cast<float>(intensity) / 2.0f;
             }
             else
@@ -78,12 +78,22 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
             // Освещение кабины
             if (tumblers[TUMBLER_CAB_LIGHT_LOW][cab_idx].getState())
             {
-                std::uint8_t intensity = 1 + tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].getState();
-                analogSignal[CAB1_LIGHT_CABINE + d] = static_cast<float>(intensity) / 2.0f;
+                const std::uint8_t intensity = 1 + tumblers[TUMBLER_CAB_LIGHT_HIGH][cab_idx].getState();
+                if (tumblers[TUMBLER_CAB_LIGHT_GREEN][cab_idx].getState())
+                {
+                    analogSignal[CAB1_LIGHT_CABINE + d] = 0.0f;
+                    analogSignal[CAB1_GREEN_CABINE + d] = static_cast<float>(intensity) / 2.0f;
+                }
+                else
+                {
+                    analogSignal[CAB1_LIGHT_CABINE + d] = static_cast<float>(intensity) / 2.0f;
+                    analogSignal[CAB1_GREEN_CABINE + d] = 0.0f;
+                }
             }
             else
             {
                 analogSignal[CAB1_LIGHT_CABINE + d] = 0.0f;
+                analogSignal[CAB1_GREEN_CABINE + d] = 0.0f;
             }
 
             // Подсветка приборов

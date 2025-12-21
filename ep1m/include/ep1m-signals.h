@@ -44,7 +44,7 @@ enum
     BUFFERLIGHT_FWD_L_RED = 10,
     BUFFERLIGHT_FWD_R_RED = 11,
     CAB1_LIGHT_CABINE = 12,
-    CAB1_LIGHT_DEVICES = 13,
+    CAB1_GREEN_CABINE = 13,
 
     // Циферблаты
     CAB1_PRESSURE_ER = 14,
@@ -194,7 +194,11 @@ enum
     CAB1_SIGLIGHT_FAST_SWITCH_ENGINE_3_OFF = 139,
     CAB1_SIGLIGHT_FAST_SWITCH_ENGINE_2_OFF = 140,
     CAB1_SIGLIGHT_FAST_SWITCH_ENGINE_1_OFF = 141,
-    // 142-143 резерв
+
+    // Подсветка приборов
+    CAB1_LIGHT_DEVICES = 142,
+
+    // 143 резерв
 
     KLUB_U_CAB1_POWER    = 144, // питание дисплея КЛУБ-У в кабине 1
     KLUB_U_CAB2_POWER    = 145, // питание дисплея КЛУБ-У в кабине 2
@@ -266,7 +270,7 @@ enum
     BUFFERLIGHT_BWD_L_RED = 210,
     BUFFERLIGHT_BWD_R_RED = 211,
     CAB2_LIGHT_CABINE = 212,
-    CAB2_LIGHT_DEVICES = 213,
+    CAB2_GREEN_CABINE = 213,
 
     // Циферблаты
     CAB2_PRESSURE_ER = 214,
@@ -416,7 +420,11 @@ enum
     CAB2_SIGLIGHT_FAST_SWITCH_ENGINE_3_OFF = 339,
     CAB2_SIGLIGHT_FAST_SWITCH_ENGINE_2_OFF = 340,
     CAB2_SIGLIGHT_FAST_SWITCH_ENGINE_1_OFF = 341,
-    // 342-343 резерв
+
+    // Подсветка приборов
+    CAB2_LIGHT_DEVICES = 342,
+
+    // 343 резерв
 
     MSUD_CAB1_POWER      = 344, // питание дисплея МСУД в кабине 1
     MSUD_CAB2_POWER      = 345, // питание дисплея МСУД в кабине 2

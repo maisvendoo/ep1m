@@ -8,7 +8,7 @@ void EP1m::stepPanel(const double& t, const double& dt)
     // Регулировка яркости подсветки приборов
     auto change_intensity = [](float& intencity, float delta)
     {
-        intencity = std::clamp(intencity + delta, 0.25f, 1.0f);
+        intencity = std::clamp(intencity + delta, 0.125f, 1.0f);
     };
 
     for (size_t cab_idx : {CAB1, CAB2})
@@ -16,14 +16,24 @@ void EP1m::stepPanel(const double& t, const double& dt)
         // Контроллер машиниста
         km[cab_idx]->step(t, dt);
 
+        // Регулировка яркости подсветки пульта (не реализовано)
+        if (switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].isSwitched(0))
+        {
+            change_intensity(panel_light_intensity[cab_idx], -0.5f * dt);
+        }
+        if (switchers[SWITCHER_PANEL_BRIGHTNESS][cab_idx].isSwitched(2))
+        {
+            change_intensity(panel_light_intensity[cab_idx], 0.5f * dt);
+        }
+
         // Регулировка яркости подсветки приборов
         if (switchers[SWITCHER_DEVICES_BRIGHTNESS][cab_idx].isSwitched(0))
         {
-            change_intensity(device_light_intensity[cab_idx], 0.25f * dt);
+            change_intensity(device_light_intensity[cab_idx], -0.5f * dt);
         }
         if (switchers[SWITCHER_DEVICES_BRIGHTNESS][cab_idx].isSwitched(2))
         {
-            change_intensity(device_light_intensity[cab_idx], -0.25f * dt);
+            change_intensity(device_light_intensity[cab_idx], 0.5f * dt);
         }
     }
 

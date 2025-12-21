@@ -108,6 +108,8 @@ private:
     /// Блок сигнализации БС-002
     SignalizationModule* signals_module = nullptr;
 
+    /// Яркость подсветки пульта (не реализовано)
+    float panel_light_intensity[CABS_NUM] = {0.75f, 0.75f};
     /// Яркость подсветки приборов
     float device_light_intensity[CABS_NUM] = {0.75f, 0.75f};
 

@@ -125,7 +125,7 @@ void EP1m::soundsOutput(const simulator_time_t& t, const double& dt)
         analogSignal[CAB1_SOUND_TUMBLER_DEVICES_LIGHT_ON + d] = tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].getSoundSignal(Trigger::ON_SOUND);
         analogSignal[CAB1_SOUND_TUMBLER_DEVICES_LIGHT_OFF + d] = tumblers[TUMBLER_DEVICES_LIGHT][cab_idx].getSoundSignal(Trigger::OFF_SOUND);
         analogSignal[CAB1_SOUND_TUMBLER_BATTERY_OR_EPB_VOLTAGE_UP + d] = tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].getSoundSignal(Trigger::ON_SOUND);
-        analogSignal[CAB1_SOUND_TUMBLER_BATTERY_OR_EPB_VOLTAGE_UP + d] = tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].getSoundSignal(Trigger::OFF_SOUND);
+        analogSignal[CAB1_SOUND_TUMBLER_BATTERY_OR_EPB_VOLTAGE_DOWN + d] = tumblers[TUMBLER_BATTERY_OR_EPB_VOLTAGE][cab_idx].getSoundSignal(Trigger::OFF_SOUND);
 
         // Тумблеры на столешнице слева
         analogSignal[CAB1_SOUND_TUMBLER_SIGNAL_PANEL_BS_002_ON + d] = tumblers[TUMBLER_SIGNAL_PANEL_BS_002][cab_idx].getSoundSignal(Trigger::ON_SOUND);
