@@ -252,8 +252,8 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         tumblers[BUTTON_RELEASE_BRAKES][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Кнопка "Компрессор"
-        tumblers[BUTTON_COMPRESSOR][cab_idx].setKeySymbolOn(KEY_4);
-        tumblers[BUTTON_COMPRESSOR][cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
+        tumblers[BUTTON_COMPRESSOR][cab_idx].setKeySymbolOn(KEY_R);
+        tumblers[BUTTON_COMPRESSOR][cab_idx].setKeyModifierOn(KEY_Undefined);
         tumblers[BUTTON_COMPRESSOR][cab_idx].setKeySymbolOff(KEY_Undefined);
         tumblers[BUTTON_COMPRESSOR][cab_idx].setKeyModifierOff(KEY_Undefined);
         tumblers[BUTTON_COMPRESSOR][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
