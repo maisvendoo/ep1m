@@ -375,7 +375,7 @@ private:
     CoilALSN*   coil_ALSN_bwd = nullptr;
 
     /// Дешифратор сигнала АЛСН
-    DecoderALSN* alsn_decoder = nullptr;
+    DecoderALSN* alsn_decoder[CABS_NUM] = {nullptr, nullptr};
 
 
     /// Чтение конфигурационного файла

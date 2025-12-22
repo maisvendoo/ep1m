@@ -29,8 +29,11 @@ void EP1m::initSafetyDevices(const QString& modules_dir, const QString& custom_c
     addRailwayConnector(coil_ALSN_bwd, -length / 2.0);
 
     // Дешифратор АЛСН
-    alsn_decoder = new DecoderALSN();
-    alsn_decoder->read_config("ALSN-decoder");
+    for (size_t cab_idx : {CAB1, CAB2})
+    {
+        alsn_decoder[cab_idx] = new DecoderALSN();
+        alsn_decoder[cab_idx]->read_config("ALSN-decoder");
+    }
 
     // КЛУБ
     klub_BEL = new KLUB();
