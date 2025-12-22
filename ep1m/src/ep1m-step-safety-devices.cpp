@@ -20,10 +20,14 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
     auto wheel_idx = TRAC_MOTOR1;
     if (epk[CAB1]->isKeyOn())
     {
+        klub_BEL->setSpeedMapModule(speedmap_fwd);
+        klub_BEL->setCoilALSNModule(coil_ALSN_fwd);
         epk_on = true;
     }
     if (epk[CAB2]->isKeyOn())
     {
+        klub_BEL->setSpeedMapModule(speedmap_bwd);
+        klub_BEL->setCoilALSNModule(coil_ALSN_bwd);
         epk_on = true;
         direction *= -1;
         cab_idx = CAB2;
