@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Vehicle>
+		<EmptyMass>132000</EmptyMass>
+		<PayloadMass>1000</PayloadMass>
+		<Length>22.532</Length>
+		<WheelDiameter>1.25</WheelDiameter>
+		<MainResist>loco-resist</MainResist>
+		<WheelRailFriction>loco-AC</WheelRailFriction>
+		<NumAxis>6</NumAxis>
+		<WheelInertia>100.0</WheelInertia>
+		<SoundDir>ep1m</SoundDir>
+		<AnimationsConfigDir>ep1m</AnimationsConfigDir>
+
+		<ReductorCoeff>3.38</ReductorCoeff>
+
+		<!--
+		<ExtModelName>EP1m-735/ep1m-735.gltf</ExtModelName>
+		<ModelShift>0.0 0.0 0.3</ModelShift>
+		-->
+
+		<CabineModel>EP1m-735/ep1m-cab.gltf</CabineModel>
+		<CabineShift>0.0 0.0 0.3</CabineShift>
+
+		<isRegistratorOn>0</isRegistratorOn>
+
+	</Vehicle>
+
+	<Cabine>
+		<DriverPos>0.635 9.291 3.5</DriverPos>
+		<DriverDir>0.0</DriverDir>
+	</Cabine>
+
+	<Cabine>
+		<DriverPos>-0.635 -9.291 3.5</DriverPos>
+		<DriverDir>180.0</DriverDir>
+	</Cabine>
+	
+	<Model>
+		<ModelName>ep1m/ep1m-735.gltf</ModelName>
+		<ModelShift>0.0 0.0 0.3</ModelShift>
+		<AnimationsConfigDir>ep1m</AnimationsConfigDir>
+	</Model>
+	
+	<Model>
+		<ModelName>ep1m/ep1m-cabview.gltf</ModelName>
+		<ModelShift>0.0 0.0 0.3</ModelShift>
+		<AnimationsConfigDir>ep1m</AnimationsConfigDir>
+	</Model>
+
+</Config>

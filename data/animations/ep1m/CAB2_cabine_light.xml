@@ -8,7 +8,7 @@
 		<Color>1.0 0.8 0.4</Color>
 		<Color2>0.2 1.0 0.1</Color2>
 		<!-- Максимальная яркость -->
-		<MaxIntensity>10.0</MaxIntensity>
+		<MaxIntensity>8.0</MaxIntensity>
 		<!-- Угол внутреннего конуса (до него максимальная яркость), 0 - 90 град. -->
 		<InnerAngle>0.0</InnerAngle>
 		<!-- Угол внешнего конуса (после него нулевая яркость), 0 - 90 град. -->
@@ -28,12 +28,12 @@
 
 	<KeyPoint>
 		<Param>0.5</Param>
-		<Value>0.4</Value>
+		<Value>0.1</Value>
 	</KeyPoint>
 
 	<KeyPoint>
 		<Param>1.0</Param>
-		<Value>1.0</Value>
+		<Value>0.2</Value>
 	</KeyPoint>
 
 </Config>
