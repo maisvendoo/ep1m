@@ -15,7 +15,7 @@ find_package(Qt6 COMPONENTS Gui REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 
-set(RRS_VERSION 1.3.0)
+set(RRS_VERSION 1.8.0)
 
 find_package(CfgReader ${RRS_VERSION} REQUIRED)
 find_package(physics ${RRS_VERSION} REQUIRED)
