@@ -8,8 +8,6 @@ set (CMAKE_SHARED_MODULE_PREFIX "")
 
 find_package(Qt6 COMPONENTS Xml REQUIRED)
 
-set(RRS_VERSION 1.8.0)
-
 find_package(CfgReader ${RRS_VERSION} REQUIRED)
 find_package(physics ${RRS_VERSION} REQUIRED)
 find_package(Journal ${RRS_VERSION} REQUIRED)
