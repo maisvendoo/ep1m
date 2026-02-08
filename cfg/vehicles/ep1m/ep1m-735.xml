@@ -14,37 +14,28 @@
 
 		<ReductorCoeff>3.38</ReductorCoeff>
 
-		<!--
-		<ExtModelName>EP1m-735/ep1m-735.gltf</ExtModelName>
-		<ModelShift>0.0 0.0 0.3</ModelShift>
-		-->
-
-		<CabineModel>EP1m-735/ep1m-cab.gltf</CabineModel>
-		<CabineShift>0.0 0.0 0.3</CabineShift>
-
 		<isRegistratorOn>0</isRegistratorOn>
-
 	</Vehicle>
 
+
 	<Cabine>
-		<DriverPos>0.635 9.291 3.5</DriverPos>
+		<DriverPos>0.635 9.291 3.2</DriverPos>
 		<DriverDir>0.0</DriverDir>
 	</Cabine>
 
 	<Cabine>
-		<DriverPos>-0.635 -9.291 3.5</DriverPos>
+		<DriverPos>-0.635 -9.291 3.2</DriverPos>
 		<DriverDir>180.0</DriverDir>
 	</Cabine>
-	
+
+
 	<Model>
 		<ModelName>ep1m/ep1m-735.gltf</ModelName>
-		<ModelShift>0.0 0.0 0.3</ModelShift>
 		<AnimationsConfigDir>ep1m</AnimationsConfigDir>
 	</Model>
-	
+
 	<Model>
 		<ModelName>ep1m/ep1m-cabview.gltf</ModelName>
-		<ModelShift>0.0 0.0 0.3</ModelShift>
 		<AnimationsConfigDir>ep1m</AnimationsConfigDir>
 	</Model>
 
