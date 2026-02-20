@@ -12,20 +12,20 @@ void EP1m::initSafetyDevices(const QString& modules_dir, const QString& custom_c
 
     // Карта ограничений скорости
     speedmap_fwd = new SpeedMap();
-    speedmap_fwd->setDirection(dir * orient);
+    speedmap_fwd->setDirection(dir);
     addRailwayConnector(speedmap_fwd, length / 2.0);
 
     speedmap_bwd = new SpeedMap();
-    speedmap_bwd->setDirection(-1 * dir * orient);
+    speedmap_bwd->setDirection(-1 * dir);
     addRailwayConnector(speedmap_bwd, -length / 2.0);
 
     // Приёмные катушки АЛСН
     coil_ALSN_fwd = new CoilALSN();
-    coil_ALSN_fwd->setDirection(dir * orient);
+    coil_ALSN_fwd->setDirection(dir);
     addRailwayConnector(coil_ALSN_fwd, length / 2.0);
 
     coil_ALSN_bwd = new CoilALSN();
-    coil_ALSN_bwd->setDirection(-1 * dir * orient);
+    coil_ALSN_bwd->setDirection(-1 * dir);
     addRailwayConnector(coil_ALSN_bwd, -length / 2.0);
 
     // Дешифратор АЛСН
@@ -40,7 +40,7 @@ void EP1m::initSafetyDevices(const QString& modules_dir, const QString& custom_c
     klub_BEL->setMaxVelocity(140.0);
     klub_BEL->setSpeedMapModule(speedmap_fwd);
     klub_BEL->setCoilALSNModule(coil_ALSN_fwd);
-    klub_BEL->setDirection(dir * orient);
+    klub_BEL->setDirection(dir);
     klub_BEL->setTrainLength(length);
 
     // Загрузка станций в КЛУБ
