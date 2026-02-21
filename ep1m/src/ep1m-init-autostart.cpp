@@ -133,5 +133,10 @@ void EP1m::slotAutostart()
         brake_lock[CAB2]->setControl(&pressed_keys_by_cabine[CAB2]);
         epk[CAB1]->setControl(&pressed_keys_by_cabine[CAB1]);
         epk[CAB2]->setControl(&pressed_keys_by_cabine[CAB2]);
+
+        if (auto_start_autopilot)
+        {
+            // TODO: запуск автоведения
+        }
     }
 }
