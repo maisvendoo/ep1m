@@ -68,6 +68,11 @@ bool EP1m::initAutostartProgram(int cab_autostart_request)
     autostart_triggers.push_back(tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_MOTOR_FAN2));
     autostart_triggers.push_back(tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_MOTOR_FAN3));
 
+    if (!epk[autostart_cab]->isKeyOn())
+    {
+        autostart_triggers.push_back(&tumblers[BUTTON_RBS][autostart_cab]);
+    }
+
     return true;
 }
 
@@ -106,10 +111,19 @@ void EP1m::slotAutostart()
             }
         }
 
+        if ( (autostart_triggers[start_count] == &tumblers[BUTTON_RBS][autostart_cab]) &&
+            !epk[autostart_cab]->isKeyOn())
+        {
+            epk[autostart_cab]->setKeyOn(true);
+            return;
+        }
+
         autostart_triggers[start_count++]->set();
     }
     else
     {
+        autoStartTimer->stop();
+        start_count = 0;
 
     }
 }
