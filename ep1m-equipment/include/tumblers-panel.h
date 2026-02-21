@@ -66,6 +66,11 @@ public:
 
     float getTumblerSoundSignal(size_t tumbler_idx, size_t idx = Trigger::CHANGE_SOUND);
 
+    TriggerControl *getTumblerPtr(size_t tumbler_idx)
+    {
+        return &tumblers[tumbler_idx];
+    }
+
 private:
 
     enum { TUMBLERS_NUMBER = 12 };

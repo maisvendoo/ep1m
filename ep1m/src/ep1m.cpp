@@ -78,6 +78,8 @@ void EP1m::initialization()
     // Инициализация регистратора
     if (is_Registrator_on)
         initRegistartor(modules_dir, custom_cfg_dir);
+
+    connect(autoStartTimer, &Timer::process, this, &EP1m::slotAutostart);
 }
 
 //------------------------------------------------------------------------------
@@ -150,6 +152,8 @@ void EP1m::step(const double& t, const double& dt)
     // Регистрация параметров движения
     if (is_Registrator_on)
         stepRegistration(t, dt);
+
+    autoStartTimer->step(t, dt);
 }
 
 //------------------------------------------------------------------------------

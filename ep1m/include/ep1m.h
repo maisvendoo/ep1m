@@ -504,6 +504,19 @@ private:
     void load_brakes_config(QString path);
 
     double calcTracForce();
+
+    Timer *autoStartTimer = new Timer(0.5, false);
+
+    std::vector<Trigger *> autostart_triggers;
+    size_t start_count = 0;
+    size_t autostart_cab = 0;
+
+    /// Инициализация автозапуска
+    bool initAutostartProgram(int cab_autostart_request);
+
+private slots:
+
+    void slotAutostart();
 };
 
 #endif // EP1M_H
