@@ -95,7 +95,15 @@ void EP1m::slotAutostart()
         // Проверяем, включен ли ГВ, чтобы отпустить возврат защиты
         if (main_switch->getState())
         {
-            tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_MAIN_SWITCH)->reset();
+            tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_RETURN_PROTECTION)->reset();
+        }
+        else
+        {
+            if (autostart_triggers[start_count] == tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_RETURN_PROTECTION))
+            {
+                tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_RETURN_PROTECTION)->set();
+                return;
+            }
         }
 
         autostart_triggers[start_count++]->set();

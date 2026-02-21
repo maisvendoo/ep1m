@@ -23,6 +23,24 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
 
     tumbler_power_supply.step(t.simulation_seconds, dt);
 
+    // Автозапуск
+    if (autoStartTimer->isStarted())
+    {
+        return;
+    }
+
+    if (getKeyState(KEY_R, CAB1) && isAlt(CAB1) && initAutostartProgram(CAB1))
+    {
+        autoStartTimer->start();
+        return;
+    }
+
+    if (getKeyState(KEY_R, CAB2) && isAlt(CAB2) && initAutostartProgram(CAB2))
+    {
+        autoStartTimer->start();
+        return;
+    }
+
     // Управление оборудованием в кабинах
     for (auto cab_idx : {CAB1, CAB2})
     {
@@ -89,23 +107,5 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
         }
 
         brake_lock_door[cab_idx].step(t.simulation_seconds, dt);
-    }
-
-    // Автозапуск
-    if (autoStartTimer->isStarted())
-    {
-        return;
-    }
-
-    if (getKeyState(KEY_R, CAB1) && isAlt(CAB1) && initAutostartProgram(CAB1))
-    {
-        autoStartTimer->start();
-        return;
-    }
-
-    if (getKeyState(KEY_R, CAB2) && isAlt(CAB2) && initAutostartProgram(CAB2))
-    {
-        autoStartTimer->start();
-        return;
-    }
+    }    
 }
