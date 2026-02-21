@@ -101,6 +101,20 @@ public:
     };
     float getSoundSignal(size_t state_idx) const override;
 
+    void setReversFwd()
+    {
+        revers_pos = 1;
+
+        sound_states[REVERS_CHANGE_POS_SOUND].play();
+    }
+
+    void setReversBwd()
+    {
+        revers_pos = -1;
+
+        sound_states[REVERS_CHANGE_POS_SOUND].play();
+    }
+
 private:
 
     /// Разрешение установить реверсивку (для реализации одной рукоятки на несколько кабин)
