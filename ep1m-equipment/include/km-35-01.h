@@ -115,6 +115,11 @@ public:
         sound_states[REVERS_CHANGE_POS_SOUND].play();
     }
 
+    void setMode(int8_t mode_pos)
+    {
+        this->mode_pos = mode_pos;
+    }
+
 private:
 
     /// Разрешение установить реверсивку (для реализации одной рукоятки на несколько кабин)

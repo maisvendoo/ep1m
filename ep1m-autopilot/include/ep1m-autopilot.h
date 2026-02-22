@@ -19,6 +19,9 @@ public:
 
     void step(double t, double dt) override;
 
+    void initAutoBrakeControl(const QString& config_name,
+                              const QString& custom_cfg_dir) override;
+
 private:
 
     /// структура управляющих воздействий
@@ -27,9 +30,19 @@ private:
     /// структура обратных связей
     ep1m_feedback_t *auto_feedback = nullptr;
 
+    /// Максимальный ток якоря
+    double Imax = 0.0;
+
+    /// Тормозной контроллер
+    AutopilotBrakeController *brake_control = new AutopilotBrakeController;
+
     void press_RB() override;
 
     void release_RB() override;
+
+    void load_config(CfgReader &cfg) override;
+
+    void preStep(state_vector_t &Y, double t) override;
 };
 
 #endif

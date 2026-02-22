@@ -47,7 +47,27 @@ void EP1m::stepAutopilot(double t, double dt)
 
     // Сигнал контроля бдительности от цепей КЛУБ
     auto_feedback[cab_idx]->is_vigilance_control = klub_BEL->isCheckVigilanse();
+    auto_feedback[cab_idx]->I_motor = trac_motor[TRAC_MOTOR1]->getAncorCurrent();
+    auto_feedback[cab_idx]->v_cur = qAbs(velocity * Physics::kmh);
+    auto_feedback[cab_idx]->v_tau = qAbs(wheel_omega[0] * wheel_diameter[0] / 2.0 * Physics::kmh);
+    auto_feedback[cab_idx]->v_lim = klub_BEL->getCurrentSpeedLimit();
+    auto_feedback[cab_idx]->v_lim_next = klub_BEL->getNextSpeedLimit();
+    auto_feedback[cab_idx]->v_lim_next = v_lim_next;
+    auto_feedback[cab_idx]->limit_dist = limit_dist;
+    auto_feedback[cab_idx]->alsn_code = alsn_code;
+    auto_feedback[cab_idx]->signal_dist = signal_dist;
+    auto_feedback[cab_idx]->pBC = brake_mech[TROLLEY_FWD]->getBCpressure();
+    auto_feedback[cab_idx]->pEQ = brake_crane[cab_idx]->getERpressure();
+    auto_feedback[cab_idx]->p_charge = charge_press;
+    auto_feedback[cab_idx]->is_EPB_on = epb_control->stateReleaseLamp();
 
+    // Проверяем состояние линейных контакторов
+    auto_feedback[cab_idx]->is_LC_ON = true;
+
+    for (auto lc : fast_switch)
+    {
+        auto_feedback[cab_idx]->is_LC_ON = auto_feedback[cab_idx]->is_LC_ON && lc->getContactState(0);
+    }
 
     // Принимаем сигналы обратной связи от оборудования
     autopilot[cab_idx]->setFeedback(auto_feedback[cab_idx]);
@@ -65,5 +85,7 @@ void EP1m::stepAutopilot(double t, double dt)
 
         // Проверка бдительности
         auto_control[cab_idx]->press_RB ? tumblers[BUTTON_RBS][cab_idx].set() : tumblers[BUTTON_RBS][cab_idx].reset();
+
+        km[cab_idx]->setMode(auto_control[cab_idx]->mode_pos);
     }
 }

@@ -35,6 +35,15 @@ void EP1mAutopilot::step(double t, double dt)
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
+void EP1mAutopilot::initAutoBrakeControl(const QString &config_name,
+                                         const QString &custom_cfg_dir)
+{
+    brake_control->read_config(config_name, custom_cfg_dir);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 void EP1mAutopilot::press_RB()
 {
     auto_control->press_RB = true;
@@ -46,6 +55,34 @@ void EP1mAutopilot::press_RB()
 void EP1mAutopilot::release_RB()
 {
     auto_control->press_RB = false;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1mAutopilot::load_config(CfgReader &cfg)
+{
+    Autopilot::load_config(cfg);
+
+    QString secName = "Device";
+
+    cfg.getDouble(secName, "Imax", Imax);
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1mAutopilot::preStep(state_vector_t &Y, double t)
+{
+    // Приводим общую структуру обратной связи к нашему типу
+    auto_feedback = dynamic_cast<ep1m_feedback_t *>(feedback);
+
+    if (auto_feedback == nullptr)
+    {
+        return;
+    }
+
+    //auto_control->mode_pos = 1;
 }
 
 GET_AUTOPILOT(EP1mAutopilot)
