@@ -80,6 +80,8 @@ void EP1m::initialization()
         initRegistartor(modules_dir, custom_cfg_dir);
 
     connect(autoStartTimer, &Timer::process, this, &EP1m::slotAutostart);
+
+    initAutopilot(modules_dir, custom_cfg_dir);
 }
 
 //------------------------------------------------------------------------------

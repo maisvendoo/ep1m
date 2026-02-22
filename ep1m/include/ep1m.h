@@ -2,6 +2,7 @@
 #define     EP1M_H
 
 #include    <ep1m-headers.h>
+#include    <ep1m-autopilot-types.h>
 
 //---------------------------------------------------------------------
 //
@@ -32,6 +33,12 @@ private:
     QString coupling_module_name = "sa3";
     /// Имя конфига сцепного устройства
     QString coupling_config_name = "sa3";
+
+    QString autopilot_module_name = "ep1m-autopilot";
+    /// Имя конфига модуля автоведения
+    QString autopilot_config_name = "ep1m-autopilot";
+    /// Каталог поиска кастомных модулей
+    QString custom_modules_dir = "ep1m";
 
     /// Сцепка спереди
     Coupling* coupling_fwd = nullptr;
@@ -514,9 +521,27 @@ private:
     /// Инициализация автозапуска
     bool initAutostartProgram(int cab_autostart_request);
 
+    ep1m_control_t *auto_control[CABS_NUM] = {nullptr, nullptr};
+
+    ep1m_feedback_t *auto_feedback[CABS_NUM];
+
+    TriggerControl autopilot_switcher[CABS_NUM];
+
+    /// Инициализация автоведения
+    void initAutopilot(const QString& modules_dir, const QString& custom_cfg_dir);
+
+    /// Подготовка рабочей кабины к включению автоведения
+    void prepareCabineForAutopilot(int my_cab_idx, int other_cab_idx);
+
+    void OnAutopilot() override;
+
+    void OffAutopilot() override;
+
 private slots:
 
     void slotAutostart();
+
+    void slotInitTrainForAutopilot();
 };
 
 #endif // EP1M_H

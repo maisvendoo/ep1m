@@ -136,7 +136,9 @@ void EP1m::slotAutostart()
 
         if (auto_start_autopilot)
         {
-            // TODO: запуск автоведения
+            // Включаем модули автоведения, если мы - бот
+            autopilot_switcher[CAB1].set();
+            autopilot_switcher[CAB2].set();
         }
     }
 }

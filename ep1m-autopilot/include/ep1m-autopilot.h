@@ -2,6 +2,7 @@
 #define     EP1M_AUTOPILOT
 
 #include    <autopilot.h>
+#include    <ep1m-autopilot-types.h>
 
 //------------------------------------------------------------------------------
 //
@@ -17,6 +18,12 @@ public:
     auto_control_t *getControl() override;
 
 private:
+
+    /// структура управляющих воздействий
+    ep1m_control_t *auto_control = new ep1m_control_t();
+
+    /// структура обратных связей
+    ep1m_feedback_t *auto_feedback = nullptr;
 };
 
 #endif
