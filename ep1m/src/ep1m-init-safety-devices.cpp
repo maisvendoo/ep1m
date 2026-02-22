@@ -12,20 +12,20 @@ void EP1m::initSafetyDevices(const QString& modules_dir, const QString& custom_c
 
     // Карта ограничений скорости
     speedmap_fwd = new SpeedMap();
-    speedmap_fwd->setDirection(dir);
+    speedmap_fwd->setDirection(1);
     addRailwayConnector(speedmap_fwd, length / 2.0);
 
     speedmap_bwd = new SpeedMap();
-    speedmap_bwd->setDirection(-1 * dir);
+    speedmap_bwd->setDirection(-1);
     addRailwayConnector(speedmap_bwd, -length / 2.0);
 
     // Приёмные катушки АЛСН
     coil_ALSN_fwd = new CoilALSN();
-    coil_ALSN_fwd->setDirection(dir);
+    coil_ALSN_fwd->setDirection(1);
     addRailwayConnector(coil_ALSN_fwd, length / 2.0);
 
     coil_ALSN_bwd = new CoilALSN();
-    coil_ALSN_bwd->setDirection(-1 * dir);
+    coil_ALSN_bwd->setDirection(-1);
     addRailwayConnector(coil_ALSN_bwd, -length / 2.0);
 
     // Дешифратор АЛСН
