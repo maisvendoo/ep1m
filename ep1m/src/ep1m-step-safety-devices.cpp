@@ -18,7 +18,7 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
 
     // КЛУБ
     bool epk_on = false;
-    int direction = dir * orient;
+    int direction = dir;
     auto cab_idx = CAB1;
     auto wheel_idx = TRAC_MOTOR1;
     if (epk[CAB1]->isKeyOn())
