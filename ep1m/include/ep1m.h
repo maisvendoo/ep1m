@@ -537,6 +537,9 @@ private:
 
     void OffAutopilot() override;
 
+    /// Шаг работы автоведения
+    void stepAutopilot(double t, double dt);
+
 private slots:
 
     void slotAutostart();

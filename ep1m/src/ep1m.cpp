@@ -156,6 +156,9 @@ void EP1m::step(const double& t, const double& dt)
         stepRegistration(t, dt);
 
     autoStartTimer->step(t, dt);
+
+    // Работа автоведения
+    stepAutopilot(t, dt);
 }
 
 //------------------------------------------------------------------------------

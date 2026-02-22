@@ -17,6 +17,8 @@ public:
 
     auto_control_t *getControl() override;
 
+    void step(double t, double dt) override;
+
 private:
 
     /// структура управляющих воздействий
@@ -24,6 +26,10 @@ private:
 
     /// структура обратных связей
     ep1m_feedback_t *auto_feedback = nullptr;
+
+    void press_RB() override;
+
+    void release_RB() override;
 };
 
 #endif

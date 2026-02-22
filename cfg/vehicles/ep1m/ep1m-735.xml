@@ -24,6 +24,11 @@
 
 		<isRegistratorOn>0</isRegistratorOn>
 
+		<CustomModulesDir>ep1m</CustomModulesDir>
+
+		<AutopilotModule>ep1m-autopilot</AutopilotModule>
+		<AutopilotConfig>ep1m-autopilot</AutopilotConfig>
+
 	</Vehicle>
 
 	<Cabine>
