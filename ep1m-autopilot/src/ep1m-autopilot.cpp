@@ -49,7 +49,7 @@ void EP1mAutopilot::initAutoBrakeControl(const QString &config_name,
 //------------------------------------------------------------------------------
 void EP1mAutopilot::press_RB()
 {
-    auto_control->press_RB = true;
+
 }
 
 //------------------------------------------------------------------------------
@@ -57,10 +57,7 @@ void EP1mAutopilot::press_RB()
 //------------------------------------------------------------------------------
 void EP1mAutopilot::release_RB()
 {
-    if (!auto_feedback->is_vigilance_control)
-    {
-        auto_control->press_RB = false;
-    }
+
 }
 
 //------------------------------------------------------------------------------
@@ -148,6 +145,8 @@ void EP1mAutopilot::preStep(state_vector_t &Y, double t)
 
     // Управляем прожектором - включаем когда разрешено движение
     auto_control->spotlight_ON = is_motion_allowed;
+
+    auto_control->press_RB = auto_feedback->is_vigilance_control;
 }
 
 //------------------------------------------------------------------------------
