@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 EP1mAutopilot::EP1mAutopilot() : Autopilot(nullptr)
 {
-
+    connect(km_delay, &Timer::process, this, &EP1mAutopilot::slotDelayKM);
 }
 
 //------------------------------------------------------------------------------
@@ -30,6 +30,8 @@ auto_control_t *EP1mAutopilot::getControl()
 void EP1mAutopilot::step(double t, double dt)
 {
     Autopilot::step(t, dt);
+
+    km_delay->step(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -97,9 +99,10 @@ void EP1mAutopilot::preStep(state_vector_t &Y, double t)
     I_ref = cut(I_ref, -Imax, Imax);
 
     // Выбираем режим работы привода
-    mode_pose = tree_pos_relay(I_ref, -5.0, 5.0);
+    mode_pos_old = mode_pos;
+    mode_pos = tree_pos_relay(I_ref, -5.0, 5.0);
 
-    traction_control(mode_pose, I_ref / I_ref_max);
+    traction_control(mode_pos, I_ref / I_ref_max);
 
     // Задаем скорость для регулятора
     auto_control->v_level = v_ref / v_constr;
@@ -129,24 +132,47 @@ int8_t EP1mAutopilot::tree_pos_relay(double x, double x_min, double x_max)
 //------------------------------------------------------------------------------
 void EP1mAutopilot::traction_control(int8_t mode_pos, double level)
 {
-    // Перекладываем ручку на другой режим - только через ноль
-    if (mode_pos * mode_pose_old < 0 && !auto_feedback->km_is_zero)
+    if (km_delay->isStarted())
     {
-        auto_control->mode_pos = 0;
         return;
     }
 
-    // Если не замкнуты линейные контакторы, ставим рукоятку в нужный режим подготовки
+    // Перекладываем ручку на другой режим - только через ноль
+    if (mode_pos * mode_pos_old < 0 && !auto_feedback->km_is_zero)
+    {
+        auto_control->mode_pos = 0;
+
+        if (!km_delay->isStarted())
+        {
+            km_delay->start();
+        }
+
+        return;
+    }
+
+    // Если не не собрана схема, ставим рукоятку в нужный режим подготовки
     if (!auto_feedback->is_LC_ON && auto_feedback->km_is_zero)
     {
         auto_control->mode_pos = mode_pos;
+
+        if (!km_delay->isStarted())
+        {
+            km_delay->start();
+        }
+
         return;
     }
 
-    mode_pose_old = mode_pos;
-
     // Задаем уровень тяги/ЭДТ
     auto_control->level = level;
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1mAutopilot::slotDelayKM()
+{
+    km_delay->stop();
 }
 
 GET_AUTOPILOT(EP1mAutopilot)

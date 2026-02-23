@@ -2,6 +2,7 @@
 #define     EP1M_AUTOPILOT
 
 #include    <autopilot.h>
+#include    <timer.h>
 #include    <ep1m-autopilot-types.h>
 
 //------------------------------------------------------------------------------
@@ -42,14 +43,17 @@ private:
     /// Коэффициент обратной связи по скорости проскальзывания
     double Ks = 1.0;
 
-    int8_t mode_pose = 0;
-    int8_t mode_pose_old = 0;
+    int8_t mode_pos = 0;
+    int8_t mode_pos_old = 0;
 
     /// Максимальный ток, задаваемый с контроллера
     double I_ref_max = 1300.0;
 
     /// Тормозной контроллер
     AutopilotBrakeController *brake_control = new AutopilotBrakeController;
+
+    /// Таймер выдержки для КМ
+    Timer *km_delay = new Timer(1.5, false);
 
     void press_RB() override;
 
@@ -64,6 +68,10 @@ private:
 
     /// Управление тягой/ЭДТ
     void traction_control(int8_t mode_pos, double level);
+
+private slots:
+
+    void slotDelayKM();
 };
 
 #endif
