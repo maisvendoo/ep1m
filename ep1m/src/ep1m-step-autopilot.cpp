@@ -52,7 +52,6 @@ void EP1m::stepAutopilot(double t, double dt)
     auto_feedback[cab_idx]->v_tau = qAbs(wheel_omega[0] * wheel_diameter[0] / 2.0 * Physics::kmh);
     auto_feedback[cab_idx]->v_lim = klub_BEL->getCurrentSpeedLimit();
     auto_feedback[cab_idx]->v_lim_next = klub_BEL->getNextSpeedLimit();
-    auto_feedback[cab_idx]->v_lim_next = v_lim_next;
     auto_feedback[cab_idx]->limit_dist = limit_dist;
     auto_feedback[cab_idx]->alsn_code = alsn_code;
     auto_feedback[cab_idx]->signal_dist = signal_dist;
@@ -64,6 +63,8 @@ void EP1m::stepAutopilot(double t, double dt)
 
     // Проверяем состояние сбора схемы
     auto_feedback[cab_idx]->is_LC_ON = msud_input.is_traction || msud_input.is_brake; //true;
+    auto_feedback[cab_idx]->is_traction_ON = msud_input.is_traction;
+    auto_feedback[cab_idx]->is_brake_ON = msud_input.is_brake;
 
     /*for (auto lc : fast_switch)
     {
@@ -90,5 +91,11 @@ void EP1m::stepAutopilot(double t, double dt)
         km[cab_idx]->setMode(auto_control[cab_idx]->mode_pos);
         km[cab_idx]->setLevel(auto_control[cab_idx]->level);
         km[cab_idx]->setVrefLevel(auto_control[cab_idx]->v_level);
+
+        // Управление КрМ
+        brake_crane[cab_idx]->setHandlePosition(auto_control[cab_idx]->krm_pos);
+
+        // Управление КВТ
+        loco_crane[cab_idx]->setHandlePosition(auto_control[cab_idx]->kvt_pos);
     }
 }

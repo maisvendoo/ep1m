@@ -49,6 +49,8 @@ private:
     /// Максимальный ток, задаваемый с контроллера
     double I_ref_max = 1300.0;
 
+    bool lock_traction = false;
+
     /// Тормозной контроллер
     AutopilotBrakeController *brake_control = new AutopilotBrakeController;
 

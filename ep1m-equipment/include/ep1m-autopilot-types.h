@@ -17,6 +17,10 @@ public:
 
     double v_level = 0.0;
 
+    int krm_pos = 1;
+
+    double kvt_pos = 0.0;
+
     ep1m_control_t()
     {
 
@@ -38,6 +42,12 @@ public:
 
     /// Признак замыкания линейных контакторов ТЭД
     bool is_LC_ON = false;
+
+    /// Признак сбора тяги
+    bool is_traction_ON = false;
+
+    /// Признак сбора рекуперации
+    bool is_brake_ON = false;
 
     /// Признак нулевого положения КМ
     bool km_is_zero = false;

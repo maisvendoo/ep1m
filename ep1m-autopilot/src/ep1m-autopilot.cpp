@@ -32,6 +32,7 @@ void EP1mAutopilot::step(double t, double dt)
     Autopilot::step(t, dt);
 
     km_delay->step(t, dt);
+    brake_control->step(t, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -106,7 +107,51 @@ void EP1mAutopilot::preStep(state_vector_t &Y, double t)
 
     // Задаем скорость для регулятора
     auto_control->v_level = v_ref / v_constr;
-    //auto_control->mode_pos = -1;
+
+    // Управляем пневматикой
+    // Блокирование тяги по давлению в ТЦ
+    if (auto_feedback->pBC > 0.04)
+    {
+        lock_traction = true;
+    }
+    else
+    {
+        // Если тяга заблокирована но скорость не упала сильно
+        if (lock_traction && dv < 10.0)
+            lock_traction = true; // продолжаем блокировать тягу
+        else
+            lock_traction = false;
+    }
+
+    brake_control->setBrakePressures(auto_feedback->pEQ,
+                                     auto_feedback->pBC,
+                                     auto_feedback->p_charge);
+
+    brake_control->setFeedback(auto_feedback->v_cur, dist_target, a_brake, accel_meter->value());
+
+    // Передаем в тормоза ошибку по скорости, если неэффективна рекуперация
+    double dv_brakes = 0.0;
+    if (auto_control->level < -0.95)
+    {
+        if (accel_meter->value() > -a_brake)
+        {
+            dv_brakes = dv;
+        }
+    }
+
+    brake_control->step_control(auto_feedback->is_EPB_on,
+                                dv_brakes,
+                                is_motion_allowed,
+                                lock_traction,
+                                is_disable_release);
+
+    autopilot_brake_control_state_t bc_state = brake_control->getControlState();
+
+    auto_control->krm_pos = bc_state.brake_crane_pos_ref;
+    auto_control->kvt_pos = bc_state.loco_crane_pos_ref;
+
+    // Управляем прожектором - включаем когда разрешено движение
+    auto_control->spotlight_ON = is_motion_allowed;
 }
 
 //------------------------------------------------------------------------------
@@ -137,6 +182,18 @@ void EP1mAutopilot::traction_control(int8_t mode_pos, double level)
         return;
     }
 
+    if (!is_motion_allowed)
+    {
+        auto_control->mode_pos = 0;
+
+        if (!km_delay->isStarted())
+        {
+            km_delay->start();
+        }
+
+        return;
+    }
+
     // Перекладываем ручку на другой режим - только через ноль
     if (mode_pos * mode_pos_old < 0 && !auto_feedback->km_is_zero)
     {
@@ -150,10 +207,35 @@ void EP1mAutopilot::traction_control(int8_t mode_pos, double level)
         return;
     }
 
-    // Если не не собрана схема, ставим рукоятку в нужный режим подготовки
-    if (!auto_feedback->is_LC_ON && auto_feedback->km_is_zero)
+    if (mode_pos == 1 && !auto_feedback->is_traction_ON)
     {
-        auto_control->mode_pos = mode_pos;
+        if (auto_feedback->km_is_zero)
+        {
+            auto_control->mode_pos = 1;
+        }
+        else
+        {
+            auto_control->mode_pos = 0;
+        }
+
+        if (!km_delay->isStarted())
+        {
+            km_delay->start();
+        }
+
+        return;
+    }
+
+    if (mode_pos == -1 && !auto_feedback->is_brake_ON)
+    {
+        if (auto_feedback->km_is_zero)
+        {
+            auto_control->mode_pos = -1;
+        }
+        else
+        {
+            auto_control->mode_pos = 0;
+        }
 
         if (!km_delay->isStarted())
         {
@@ -164,7 +246,17 @@ void EP1mAutopilot::traction_control(int8_t mode_pos, double level)
     }
 
     // Задаем уровень тяги/ЭДТ
-    auto_control->level = level;
+    if (level > 0)
+    {
+        if (!lock_traction)
+            auto_control->level = level;
+        else
+            auto_control->level = 0;
+    }
+    else
+    {
+        auto_control->level = level;
+    }
 }
 
 //------------------------------------------------------------------------------
