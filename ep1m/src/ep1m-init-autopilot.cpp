@@ -73,6 +73,18 @@ void EP1m::prepareCabineForAutopilot(int my_cab_idx, int other_cab_idx)
     {
         tumblers_panel[my_cab_idx]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_EPT)->set();
     }
+
+    // Включаем белые буферные
+    tumblers[TUMBLER_BUFFERLIGHT_L][my_cab_idx].set();
+    tumblers[TUMBLER_BUFFERLIGHT_R][my_cab_idx].set();
+    // прожектор ярко
+    tumblers[TUMBLER_SPOTLIGHT_HIGH][my_cab_idx].set();
+
+    // Включаем подсветку приборов
+    tumblers[TUMBLER_DEVICES_LIGHT][my_cab_idx].set();
+
+    // В другой кабине
+    tumblers[TUMBLER_BUFFERLIGHT_L][other_cab_idx].set();
 }
 
 //------------------------------------------------------------------------------

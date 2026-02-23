@@ -97,5 +97,7 @@ void EP1m::stepAutopilot(double t, double dt)
 
         // Управление КВТ
         loco_crane[cab_idx]->setHandlePosition(auto_control[cab_idx]->kvt_pos);
+
+        auto_control[cab_idx]->spotlight_ON ? tumblers[TUMBLER_SPOTLIGHT_LOW][cab_idx].set() : tumblers[TUMBLER_SPOTLIGHT_LOW][cab_idx].reset();
     }
 }
