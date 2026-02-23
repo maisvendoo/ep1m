@@ -120,6 +120,32 @@ public:
         this->mode_pos = mode_pos;
     }
 
+    void setLevel(double level)
+    {
+        if (mode_pos == 1 && level >= 0)
+        {
+            trac_level = cut(level, 0.0, 1.0) * 100.0;
+        }
+        else
+        {
+            trac_level = 0.0;
+        }
+
+        if (mode_pos == -1 && level <= 0)
+        {
+            brake_level = cut(-level, 0.0, 1.0) * 100.0;
+        }
+        else
+        {
+            brake_level = 0.0;
+        }
+    }
+
+    void setVrefLevel(double v_level)
+    {
+        refV_level = cut(v_level, 0.0, 1.0);
+    }
+
 private:
 
     /// Разрешение установить реверсивку (для реализации одной рукоятки на несколько кабин)

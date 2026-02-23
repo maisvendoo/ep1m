@@ -60,14 +60,15 @@ void EP1m::stepAutopilot(double t, double dt)
     auto_feedback[cab_idx]->pEQ = brake_crane[cab_idx]->getERpressure();
     auto_feedback[cab_idx]->p_charge = charge_press;
     auto_feedback[cab_idx]->is_EPB_on = epb_control->stateReleaseLamp();
+    auto_feedback[cab_idx]->km_is_zero = km[cab_idx]->isZero();
 
-    // Проверяем состояние линейных контакторов
-    auto_feedback[cab_idx]->is_LC_ON = true;
+    // Проверяем состояние сбора схемы
+    auto_feedback[cab_idx]->is_LC_ON = msud_input.is_traction || msud_input.is_brake; //true;
 
-    for (auto lc : fast_switch)
+    /*for (auto lc : fast_switch)
     {
         auto_feedback[cab_idx]->is_LC_ON = auto_feedback[cab_idx]->is_LC_ON && lc->getContactState(0);
-    }
+    }*/
 
     // Принимаем сигналы обратной связи от оборудования
     autopilot[cab_idx]->setFeedback(auto_feedback[cab_idx]);
@@ -87,5 +88,7 @@ void EP1m::stepAutopilot(double t, double dt)
         auto_control[cab_idx]->press_RB ? tumblers[BUTTON_RBS][cab_idx].set() : tumblers[BUTTON_RBS][cab_idx].reset();
 
         km[cab_idx]->setMode(auto_control[cab_idx]->mode_pos);
+        km[cab_idx]->setLevel(auto_control[cab_idx]->level);
+        km[cab_idx]->setVrefLevel(auto_control[cab_idx]->v_level);
     }
 }

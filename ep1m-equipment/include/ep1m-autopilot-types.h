@@ -13,6 +13,10 @@ public:
 
     int8_t mode_pos = 0;
 
+    double level = 0.0;
+
+    double v_level = 0.0;
+
     ep1m_control_t()
     {
 
@@ -34,6 +38,9 @@ public:
 
     /// Признак замыкания линейных контакторов ТЭД
     bool is_LC_ON = false;
+
+    /// Признак нулевого положения КМ
+    bool km_is_zero = false;
 
     ep1m_feedback_t()
     {

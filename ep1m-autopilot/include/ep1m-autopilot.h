@@ -33,6 +33,21 @@ private:
     /// Максимальный ток якоря
     double Imax = 0.0;
 
+    /// Ошибка по скорости
+    double dv = 0.0;
+
+    /// Коэффициент пропорциональной части регулятора
+    double Kp = 1.0;
+
+    /// Коэффициент обратной связи по скорости проскальзывания
+    double Ks = 1.0;
+
+    int8_t mode_pose = 0;
+    int8_t mode_pose_old = 0;
+
+    /// Максимальный ток, задаваемый с контроллера
+    double I_ref_max = 1300.0;
+
     /// Тормозной контроллер
     AutopilotBrakeController *brake_control = new AutopilotBrakeController;
 
@@ -43,6 +58,12 @@ private:
     void load_config(CfgReader &cfg) override;
 
     void preStep(state_vector_t &Y, double t) override;
+
+    /// Трехпозиционное реле с зоной нечувствительности
+    int8_t tree_pos_relay(double x, double x_min, double x_max);
+
+    /// Управление тягой/ЭДТ
+    void traction_control(int8_t mode_pos, double level);
 };
 
 #endif
