@@ -57,7 +57,10 @@ void EP1mAutopilot::press_RB()
 //------------------------------------------------------------------------------
 void EP1mAutopilot::release_RB()
 {
-    auto_control->press_RB = false;
+    if (!auto_feedback->is_vigilance_control)
+    {
+        auto_control->press_RB = false;
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -72,6 +75,7 @@ void EP1mAutopilot::load_config(CfgReader &cfg)
     cfg.getDouble(secName, "Imax", Imax);
     cfg.getDouble(secName, "Kp", Kp);
     cfg.getDouble(secName, "Ks", Ks);
+    cfg.getBool(secName, "DisableEDB", edb_disable);
 }
 
 //------------------------------------------------------------------------------
@@ -96,8 +100,10 @@ void EP1mAutopilot::preStep(state_vector_t &Y, double t)
     // Задание по  току
     double I_ref = Imax * (Kp * dv - Ks * dv_s);
 
-    // И рекуперацию тоже учитываем
-    I_ref = cut(I_ref, -Imax, Imax);
+    if (edb_disable)
+        I_ref = cut(I_ref, 0.0, Imax);
+    else
+        I_ref = cut(I_ref, -Imax, Imax);
 
     // Выбираем режим работы привода
     mode_pos_old = mode_pos;
@@ -129,18 +135,8 @@ void EP1mAutopilot::preStep(state_vector_t &Y, double t)
 
     brake_control->setFeedback(auto_feedback->v_cur, dist_target, a_brake, accel_meter->value());
 
-    // Передаем в тормоза ошибку по скорости, если неэффективна рекуперация
-    double dv_brakes = 0.0;
-    if (auto_control->level < -0.95)
-    {
-        if (accel_meter->value() > -a_brake)
-        {
-            dv_brakes = dv;
-        }
-    }
-
     brake_control->step_control(auto_feedback->is_EPB_on,
-                                dv_brakes,
+                                dv,
                                 is_motion_allowed,
                                 lock_traction,
                                 is_disable_release);

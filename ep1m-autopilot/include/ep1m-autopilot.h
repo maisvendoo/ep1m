@@ -51,6 +51,8 @@ private:
 
     bool lock_traction = false;
 
+    bool edb_disable = false;
+
     /// Тормозной контроллер
     AutopilotBrakeController *brake_control = new AutopilotBrakeController;
 
