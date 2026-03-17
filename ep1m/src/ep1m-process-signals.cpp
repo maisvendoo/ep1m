@@ -294,8 +294,8 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
     analogSignal[KLUB_U_STRAIGHT] = 0.0f;
     analogSignal[KLUB_U_SIDE] = 0.0f;
     analogSignal[KLUB_U_BDITELNOST] = TO_FLOAT(klub_BEL->isCheckVigilanse());
-    analogSignal[KLUB_U_M] = 0.0f;
-    analogSignal[KLUB_U_P] = 1.0f;
+    analogSignal[KLUB_U_M] = static_cast<float>(klub_BEL->isShuntingMode());
+    analogSignal[KLUB_U_P] = static_cast<float>(!klub_BEL->isShuntingMode());
     analogSignal[KLUB_U_CASSETE] = 1.0f;
     analogSignal[KLUB_U_REVERSOR] = TO_FLOAT(epk[CAB1]->isKeyOn() * km[CAB1]->getReversHandlePos() +
                                              epk[CAB2]->isKeyOn() * km[CAB2]->getReversHandlePos());

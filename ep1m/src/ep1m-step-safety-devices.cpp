@@ -49,5 +49,6 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
     klub_BEL->setTrainLength(length);
     klub_BEL->setRBstate(epk_on && tumblers[BUTTON_RB][cab_idx].getState());
     klub_BEL->setRBSstate(epk_on && tumblers[BUTTON_RBS][cab_idx].getState());
+    klub_BEL->setShuntingMode(shunting_mode_switcher[cab_idx].getState());
     klub_BEL->step(t, dt);
 }

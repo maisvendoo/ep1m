@@ -109,5 +109,7 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
         brake_lock_door[cab_idx].step(t.simulation_seconds, dt);
 
         autopilot_switcher[cab_idx].step(t.simulation_seconds, dt);
+
+        shunting_mode_switcher[cab_idx].step(t.simulation_seconds, dt);
     }    
 }

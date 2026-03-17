@@ -40,8 +40,15 @@ public:
     /// Прием кода АЛСН
     void setAlsnCode(ALSN code_alsn)
     {
-        old_code_alsn = this->code_alsn;
-        this->code_alsn = code_alsn;
+        if (!is_shunting_mode)
+        {
+            old_code_alsn = this->code_alsn;
+            this->code_alsn = code_alsn;
+        }
+        else
+        {
+            this->code_alsn = ALSN::NO_CODE;
+        }
     };
 
     /// Модуль приёма сигналов АЛС с путевой топологии
@@ -170,10 +177,8 @@ public:
    {
        if (is_shunting_mode != is_shnt_mode)
        {
-           epk_state.reset();
-
-           if (!safety_timer->isStarted())
-            safety_timer->start();
+           epk_state.reset();           
+           safety_timer->start();
        }
 
        is_shunting_mode = is_shnt_mode;
@@ -311,6 +316,10 @@ private:
    std::array<sound_state_t, NUM_SOUNDS> sound_states;
 
    void preStep(state_vector_t &Y, double t) override;
+
+   void train_mode_process();
+
+   void shunting_mode_process();
 
    void ode_system(const state_vector_t &Y,
                    state_vector_t &dYdt,

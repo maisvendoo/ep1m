@@ -111,6 +111,31 @@ void KLUB::preStep(state_vector_t &Y, double t)
     is_dislplay_ON = true;
     is_trac_allowed = true;
 
+    if (is_shunting_mode)
+    {
+        shunting_mode_process();
+    }
+    else
+    {
+        train_mode_process();
+    }
+
+    if (state_RB || state_RBS)
+    {
+        epk_state.set();
+        safety_timer->stop();
+    }
+
+    check_vigilance = !epk_state.getState();
+
+    sounds_process();
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void KLUB::train_mode_process()
+{
     stations_process();
 
     calc_speed_limits_by_speedmap();
@@ -177,16 +202,18 @@ void KLUB::preStep(state_vector_t &Y, double t)
             safety_timer->stop();
         }
     }
+}
 
-    if (state_RB || state_RBS)
-    {
-        epk_state.set();
-        safety_timer->stop();
-    }
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void KLUB::shunting_mode_process()
+{
+    lamps[WHITE_LAMP] = 1.0f;
+    current_limit = 60.0;
+    next_limit = 60.0;
 
-    check_vigilance = !epk_state.getState();
-
-    sounds_process();
+    speed_control();
 }
 
 //------------------------------------------------------------------------------
