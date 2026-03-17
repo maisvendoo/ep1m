@@ -99,5 +99,8 @@ void EP1m::stepAutopilot(double t, double dt)
         loco_crane[cab_idx]->setHandlePosition(auto_control[cab_idx]->kvt_pos);
 
         auto_control[cab_idx]->spotlight_ON ? tumblers[TUMBLER_SPOTLIGHT_LOW][cab_idx].set() : tumblers[TUMBLER_SPOTLIGHT_LOW][cab_idx].reset();
+
+        horn[cab_idx].setSvistokOn(auto_control[cab_idx]->whistle);
+        horn[cab_idx].setTifonOn(auto_control[cab_idx]->typhoid);
     }
 }

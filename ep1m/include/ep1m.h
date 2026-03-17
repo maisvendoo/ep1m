@@ -540,6 +540,9 @@ private:
     /// Шаг работы автоведения
     void stepAutopilot(double t, double dt);
 
+    /// Условный переключатель поездного/маневрового режима
+    TriggerControl shunting_mode_switcher[CABS_NUM];
+
 private slots:
 
     void slotAutostart();

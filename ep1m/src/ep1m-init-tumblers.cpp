@@ -293,11 +293,11 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         tumblers[BUTTON_RBS][cab_idx].setKeyModifierOff(KEY_Undefined);
         tumblers[BUTTON_RBS][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
-        tumblers[BUTTON_RBP][cab_idx].setKeySymbolOn(KEY_Tilde);
-        tumblers[BUTTON_RBP][cab_idx].setKeyModifierOn(ANY_MODIFIERS);
-        tumblers[BUTTON_RBP][cab_idx].setKeySymbolOff(KEY_Undefined);
-        tumblers[BUTTON_RBP][cab_idx].setKeyModifierOff(KEY_Undefined);
-        tumblers[BUTTON_RBP][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+        //tumblers[BUTTON_RBP][cab_idx].setKeySymbolOn(KEY_Tilde);
+        //tumblers[BUTTON_RBP][cab_idx].setKeyModifierOn(ANY_MODIFIERS);
+        //tumblers[BUTTON_RBP][cab_idx].setKeySymbolOff(KEY_Undefined);
+        //tumblers[BUTTON_RBP][cab_idx].setKeyModifierOff(KEY_Undefined);
+        //tumblers[BUTTON_RBP][cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
 
         // Пульт помощника
         // Кнопка "Экстренное торможение"
@@ -315,5 +315,11 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         // Кнопка "Свисток"
         // У помощника не реализовано
         tumblers[BUTTON_P_WHISTLE][cab_idx].setInitState(false);
+
+        shunting_mode_switcher[cab_idx].setKeySymbolOn(KEY_Tilde);
+        shunting_mode_switcher[cab_idx].setKeyModifierOn(MODIFIER_OnlyShift);
+        shunting_mode_switcher[cab_idx].setKeySymbolOff(KEY_Tilde);
+        shunting_mode_switcher[cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
+        shunting_mode_switcher[cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
     }
 }
