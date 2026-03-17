@@ -166,6 +166,24 @@ public:
        return sound_states[idx].createSoundSignal();
    }
 
+   void setShuntingMode(int is_shnt_mode)
+   {
+       if (is_shunting_mode != is_shnt_mode)
+       {
+           epk_state.reset();
+
+           if (!safety_timer->isStarted())
+            safety_timer->start();
+       }
+
+       is_shunting_mode = is_shnt_mode;
+   }
+
+   bool isShuntingMode() const
+   {
+       return is_shunting_mode;
+   }
+
 private:
 
    double U_pow = 0.0;
@@ -319,6 +337,9 @@ private:
 
    /// Определение текущей станции
    void stations_process();
+
+   /// Флаг маневрового режима
+   bool is_shunting_mode = false;
 
 private slots:
 
