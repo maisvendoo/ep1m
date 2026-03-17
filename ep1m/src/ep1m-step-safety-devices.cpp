@@ -40,6 +40,12 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
         cab_idx = CAB2;
         wheel_idx = TRAC_MOTOR6;
     }
+
+    if (!epk[cab_idx]->isKeyOn())
+    {
+        shunting_mode_switcher[cab_idx].reset();
+    }
+
     klub_BEL->setDirection(direction);
     klub_BEL->setVoltage(Ucc);
     klub_BEL->setKeyEPK(epk_on);

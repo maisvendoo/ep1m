@@ -177,11 +177,10 @@ public:
    {
        if (is_shunting_mode != is_shnt_mode)
        {
-           epk_state.reset();           
+           is_shunting_mode = is_shnt_mode;
+           epk_state.reset();
            safety_timer->start();
-       }
-
-       is_shunting_mode = is_shnt_mode;
+       }       
    }
 
    bool isShuntingMode() const

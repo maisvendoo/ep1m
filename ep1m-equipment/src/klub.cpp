@@ -155,6 +155,7 @@ void KLUB::train_mode_process()
 
         key_epk_old = false;
         is_red.reset();
+        is_shunting_mode = false;
 
         return;
     }
@@ -214,6 +215,11 @@ void KLUB::shunting_mode_process()
     next_limit = 60.0;
 
     speed_control();
+
+    if (!safety_timer->isStarted() && v_kmh > 5.0)
+    {
+        safety_timer->start();
+    }
 }
 
 //------------------------------------------------------------------------------
