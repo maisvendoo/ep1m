@@ -97,6 +97,9 @@ void EP1m::process(const simulator_time_t& t, const double& dt)
     signalsOutput(t, dt);
 
     soundsOutput(t, dt);
+
+    // Работа автоведения
+    stepAutopilot(t.simulation_seconds, dt);
 }
 
 //------------------------------------------------------------------------------
@@ -155,10 +158,7 @@ void EP1m::step(const double& t, const double& dt)
     if (is_Registrator_on)
         stepRegistration(t, dt);
 
-    autoStartTimer->step(t, dt);
-
-    // Работа автоведения
-    stepAutopilot(t, dt);
+    autoStartTimer->step(t, dt);    
 }
 
 //------------------------------------------------------------------------------
