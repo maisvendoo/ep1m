@@ -29,10 +29,10 @@ auto_control_t *EP1mAutopilot::getControl()
 //------------------------------------------------------------------------------
 void EP1mAutopilot::step(double t, double dt)
 {
-    Autopilot::step(t, dt);
-
     km_delay->step(t, dt);
     brake_control->step(t, dt);
+
+    Autopilot::step(t, dt);
 }
 
 //------------------------------------------------------------------------------

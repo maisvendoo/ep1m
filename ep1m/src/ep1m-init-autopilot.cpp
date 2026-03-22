@@ -16,6 +16,7 @@ void EP1m::initAutopilot(const QString& modules_dir,
 
         if (autopilot != nullptr)
         {
+            autopilot->setVehicleIndex(model_idx);
             autopilot->read_config(autopilot_config_name, custom_cfg_dir);
             autopilot->initAutoBrakeControl(autopilot_config_name, custom_cfg_dir);
             autopilot_switcher[cab_idx].setKeyModifierOn(MODIFIER_OnlyAlt);
@@ -25,11 +26,11 @@ void EP1m::initAutopilot(const QString& modules_dir,
             autopilot_switcher[cab_idx].setControl(&pressed_keys);
 
             connect(autopilot, &Autopilot::sigInitTrainParams, this, &EP1m::slotInitTrainForAutopilot);
+
+            this->autopilot.push_back(autopilot);
+
+            auto_feedback[cab_idx] = new ep1m_feedback_t();
         }
-
-        this->autopilot.push_back(autopilot);
-
-        auto_feedback[cab_idx] = new ep1m_feedback_t();
     }
 }
 
