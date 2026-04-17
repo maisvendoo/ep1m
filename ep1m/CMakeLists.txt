@@ -20,7 +20,7 @@ file (GLOB EQP_INCLUDES "../ep1m-equipment/include/*.h")
 file (GLOB SOURCES "./src/*.cpp")
 file (GLOB EQP_SOURCES "../ep1m-equipment/src/*.cpp")
 
-add_library (${TARGET} MODULE ${SOURCES} ${INCLUDES} ${EQP_SOURCES} ${EQP_INCLUDES})
+add_library (${TARGET} SHARED ${SOURCES} ${INCLUDES} ${EQP_SOURCES} ${EQP_INCLUDES})
 
 target_include_directories (${TARGET} PRIVATE ./include/)
 target_include_directories (${TARGET} PRIVATE ../ep1m-equipment/include)

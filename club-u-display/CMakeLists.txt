@@ -30,7 +30,7 @@ file (GLOB SOURCES "./src/*.cpp")
 file (GLOB RESOURCES "./resources/*.qrc")
 
 #add_library (${TARGET} MODULE ${SOURCES} ${INCLUDES} ${EQP_SOURCES} ${EQP_INCLUDES} ${RESOURCES})
-add_library (${TARGET} MODULE ${SOURCES} ${INCLUDES} ${RESOURCES})
+add_library (${TARGET} SHARED ${SOURCES} ${INCLUDES} ${RESOURCES})
 
 target_include_directories (${TARGET} PRIVATE ./include/)
 target_include_directories (${TARGET} PRIVATE ../ep1m/include)

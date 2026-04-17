@@ -29,7 +29,7 @@ file (GLOB INCLUDES "./include/*.h")
 file (GLOB SOURCES "./src/*.cpp")
 
 # Компиляция библиотеки
-add_library (${TARGET} MODULE ${SOURCES} ${INCLUDES} ${EQP_SOURCES})
+add_library (${TARGET} SHARED ${SOURCES} ${INCLUDES} ${EQP_SOURCES})
 
 # Указываем пути поиска заголовков
 target_include_directories (${TARGET} PRIVATE ./include/)
