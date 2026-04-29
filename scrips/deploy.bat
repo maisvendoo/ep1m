@@ -12,6 +12,9 @@ rem Создаем структуру каталогов
 mkdir %PKG_DIR%\%DIR_NAME%\cfg
 mkdir %PKG_DIR%\%DIR_NAME%\docs
 mkdir %PKG_DIR%\%DIR_NAME%\data
+mkdir %PKG_DIR%\%DIR_NAME%\data\animations
+mkdir %PKG_DIR%\%DIR_NAME%\data\models
+mkdir %PKG_DIR%\%DIR_NAME%\data\sounds
 mkdir %PKG_DIR%\%DIR_NAME%\modules\
 mkdir %PKG_DIR%\%DIR_NAME%\modules\%ADDON_NAME%
 
@@ -22,7 +25,9 @@ rem Копируем конфиги
 xcopy /E /Y ..\cfg\*.* %PKG_DIR%\%DIR_NAME%\cfg\
 
 rem Копируем ресурсы
-xcopy /E /Y ..\data\*.* %PKG_DIR%\%DIR_NAME%\data\
+xcopy /E /Y ..\data\animations\*.* %PKG_DIR%\%DIR_NAME%\data\animations
+xcopy /E /Y ..\data\models_ktx\*.* %PKG_DIR%\%DIR_NAME%\data\models
+xcopy /E /Y ..\data\sounds\*.* %PKG_DIR%\%DIR_NAME%\data\sounds
 
 rem Копируем документацию
 xcopy /E /Y ..\docs\*.pdf %PKG_DIR%\%DIR_NAME%\docs\
