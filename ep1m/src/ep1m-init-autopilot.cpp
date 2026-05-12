@@ -25,11 +25,12 @@ void EP1m::initAutopilot(const QString& modules_dir,
             autopilot_switcher[cab_idx].setKeySymbolOff(KEY_F);
             autopilot_switcher[cab_idx].setControl(&pressed_keys);
 
+            auto_feedback[cab_idx] = new ep1m_feedback_t();
+            autopilot->setFeedback(auto_feedback[cab_idx]);
+
             connect(autopilot, &Autopilot::sigInitTrainParams, this, &EP1m::slotInitTrainForAutopilot);
 
             this->autopilot.push_back(autopilot);
-
-            auto_feedback[cab_idx] = new ep1m_feedback_t();
         }
     }
 }
