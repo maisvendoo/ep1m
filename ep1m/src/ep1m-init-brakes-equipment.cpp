@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    "core/load_module.h"
+
 #include    <QDir>
 
 //------------------------------------------------------------------------
@@ -13,7 +15,7 @@ void EP1m::initBrakesEquipment(const QString& modules_dir, const QString& custom
     brakepipe->setLeakCoeff(3e-6);
 
     // Воздухораспределитель
-    air_dist = loadAirDistributor(modules_dir + QDir::separator() + "vr242");
+    air_dist = LOAD_MODULE(AirDistributor, modules_dir + QDir::separator() + "vr242");
     air_dist->read_config("vr242");
 
     // Электровоздухораспределитель
