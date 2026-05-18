@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    "core/load_module.h"
+
 #include    <QDir>
 
 //------------------------------------------------------------------------
@@ -24,8 +26,7 @@ void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_c
         loco_crane[cab_idx]->read_config("kvt254");
 
         // ЭПК автостопа
-        epk[cab_idx] = loadAutoTrainStop(
-            modules_dir + QDir::separator() + "epk150");
+        epk[cab_idx] = LOAD_MODULE(AutoTrainStop, modules_dir + QDir::separator() + "epk150");
         epk[cab_idx]->read_config("epk150");
     }
 
