@@ -23,6 +23,7 @@ find_package(Journal ${RRS_VERSION} REQUIRED)
 find_package(filesystem ${RRS_VERSION} REQUIRED)
 find_package(device ${RRS_VERSION} REQUIRED)
 find_package(vehicle ${RRS_VERSION} REQUIRED)
+find_package(core ${RRS_VERSION} REQUIRED)
 
 # Пути к заголовкам и сорцам
 file (GLOB INCLUDES "./include/*.h")
@@ -42,3 +43,4 @@ target_link_libraries (${TARGET} physics)
 target_link_libraries (${TARGET} vehicle)
 target_link_libraries (${TARGET} device)
 target_link_libraries (${TARGET} filesystem)
+target_link_libraries (${TARGET} core)
