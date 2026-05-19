@@ -16,7 +16,7 @@ void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_c
         brake_lock[cab_idx]->read_config("ubt367m");
 
         // Поездной кран машиниста
-        brake_crane[cab_idx] = loadBrakeCrane(
+        brake_crane[cab_idx] = LOAD_MODULE(BrakeCrane,
             modules_dir + QDir::separator() + "krm395");
         brake_crane[cab_idx]->read_config("krm395");
 
