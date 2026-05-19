@@ -21,7 +21,7 @@ void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_c
         brake_crane[cab_idx]->read_config("krm395");
 
         // Кран вспомогательного тормоза
-        loco_crane[cab_idx] = loadLocoCrane(
+        loco_crane[cab_idx] = LOAD_MODULE(LocoCrane,
             modules_dir + QDir::separator() + "kvt254");
         loco_crane[cab_idx]->read_config("kvt254");
 
