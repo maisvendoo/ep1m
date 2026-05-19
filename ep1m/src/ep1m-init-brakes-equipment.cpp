@@ -19,7 +19,8 @@ void EP1m::initBrakesEquipment(const QString& modules_dir, const QString& custom
     air_dist->read_config("vr242");
 
     // Электровоздухораспределитель
-    electro_air_dist = loadElectroAirDistributor(modules_dir + QDir::separator() + "evr305");
+    electro_air_dist = LOAD_MODULE(ElectroAirDistributor,
+        modules_dir + QDir::separator() + "evr305");
     electro_air_dist->read_config("evr305");
 
     // Запасный резервуар
