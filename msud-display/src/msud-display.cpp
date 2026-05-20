@@ -3,7 +3,6 @@
 #include    <QVBoxLayout>
 #include    <QLabel>
 #include    <QFontDatabase>
-#include    <core/get_module.h>
 //#include    <QTime>
 
 #include    "ep1m-signals.h"
@@ -553,5 +552,9 @@ void MsudDisplay::update(double t, double dt)
     }
 }
 
+
+
+
+
 // Важная штука, чтобы в RRS работало.
-GET_MODULE(MsudDisplay)
+GET_DISPLAY(MsudDisplay)

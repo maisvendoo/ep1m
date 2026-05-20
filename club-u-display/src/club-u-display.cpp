@@ -15,7 +15,6 @@
 #include    "block-right.h"
 #include    "block-bottom.h"
 #include    "block-SAUT.h"
-#include    <core/get_module.h>
 
 
 //------------------------------------------------------------------------------
@@ -359,4 +358,4 @@ void ClubUDisplay::update(double t, double dt)
 
 
 // Важная штука, чтобы в RRS работало.
-GET_MODULE(ClubUDisplay)
+GET_DISPLAY(ClubUDisplay)
