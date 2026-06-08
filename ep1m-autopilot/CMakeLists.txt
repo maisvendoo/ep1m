@@ -17,13 +17,7 @@ set (CMAKE_SHARED_MODULE_PREFIX "")
 # Ищем зависимости Qt6
 find_package(Qt6 COMPONENTS Xml REQUIRED)
 
-find_package(CfgReader ${RRS_VERSION} REQUIRED)
-find_package(physics ${RRS_VERSION} REQUIRED)
-find_package(Journal ${RRS_VERSION} REQUIRED)
-find_package(filesystem ${RRS_VERSION} REQUIRED)
-find_package(device ${RRS_VERSION} REQUIRED)
-find_package(vehicle ${RRS_VERSION} REQUIRED)
-find_package(core ${RRS_VERSION} REQUIRED)
+find_package(RRS ${RRS_VERSION} REQUIRED)
 
 # Пути к заголовкам и сорцам
 file (GLOB INCLUDES "./include/*.h")
