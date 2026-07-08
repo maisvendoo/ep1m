@@ -1,5 +1,7 @@
 #include    <ep1m-autopilot.h>
 
+#include    <core/get_module.h>
+
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -262,4 +264,4 @@ void EP1mAutopilot::slotDelayKM()
     km_delay->stop();
 }
 
-GET_AUTOPILOT(EP1mAutopilot)
+GET_MODULE(EP1mAutopilot)

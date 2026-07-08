@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    "core/load_module.h"
+
 #include    <QDir>
 
 //------------------------------------------------------------------------
@@ -14,18 +16,17 @@ void EP1m::initBrakesControl(const QString& modules_dir, const QString& custom_c
         brake_lock[cab_idx]->read_config("ubt367m");
 
         // Поездной кран машиниста
-        brake_crane[cab_idx] = loadBrakeCrane(
+        brake_crane[cab_idx] = LOAD_MODULE(BrakeCrane,
             modules_dir + QDir::separator() + "krm395");
         brake_crane[cab_idx]->read_config("krm395");
 
         // Кран вспомогательного тормоза
-        loco_crane[cab_idx] = loadLocoCrane(
+        loco_crane[cab_idx] = LOAD_MODULE(LocoCrane,
             modules_dir + QDir::separator() + "kvt254");
         loco_crane[cab_idx]->read_config("kvt254");
 
         // ЭПК автостопа
-        epk[cab_idx] = loadAutoTrainStop(
-            modules_dir + QDir::separator() + "epk150");
+        epk[cab_idx] = LOAD_MODULE(AutoTrainStop, modules_dir + QDir::separator() + "epk150");
         epk[cab_idx]->read_config("epk150");
     }
 

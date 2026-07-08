@@ -1,5 +1,7 @@
 #include    "ep1m.h"
 
+#include    <core/load_module.h>
+
 #include    <QDir>
 
 //------------------------------------------------------------------------
@@ -10,10 +12,13 @@ void EP1m::initCouplings(const QString& modules_dir, const QString& custom_cfg_d
     (void) custom_cfg_dir;
 
     // Сцепные устройства
-    coupling_fwd = loadCoupling(modules_dir + QDir::separator() + coupling_module_name);
+    coupling_fwd = LOAD_MODULE(Coupling,
+        modules_dir + QDir::separator() + coupling_module_name);
     coupling_fwd->read_config(coupling_config_name);
     forward_connectors.push_back(coupling_fwd);
-    coupling_bwd = loadCoupling(modules_dir + QDir::separator() + coupling_module_name);
+
+    coupling_bwd = LOAD_MODULE(Coupling,
+        modules_dir + QDir::separator() + coupling_module_name);
     coupling_bwd->read_config(coupling_config_name);
     backward_connectors.push_back(coupling_bwd);
 

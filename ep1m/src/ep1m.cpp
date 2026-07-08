@@ -2,10 +2,12 @@
 
 #include    "filesystem.h"
 
+#include    <core/get_module.h>
+
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-EP1m::EP1m(QObject *parent) : Vehicle (parent)  
+EP1m::EP1m(QObject *parent) : Vehicle (parent)
 {
     analogSignal.resize(SIGNALS_NUM_TOTAL);
 
@@ -158,10 +160,10 @@ void EP1m::step(const double& t, const double& dt)
     if (is_Registrator_on)
         stepRegistration(t, dt);
 
-    autoStartTimer->step(t, dt);    
+    autoStartTimer->step(t, dt);
 }
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-GET_VEHICLE(EP1m)
+GET_MODULE(EP1m)
