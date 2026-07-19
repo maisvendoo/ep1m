@@ -61,7 +61,6 @@ public:
     void setSpeedMapModule(SpeedMap *device)
     {
         speedmap = device;
-        speedmap->setDirection(dir);
         speedmap->setCurrentSearchDistance(train_length);
     }
 
@@ -139,13 +138,6 @@ public:
 
    /// Загрузка станций из ЭК
    void loadStationsMap(QString path);
-
-    void setDirection(int dir)
-    {
-        this->dir = dir;
-        if (speedmap)
-            speedmap->setDirection(dir);
-    }
 
    double getTargetDistance() const { return target_dist; }
 
@@ -254,9 +246,6 @@ private:
 
    /// Счётчик пройденной дистанции
    double passed_distance = 0.0;
-
-   /// Направление
-   int dir = 1;
 
    /// Дистанция до следующей цели
    double target_dist = 0.0;

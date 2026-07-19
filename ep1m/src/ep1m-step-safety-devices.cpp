@@ -46,7 +46,6 @@ void EP1m::stepSafetyDevices(const double& t, const double& dt)
         shunting_mode_switcher[cab_idx].reset();
     }
 
-    klub_BEL->setDirection(direction);
     klub_BEL->setVoltage(Ucc);
     klub_BEL->setKeyEPK(epk_on);
     klub_BEL->setCoord(profile_point_data.position);
