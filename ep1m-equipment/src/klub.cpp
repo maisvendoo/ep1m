@@ -54,13 +54,46 @@ void KLUB::loadStationsMap(QString path)
     while (!stream.atEnd())
     {
         QString line = stream.readLine();
+        line = line.trimmed();
+
+        if (line.isEmpty())
+        {
+            continue;
+        }
+
         QStringList tokens = line.split('\t');
 
+        if (tokens.size() < 4)
+        {
+            continue;
+        }
+
         station_t station;
+
         station.name = tokens[0];
-        station.coord.x = tokens[1].toDouble();
-        station.coord.y = tokens[2].toDouble();
-        station.coord.z = tokens[3].toDouble();
+
+        bool isOk = false;
+
+        station.coord.x = tokens[1].toDouble(&isOk);
+
+        if (!isOk)
+        {
+            continue;
+        }
+
+        station.coord.y = tokens[2].toDouble(&isOk);
+
+        if (!isOk)
+        {
+            continue;
+        }
+
+        station.coord.z = tokens[3].toDouble(&isOk);
+
+        if (!isOk)
+        {
+            continue;
+        }
 
         stations.push_back(station);
     }
