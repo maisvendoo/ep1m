@@ -51,6 +51,8 @@ void KLUB::loadStationsMap(QString path)
 
     QTextStream stream(&stations_file);
 
+    stations.clear();
+
     while (!stream.atEnd())
     {
         QString line = stream.readLine();
