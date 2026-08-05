@@ -42,82 +42,55 @@ void KLUB::step(double t, double dt)
 //------------------------------------------------------------------------------
 void KLUB::loadStationsMap(QString path)
 {
-    QFile stations_file(path);
-
-    if (!stations_file.open(QIODevice::ReadOnly))
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         return;
     }
 
-    QTextStream stream(&stations_file);
+    QTextStream stream(&file);
 
     stations.clear();
-    stations.reserve(100);
 
-    int lineNumber = 0;
     while (!stream.atEnd())
     {
         QString line = stream.readLine().trimmed();
-        lineNumber++;
-
-        // Пропускаем пустые строки
         if (line.isEmpty())
         {
             continue;
         }
 
-        // Пропускаем комментарии
-        if (line.startsWith('#'))
-        {
-            continue;
-        }
-
-        // Удаляем символы возврата каретки
         line.remove('\r');
 
-        QStringList tokens = line.split('\t');
-
-        if (tokens.size() < 4)
+        QStringList parts = line.split('\t', Qt::SkipEmptyParts);
+        if (parts.size() < 4)
         {
             continue;
         }
 
-        // Парсим все данные во временные переменные
-        QString name = tokens[0].trimmed();
+        QString name = parts[0].trimmed();
         if (name.isEmpty())
         {
             continue;
         }
 
-        bool isOk = false;
+        bool ok1 = false, ok2 = false, ok3 = false;
+        double x = parts[1].trimmed().toDouble(&ok1);
+        double y = parts[2].trimmed().toDouble(&ok2);
+        double z = parts[3].trimmed().toDouble(&ok3);
 
-        double x = tokens[1].trimmed().toDouble(&isOk);
-        if (!isOk)
+        if (!ok1 || !ok2 || !ok3)
         {
             continue;
         }
 
-        double y = tokens[2].trimmed().toDouble(&isOk);
-        if (!isOk)
-        {
-            continue;
-        }
+        station_t st;
+        st.name = name;
+        st.coord.x = x;
+        st.coord.y = y;
+        st.coord.z = z;
 
-        double z = tokens[3].trimmed().toDouble(&isOk);
-        if (!isOk)
-        {
-            continue;
-        }
-
-        // Только после проверки всех данных создаем объект
-        station_t station;
-        station.name = name;
-        station.coord.x = x;
-        station.coord.y = y;
-        station.coord.z = z;
-
-        // Перемещаем в вектор (без копирования)
-        stations.append(std::move(station));
+        stations.append(std::move(st));
     }
 }
 
