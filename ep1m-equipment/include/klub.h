@@ -272,7 +272,7 @@ private:
     double station_search_radius = 5000.0;
 
     /// База станций
-    QVector<station_t *> stations;
+    QVector<station_t> stations;
 
     std::array<float, NUM_LAMPS> lamps = {0.0f, 0.0f, 0.0f, 0.0f,
                                           0.0f, 0.0f, 0.0f, 0.0f};
