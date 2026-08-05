@@ -52,52 +52,72 @@ void KLUB::loadStationsMap(QString path)
     QTextStream stream(&stations_file);
 
     stations.clear();
+    stations.reserve(100);
 
-    // Читаем все содержимое файла
-    QString content = stream.readAll();
-
-    // Делим файл на строки
-    QStringList lines = content.split('\n', Qt::SkipEmptyParts);
-    stations.reserve(lines.size());
-
-    for (int i = 0; i < lines.size(); ++i)
+    int lineNumber = 0;
+    while (!stream.atEnd())
     {
-        lines[i] = lines[i].trimmed();        
+        QString line = stream.readLine().trimmed();
+        lineNumber++;
 
-        QStringList tokens = lines[i].split('\t');
+        // Пропускаем пустые строки
+        if (line.isEmpty())
+        {
+            continue;
+        }
+
+        // Пропускаем комментарии
+        if (line.startsWith('#'))
+        {
+            continue;
+        }
+
+        // Удаляем символы возврата каретки
+        line.remove('\r');
+
+        QStringList tokens = line.split('\t');
 
         if (tokens.size() < 4)
         {
             continue;
         }
 
-        stations.emplace_back();
-        station_t &station = stations.last();
-
-        station.name = tokens[0];
+        // Парсим все данные во временные переменные
+        QString name = tokens[0].trimmed();
+        if (name.isEmpty())
+        {
+            continue;
+        }
 
         bool isOk = false;
 
-        station.coord.x = tokens[1].toDouble(&isOk);
-
+        double x = tokens[1].trimmed().toDouble(&isOk);
         if (!isOk)
         {
             continue;
         }
 
-        station.coord.y = tokens[2].toDouble(&isOk);
-
+        double y = tokens[2].trimmed().toDouble(&isOk);
         if (!isOk)
         {
             continue;
         }
 
-        station.coord.z = tokens[3].toDouble(&isOk);
-
+        double z = tokens[3].trimmed().toDouble(&isOk);
         if (!isOk)
         {
             continue;
-        }        
+        }
+
+        // Только после проверки всех данных создаем объект
+        station_t station;
+        station.name = name;
+        station.coord.x = x;
+        station.coord.y = y;
+        station.coord.z = z;
+
+        // Перемещаем в вектор (без копирования)
+        stations.append(std::move(station));
     }
 }
 
