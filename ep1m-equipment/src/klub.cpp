@@ -71,7 +71,8 @@ void KLUB::loadStationsMap(QString path)
             continue;
         }
 
-        station_t station;
+        stations.emplace_back();
+        station_t &station = stations.last();
 
         station.name = tokens[0];
 
@@ -96,9 +97,7 @@ void KLUB::loadStationsMap(QString path)
         if (!isOk)
         {
             continue;
-        }
-
-        stations.append(station);
+        }        
     }
 }
 
