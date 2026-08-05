@@ -84,13 +84,13 @@ void KLUB::loadStationsMap(QString path)
             continue;
         }
 
-        station_t st;
-        st.name = name;
-        st.coord.x = x;
-        st.coord.y = y;
-        st.coord.z = z;
+        station_t *st = new station_t();
+        st->name = name;
+        st->coord.x = x;
+        st->coord.y = y;
+        st->coord.z = z;
 
-        stations.append(std::move(st));
+        stations.append(st);
     }
 }
 
@@ -543,7 +543,7 @@ void KLUB::stations_process()
     double min_distance = station_search_radius;
     for (size_t i = 0; i < stations.size(); ++i)
     {
-        double distance = length(coord - stations[i].coord);
+        double distance = length(coord - stations[i]->coord);
         if (min_distance > distance)
         {
             min_distance = distance;
@@ -551,7 +551,7 @@ void KLUB::stations_process()
         }
     }
     if (station_idx >= 0)
-        station_text = stations[station_idx].name;
+        station_text = stations[station_idx]->name;
     else
         station_text = "";
 }
