@@ -58,17 +58,11 @@ void KLUB::loadStationsMap(QString path)
 
     // Делим файл на строки
     QStringList lines = content.split('\n', Qt::SkipEmptyParts);
-    stations.resize(lines.size());
+    stations.reserve(lines.size());
 
     for (int i = 0; i < lines.size(); ++i)
     {
-        lines[i] = lines[i].trimmed();
-
-        // Проверяем пусте строки и строки содержащие возврат каретки
-        if (lines[i].isEmpty() || lines[i] == '\r')
-        {
-            continue;
-        }
+        lines[i] = lines[i].trimmed();        
 
         QStringList tokens = lines[i].split('\t');
 
@@ -77,30 +71,34 @@ void KLUB::loadStationsMap(QString path)
             continue;
         }
 
-        stations[i].name = tokens[0];
+        station_t station;
+
+        station.name = tokens[0];
 
         bool isOk = false;
 
-        stations[i].coord.x = tokens[1].toDouble(&isOk);
+        station.coord.x = tokens[1].toDouble(&isOk);
 
         if (!isOk)
         {
             continue;
         }
 
-        stations[i].coord.y = tokens[2].toDouble(&isOk);
+        station.coord.y = tokens[2].toDouble(&isOk);
 
         if (!isOk)
         {
             continue;
         }
 
-        stations[i].coord.z = tokens[3].toDouble(&isOk);
+        station.coord.z = tokens[3].toDouble(&isOk);
 
         if (!isOk)
         {
             continue;
         }
+
+        stations.append(station);
     }
 }
 
