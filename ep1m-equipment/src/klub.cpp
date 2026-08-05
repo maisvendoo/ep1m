@@ -84,7 +84,7 @@ void KLUB::loadStationsMap(QString path)
             continue;
         }
 
-        station_t st;
+        klub_station_t st;
         st.name = name;
         st.coord.x = x;
         st.coord.y = y;
