@@ -14,7 +14,10 @@ struct station_t
 
     station_t()
     {
-
+        coord.x = 0.0;
+        coord.y = 0.0;
+        coord.z = 0.0;
+        name = QString();
     }
 };
 
