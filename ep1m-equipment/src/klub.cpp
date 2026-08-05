@@ -60,7 +60,7 @@ void KLUB::loadStationsMap(QString path)
     QStringList lines = content.split('\n', Qt::SkipEmptyParts);
     stations.resize(lines.size());
 
-    for (int i = 0; lines.size(); ++i)
+    for (int i = 0; i < lines.size(); ++i)
     {
         lines[i] = lines[i].trimmed();
 
