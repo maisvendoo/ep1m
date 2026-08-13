@@ -14,8 +14,8 @@ void EP1m::soundsOutput(const simulator_time_t& t, const double& dt)
         std::uint16_t d = (SOUND_BWD_SVISTOK - SOUND_FWD_SVISTOK) * cab_idx;
 
         // Свистулька и тифулька :-)
-        analogSignal[SOUND_FWD_SVISTOK + d] = horn->getSoundSignal(TrainHorn::SVISTOK_SOUND);
-        analogSignal[SOUND_FWD_TIFON + d] = horn->getSoundSignal(TrainHorn::TIFON_SOUND);
+        analogSignal[SOUND_FWD_SVISTOK + d] = horn[cab_idx]->getSoundSignal(TrainHorn::SVISTOK_SOUND);
+        analogSignal[SOUND_FWD_TIFON + d] = horn[cab_idx]->getSoundSignal(TrainHorn::TIFON_SOUND);
 
         // Реверсор и контроллер
         analogSignal[CAB1_SOUND_INSERT_REVERS_HANDLE + d] = km[cab_idx]->getSoundSignal(TracController::HANDLE_INSERTED_SOUND);

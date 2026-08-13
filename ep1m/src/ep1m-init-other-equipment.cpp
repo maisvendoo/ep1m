@@ -8,8 +8,11 @@ void EP1m::initOtherEquipment(const QString& modules_dir, const QString& custom_
     (void) modules_dir;
     (void) custom_cfg_dir;
 
-    horn = new TrainHorn();
-    horn->read_config("train-horn");
+    for (auto i : {CAB1, CAB2})
+    {
+        horn[i] = new TrainHorn();
+        horn[i]->read_config("train-horn");
+    }
 
     // Система подачи песка
     sand_system = new SandingSystem();

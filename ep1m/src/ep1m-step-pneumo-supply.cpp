@@ -26,7 +26,7 @@ void EP1m::stepPneumoSupply(const double& t, const double& dt)
     // Главный резервуар
     double FL_flow = 0.0;
     FL_flow += motor_compressor->getFLflow();
-    FL_flow += horn->getFLflow();
+    FL_flow += horn[CAB1]->getFLflow() + horn[CAB2]->getFLflow();
     FL_flow += sand_system->getFLflow();
     FL_flow += brake_lock[CAB1]->getFLflow();
     FL_flow += brake_lock[CAB2]->getFLflow();

@@ -5,8 +5,11 @@
 //------------------------------------------------------------------------------
 void EP1m::stepOtherEquipment(const double& t, const double& dt)
 {
-    horn->setFLpressure(main_reservoir->getPressure());
-    horn->step(t, dt);
+    for (auto i : {CAB1, CAB2})
+    {
+        horn[i]->setFLpressure(main_reservoir->getPressure());
+        horn[i]->step(t, dt);
+    }
 
     // Система подачи песка
     sand_system->setFLpressure(main_reservoir->getPressure());

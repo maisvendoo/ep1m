@@ -155,8 +155,8 @@ void EP1m::signalsOutput(const simulator_time_t& t, const double& dt)
         analogSignal[CAB1_TUMBLER_EPB + d] = TO_FLOAT(tumblers_panel[cab_idx]->getTumblerState(EP1MTumblersPanel::TUMBLER_EPT));
 
         // Панель на столешнице справа
-        analogSignal[CAB1_BUTTON_WHISTLE + d] = TO_FLOAT(horn->isSvistok());
-        analogSignal[CAB1_BUTTON_TYPHON + d] = TO_FLOAT(horn->isTifon());
+        analogSignal[CAB1_BUTTON_WHISTLE + d] = TO_FLOAT(horn[cab_idx]->isSvistok());
+        analogSignal[CAB1_BUTTON_TYPHON + d] = TO_FLOAT(horn[cab_idx]->isTifon());
         analogSignal[CAB1_BUTTON_SAND + d] = TO_FLOAT(sand_system->isSandDelivery());
         analogSignal[CAB1_TOOGLE_AUTOSAND + d] = TO_FLOAT(tumblers[TUMBLER_AUTOSAND][cab_idx].getState());
         analogSignal[CAB1_TOOGLE_MPK_1_OR_2 + d] = TO_FLOAT(tumblers[TUMBLER_MPK][cab_idx].getState());

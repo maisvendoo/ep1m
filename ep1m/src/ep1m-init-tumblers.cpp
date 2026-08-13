@@ -12,7 +12,7 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
     sand_system->setControl(&pressed_keys);
 
     // Тифон и свисток
-    horn->setControl(&pressed_keys);
+    //horn->setControl(&pressed_keys);
 
     // Расцепные рычаги
     oper_rod_fwd->setKeySymbol(KEY_X);
@@ -321,5 +321,8 @@ void EP1m::initControl(const QString &modules_dir, const QString &custom_cfg_dir
         shunting_mode_switcher[cab_idx].setKeySymbolOff(KEY_Tilde);
         shunting_mode_switcher[cab_idx].setKeyModifierOff(MODIFIER_OnlyControl);
         shunting_mode_switcher[cab_idx].setControl(&pressed_keys_by_cabine[cab_idx]);
+
+        // Тифон и свисток
+        horn[cab_idx]->setControl(&pressed_keys_by_cabine[cab_idx]);
     }
 }
