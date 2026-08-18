@@ -41,6 +41,19 @@ void EP1m::keyProcess(const simulator_time_t& t, const double& dt)
         return;
     }
 
+    // Автовыключение
+    if (getKeyState(KEY_T, CAB1) && isAlt(CAB1) && initShutdownProgram(CAB1))
+    {
+        autoStartTimer->start();
+        return;
+    }
+
+    if (getKeyState(KEY_T, CAB2) && isAlt(CAB2) && initShutdownProgram(CAB2))
+    {
+        autoStartTimer->start();
+        return;
+    }
+
     // Управление оборудованием в кабинах
     for (auto cab_idx : {CAB1, CAB2})
     {
