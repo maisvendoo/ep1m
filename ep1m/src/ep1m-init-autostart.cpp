@@ -235,24 +235,12 @@ void EP1m::stepShutdownSequence()
         return;
     }
 
-    // Гасим оставшиеся тумблеры панели для возможности её блокировки
+    // Гасим оставшиеся тумблеры панели
     tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_PANT1)->reset();
     tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_EPT)->reset();
 
-    // Блокируем панель тумблеров и извлекаем ключ
-    tumblers_panel[autostart_cab]->setKeyOn(false);
-    tumblers_panel[autostart_cab]->insertKey(false);
-
-    // Возвращаем реверсор в ноль и извлекаем реверсивку
+    // Возвращаем реверсор в ноль (рукоятку не извлекаем)
     km[autostart_cab]->setReversZero();
-    km[autostart_cab]->insertReversHandle(false);
-
-    // Выключаем блокировку тормозов 367
-    brake_lock[autostart_cab]->setStateOn(false);
-
-    // Выключаем автостоп и извлекаем ключ ЭПК
-    epk[autostart_cab]->setKeyOn(false);
-    epk[autostart_cab]->insertKey(false);
 
     // Возвращаем управление в кабины
     km[CAB1]->setControl(&pressed_keys_by_cabine[CAB1]);
