@@ -108,6 +108,13 @@ public:
         sound_states[REVERS_CHANGE_POS_SOUND].play();
     }
 
+    void setReversZero()
+    {
+        revers_pos = 0;
+
+        sound_states[REVERS_CHANGE_POS_SOUND].play();
+    }
+
     void setReversBwd()
     {
         revers_pos = -1;

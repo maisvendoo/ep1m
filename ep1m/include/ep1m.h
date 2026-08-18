@@ -525,6 +525,9 @@ private:
     /// Инициализация автозапуска
     bool initAutostartProgram(int cab_autostart_request);
 
+    /// Инициализация автовыключения
+    bool initShutdownProgram(int cab_shutdown_request);
+
     /// Шаг последовательности выключения электровоза
     void stepShutdownSequence();
 
