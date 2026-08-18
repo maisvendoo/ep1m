@@ -242,6 +242,9 @@ void EP1m::stepShutdownSequence()
     // Возвращаем реверсор в ноль (рукоятку не извлекаем)
     km[autostart_cab]->setReversZero();
 
+    // Выключаем автостоп (ключ оставляем на месте)
+    epk[autostart_cab]->setKeyOn(false);
+
     // Возвращаем управление в кабины
     km[CAB1]->setControl(&pressed_keys_by_cabine[CAB1]);
     km[CAB2]->setControl(&pressed_keys_by_cabine[CAB2]);
