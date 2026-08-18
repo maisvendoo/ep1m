@@ -35,4 +35,4 @@ xcopy /E /Y ..\docs\*.pdf %PKG_DIR%\%DIR_NAME%\docs\
 rem Архифируем в 7zip
 cd %PKG_DIR%\%DIR_NAME%
 7z a -r ..\%DIR_NAME%.7z 
-cd ..\..\%ADDON_NAME%\scripts
+cd ..\..\%ADDON_NAME%\scrips
