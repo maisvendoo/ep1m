@@ -239,6 +239,9 @@ void EP1m::stepShutdownSequence()
     tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_PANT1)->reset();
     tumblers_panel[autostart_cab]->getTumblerPtr(EP1MTumblersPanel::TUMBLER_EPT)->reset();
 
+    // Блокируем панель тумблеров (ключ оставляем на месте)
+    tumblers_panel[autostart_cab]->setKeyOn(false);
+
     // Возвращаем реверсор в ноль (рукоятку не извлекаем)
     km[autostart_cab]->setReversZero();
 
