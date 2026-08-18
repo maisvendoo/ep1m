@@ -518,8 +518,15 @@ private:
     size_t start_count = 0;
     size_t autostart_cab = 0;
 
+    /// Направление последовательности автозапуска:
+    /// false - включение, true - выключение
+    bool autostart_shutdown = false;
+
     /// Инициализация автозапуска
     bool initAutostartProgram(int cab_autostart_request);
+
+    /// Шаг последовательности выключения электровоза
+    void stepShutdownSequence();
 
     ep1m_control_t *auto_control[CABS_NUM] = {nullptr, nullptr};
 

@@ -12,6 +12,8 @@ bool EP1m::initAutostartProgram(int cab_autostart_request)
         return false;
     }
 
+    autostart_shutdown = false;
+
     // проверяем индекс кабины
     if ((cab_autostart_request != CAB1) && (cab_autostart_request != CAB2))
     {
@@ -81,6 +83,12 @@ bool EP1m::initAutostartProgram(int cab_autostart_request)
 //------------------------------------------------------------------------------
 void EP1m::slotAutostart()
 {
+    if (autostart_shutdown)
+    {
+        stepShutdownSequence();
+        return;
+    }
+
     if (start_count < autostart_triggers.size())
     {
         // Разблокируем панель тумблеров, если она не разблокирована
@@ -141,4 +149,15 @@ void EP1m::slotAutostart()
             autopilot_switcher[CAB2].set();
         }
     }
+}
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+void EP1m::stepShutdownSequence()
+{
+    // Последовательность выключения будет реализована в следующем слайсе
+    autoStartTimer->stop();
+    start_count = 0;
+    autostart_shutdown = false;
 }
